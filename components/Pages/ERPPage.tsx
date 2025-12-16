@@ -1,34 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Server, Layers, Building2, ShoppingBag, Factory, Truck } from 'lucide-react';
+import { Layers, Globe } from 'lucide-react';
 import Button from '../UI/Button';
+import { CONFIG } from '../../config/config-english';
 
 const ERPPage: React.FC = () => {
-  const modules = [
-    { title: "Accounting & Finance", desc: "Manage your financial health with precision." },
-    { title: "Inventory Control", desc: "Optimize stock levels and reduce waste." },
-    { title: "Sales & CRM", desc: "Enhance customer relationships and drive sales." },
-    { title: "Purchasing", desc: "Streamline procurement and vendor management." },
-    { title: "Debtors & Credit Control", desc: "Improve cash flow and mitigate risks." },
-    { title: "Manufacturing & Costing", desc: "Accurate cost tracking and production planning." },
-    { title: "Export Documentation", desc: "Simplify complex international trade paperwork." },
-    { title: "HR & Payroll", desc: "Efficient human resources and salary management." },
-    { title: "POS & Integrations", desc: "Seamless point-of-sale and system connectivity." },
-  ];
-
-  const industries = [
-    { name: "Importers & Distributors", icon: Truck },
-    { name: "Exporters", icon: GlobeIcon },
-    { name: "Vehicle Traders", icon: Truck }, // Using Truck as placeholder
-    { name: "Retail & Wholesale", icon: ShoppingBag },
-    { name: "Manufacturing", icon: Factory },
-    { name: "Hotels & Restaurants", icon: Building2 },
-  ];
-
-  // Helper for icon
-  function GlobeIcon(props: any) {
-      return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-  }
+  const { title, subtitle, description, platforms, industries, modules } = CONFIG.erpPage;
 
   return (
     <div className="pt-24 min-h-screen bg-matte-black">
@@ -42,10 +19,10 @@ const ERPPage: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 tracking-tight">BizSense ERP Solutions</h1>
-            <h2 className="text-xl md:text-2xl text-gold-500 font-serif mb-6">Designed by a Banker, for Businesses</h2>
+            <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 tracking-tight">{title}</h1>
+            <h2 className="text-xl md:text-2xl text-gold-500 font-serif mb-6">{subtitle}</h2>
             <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed max-w-2xl">
-              Our ERP solutions are meticulously designed to empower businesses with unparalleled control and efficiency. Leveraging insights from a banking perspective, we focus on real-world financial management.
+              {description}
             </p>
           </motion.div>
         </div>
@@ -59,7 +36,7 @@ const ERPPage: React.FC = () => {
           <div>
             <h3 className="text-gold-500 uppercase tracking-[0.2em] font-bold text-xs mb-10">ERP Platforms We Implement</h3>
             <div className="space-y-4">
-              {['Odoo', 'ERP Next', 'Quick Book (Pro Advisor)', 'Zoho (Books, Inventory, CRM, People)', 'Custom ERP (BizSense ERP – Light)'].map((tech, i) => (
+              {platforms.map((tech, i) => (
                 <motion.div
                   key={tech}
                   initial={{ opacity: 0, x: -10 }}
@@ -109,7 +86,7 @@ const ERPPage: React.FC = () => {
             </div>
             
             <div className="mt-12">
-                <Button>Request Demo</Button>
+                <Button onClick={() => window.open(`https://wa.me/94701757576?text=I%20am%20interested%20in%20an%20ERP%20Demo`, '_blank')}>Request Demo</Button>
             </div>
           </div>
 

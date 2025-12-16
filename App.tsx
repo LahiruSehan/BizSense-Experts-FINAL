@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-d
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import HomeServices from './components/HomeServices';
 import ERPPage from './components/Pages/ERPPage';
 import Contact from './components/Contact';
 import ChatWidget from './components/ChatWidget';
@@ -10,6 +11,7 @@ import WhatsAppFloat from './components/UI/WhatsAppFloat';
 import WhatsAppModal from './components/WhatsAppModal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Globe, Laptop, PieChart, TrendingUp, Users, Target, Lightbulb, Trophy, ArrowRight, Twitter, Linkedin, Facebook } from 'lucide-react';
+import { CONFIG } from './config/config-english';
 
 // --- Shared Components ---
 
@@ -23,39 +25,6 @@ const PageWrapper: React.FC<{children: React.ReactNode, pt?: string}> = ({ child
   >
     {children}
   </motion.div>
-);
-
-const PhilosophySection: React.FC = () => (
-    <section className="py-16 md:py-24 bg-matte-black relative z-10 border-b border-white/5">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
-          <span className="text-gold-500 text-[9px] md:text-[10px] font-bold tracking-[0.25em] uppercase mb-2 md:mb-4 block">Our Philosophy</span>
-          <h2 className="text-2xl md:text-5xl font-serif text-white leading-tight">Bridging Tech & <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 to-gold-600">Real Needs</span></h2>
-        </div>
-        <div className="grid grid-cols-3 gap-2 md:gap-8">
-            {[
-                { icon: Trophy, title: "Elite", text: "20+ years expertise." },
-                { icon: Target, title: "Focus", text: "Target bottlenecks." },
-                { icon: Lightbulb, title: "Sense", text: "Tangible growth." }
-            ].map((item, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-matte-charcoal/50 border border-white/5 p-3 md:p-10 relative overflow-hidden group hover:border-gold-500/30 transition-colors duration-500 rounded-lg md:rounded-xl flex flex-col items-center text-center"
-                >
-                    <div className="w-8 h-8 md:w-12 md:h-12 bg-gold-500/10 flex items-center justify-center rounded-lg text-gold-500 mb-2 md:mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors">
-                        <item.icon size={16} className="md:w-6 md:h-6" />
-                    </div>
-                    <h3 className="text-xs md:text-xl font-serif text-white mb-1 md:mb-4">{item.title}</h3>
-                    <p className="text-gray-500 font-light leading-tight text-[9px] md:text-sm">{item.text}</p>
-                </motion.div>
-            ))}
-        </div>
-      </div>
-    </section>
 );
 
 const B2BSection: React.FC = () => (
@@ -101,10 +70,10 @@ const BookkeepingSection: React.FC = () => (
             <div>
                 <h3 className="text-xl md:text-3xl text-white font-serif mb-4 md:mb-8">Remote Bookkeeping</h3>
                 <p className="text-gray-400 mb-6 md:mb-10 leading-relaxed font-light text-xs md:text-base">
-                    Professional remote bookkeeping and taxation tailored for businesses without in-house accountants.
+                    Professional remote bookkeeping and taxation tailored for businesses.
                 </p>
                 <ul className="space-y-3 md:space-y-6">
-                    {["Expert financial management", "Compliance for overseas companies", "Cost-effective for SMEs", "Integration with BizSense ERP"].map((item, i) => (
+                    {["Expert financial management", "Strict security protocols", "Cost-effective for SMEs", "Integration with BizSense ERP"].map((item, i) => (
                         <li key={i} className="flex items-center gap-3 md:gap-4 text-gray-300">
                              <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-gold-500 flex items-center justify-center text-black shrink-0"><Check size={10} className="md:w-3.5 md:h-3.5" /></div>
                              <span className="text-[10px] md:text-sm tracking-wide">{item}</span>
@@ -127,45 +96,20 @@ const BookkeepingSection: React.FC = () => (
     </section>
 );
 
-const WhyChooseSection: React.FC = () => (
-    <section className="py-16 md:py-24 bg-gradient-to-r from-matte-black via-[#0F0F0F] to-matte-black border-y border-white/5">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-             <h2 className="text-xl md:text-3xl font-serif text-white mb-10 md:mb-16">Why Choose BizSense?</h2>
-             <div className="grid grid-cols-5 gap-2 md:gap-8">
-                 {[
-                     { icon: Globe, title: "Global" },
-                     { icon: TrendingUp, title: "Practical" },
-                     { icon: Laptop, title: "ERP" },
-                     { icon: PieChart, title: "Finance" },
-                     { icon: Users, title: "20+ Yrs" }
-                 ].map((item, i) => (
-                     <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center gap-2 md:gap-6 group">
-                         <div className="w-10 h-10 md:w-20 md:h-20 rounded-full bg-gold-500/5 border border-gold-500/20 flex items-center justify-center text-gold-500 group-hover:bg-gold-500 group-hover:text-black transition-all duration-500"><item.icon size={16} className="md:w-8 md:h-8" /></div>
-                         <h4 className="text-white font-bold text-[9px] md:text-xs uppercase tracking-widest leading-relaxed">{item.title}</h4>
-                     </motion.div>
-                 ))}
-             </div>
-        </div>
-    </section>
-);
-
 // --- Page Components ---
 
 const Home: React.FC = () => (
   <PageWrapper pt="pt-0">
     <Hero />
-    <PhilosophySection />
+    <HomeServices />
     <B2BSection />
     <BookkeepingSection />
-    <WhyChooseSection />
     <Contact />
   </PageWrapper>
 );
 
-// Strictly defined About Page: Philosophy -> B2B -> Bookkeeping. No Hero.
 const About: React.FC = () => (
     <PageWrapper pt="pt-20">
-        <PhilosophySection />
         <B2BSection />
         <BookkeepingSection />
         <Contact />
@@ -197,12 +141,12 @@ const Footer: React.FC = () => (
          </div>
          <div className="bg-white/5 p-4 rounded-xl flex flex-col items-center justify-center gap-2 border border-white/5 hover:border-gold-500/30 transition-colors col-span-2 md:col-span-1">
              <h5 className="text-gold-500 text-[10px] uppercase font-bold">Support</h5>
-             <span className="text-white/50 text-[10px]">info@bizsenselk.com</span>
+             <span className="text-white/50 text-[10px]">{CONFIG.company.email}</span>
          </div>
       </div>
 
       <div className="text-center text-gray-600 text-[9px] md:text-[10px] border-t border-white/5 pt-6 uppercase tracking-widest">
-        &copy; {new Date().getFullYear()} BizSense Experts.
+        &copy; {new Date().getFullYear()} {CONFIG.company.name}.
       </div>
     </div>
   </footer>
@@ -213,7 +157,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowFloaters(window.scrollY > 800); // Increased scroll threshold to hide on Hero
+      setShowFloaters(window.scrollY > 800);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -241,10 +185,10 @@ const App: React.FC = () => {
         {/* Modals and Widgets */}
         <WhatsAppModal />
         
-        {/* ChatWidget is always mounted to receive events, but its internal floating button handles its own visibility or we control it here if we want to hide ONLY the floating button */}
+        {/* ChatWidget is always mounted */}
         <ChatWidget />
         
-        {/* Floating WhatsApp Bubble - Shown only after scroll */}
+        {/* Floating WhatsApp Bubble */}
         <div className={`transition-opacity duration-700 ${showFloaters ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
           <WhatsAppFloat />
         </div>

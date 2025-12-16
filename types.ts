@@ -27,6 +27,7 @@ export interface ChatMessage {
   role: 'user' | 'model';
   text: string;
   timestamp: Date;
+  suggestions?: string[];
 }
 
 export interface Testimonial {

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Sparkles, Bot } from 'lucide-react';
-import { sendMessageToGemini } from '../services/geminiService'; // This now imports the local engine
+import { sendMessageToGemini } from '../services/geminiService';
 import { ChatMessage } from '../types';
 
 const ChatWidget: React.FC = () => {
@@ -12,7 +12,8 @@ const ChatWidget: React.FC = () => {
       id: 'welcome',
       role: 'model',
       text: 'Greetings. I am BizSense AI. I can assist with ERP Systems, Global Trade, or Financial Strategy. How may I help?',
-      timestamp: new Date()
+      timestamp: new Date(),
+      suggestions: ["How can ERP help me?", "Global Trade Services", "Digital Marketing"]
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -29,11 +30,10 @@ const ChatWidget: React.FC = () => {
 
   useEffect(() => {
     const handleOpenChat = () => setIsOpen(true);
-    // Cast to any to bypass strict TypeScript window event map checks
     window.addEventListener('openBizSenseChat' as any, handleOpenChat);
     
     const handleScroll = () => {
-        setShowFloatingButton(window.scrollY > 800);
+        setShowFloatingButton(window.scrollY > 500);
     };
     window.addEventListener('scroll', handleScroll);
 
@@ -43,13 +43,13 @@ const ChatWidget: React.FC = () => {
     }
   }, []);
 
-  const handleSend = async () => {
-    if (!inputValue.trim() || isLoading) return;
+  const handleSend = async (text: string = inputValue) => {
+    if (!text.trim() || isLoading) return;
 
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
-      text: inputValue,
+      text: text,
       timestamp: new Date()
     };
 
@@ -57,14 +57,14 @@ const ChatWidget: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
-    // Call Local AI Engine
-    const responseText = await sendMessageToGemini(userMsg.text);
+    const response = await sendMessageToGemini(userMsg.text);
 
     const botMsg: ChatMessage = {
       id: (Date.now() + 1).toString(),
       role: 'model',
-      text: responseText,
-      timestamp: new Date()
+      text: response.text,
+      timestamp: new Date(),
+      suggestions: response.suggestions
     };
 
     setMessages(prev => [...prev, botMsg]);
@@ -91,7 +91,7 @@ const ChatWidget: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-[95vw] md:w-[450px] h-[80vh] md:h-[600px] bg-matte-charcoal/95 backdrop-blur-2xl border border-white/10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden ring-1 ring-gold-500/20"
+              className="relative w-[95vw] md:w-[450px] h-[80vh] md:h-[650px] bg-matte-charcoal/95 backdrop-blur-2xl border border-white/10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden ring-1 ring-gold-500/20"
             >
               {/* Header */}
               <div className="p-4 border-b border-white/5 flex items-center justify-between bg-gradient-to-r from-matte-black to-neutral-900/50">
@@ -104,7 +104,7 @@ const ChatWidget: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-gray-100 font-serif font-semibold text-sm tracking-wide">BizSense AI</h3>
-                    <p className="text-[10px] text-gold-500/70 uppercase tracking-wider font-bold">Advisory Active</p>
+                    <p className="text-[10px] text-gold-500/70 uppercase tracking-wider font-bold">Consultant Online</p>
                   </div>
                 </div>
                 <button 
@@ -117,23 +117,43 @@ const ChatWidget: React.FC = () => {
 
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar bg-matte-black/40">
-                {messages.map((msg) => (
-                  <motion.div
-                    key={msg.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-[85%] p-3.5 rounded-2xl text-xs md:text-sm leading-relaxed ${
-                        msg.role === 'user'
-                          ? 'bg-gold-600/10 border border-gold-500/20 text-gold-100 rounded-br-sm'
-                          : 'bg-white/5 border border-white/5 text-gray-300 rounded-bl-sm'
-                      }`}
+                {messages.map((msg, index) => (
+                  <div key={msg.id} className="flex flex-col gap-2">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      {msg.text}
-                    </div>
-                  </motion.div>
+                      <div
+                        className={`max-w-[85%] p-3.5 rounded-2xl text-xs md:text-sm leading-relaxed ${
+                          msg.role === 'user'
+                            ? 'bg-gold-600/10 border border-gold-500/20 text-gold-100 rounded-br-sm'
+                            : 'bg-white/5 border border-white/5 text-gray-300 rounded-bl-sm'
+                        }`}
+                      >
+                        {msg.text}
+                      </div>
+                    </motion.div>
+                    
+                    {/* Suggestions (Only for the latest message from model) */}
+                    {msg.role === 'model' && index === messages.length - 1 && msg.suggestions && (
+                       <motion.div 
+                         initial={{ opacity: 0 }}
+                         animate={{ opacity: 1 }}
+                         className="flex flex-wrap gap-2 mt-1 ml-2"
+                       >
+                         {msg.suggestions.map((suggestion, idx) => (
+                           <button
+                             key={idx}
+                             onClick={() => handleSend(suggestion)}
+                             className="text-[10px] bg-gold-500/5 border border-gold-500/20 text-gold-400 px-3 py-1.5 rounded-full hover:bg-gold-500 hover:text-black transition-colors"
+                           >
+                             {suggestion}
+                           </button>
+                         ))}
+                       </motion.div>
+                    )}
+                  </div>
                 ))}
                 {isLoading && (
                   <motion.div 
@@ -159,11 +179,11 @@ const ChatWidget: React.FC = () => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                    placeholder="Ask about premium services..."
+                    placeholder="Ask your strategy consultant..."
                     className="flex-1 bg-transparent py-3 px-2 text-sm text-gray-200 focus:outline-none placeholder:text-gray-600"
                   />
                   <button
-                    onClick={handleSend}
+                    onClick={() => handleSend()}
                     disabled={isLoading}
                     className="p-2 text-gold-500 hover:text-white disabled:opacity-30 transition-colors"
                   >
@@ -176,7 +196,6 @@ const ChatWidget: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Floating Trigger Button - Only visible on scroll */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}

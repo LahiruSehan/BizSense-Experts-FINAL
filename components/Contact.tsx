@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
 import Button from './UI/Button';
+import { CONFIG } from '../config/config-english';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
@@ -12,7 +13,17 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you. An expert will contact you shortly.");
+    
+    // Construct WhatsApp URL
+    const message = `*New Inquiry via Website*\n\n*Name:* ${formData.name}\n*Company:* ${formData.company}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
+    const encodedMessage = encodeURIComponent(message);
+    const waUrl = `https://wa.me/${CONFIG.company.whatsappNumber}?text=${encodedMessage}`;
+    
+    // Open in new tab
+    window.open(waUrl, '_blank');
+    
+    // Reset form
+    setFormData({ name: '', email: '', company: '', message: '' });
   };
 
   return (
@@ -28,9 +39,9 @@ const Contact: React.FC = () => {
              className="lg:w-1/3"
            >
              <h2 className="text-gold-500 font-bold uppercase tracking-widest text-[9px] md:text-xs mb-3 md:mb-4">Contact Us</h2>
-             <h3 className="text-3xl md:text-4xl font-serif text-white mb-6 md:mb-8">Let's Grow.</h3>
+             <h3 className="text-3xl md:text-4xl font-serif text-white mb-6 md:mb-8">{CONFIG.contact.title}</h3>
              <p className="text-gray-400 mb-8 md:mb-12 font-light leading-relaxed text-xs md:text-base">
-               Ready to transform your business with innovative ERP, dynamic digital marketing, seamless B2B trade, or expert SME advisory?
+               {CONFIG.contact.subtitle}
              </p>
 
              <div className="space-y-6 md:space-y-8">
@@ -40,7 +51,7 @@ const Contact: React.FC = () => {
                  </div>
                  <div>
                    <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">Call Us</p>
-                   <p className="text-white font-serif text-sm md:text-lg">0701 75 75 76</p>
+                   <p className="text-white font-serif text-sm md:text-lg">{CONFIG.company.phone}</p>
                  </div>
                </div>
 
@@ -50,7 +61,7 @@ const Contact: React.FC = () => {
                  </div>
                  <div>
                    <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">Email Us</p>
-                   <p className="text-white font-serif text-sm md:text-lg">info@bizsenselk.com</p>
+                   <p className="text-white font-serif text-sm md:text-lg">{CONFIG.company.email}</p>
                  </div>
                </div>
 
@@ -60,13 +71,13 @@ const Contact: React.FC = () => {
                  </div>
                  <div>
                    <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">Serving</p>
-                   <p className="text-white font-serif text-sm md:text-lg">Sri Lanka & Global</p>
+                   <p className="text-white font-serif text-sm md:text-lg">{CONFIG.company.location}</p>
                  </div>
                </div>
              </div>
            </motion.div>
 
-           {/* Form - Compact on Mobile */}
+           {/* Form */}
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +89,7 @@ const Contact: React.FC = () => {
              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 relative z-10">
                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                  <div>
-                   <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">Full Name</label>
+                   <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">{CONFIG.contact.form.name}</label>
                    <input 
                      type="text" 
                      name="name" 
@@ -90,7 +101,7 @@ const Contact: React.FC = () => {
                    />
                  </div>
                  <div>
-                   <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">Company</label>
+                   <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">{CONFIG.contact.form.company}</label>
                    <input 
                      type="text" 
                      name="company" 
@@ -103,7 +114,7 @@ const Contact: React.FC = () => {
                </div>
 
                <div>
-                 <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">Email</label>
+                 <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">{CONFIG.contact.form.email}</label>
                  <input 
                    type="email" 
                    name="email" 
@@ -116,7 +127,7 @@ const Contact: React.FC = () => {
                </div>
 
                <div>
-                 <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">Message</label>
+                 <label className="block text-[9px] md:text-[10px] text-gold-500 uppercase font-bold mb-1.5 md:mb-2">{CONFIG.contact.form.message}</label>
                  <textarea 
                    rows={4}
                    name="message"
@@ -130,7 +141,7 @@ const Contact: React.FC = () => {
 
                <div className="pt-2 md:pt-4">
                  <Button type="submit" className="w-full md:w-auto">
-                   Send Message <Send size={12} className="ml-2" />
+                   {CONFIG.contact.form.button} <Send size={12} className="ml-2" />
                  </Button>
                </div>
              </form>
