@@ -78,8 +78,9 @@ const ERPPage: React.FC = () => {
                             <Layers size={14} />
                         </div>
                         <div>
-                            <h4 className="text-white font-bold text-sm mb-1">{mod.title}</h4>
-                            <p className="text-gray-500 text-xs">{mod.desc}</p>
+                            <h4 className="text-white font-bold text-base mb-1">{mod.title}</h4>
+                            {/* Updated Style: Bold and Bigger */}
+                            <p className="text-gray-200 font-bold text-sm">{mod.desc}</p>
                         </div>
                     </motion.div>
                 ))}

@@ -17,7 +17,7 @@ const Services: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-20">
         <div className="text-center mb-16 md:mb-24">
           <h2 className="text-gold-500 text-[9px] md:text-[10px] font-bold tracking-[0.3em] uppercase mb-4">Expertise</h2>
-          <h3 className="text-3xl md:text-5xl font-serif text-white leading-tight">
+          <h3 className="text-3xl md:text-5xl font-serif text-white leading-tight font-bold">
             Core Services
           </h3>
         </div>
@@ -53,7 +53,7 @@ const Services: React.FC = () => {
                     <div className="text-gold-500 group-hover:text-gold-300 transition-colors duration-300">
                         <service.icon size={20} strokeWidth={1.5} />
                     </div>
-                    <h4 className="text-lg md:text-xl font-serif text-white group-hover:text-gold-200 transition-colors leading-tight">
+                    <h4 className="text-lg md:text-xl font-serif text-white group-hover:text-gold-200 transition-colors leading-tight font-bold">
                         {service.title}
                     </h4>
                 </div>
@@ -61,16 +61,17 @@ const Services: React.FC = () => {
                 {/* Divider */}
                 <div className="w-10 h-[1px] bg-gold-500/30 mb-3 group-hover:w-20 transition-all duration-500" />
 
-                {/* Summary Description */}
-                <p className="text-xs text-gray-400 font-light leading-relaxed mb-4 flex-grow line-clamp-3">
+                {/* Summary Description - Bold and Gold */}
+                <p className="text-xs text-gold-500 font-bold leading-relaxed mb-4 flex-grow line-clamp-3">
                    {service.summary}
                 </p>
 
-                {/* Tiny See More Button */}
+                {/* Tiny See More Button - Animated Gradient */}
                 <div className="flex justify-start pt-1">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[9px] uppercase tracking-widest text-gray-400 group-hover:border-gold-500/30 group-hover:text-gold-400 transition-all duration-300">
-                        <span>See More</span>
-                        <ArrowRight size={10} className="-rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                    <div className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-[9px] uppercase tracking-widest text-gray-400 group-hover:text-black group-hover:font-bold transition-all duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">See More</span>
+                        <ArrowRight size={10} className="relative z-10 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                     </div>
                 </div>
               </div>

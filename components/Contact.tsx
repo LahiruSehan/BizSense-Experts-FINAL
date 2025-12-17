@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Globe, MessageCircle } from 'lucide-react';
 import Button from './UI/Button';
 import { CONFIG } from '../config/config-english';
 
@@ -47,10 +47,12 @@ const Contact: React.FC = () => {
              <div className="space-y-6 md:space-y-8">
                <div className="flex items-center gap-4 group">
                  <div className="w-8 h-8 md:w-10 md:h-10 bg-gold-500/10 border border-gold-500/20 rounded-full flex items-center justify-center text-gold-500 shrink-0">
-                   <Phone size={14} className="md:w-[18px]" />
+                   {/* Changed Icon to MessageCircle for WhatsApp */}
+                   <MessageCircle size={14} className="md:w-[18px]" />
                  </div>
                  <div>
-                   <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">Call Us</p>
+                   {/* Changed text from Call Us to WhatsApp */}
+                   <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">WhatsApp</p>
                    <p className="text-white font-serif text-sm md:text-lg">{CONFIG.company.phone}</p>
                  </div>
                </div>
@@ -61,6 +63,7 @@ const Contact: React.FC = () => {
                  </div>
                  <div>
                    <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">Email Us</p>
+                   {/* Email is pulled from CONFIG which is updated to bizsensexperts@gmail.com */}
                    <p className="text-white font-serif text-sm md:text-lg">{CONFIG.company.email}</p>
                  </div>
                </div>
