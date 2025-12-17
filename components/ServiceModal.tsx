@@ -137,13 +137,24 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ selectedService, setSelecte
                     >
                     Consult Expert
                     </Button>
-                    <Button 
-                        variant="secondary" 
-                        onClick={(e) => { e.stopPropagation(); navigate(selectedService.path); setSelectedId(null); }}
-                        className="w-full md:w-auto py-2.5 md:py-3 text-[10px] md:text-[11px] font-bold"
-                    >
-                    Full Details <ArrowRight size={12} className="ml-1" />
-                    </Button>
+                    
+                    {selectedService.id === 'erp' ? (
+                        <Button 
+                            variant="secondary" 
+                            onClick={(e) => { e.stopPropagation(); navigate(selectedService.path); setSelectedId(null); }}
+                            className="w-full md:w-auto py-2.5 md:py-3 text-[10px] md:text-[11px] font-bold"
+                        >
+                            Full Details <ArrowRight size={12} className="ml-1" />
+                        </Button>
+                    ) : (
+                        <Button 
+                            variant="secondary" 
+                            onClick={(e) => { e.stopPropagation(); setSelectedId(null); }}
+                            className="w-full md:w-auto py-2.5 md:py-3 text-[10px] md:text-[11px] font-bold"
+                        >
+                            Back
+                        </Button>
+                    )}
                 </div>
             </div>
         </div>

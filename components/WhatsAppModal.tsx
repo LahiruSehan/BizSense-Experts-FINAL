@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, MessageCircle } from 'lucide-react';
+import { CONFIG } from '../config/config-english';
 
 const WhatsAppModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,7 @@ const WhatsAppModal: React.FC = () => {
   }, []);
 
   const handleSend = () => {
-    const baseUrl = "https://wa.me/94701757576"; // Replace with actual number
+    const baseUrl = `https://wa.me/${CONFIG.company.whatsappNumber}`; // Replace with actual number
     const encodedMsg = encodeURIComponent(message || "Hello, I would like to inquire about your services.");
     window.open(`${baseUrl}?text=${encodedMsg}`, '_blank');
     setIsOpen(false);

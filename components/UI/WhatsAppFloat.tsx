@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { CONFIG } from '../../config/config-english';
 
 const WhatsAppFloat: React.FC = () => {
   return (
     <motion.a
-      href="https://wa.me/" // Add actual number
+      href={`https://wa.me/${CONFIG.company.whatsappNumber}`}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, x: 20 }}

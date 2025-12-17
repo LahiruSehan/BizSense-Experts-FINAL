@@ -59,8 +59,9 @@ const Footer: React.FC = () => (
          
          <div className="bg-white/5 p-4 rounded-xl flex flex-col items-center justify-center gap-2 border border-white/5 hover:border-gold-500/30 transition-colors">
             <h5 className="text-gold-500 text-[10px] uppercase font-bold">Contact</h5>
-            <div className="flex gap-2 text-white/50">
-               <Users size={16} /> <ArrowRight size={16} />
+            <div className="flex flex-col items-center gap-1 text-white/50">
+               <a href={`https://wa.me/${CONFIG.company.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold hover:text-white transition-colors">0701 75 75 76</a>
+               <span className="text-[10px] font-bold">0711 75 75 76</span>
             </div>
          </div>
          <div className="bg-white/5 p-4 rounded-xl flex flex-col items-center justify-center gap-2 border border-white/5 hover:border-gold-500/30 transition-colors">

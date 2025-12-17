@@ -5,7 +5,7 @@ export const CONFIG = {
   company: {
     name: "BizSense Experts",
     tagline: "Intelligent Business Solutions",
-    phone: "0701 75 75 76",
+    phone: "0701 75 75 76 / 0711 75 75 76",
     email: "bizsensexperts@gmail.com",
     whatsappNumber: "94701757576", // Format: CountryCodeNumber without +
     location: "Sri Lanka & Global"
