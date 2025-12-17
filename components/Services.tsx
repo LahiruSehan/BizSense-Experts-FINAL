@@ -14,9 +14,9 @@ const Services: React.FC = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-transparent via-gold-500/10 to-transparent" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/10 to-transparent" />
 
-      {/* Faint Blue Ambient Glows - Doubled Opacity */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gemini-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gemini-900/15 rounded-full blur-[120px] pointer-events-none" />
+      {/* Faint Blue Ambient Glows - Doubled Opacity & Animated */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gemini-600/10 rounded-full blur-[120px] pointer-events-none animate-blob" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gemini-900/15 rounded-full blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: '3s' }} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-20">
         <div className="text-center mb-16 md:mb-24">

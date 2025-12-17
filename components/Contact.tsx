@@ -28,9 +28,9 @@ const Contact: React.FC = () => {
 
   return (
     <section className="py-16 md:py-24 bg-matte-black relative border-t border-white/5 overflow-hidden" id="contact">
-       {/* Faint Blue Glow - Increased Opacity */}
-       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.06),transparent_60%)] pointer-events-none" />
-       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none" />
+       {/* Faint Blue Glow - Increased Opacity & Animated */}
+       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.06),transparent_60%)] pointer-events-none animate-pulse-soft" />
+       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: '1s' }} />
 
        <div className="container mx-auto px-4 md:px-6 relative z-10">
          <div className="flex flex-col lg:flex-row gap-12 md:gap-20">

@@ -9,8 +9,8 @@ const ERPPage: React.FC = () => {
 
   return (
     <div className="pt-24 min-h-screen bg-matte-black relative overflow-hidden">
-      {/* Faint Blue Glow - Top Section (Opacity Increased) */}
-      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-gemini-900/10 blur-[150px] pointer-events-none" />
+      {/* Faint Blue Glow - Top Section (Opacity Increased) & Animated */}
+      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-gemini-900/10 blur-[150px] pointer-events-none animate-blob" />
 
       {/* Page Header */}
       <section className="relative py-24 px-6 border-b border-white/5 overflow-hidden">
@@ -33,8 +33,8 @@ const ERPPage: React.FC = () => {
 
       {/* Platforms & Benefits */}
       <section className="py-24 px-6 relative">
-        {/* Faint Blue Glow - Middle/Bottom (Opacity Increased) */}
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none" />
+        {/* Faint Blue Glow - Middle/Bottom (Opacity Increased) & Animated */}
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: '2s' }} />
 
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-10">
           

@@ -63,9 +63,9 @@ const Hero: React.FC = () => {
            {/* Complex Gradient Overlays for Blue/Gold Vibe */}
            <div className="absolute inset-0 bg-gradient-to-b from-matte-black/50 via-matte-black/90 to-matte-black" />
            
-           {/* Faint Blue Ambient Light - Boosted Opacity */}
+           {/* Faint Blue Ambient Light - Boosted Opacity & Animated */}
            <div className="absolute inset-0 bg-gradient-to-r from-gemini-900/20 via-transparent to-gemini-900/20 mix-blend-overlay" />
-           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.12),transparent_60%)]" />
+           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.12),transparent_60%)] animate-pulse-soft" />
            
            {/* Texture */}
            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center opacity-[0.02]" />

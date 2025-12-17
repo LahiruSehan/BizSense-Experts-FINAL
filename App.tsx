@@ -51,7 +51,7 @@ const About: React.FC = () => (
 const Footer: React.FC = () => (
   <footer className="bg-matte-charcoal border-t border-white/5 pt-10 pb-8 text-sm relative z-10 overflow-hidden">
     {/* Footer Specific Faint Blue Glow - Slightly Increased */}
-    <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-gemini-900/15 blur-[80px] pointer-events-none" />
+    <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-gemini-900/15 blur-[80px] pointer-events-none animate-pulse-soft" />
     
     <div className="container mx-auto px-4 md:px-6 relative z-10">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mb-8">
@@ -105,11 +105,11 @@ const App: React.FC = () => {
         <div className="fixed inset-0 bg-matte-black -z-20" />
         
         {/* Faint Blue Ambient Light - Global Coverage (Opacity Increased) */}
-        <div className="fixed top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.05),transparent_90%)] pointer-events-none -z-10" />
+        <div className="fixed top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.05),transparent_90%)] pointer-events-none -z-10 animate-pulse-soft" />
         
-        {/* Corner Accents - Very Faint but Visible */}
-        <div className="fixed bottom-0 left-0 w-[800px] h-[800px] bg-gemini-900/10 blur-[150px] pointer-events-none -z-10" />
-        <div className="fixed top-0 right-0 w-[800px] h-[800px] bg-gemini-900/10 blur-[150px] pointer-events-none -z-10" />
+        {/* Corner Accents - Very Faint but Visible & Moving */}
+        <div className="fixed bottom-0 left-0 w-[800px] h-[800px] bg-gemini-900/10 blur-[150px] pointer-events-none -z-10 animate-blob" />
+        <div className="fixed top-0 right-0 w-[800px] h-[800px] bg-gemini-900/10 blur-[150px] pointer-events-none -z-10 animate-blob" style={{ animationDelay: '2s' }} />
 
         <Navbar />
         <AnimatePresence mode="wait">

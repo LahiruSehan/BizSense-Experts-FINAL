@@ -11,8 +11,8 @@ const HomeServices: React.FC = () => {
   return (
     // Added significant negative margin to pull up into Hero
     <section className="relative z-20 -mt-60 md:-mt-64 pb-16 px-4 md:px-6">
-      {/* Local Ambient Blue Glow - Softened top edge to remove sharp line */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gemini-900/10 to-transparent pointer-events-none -z-10" />
+      {/* Local Ambient Blue Glow - Softened top edge to remove sharp line & Animated */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gemini-900/10 to-transparent pointer-events-none -z-10 animate-pulse-soft" />
       
       <div className="container mx-auto">
         
