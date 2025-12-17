@@ -27,12 +27,8 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-matte-black relative border-t border-white/5 overflow-hidden" id="contact">
-       {/* Faint Blue Glow - Increased Opacity */}
-       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.06),transparent_60%)] pointer-events-none" />
-       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none" />
-
-       <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <section className="py-16 md:py-24 bg-matte-black relative border-t border-white/5" id="contact">
+       <div className="container mx-auto px-4 md:px-6">
          <div className="flex flex-col lg:flex-row gap-12 md:gap-20">
            
            {/* Contact Info */}
@@ -92,7 +88,6 @@ const Contact: React.FC = () => {
              className="lg:w-2/3 bg-[#0A0A0A] border border-white/5 p-6 md:p-12 rounded-xl shadow-2xl relative overflow-hidden"
            >
              <div className="absolute top-0 right-0 w-40 h-40 bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
-             <div className="absolute bottom-0 left-0 w-40 h-40 bg-gemini-500/5 rounded-full blur-3xl pointer-events-none" />
              
              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 relative z-10">
                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">

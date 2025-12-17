@@ -8,10 +8,7 @@ const ERPPage: React.FC = () => {
   const { title, subtitle, description, platforms, industries, modules } = CONFIG.erpPage;
 
   return (
-    <div className="pt-24 min-h-screen bg-matte-black relative overflow-hidden">
-      {/* Faint Blue Glow - Top Section (Opacity Increased) */}
-      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-gemini-900/10 blur-[150px] pointer-events-none" />
-
+    <div className="pt-24 min-h-screen bg-matte-black">
       {/* Page Header */}
       <section className="relative py-24 px-6 border-b border-white/5 overflow-hidden">
         <div className="absolute inset-0 bg-gold-500/5 pointer-events-none"></div>
@@ -32,11 +29,8 @@ const ERPPage: React.FC = () => {
       </section>
 
       {/* Platforms & Benefits */}
-      <section className="py-24 px-6 relative">
-        {/* Faint Blue Glow - Middle/Bottom (Opacity Increased) */}
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none" />
-
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-10">
+      <section className="py-24 px-6">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           
           {/* Left Column: Platforms */}
           <div>
@@ -78,13 +72,12 @@ const ERPPage: React.FC = () => {
                        initial={{ opacity: 0, y: 10 }}
                        whileInView={{ opacity: 1, y: 0 }}
                        transition={{ delay: i * 0.05 }}
-                       className="flex items-start gap-4 p-4 border border-white/5 rounded-xl hover:border-gold-500/30 transition-colors bg-matte-charcoal relative overflow-hidden"
+                       className="flex items-start gap-4 p-4 border border-white/5 rounded-xl hover:border-gold-500/30 transition-colors bg-matte-charcoal"
                     >
-                        <div className="absolute inset-0 bg-gemini-900/0 hover:bg-gemini-900/5 transition-colors duration-500 pointer-events-none" />
-                        <div className="w-8 h-8 rounded-full bg-gold-500/10 flex items-center justify-center text-gold-500 shrink-0 mt-1 relative z-10">
+                        <div className="w-8 h-8 rounded-full bg-gold-500/10 flex items-center justify-center text-gold-500 shrink-0 mt-1">
                             <Layers size={14} />
                         </div>
-                        <div className="relative z-10">
+                        <div>
                             <h4 className="text-white font-bold text-base mb-1">{mod.title}</h4>
                             {/* Updated Style: Bold and Bigger */}
                             <p className="text-gray-200 font-bold text-sm">{mod.desc}</p>

@@ -11,9 +11,6 @@ const HomeServices: React.FC = () => {
   return (
     // Added significant negative margin to pull up into Hero
     <section className="relative z-20 -mt-60 md:-mt-64 pb-16 px-4 md:px-6">
-      {/* Local Ambient Blue Glow - Softened top edge to remove sharp line */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gemini-900/10 to-transparent pointer-events-none -z-10" />
-      
       <div className="container mx-auto">
         
         {/* Floating Header - Removed the Box/Frame */}
@@ -21,7 +18,7 @@ const HomeServices: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12 relative"
+            className="text-center mb-8 md:mb-12"
         >
            {/* Simple Clean Header Text without background box */}
            <h2 className="text-gold-500 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center gap-2">
