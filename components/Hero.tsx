@@ -45,6 +45,11 @@ const Hero: React.FC = () => {
     visible: { opacity: 1, y: 0 }
   };
 
+  // Determine if we should show the "with" prefix based on the current headline
+  // (e.g., if headline starts with "Through", we might want to hide the standard "with")
+  const currentHeadline = headlines[index];
+  const showWithPrefix = !currentHeadline.startsWith('Through') && !currentHeadline.startsWith('තොට');
+
   return (
     <>
       <div className="relative w-full min-h-[120vh] flex flex-col pt-24 pb-64 overflow-hidden bg-matte-black justify-start items-center">
@@ -83,20 +88,37 @@ const Hero: React.FC = () => {
                {config.hero.mainHeadlinePrefix}
             </h1>
 
-            <div className="h-10 md:h-16 flex justify-center items-center drop-shadow-2xl mb-6 relative">
-              <div className="absolute inset-0 bg-gemini-500/10 blur-3xl rounded-full"></div>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-8">
               <AnimatePresence mode="wait">
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
-                  transition={{ duration: 0.5 }}
-                  className="relative font-serif italic text-gold-400 text-2xl md:text-4xl border-b-2 border-gold-500/50 pb-1 font-bold tracking-wide"
-                >
-                  {headlines[index]}
-                </motion.span>
+                {showWithPrefix && (
+                  <motion.span 
+                    key="with-prefix"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ delay: 0.1, type: "spring", stiffness: 100 }}
+                    className="text-white text-[12px] md:text-sm uppercase tracking-[0.4em] font-black italic mt-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"
+                  >
+                    {config.hero.withText}
+                  </motion.span>
+                )}
               </AnimatePresence>
+              
+              <div className="h-10 md:h-16 flex justify-center items-center drop-shadow-2xl relative">
+                <div className="absolute inset-0 bg-gemini-500/10 blur-3xl rounded-full"></div>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.5 }}
+                    className="relative font-serif italic text-gold-400 text-2xl md:text-4xl border-b-2 border-gold-500/50 pb-1 font-bold tracking-wide"
+                  >
+                    {currentHeadline}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
             </div>
 
             <motion.p 

@@ -48,6 +48,7 @@ export interface SiteConfig {
   hero: {
     badge: string;
     mainHeadlinePrefix: string;
+    withText: string;
     headlines: string[];
     description: string;
     cta: {

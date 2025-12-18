@@ -1,5 +1,7 @@
 {
   "name": "BizSense Experts V3",
-  "description": "Elite luxury business consultancy website featuring AI-driven advisory and premium financial solutions.",
-  "requestFramePermissions": []
+  "description": "Elite luxury business consultancy website featuring powerful AI-driven strategic advisory and premium financial solutions.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }
