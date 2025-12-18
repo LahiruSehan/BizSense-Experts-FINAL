@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CONFIG } from '../../config/config-english';
+import { useLanguage } from '../../context/LanguageContext';
 
 const WhatsAppFloat: React.FC = () => {
+  const { config } = useLanguage();
+  
   return (
     <motion.a
-      href={`https://wa.me/${CONFIG.company.whatsappNumber}`}
+      href={`https://wa.me/${config.company.whatsappNumber}`}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, x: 20 }}
@@ -13,7 +15,7 @@ const WhatsAppFloat: React.FC = () => {
       transition={{ delay: 1.5, duration: 0.8 }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-24 right-4 md:right-8 z-40 group flex items-center gap-3 cursor-pointer"
+      className="fixed bottom-[96px] right-4 md:right-8 z-40 group flex items-center gap-3 cursor-pointer"
     >
       <span className="hidden md:block bg-matte-black/90 backdrop-blur border border-white/10 px-3 py-1.5 rounded text-[10px] uppercase font-bold tracking-widest text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
         Talk to Expert

@@ -1,18 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Globe } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import Button from '../UI/Button';
-import { CONFIG } from '../../config/config-english';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ERPPage: React.FC = () => {
-  const { title, subtitle, description, platforms, industries, modules } = CONFIG.erpPage;
+  const { config } = useLanguage();
+  const { title, subtitle, description, platforms, industries, modules } = config.erpPage;
 
   return (
     <div className="pt-24 min-h-screen bg-matte-black relative overflow-hidden">
-      {/* Faint Blue Glow - Top Section (Opacity Increased) & Animated */}
       <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-gemini-900/10 blur-[150px] pointer-events-none animate-blob" />
 
-      {/* Page Header */}
       <section className="relative py-24 px-6 border-b border-white/5 overflow-hidden">
         <div className="absolute inset-0 bg-gold-500/5 pointer-events-none"></div>
         <div className="container mx-auto relative z-10">
@@ -31,14 +30,10 @@ const ERPPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Platforms & Benefits */}
       <section className="py-24 px-6 relative">
-        {/* Faint Blue Glow - Middle/Bottom (Opacity Increased) & Animated */}
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gemini-900/10 blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: '2s' }} />
 
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-10">
-          
-          {/* Left Column: Platforms */}
           <div>
             <h3 className="text-gold-500 uppercase tracking-[0.2em] font-bold text-xs mb-10">ERP Platforms We Implement</h3>
             <div className="space-y-4">
@@ -68,7 +63,6 @@ const ERPPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Modules */}
           <div>
             <h3 className="text-gold-500 uppercase tracking-[0.2em] font-bold text-xs mb-10">Comprehensive Modules</h3>
             <div className="grid grid-cols-1 gap-6">
@@ -86,7 +80,6 @@ const ERPPage: React.FC = () => {
                         </div>
                         <div className="relative z-10">
                             <h4 className="text-white font-bold text-base mb-1">{mod.title}</h4>
-                            {/* Updated Style: Bold and Bigger */}
                             <p className="text-gray-200 font-bold text-sm">{mod.desc}</p>
                         </div>
                     </motion.div>
@@ -97,7 +90,6 @@ const ERPPage: React.FC = () => {
                 <Button onClick={() => window.open(`https://wa.me/94701757576?text=I%20am%20interested%20in%20an%20ERP%20Demo`, '_blank')}>Request Demo</Button>
             </div>
           </div>
-
         </div>
       </section>
     </div>
