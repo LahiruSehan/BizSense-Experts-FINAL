@@ -8,5 +8,10 @@ export default defineConfig({
   base: './', 
   build: {
     outDir: 'dist',
+  },
+  define: {
+    'process.env': {
+      API_KEY: process.env.API_KEY
+    }
   }
 })
