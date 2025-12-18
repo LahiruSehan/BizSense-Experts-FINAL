@@ -133,26 +133,33 @@ const ChatWidget: React.FC = () => {
               <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
                 {messages.map((msg, index) => (
                   <div key={msg.id} className={`flex flex-col gap-3 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      className={`relative group max-w-[90%] p-5 rounded-3xl text-sm leading-relaxed shadow-xl ${
-                        msg.role === 'user'
-                          ? 'bg-gradient-to-br from-gold-600/20 to-gold-800/20 border border-gold-500/30 text-gold-50 rounded-br-none'
-                          : 'bg-white/5 border border-white/10 text-gray-200 rounded-bl-none'
-                      }`}
-                    >
-                      {msg.text}
+                    <div className="flex items-end gap-2 max-w-full">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        className={`relative group p-5 rounded-3xl text-sm leading-relaxed shadow-xl ${
+                          msg.role === 'user'
+                            ? 'bg-gradient-to-br from-gold-600/20 to-gold-800/20 border border-gold-500/30 text-gold-50 rounded-br-none'
+                            : 'bg-white/5 border border-white/10 text-gray-200 rounded-bl-none'
+                        }`}
+                      >
+                        {msg.text}
+                      </motion.div>
                       
                       {msg.role === 'model' && (
-                        <button 
+                        <motion.button 
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                           onClick={() => handleSpeak(msg.text, msg.id)}
-                          className="absolute -right-12 bottom-0 p-2 bg-matte-black/60 border border-white/10 rounded-full text-gold-500 hover:text-white hover:border-gold-500 transition-all opacity-0 group-hover:opacity-100"
+                          className={`p-2 bg-gold-500/10 border border-gold-500/30 rounded-full text-gold-500 hover:bg-gold-500 hover:text-black transition-all shadow-[0_0_15px_rgba(212,165,51,0.2)] mb-1 shrink-0 ${isSpeaking === msg.id ? 'animate-pulse' : ''}`}
+                          title="Listen to advice"
                         >
                           {isSpeaking === msg.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Volume2 className="w-4 h-4" />}
-                        </button>
+                        </motion.button>
                       )}
-                    </motion.div>
+                    </div>
                     
                     {msg.role === 'model' && index === messages.length - 1 && msg.suggestions && (
                        <div className="flex flex-wrap gap-2 mt-2">
