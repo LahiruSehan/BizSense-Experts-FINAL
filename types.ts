@@ -35,3 +35,65 @@ export interface Testimonial {
   company: string;
   quote: string;
 }
+
+export interface SiteConfig {
+  company: {
+    name: string;
+    tagline: string;
+    phone: string;
+    email: string;
+    whatsappNumber: string;
+    location: string;
+  };
+  hero: {
+    badge: string;
+    mainHeadlinePrefix: string;
+    headlines: string[];
+    description: string;
+    cta: {
+      consult: string;
+      whatsapp: string;
+      ai: string;
+    };
+    whyChoose: Array<{
+      icon: any;
+      title: string;
+      text: string;
+    }>;
+  };
+  services: Array<{
+    id: string;
+    title: string;
+    shortDesc: string;
+    summary: string;
+    fullDesc: string;
+    features: string[];
+    icon: any;
+    path: string;
+  }>;
+  erpPage: {
+    title: string;
+    subtitle: string;
+    description: string;
+    platforms: string[];
+    industries: Array<{
+      name: string;
+      icon: any;
+    }>;
+    modules: Array<{
+      title: string;
+      desc: string;
+    }>;
+  };
+  contact: {
+    title: string;
+    subtitle: string;
+    form: {
+      name: string;
+      company: string;
+      email: string;
+      message: string;
+      button: string;
+    };
+  };
+}

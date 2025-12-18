@@ -1,7 +1,7 @@
-import { Layers, Globe, BarChart3, Calculator, ShieldCheck, Activity, Truck, ShoppingBag, Factory, Building2, Trophy, Target, Lightbulb, Users, TrendingUp, Laptop, PieChart, Lock } from 'lucide-react';
-import { ServiceType } from '../types';
+import { Layers, Globe, BarChart3, Calculator, ShieldCheck, Truck, ShoppingBag, Factory, Building2, Users, TrendingUp, Laptop, PieChart, Lock } from 'lucide-react';
+import { ServiceType, SiteConfig } from '../types';
 
-export const CONFIG = {
+export const CONFIG: SiteConfig = {
   company: {
     name: "BizSense Experts",
     tagline: "Intelligent Business Solutions",

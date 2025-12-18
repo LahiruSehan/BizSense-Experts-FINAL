@@ -1,7 +1,7 @@
 import { Layers, Globe, BarChart3, Calculator, ShieldCheck, Truck, ShoppingBag, Factory, Building2, Users, Laptop, PieChart, Lock, TrendingUp } from 'lucide-react';
-import { ServiceType } from '../types';
+import { SiteConfig } from '../types';
 
-export const CONFIG_SINHALA = {
+export const CONFIG_SINHALA: SiteConfig = {
   company: {
     name: "BizSense Experts",
     tagline: "බුද්ධිමත් ව්‍යාපාරික විසඳුම්",

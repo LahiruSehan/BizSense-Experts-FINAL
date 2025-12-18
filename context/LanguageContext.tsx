@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CONFIG } from '../config/config-english';
 import { CONFIG_SINHALA } from '../config/config-sinhala';
+import { SiteConfig } from '../types';
 
 type Language = 'en' | 'si';
 
@@ -8,7 +9,7 @@ interface LanguageContextType {
   language: Language | null;
   setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
-  config: typeof CONFIG;
+  config: SiteConfig;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
