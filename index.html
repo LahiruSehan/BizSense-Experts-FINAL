@@ -26,7 +26,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Premium Font Suite: English (Cinzel, Manrope) + Sinhala (Abhaya Libre, Noto Sans, Gemunu Libre) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600&family=Abhaya+Libre:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@100;200;300;400;500;600;700;800;900&family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <script>
       tailwind.config = {
         theme: {
@@ -43,7 +45,6 @@
                 800: '#554215',
                 900: '#2B210A',
               },
-              // Gemini / Tech Blue
               gemini: {
                 300: '#7dd3fc',
                 400: '#38bdf8',
@@ -53,18 +54,21 @@
                 900: '#0c4a6e',
               },
               matte: {
-                black: '#020202', // Even Darker
-                charcoal: '#080808', // Darker Grey
+                black: '#020202',
+                charcoal: '#080808',
                 glass: 'rgba(5, 5, 5, 0.7)'
               }
             },
             fontFamily: {
               serif: ['Cinzel', 'serif'],
               sans: ['Manrope', 'sans-serif'],
+              sinhalaSerif: ['Abhaya Libre', 'serif'],
+              sinhalaSans: ['Noto Sans Sinhala', 'sans-serif'],
+              sinhalaDisplay: ['Gemunu Libre', 'sans-serif'],
             },
             backgroundImage: {
               'gold-gradient': 'linear-gradient(135deg, #D4A533 0%, #F9F1D8 40%, #AA8429 100%)',
-              'gemini-gradient': 'linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #818cf8 100%)', // Blue/Indigo
+              'gemini-gradient': 'linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #818cf8 100%)',
               'gold-shine': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
               'dark-gradient': 'linear-gradient(to bottom, #020202, #000000)',
             },
@@ -116,6 +120,28 @@
         overflow-x: hidden;
       }
       
+      /* Global Sinhala Typography Overrides */
+      html[lang="si"] {
+        font-family: 'Noto Sans Sinhala', sans-serif;
+      }
+      html[lang="si"] .font-serif {
+        font-family: 'Abhaya Libre', serif !important;
+        letter-spacing: 0.02em !important;
+      }
+      html[lang="si"] .font-sans {
+        font-family: 'Noto Sans Sinhala', sans-serif !important;
+      }
+      html[lang="si"] .gold-title-realistic {
+        font-family: 'Gemunu Libre', sans-serif !important;
+        letter-spacing: 0.05em !important;
+        line-height: 1.1 !important;
+      }
+      html[lang="si"] h1, 
+      html[lang="si"] h2, 
+      html[lang="si"] h3 {
+        font-family: 'Abhaya Libre', serif;
+      }
+
       /* Cinematic Noise Overlay */
       .bg-noise {
         position: fixed;
@@ -125,7 +151,7 @@
         height: 100vh;
         pointer-events: none;
         z-index: 9999;
-        opacity: 0.02; /* Reduced opacity for cleaner look */
+        opacity: 0.02;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
       }
 

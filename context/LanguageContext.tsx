@@ -21,11 +21,16 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const savedLang = localStorage.getItem('bizsense_lang') as Language;
     if (savedLang) {
       setLanguageState(savedLang);
+      document.documentElement.lang = savedLang;
+    } else {
+      // Default to 'en' but don't set language state yet so selector shows
+      document.documentElement.lang = 'en';
     }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
+    document.documentElement.lang = lang;
     localStorage.setItem('bizsense_lang', lang);
   };
 
