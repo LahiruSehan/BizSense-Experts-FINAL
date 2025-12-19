@@ -2,8 +2,6 @@
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { BIZSENSE_KNOWLEDGE } from "../config/ai-knowledge";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export interface ChatResponse {
   text: string;
   suggestions: string[];
@@ -13,6 +11,9 @@ export interface ChatResponse {
  * Enhanced AI Consultation Logic
  */
 export const sendMessageToGemini = async (message: string, language: 'en' | 'si' = 'en'): Promise<ChatResponse> => {
+  // Initializing GoogleGenAI right before use to ensure the most up-to-date environment variables and session state.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-pro-preview",
@@ -48,6 +49,7 @@ export const sendMessageToGemini = async (message: string, language: 'en' | 'si'
       },
     });
 
+    // Accessing the .text property directly instead of calling it as a method
     return JSON.parse(response.text || '{}');
   } catch (error) {
     console.error("AI Error:", error);
@@ -62,6 +64,9 @@ export const sendMessageToGemini = async (message: string, language: 'en' | 'si'
  * Text-to-Speech Implementation using Gemini TTS
  */
 export const generateSpeech = async (text: string, language: 'en' | 'si' = 'en'): Promise<string | null> => {
+  // Initializing GoogleGenAI right before use
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",

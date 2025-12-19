@@ -5,8 +5,9 @@ export const CONFIG_SINHALA: SiteConfig = {
   company: {
     name: "BizSense Experts",
     tagline: "ඩිජිටල් ලොවට බුද්ධිමත් ව්‍යාපාරික විසඳුම්",
-    phone: "070 175 7576",
-    email: "info@bizsense.lk",
+    phone: "0701 75 75 76",
+    phoneSecondary: "0711 75 75 76",
+    email: "Bizsensexperts@gmail.com",
     whatsappNumber: "94701757576",
     location: "ශ්‍රී ලංකාව සහ ජාත්‍යන්තර වෙළඳපල"
   },

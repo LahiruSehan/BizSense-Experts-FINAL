@@ -41,6 +41,7 @@ export interface SiteConfig {
     name: string;
     tagline: string;
     phone: string;
+    phoneSecondary?: string;
     email: string;
     whatsappNumber: string;
     location: string;

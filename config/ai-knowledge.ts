@@ -1,4 +1,3 @@
-
 /**
  * BIZSENSE ELITE KNOWLEDGE BASE
  * This file serves as the "brain" for BizSense AI.
@@ -11,8 +10,9 @@ export const BIZSENSE_KNOWLEDGE = {
     philosophy: "Business + Sense. Bridging the gap between technology and real-world financial reality. We don't just sell software; we design systems for profitability.",
     location: "Based in Sri Lanka, serving local and international markets (UK, EU, Middle East, Asia).",
     contact: {
-      phone: "070 175 7576",
-      email: "info@bizsense.lk",
+      phone: "0701 75 75 76",
+      phoneSecondary: "0711 75 75 76",
+      email: "Bizsensexperts@gmail.com",
       whatsapp: "94701757576"
     }
   },

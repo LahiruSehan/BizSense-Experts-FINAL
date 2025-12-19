@@ -5,8 +5,9 @@ export const CONFIG: SiteConfig = {
   company: {
     name: "BizSense Experts",
     tagline: "Smart Business Solutions for a Digital World",
-    phone: "070 175 7576",
-    email: "info@bizsense.lk",
+    phone: "0701 75 75 76",
+    phoneSecondary: "0711 75 75 76",
+    email: "Bizsensexperts@gmail.com",
     whatsappNumber: "94701757576",
     location: "Sri Lanka & International Markets"
   },

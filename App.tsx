@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Services from './components/Services';
 import HomeServices from './components/HomeServices';
+// Added missing Services component import
+import Services from './components/Services';
 import WhyChoose from './components/WhyChoose';
 import ERPPage from './components/Pages/ERPPage';
 import Contact from './components/Contact';
@@ -60,8 +62,12 @@ const Footer: React.FC = () => {
            <div className="bg-white/5 p-4 rounded-xl flex flex-col items-center justify-center gap-2 border border-white/5 hover:border-gold-500/30 transition-colors">
               <h5 className="text-gold-500 text-[10px] uppercase font-bold">Contact</h5>
               <div className="flex flex-col items-center gap-1 text-white/50">
-                 <a href={`https://wa.me/${config.company.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold hover:text-white transition-colors">0701 75 75 76</a>
-                 <span className="text-[10px] font-bold">0711 75 75 76</span>
+                 <a href={`https://wa.me/${config.company.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold hover:text-white transition-colors">
+                   {config.company.phone}
+                 </a>
+                 {config.company.phoneSecondary && (
+                   <span className="text-[10px] font-bold">{config.company.phoneSecondary}</span>
+                 )}
               </div>
            </div>
            <div className="bg-white/5 p-4 rounded-xl flex flex-col items-center justify-center gap-2 border border-white/5 hover:border-gold-500/30 transition-colors">
