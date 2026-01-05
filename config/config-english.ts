@@ -48,7 +48,7 @@ export const CONFIG: SiteConfig = {
       "Accounting Control"
     ],
     
-    description: "BizSense Experts is a multi-disciplinary business solutions company providing ERP systems, digital marketing, B2B trade services, and SME advisory to local and international businesses. With 20+ years of banking, finance, and SME consulting experience, BizSense bridges the gap between technology and real business needs. We don't just sell software — we design systems that improve profitability, control, and scalability.",
+    description: "BizSense Experts is a multi-disciplinary business solutions company providing ERP systems, digital marketing, B2B trade services, and SME advisory to local and international businesses. With 20+ years of financial, strategic, and SME consulting experience, BizSense bridges the gap between technology and real business needs. We design systems that improve profitability, control, and scalability.",
     
     cta: {
       consult: "Request Free Consultation",
@@ -62,7 +62,7 @@ export const CONFIG: SiteConfig = {
       { 
         icon: ShieldCheck, 
         title: "20+ Years Experience", 
-        text: "Deep understanding of finance, credit, and banking logic built-in." 
+        text: "Deep understanding of finance, credit, and professional business logic built-in." 
       },
       { 
         icon: PieChart, 
@@ -98,7 +98,7 @@ export const CONFIG: SiteConfig = {
     {
       id: 'erp',
       title: "ERP Solutions (International & Local)",
-      shortDesc: "ERP Designed by a Banker, for Businesses.",
+      shortDesc: "ERP Designed by Professionals, for Businesses.",
       summary: "Achieve absolute control over inventory, cash flow, and reporting with systems designed by financial experts.",
       fullDesc: "Our ERP solutions help businesses control inventory, manage debtors, improve reporting, and comply with regulations. We implement world-class platforms tailored to your specific scale.",
       features: ["Inventory Precision & Control", "Debtor & Cash Flow Management", "Accurate Financial Reporting", "Scalable Operations", "Regulatory & Tax Compliance"],
@@ -130,7 +130,7 @@ export const CONFIG: SiteConfig = {
       title: "SME & Export Advisory",
       shortDesc: "Practical SME & Strategic Consulting.",
       summary: "Expert consulting for SMEs looking to scale with financial discipline.",
-      fullDesc: "We analyze your business model with a banker's eye for credit, risk, and profitability, ensuring your path to growth is financially sound and sustainable.",
+      fullDesc: "We analyze your business model with an expert's eye for credit, risk, and profitability, ensuring your path to growth is financially sound and sustainable.",
       features: ["Business Modeling & Strategy", "Process Optimization", "Financial & Credit Planning", "Export Strategy Development", "Scalability Roadmaps"],
       icon: ShieldCheck,
       path: '/services/advisory',
@@ -139,8 +139,8 @@ export const CONFIG: SiteConfig = {
       id: 'accounting',
       title: "Accounting & Control",
       shortDesc: "Accurate Accounting & Financial Control.",
-      summary: "Professional financial oversight to ensure banking and audit readiness.",
-      fullDesc: "Bank-grade financial oversight for growing enterprises. We ensure your business maintains the strict financial discipline required for sustainable growth.",
+      summary: "Professional financial oversight to ensure audit readiness and operational control.",
+      fullDesc: "Enterprise-grade financial oversight for growing enterprises. We ensure your business maintains the strict financial discipline required for sustainable growth.",
       features: ["Remote Bookkeeping", "Taxation & Compliance", "Cash Flow Oversight", "Financial Discipline Systems", "Audit Readiness"],
       icon: Calculator,
       path: '/services/accounting',
@@ -151,7 +151,7 @@ export const CONFIG: SiteConfig = {
   // ------------------------------------------------------------------------------
   erpPage: {
     title: "BizSense ERP Solutions",
-    subtitle: "ERP Designed by a Banker, for Businesses",
+    subtitle: "ERP Designed by Experts, for Businesses",
     description: "Our ERP solutions help businesses achieve total control. From inventory to cash flow, we implement platforms that ensure scalability and regulatory compliance.",
     platforms: ['Odoo', 'ERPNext', 'Zoho (Books, Inventory, CRM, People)', 'BizSense ERP – Light (Custom)'],
     industries: [
@@ -163,7 +163,7 @@ export const CONFIG: SiteConfig = {
       { name: "Tourism & Services", icon: Building2 },
     ],
     modules: [
-      { title: "Accounting & Finance", desc: "Manage your financial health with banking-grade precision." },
+      { title: "Accounting & Finance", desc: "Manage your financial health with high-level precision." },
       { title: "Inventory Management", desc: "Optimize stock levels and prevent leakage." },
       { title: "Sales & CRM", desc: "Drive growth with data-backed customer insights." },
       { title: "Purchasing", desc: "Streamline procurement and vendor control." },

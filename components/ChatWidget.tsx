@@ -20,8 +20,8 @@ const ChatWidget: React.FC = () => {
 
   useEffect(() => {
     const greeting = language === 'si' 
-      ? 'ආයුබෝවන්. මම Bizsense Experts AI. වසර 20ක බැංකු හා මූල්‍ය අත්දැකීම් සහිත මම ඔබට ERP, ඩිජිටල් වර්ධනය හෝ ව්‍යාපාරික උපාය මාර්ග සඳහා උපකාර කිරීමට සූදානම්.'
-      : 'Greetings. I am Bizsense Experts AI. With 20+ years of banking expertise, I am here to optimize your ERP, Digital Growth, and Strategic Profitability.';
+      ? 'ආයුබෝවන්. මම Bizsense Experts AI. වසර 20ක උපායමාර්ගික හා මූල්‍ය අත්දැකීම් සහිත මම ඔබට ERP, ඩිජිටල් වර්ධනය හෝ ව්‍යාපාරික උපාය මාර්ග සඳහා උපකාර කිරීමට සූදානම්.'
+      : 'Greetings. I am Bizsense Experts AI. With 20+ years of strategic expertise, I am here to optimize your ERP, Digital Growth, and Strategic Profitability.';
     
     const suggestions = language === 'si'
       ? ["Odoo/Zoho ERP ගැන", "B2B අපනයන වෙළඳපල", "ඩිජිටල් ROI උපදෙස්"]

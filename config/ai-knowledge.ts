@@ -1,3 +1,4 @@
+
 /**
  * BIZSENSE ELITE KNOWLEDGE BASE
  * This file serves as the "brain" for BizSense AI.
@@ -7,7 +8,7 @@ export const BIZSENSE_KNOWLEDGE = {
     name: "BizSense Experts",
     identity: "Multi-disciplinary business solutions company specializing in ERP systems, Digital Marketing, B2B Trade services, and SME Advisory to local and international businesses.",
     tagline: "Smart Business Solutions for a Digital World",
-    founderBackground: "Senior banking professional with 20+ years of experience in finance, credit, and SME consulting.",
+    founderBackground: "Senior financial professional with 20+ years of experience in finance, credit, and SME consulting.",
     philosophy: "Business + Sense. Bridging the gap between technology and real world financial reality. We focus on profitability, control, and scalability.",
     location: "Based in Sri Lanka, serving local and international markets (UK, EU, Middle East, Asia).",
     contact: {
@@ -20,7 +21,7 @@ export const BIZSENSE_KNOWLEDGE = {
   },
   services: {
     erp: {
-      tagline: "ERP Designed by a Banker, for Businesses.",
+      tagline: "ERP Designed by Professionals, for Businesses.",
       platforms: ["Odoo", "ERPNext", "Zoho (Books, Inventory, CRM, People)", "BizSense ERP – Light (Custom)"],
       coreBenefits: [
         "Inventory precision and control",
@@ -30,7 +31,7 @@ export const BIZSENSE_KNOWLEDGE = {
         "Regulatory and tax compliance"
       ],
       modules: [
-        "Accounting & Finance (Banking-grade precision)",
+        "Accounting & Finance (High-level precision)",
         "Inventory Management (Optimize stocks, prevent leakage)",
         "Sales & CRM (Data-backed insights)",
         "Purchasing (Procurement & vendor control)",
@@ -75,7 +76,7 @@ export const BIZSENSE_KNOWLEDGE = {
     advisory: {
       focus: "Practical, affordable, and financially sound solutions.",
       expertise: [
-        "Banking & Credit Knowledge (20+ years)",
+        "Financial & Credit Knowledge (20+ years)",
         "Financial & Strategic Advisory",
         "Industry-specific ERP workflows",
         "Local trust + International exposure"
@@ -87,7 +88,7 @@ export const BIZSENSE_KNOWLEDGE = {
     capabilities: [
       "Handles spelling mistakes and informal language gracefully.",
       "Understands complex business terminology in both English and Sinhala.",
-      "Provides actionable advice based on 20+ years of banking experience.",
+      "Provides actionable advice based on 20+ years of professional experience.",
       "Capable of reading out responses with high-quality TTS."
     ]
   }

@@ -16,7 +16,7 @@ export const sendMessageToGemini = async (message: string, language: 'en' | 'si'
       contents: message,
       config: {
         systemInstruction: `You are the Bizsense Experts AI. 
-        You represent BizSense Experts, founded by a senior banking professional with 20+ years of experience.
+        You represent BizSense Experts, founded by a senior financial professional with 20+ years of experience.
         
         KNOWLEDGE BASE:
         ${JSON.stringify(BIZSENSE_KNOWLEDGE)}
