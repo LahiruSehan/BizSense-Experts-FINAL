@@ -10,7 +10,7 @@ const HomeServices: React.FC = () => {
   const selectedService = config.services.find(s => s.id === selectedId);
 
   return (
-    <section className="relative z-20 -mt-60 md:-mt-64 pb-16 px-4 md:px-6">
+    <section className="relative z-20 pt-16 md:pt-24 pb-16 px-4 md:px-6 bg-matte-black">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gemini-900/10 to-transparent pointer-events-none -z-10 animate-pulse-soft" />
       
       <div className="container mx-auto">

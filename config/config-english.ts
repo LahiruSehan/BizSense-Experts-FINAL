@@ -1,97 +1,127 @@
-import { Layers, Globe, BarChart3, Calculator, ShieldCheck, Truck, ShoppingBag, Factory, Building2, Users, TrendingUp, Laptop, PieChart, Lock, Car } from 'lucide-react';
-import { ServiceType, SiteConfig } from '../types';
+
+/**
+ * ==============================================================================
+ * BIZSENSE EXPERTS - MASTER CONTENT CONFIGURATION (ENGLISH)
+ * ==============================================================================
+ * This file contains all the text seen on the website. 
+ * If you want to change a phone number, email, or headline, just edit the text 
+ * inside the quotes " ". 
+ * 
+ * Instructions:
+ * 1. Only edit text inside the quotation marks.
+ * 2. Do not delete commas (,) or brackets ({ }).
+ * ==============================================================================
+ */
+
+import { Layers, Globe, BarChart3, Calculator, ShieldCheck, Truck, ShoppingBag, Factory, Building2, TrendingUp, Laptop, PieChart, Lock, Car } from 'lucide-react';
+import { SiteConfig } from '../types';
 
 export const CONFIG: SiteConfig = {
+
+  // 1. GLOBAL COMPANY SETTINGS
+  // ------------------------------------------------------------------------------
   company: {
     name: "BizSense Experts",
     tagline: "Smart Business Solutions for a Digital World",
-    phone: "0701 75 75 76",
-    phoneSecondary: "0711 75 75 76",
-    email: "Bizsensexperts@gmail.com",
-    whatsappNumber: "94701757576",
+    phone: "0701-75 75 76",              
+    phoneSecondary: "0711 75 75 76",     
+    email: "Bizsensexperts@gmail.com",   
+    whatsappNumber: "94701757576",       
     location: "Sri Lanka & International Markets"
   },
   
+  // 2. HERO SECTION (Main Top Area)
+  // ------------------------------------------------------------------------------
   hero: {
-    badge: "Designed by business professionals. Built for growth.",
-    mainHeadlinePrefix: "EMPOWERING BUSINESSES",
-    withText: "with",
+    badge: "FROM BUSINESS PROFESSIONALS FOR BUSINESS GROWTH", 
+    mainHeadlinePrefix: "BIZSENSE EXPERTS", // The large gold title
+    withText: "WITH", // The white connector text
+    
+    // These words will rotate in the animation after "EMPOWERING BUSINESSES WITH..."
     headlines: [
+      "Digital Marketing",
       "Innovative Solutions",
       "Tailored ERP Systems",
       "Strategic Digital Growth",
       "Global B2B Connections",
-      "Practical Financial Advisory",
-      "Accurate Accounting Control"
+      "Financial Advisory",
+      "Accounting Control"
     ],
-    description: "BizSense Experts is a multi-disciplinary business solutions company. With 20+ years of banking, finance, and SME consulting experience, we bridge the gap between technology and real business needs. We don't just sell software — we design systems that improve profitability.",
+    
+    description: "BizSense Experts is a multi-disciplinary business solutions company providing ERP systems, digital marketing, B2B trade services, and SME advisory to local and international businesses. With 20+ years of banking, finance, and SME consulting experience, BizSense bridges the gap between technology and real business needs. We don't just sell software — we design systems that improve profitability, control, and scalability.",
+    
     cta: {
-      consult: "Request Consultation",
+      consult: "Request Free Consultation",
       whatsapp: "Book a Demo",
       ai: "AI Business Strategy"
     },
+
+    // 3. WHY CHOOSE US
+    // ------------------------------------------------------------------------------
     whyChoose: [
       { 
         icon: ShieldCheck, 
-        title: "Banking Logic", 
-        text: "20+ years of banking & SME experience built into every solution." 
+        title: "20+ Years Experience", 
+        text: "Deep understanding of finance, credit, and banking logic built-in." 
       },
       { 
         icon: PieChart, 
-        title: "Finance First", 
-        text: "Deep understanding of finance, credit, and cash flow control." 
+        title: "Finance & Credit", 
+        text: "Strategic expertise in managing cash flow and business risk." 
       },
       { 
         icon: Laptop, 
         title: "Practical ERP", 
-        text: "Affordable solutions designed for real-world operations." 
+        text: "Affordable, industry-specific workflows that actually work." 
       },
       { 
         icon: Globe, 
         title: "Global Reach", 
-        text: "Connecting local exporters to UK, EU, Middle East, and Asia." 
+        text: "Local trust combined with UK, EU, Middle East, and Asia exposure." 
       },
       { 
         icon: TrendingUp, 
-        title: "Growth Driven", 
-        text: "ROI-driven marketing and scalable SME advisory." 
+        title: "Profitability Focus", 
+        text: "Systems designed to improve control and scalability." 
       },
       { 
         icon: Lock, 
-        title: "BizSense", 
-        text: "Business + Sense: The trusted partner for your digital journey." 
+        title: "Business + Sense", 
+        text: "Real-world solutions from professionals who understand business." 
       }
     ]
   },
 
+  // 4. MAIN SERVICES
+  // ------------------------------------------------------------------------------
   services: [
     {
       id: 'erp',
-      title: "ERP Solutions",
+      title: "ERP Solutions (International & Local)",
       shortDesc: "ERP Designed by a Banker, for Businesses.",
       summary: "Achieve absolute control over inventory, cash flow, and reporting with systems designed by financial experts.",
       fullDesc: "Our ERP solutions help businesses control inventory, manage debtors, improve reporting, and comply with regulations. We implement world-class platforms tailored to your specific scale.",
-      features: ["Odoo & ERPNext", "Zoho (Books, Inventory, CRM)", "BizSense ERP – Light", "Financial Control Logic"],
+      features: ["Inventory Precision & Control", "Debtor & Cash Flow Management", "Accurate Financial Reporting", "Scalable Operations", "Regulatory & Tax Compliance"],
       icon: Layers,
       path: '/services/erp',
     },
     {
       id: 'marketing',
-      title: "Digital Marketing",
-      shortDesc: "ROI-Driven Growth & Online Visibility.",
-      summary: "Focusing on tangible revenue growth, not just likes. Ideal for exporters, tourism, and SMEs.",
-      fullDesc: "BizSense Digital Marketing focuses on ROI-driven results. From SEO to Meta Ads, we craft strategies that convert digital presence into actual business growth.",
-      features: ["Business Websites", "International SEO", "Google & Meta Ads", "Export Market Promotion"],
+      title: "Digital Marketing & Online Growth",
+      shortDesc: "Digital Transformation for SMEs.",
+      summary: "Focusing on ROI-driven growth, not just vanity metrics like 'likes' or 'views'.",
+      fullDesc: "BizSense Digital Marketing focuses on ROI-driven results. From high-performance websites to international SEO, we craft strategies that convert digital presence into actual business growth.",
+      features: ["Business Website Development", "Local & International SEO", "Social Media & Meta Ads", "Google Ads & Content Strategy", "Export Market Online Promotion"],
       icon: BarChart3,
       path: '/services/marketing',
     },
     {
       id: 'b2b',
-      title: "B2B Trade Services",
-      shortDesc: "Local & International Trade Facilitation.",
-      summary: "Find, connect, and trade with verified buyers and sellers globally.",
-      fullDesc: "We help businesses navigate global commerce. Connecting Sri Lankan exporters with markets in the UK, EU, Middle East, and Asia through strategic networking.",
-      features: ["Buyer & Seller Matching", "Market Entry Support", "Global B2B Platforms", "Trade Documentation"],
+      title: "B2B Trade Services (Local & International)",
+      shortDesc: "B2B Trade Facilitation – Local & Global.",
+      summary: "Find, connect, and trade with verified buyers and sellers in Sri Lanka and globally.",
+      fullDesc: "We help businesses navigate global commerce. Connecting exporters with markets in the UK, EU, Middle East, and Asia through strategic networking and registration on global platforms.",
+      features: ["Buyer & Seller Matching", "International Trade Facilitation", "Export Market Entry Support", "B2B Meetings & Introductions", "Trade Documentation Support"],
       icon: Globe,
       path: '/services/trade',
     },
@@ -99,32 +129,34 @@ export const CONFIG: SiteConfig = {
       id: 'advisory',
       title: "SME & Export Advisory",
       shortDesc: "Practical SME & Strategic Consulting.",
-      summary: "Bridging the gap between technology and real-world financial reality.",
-      fullDesc: "Expert consulting for SMEs looking to scale. We analyze your business model with a banker's eye for credit, risk, and profitability.",
-      features: ["Business Modeling", "Process Optimization", "Financial Planning", "Export Strategy"],
+      summary: "Expert consulting for SMEs looking to scale with financial discipline.",
+      fullDesc: "We analyze your business model with a banker's eye for credit, risk, and profitability, ensuring your path to growth is financially sound and sustainable.",
+      features: ["Business Modeling & Strategy", "Process Optimization", "Financial & Credit Planning", "Export Strategy Development", "Scalability Roadmaps"],
       icon: ShieldCheck,
       path: '/services/advisory',
     },
     {
       id: 'accounting',
       title: "Accounting & Control",
-      shortDesc: "Accurate Financial & Accounting Control.",
-      summary: "Bank-grade financial oversight for growing enterprises.",
-      fullDesc: "Professional remote bookkeeping and financial oversight. We ensure your business maintains the strict financial discipline required for banking and audits.",
-      features: ["Bookkeeping", "Taxation", "Cash Flow Management", "Audit Readiness"],
+      shortDesc: "Accurate Accounting & Financial Control.",
+      summary: "Professional financial oversight to ensure banking and audit readiness.",
+      fullDesc: "Bank-grade financial oversight for growing enterprises. We ensure your business maintains the strict financial discipline required for sustainable growth.",
+      features: ["Remote Bookkeeping", "Taxation & Compliance", "Cash Flow Oversight", "Financial Discipline Systems", "Audit Readiness"],
       icon: Calculator,
       path: '/services/accounting',
     }
   ],
 
+  // 5. ERP DETAILED PAGE
+  // ------------------------------------------------------------------------------
   erpPage: {
     title: "BizSense ERP Solutions",
-    subtitle: "Designed by a Banker, for Businesses",
-    description: "Our ERP solutions are meticulously designed to empower businesses with unparalleled control. We focus on inventory management, debtor control, and regulatory compliance to ensure your business scales safely.",
+    subtitle: "ERP Designed by a Banker, for Businesses",
+    description: "Our ERP solutions help businesses achieve total control. From inventory to cash flow, we implement platforms that ensure scalability and regulatory compliance.",
     platforms: ['Odoo', 'ERPNext', 'Zoho (Books, Inventory, CRM, People)', 'BizSense ERP – Light (Custom)'],
     industries: [
       { name: "Importers & Distributors", icon: Truck },
-      { name: "Exporters (Coir, Agro, Spices...)", icon: Globe },
+      { name: "Exporters (Coir, Agro, Dehydrated Foods, Spices)", icon: Globe },
       { name: "Vehicle Traders", icon: Car },
       { name: "Retail & Wholesale", icon: ShoppingBag },
       { name: "Manufacturing & Processing", icon: Factory },
@@ -143,6 +175,8 @@ export const CONFIG: SiteConfig = {
     ]
   },
 
+  // 6. CONTACT SECTION
+  // ------------------------------------------------------------------------------
   contact: {
     title: "BizSense = Business + Sense",
     subtitle: "Ready to transform your business with professional ERP, digital growth, or strategic advisory? Let's discuss your roadmap.",
@@ -151,7 +185,7 @@ export const CONFIG: SiteConfig = {
       company: "Business Name",
       email: "Email Address",
       message: "How can we help?",
-      button: "Connect via WhatsApp"
+      button: "Request Free Consultation"
     }
   }
 };

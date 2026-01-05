@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, Sparkles, Bot, Volume2, Loader2, PlayCircle } from 'lucide-react';
+import { X, Send, Sparkles, Bot, Volume2, Loader2 } from 'lucide-react';
 import { sendMessageToGemini, generateSpeech, decodeBase64Audio, decodeAudioData } from '../services/geminiService';
 import { ChatMessage } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -20,8 +20,8 @@ const ChatWidget: React.FC = () => {
 
   useEffect(() => {
     const greeting = language === 'si' 
-      ? 'ආයුබෝවන්. මම BizSense Elite AI. වසර 20ක බැංකු හා මූල්‍ය අත්දැකීම් සහිත මම ඔබට ERP, ඩිජිටල් වර්ධනය හෝ ව්‍යාපාරික උපාය මාර්ග සඳහා උපකාර කිරීමට සූදානම්.'
-      : 'Greetings. I am BizSense Elite AI. With 20+ years of banking expertise, I am here to optimize your ERP, Digital Growth, and Strategic Profitability.';
+      ? 'ආයුබෝවන්. මම Bizsense Experts AI. වසර 20ක බැංකු හා මූල්‍ය අත්දැකීම් සහිත මම ඔබට ERP, ඩිජිටල් වර්ධනය හෝ ව්‍යාපාරික උපාය මාර්ග සඳහා උපකාර කිරීමට සූදානම්.'
+      : 'Greetings. I am Bizsense Experts AI. With 20+ years of banking expertise, I am here to optimize your ERP, Digital Growth, and Strategic Profitability.';
     
     const suggestions = language === 'si'
       ? ["Odoo/Zoho ERP ගැන", "B2B අපනයන වෙළඳපල", "ඩිජිටල් ROI උපදෙස්"]
@@ -96,6 +96,17 @@ const ChatWidget: React.FC = () => {
     }
   };
 
+  // Helper to format text removing ** and replacing with spans
+  const formatMessageText = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <span key={i} className="chat-bold">{part.slice(2, -2)}</span>;
+      }
+      return part;
+    });
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -109,7 +120,6 @@ const ChatWidget: React.FC = () => {
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
               className="relative w-full max-w-[500px] h-[85vh] bg-matte-black/95 border border-gold-500/30 rounded-[32px] shadow-[0_30px_100px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden ring-1 ring-gold-500/20"
             >
-              {/* Luxury Header */}
               <div className="p-6 border-b border-white/10 flex items-center justify-between bg-gradient-to-r from-matte-black via-neutral-900 to-matte-black">
                 <div className="flex items-center gap-4">
                   <div className="relative">
@@ -119,7 +129,7 @@ const ChatWidget: React.FC = () => {
                     <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-matte-black animate-pulse"></span>
                   </div>
                   <div>
-                    <h3 className="text-gray-100 font-serif font-black text-lg tracking-wider">BizSense Elite AI</h3>
+                    <h3 className="text-gray-100 font-serif font-black text-lg tracking-wider">Bizsense Experts AI</h3>
                     <div className="flex items-center gap-1.5">
                         <Sparkles size={10} className="text-gold-500" />
                         <p className="text-[10px] text-gold-500/80 uppercase tracking-[0.2em] font-black">Powered by Gemini 3 Pro</p>
@@ -129,7 +139,6 @@ const ChatWidget: React.FC = () => {
                 <button onClick={() => setIsOpen(false)} className="text-white/40 hover:text-white transition-colors bg-white/5 p-2 rounded-full hover:bg-white/10"><X size={20} /></button>
               </div>
 
-              {/* Chat Body */}
               <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
                 {messages.map((msg, index) => (
                   <div key={msg.id} className={`flex flex-col gap-3 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
@@ -139,11 +148,11 @@ const ChatWidget: React.FC = () => {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         className={`relative group p-5 rounded-3xl text-sm leading-relaxed shadow-xl ${
                           msg.role === 'user'
-                            ? 'bg-gradient-to-br from-gold-600/20 to-gold-800/20 border border-gold-500/30 text-gold-50 rounded-br-none'
-                            : 'bg-white/5 border border-white/10 text-gray-200 rounded-bl-none'
+                            ? 'bg-gradient-to-br from-gold-600/20 to-gold-800/20 border border-gold-500/30 text-gold-50 rounded-br-none font-bold'
+                            : 'bg-white/5 border border-white/10 text-gray-200 rounded-bl-none font-bold'
                         }`}
                       >
-                        {msg.text}
+                        {formatMessageText(msg.text)}
                       </motion.div>
                       
                       {msg.role === 'model' && (
@@ -190,7 +199,6 @@ const ChatWidget: React.FC = () => {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Luxury Input */}
               <div className="p-6 bg-matte-black border-t border-white/10">
                 <div className="relative flex items-center bg-white/5 rounded-2xl border border-white/10 focus-within:border-gold-500/50 focus-within:ring-1 focus-within:ring-gold-500/30 transition-all group overflow-hidden shadow-inner">
                   <input
@@ -199,7 +207,7 @@ const ChatWidget: React.FC = () => {
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                     placeholder={language === 'si' ? "උපදේශකයාගෙන් විමසන්න..." : "Ask your elite consultant..."}
-                    className="flex-1 bg-transparent py-4 px-5 text-sm text-gray-100 focus:outline-none placeholder:text-gray-600 font-medium"
+                    className="flex-1 bg-transparent py-4 px-5 text-sm text-gray-100 focus:outline-none placeholder:text-gray-600 font-bold"
                   />
                   <button
                     onClick={() => handleSend()}

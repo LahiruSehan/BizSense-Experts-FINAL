@@ -5,16 +5,18 @@
 export const BIZSENSE_KNOWLEDGE = {
   company: {
     name: "BizSense Experts",
-    identity: "Multi-disciplinary business solutions company specializing in ERP, Digital Marketing, B2B Trade, and SME Advisory.",
+    identity: "Multi-disciplinary business solutions company specializing in ERP systems, Digital Marketing, B2B Trade services, and SME Advisory to local and international businesses.",
+    tagline: "Smart Business Solutions for a Digital World",
     founderBackground: "Senior banking professional with 20+ years of experience in finance, credit, and SME consulting.",
-    philosophy: "Business + Sense. Bridging the gap between technology and real-world financial reality. We don't just sell software; we design systems for profitability.",
+    philosophy: "Business + Sense. Bridging the gap between technology and real world financial reality. We focus on profitability, control, and scalability.",
     location: "Based in Sri Lanka, serving local and international markets (UK, EU, Middle East, Asia).",
     contact: {
-      phone: "0701 75 75 76",
+      phone: "0701-75 75 76",
       phoneSecondary: "0711 75 75 76",
       email: "Bizsensexperts@gmail.com",
       whatsapp: "94701757576"
-    }
+    },
+    vision: "To be a trusted ERP and business solutions partner for SMEs globally."
   },
   services: {
     erp: {
@@ -28,13 +30,13 @@ export const BIZSENSE_KNOWLEDGE = {
         "Regulatory and tax compliance"
       ],
       modules: [
-        "Accounting & Finance (Banking-grade)",
-        "Inventory Management",
-        "Sales & CRM",
-        "Purchasing",
-        "Debtors & Credit Control",
+        "Accounting & Finance (Banking-grade precision)",
+        "Inventory Management (Optimize stocks, prevent leakage)",
+        "Sales & CRM (Data-backed insights)",
+        "Purchasing (Procurement & vendor control)",
+        "Debtors & Credit Control (Reduce bad debt)",
         "Manufacturing & Costing",
-        "Export Documentation",
+        "Export Documentation (Trade paperwork)",
         "HR & Payroll",
         "POS & API Integrations"
       ],
@@ -43,7 +45,7 @@ export const BIZSENSE_KNOWLEDGE = {
         "Exporters (Coir, Agro, Dehydrated Foods, Spices)",
         "Vehicle Traders",
         "Retail & Wholesale",
-        "Manufacturing",
+        "Manufacturing & Processing",
         "Tourism & Services"
       ]
     },
@@ -51,10 +53,10 @@ export const BIZSENSE_KNOWLEDGE = {
       philosophy: "ROI-driven marketing, not just vanity metrics like 'likes' or 'views'.",
       services: [
         "Business Website Development",
-        "Local & International SEO",
+        "SEO (Local & International)",
         "Social Media Marketing",
         "Google Ads & Meta Ads",
-        "Performance Branding",
+        "Content & Branding",
         "Export Market Online Promotion"
       ],
       targetAudience: "SMEs, exporters, tourism businesses, and traders looking for actual revenue growth."
@@ -66,15 +68,15 @@ export const BIZSENSE_KNOWLEDGE = {
         "International Trade Facilitation",
         "Export Market Entry Support",
         "B2B Meetings & Introductions",
-        "Global B2B Platform Registration",
+        "Registration on Global B2B Platforms",
         "Trade Documentation Support"
       ]
     },
     advisory: {
       focus: "Practical, affordable, and financially sound solutions.",
       expertise: [
-        "Banking & Credit Knowledge",
-        "Finance Management",
+        "Banking & Credit Knowledge (20+ years)",
+        "Financial & Strategic Advisory",
         "Industry-specific ERP workflows",
         "Local trust + International exposure"
       ]
@@ -85,7 +87,7 @@ export const BIZSENSE_KNOWLEDGE = {
     capabilities: [
       "Handles spelling mistakes and informal language gracefully.",
       "Understands complex business terminology in both English and Sinhala.",
-      "Provides actionable advice rather than generic definitions.",
+      "Provides actionable advice based on 20+ years of banking experience.",
       "Capable of reading out responses with high-quality TTS."
     ]
   }

@@ -26,8 +26,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Premium Font Suite: English (Cinzel, Manrope) + Sinhala (Abhaya Libre, Noto Sans, Gemunu Libre) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600&family=Abhaya+Libre:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@100;200;300;400;500;600;700;800;900&family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Abhaya+Libre:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@100;200;300;400;500;600;700;800;900&family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
       tailwind.config = {
@@ -39,7 +38,7 @@
                 200: '#F0DEAA',
                 300: '#E6CB7D',
                 400: '#DDB855',
-                500: '#D4A533', // Base Gold
+                500: '#D4A533',
                 600: '#AA8429',
                 700: '#80631F',
                 800: '#554215',
@@ -48,7 +47,7 @@
               gemini: {
                 300: '#7dd3fc',
                 400: '#38bdf8',
-                500: '#0ea5e9', // Electric Blue
+                500: '#0ea5e9',
                 600: '#0284c7',
                 700: '#0369a1',
                 900: '#0c4a6e',
@@ -69,26 +68,16 @@
             backgroundImage: {
               'gold-gradient': 'linear-gradient(135deg, #D4A533 0%, #F9F1D8 40%, #AA8429 100%)',
               'gemini-gradient': 'linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #818cf8 100%)',
-              'gold-shine': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
-              'dark-gradient': 'linear-gradient(to bottom, #020202, #000000)',
             },
             animation: {
               'text-shimmer': 'textShimmer 3s ease-in-out infinite alternate',
-              'float': 'float 6s ease-in-out infinite',
-              'float-delayed': 'float 6s ease-in-out 3s infinite',
               'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
               'ken-burns': 'kenBurns 30s ease-in-out infinite alternate',
-              'glow-pulse': 'glowPulse 3s ease-in-out infinite',
-              'blob': 'blob 7s infinite',
             },
             keyframes: {
               textShimmer: {
                 '0%': { backgroundPosition: '0% 50%' },
                 '100%': { backgroundPosition: '100% 50%' },
-              },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
               },
               pulseSoft: {
                 '0%, 100%': { opacity: '1' },
@@ -97,16 +86,6 @@
               kenBurns: {
                 '0%': { transform: 'scale(1.0) translate(0, 0)' },
                 '100%': { transform: 'scale(1.2) translate(-3%, -2%)' },
-              },
-              glowPulse: {
-                '0%, 100%': { boxShadow: '0 0 15px rgba(14, 165, 233, 0.1)' },
-                '50%': { boxShadow: '0 0 30px rgba(14, 165, 233, 0.3)' },
-              },
-              blob: {
-                "0%": { transform: "translate(0px, 0px) scale(1)" },
-                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-                "100%": { transform: "translate(0px, 0px) scale(1)" },
               }
             }
           }
@@ -118,31 +97,25 @@
         background-color: #020202;
         color: #E0E0E0;
         overflow-x: hidden;
+        /* Apply bold globally to all body text */
+        font-weight: 700 !important;
       }
       
-      /* Global Sinhala Typography Overrides */
-      html[lang="si"] {
-        font-family: 'Noto Sans Sinhala', sans-serif;
-      }
-      html[lang="si"] .font-serif {
-        font-family: 'Abhaya Libre', serif !important;
-        letter-spacing: 0.02em !important;
-      }
-      html[lang="si"] .font-sans {
-        font-family: 'Noto Sans Sinhala', sans-serif !important;
-      }
-      html[lang="si"] .gold-title-realistic {
-        font-family: 'Gemunu Libre', sans-serif !important;
-        letter-spacing: 0.05em !important;
-        line-height: 1.1 !important;
-      }
-      html[lang="si"] h1, 
-      html[lang="si"] h2, 
-      html[lang="si"] h3 {
-        font-family: 'Abhaya Libre', serif;
+      /* Reset specific UI elements to standard weight or appropriate weight */
+      nav *, button *, footer *, .font-serif, h1, h2, h3, h4, .no-bold {
+        font-weight: inherit;
       }
 
-      /* Cinematic Noise Overlay */
+      h1, h2, h3, .font-black {
+        font-weight: 900 !important;
+      }
+
+      /* Chat Markdown Bold styling - make it stand out without raw asterisks */
+      .chat-bold {
+        color: #D4A533;
+        font-weight: 800;
+      }
+
       .bg-noise {
         position: fixed;
         top: 0;
@@ -155,30 +128,6 @@
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
       }
 
-      /* Elegant Scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #020202;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #333;
-        border-radius: 3px;
-        border: 1px solid #020202;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #D4A533;
-      }
-
-      .text-gradient-gold {
-        background: linear-gradient(to right, #D4A533, #F9F1D8, #AA8429);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-size: 200% auto;
-      }
-
-      /* Realistic Gold Text Effect */
       .gold-title-realistic {
         color: #D4A533; 
         background: linear-gradient(
@@ -201,27 +150,25 @@
       }
 
       @keyframes goldShimmer {
-        to {
-          background-position: 200% center;
-        }
+        to { background-position: 200% center; }
       }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
-    "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
+        "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+        "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
+        "vite": "https://esm.sh/vite@^7.3.0",
+        "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+        "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+      }
+    }
+    </script>
+  </head>
   <body>
     <div class="bg-noise"></div>
     <div id="root"></div>

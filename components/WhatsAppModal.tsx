@@ -37,39 +37,39 @@ const WhatsAppModal: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/85 backdrop-blur-md"
           />
           
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-sm bg-[#0A1A10] border border-[#25D366]/30 rounded-[30px] overflow-hidden shadow-[0_0_50px_rgba(37,211,102,0.2)]"
+            className="relative w-full max-w-sm bg-matte-black border border-gold-500/30 rounded-[32px] overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.8)] ring-1 ring-gold-500/20"
           >
-            {/* Header */}
-            <div className="bg-[#075E54] p-6 flex items-center justify-between relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] opacity-10 bg-repeat" />
+            {/* Header - Luxury Dark Gold Style */}
+            <div className="bg-matte-charcoal p-6 flex items-center justify-between border-b border-gold-500/20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-500/5 to-transparent animate-text-shimmer bg-[length:200%_auto]" />
                 <div className="flex items-center gap-3 relative z-10">
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                        <MessageCircle className="text-[#075E54] fill-[#075E54]" size={20} />
+                    <div className="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center border border-gold-500/30 shadow-[0_0_15px_rgba(212,165,51,0.2)]">
+                        <MessageCircle className="text-gold-500 fill-gold-500/10" size={20} />
                     </div>
                     <div>
-                        <h3 className="text-white font-bold text-lg leading-none">WhatsApp</h3>
-                        <p className="text-green-200 text-xs mt-1">Typically replies instantly</p>
+                        <h3 className="text-white font-bold text-lg leading-none font-serif tracking-tight">WhatsApp</h3>
+                        <p className="text-gold-500/70 text-[10px] uppercase font-black tracking-widest mt-1">Direct Priority Support</p>
                     </div>
                 </div>
                 <button 
                     onClick={() => setIsOpen(false)} 
-                    className="relative z-10 p-2 text-white/70 hover:text-white transition-colors"
+                    className="relative z-10 p-2 text-white/40 hover:text-white transition-colors bg-white/5 rounded-full"
                 >
-                    <X size={20} />
+                    <X size={18} />
                 </button>
             </div>
 
             {/* Body */}
-            <div className="p-6 bg-[#0D1F15] bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat">
-                <p className="text-gray-300 text-sm mb-4 bg-[#1F2C34] p-3 rounded-lg rounded-tl-none inline-block border border-white/5 shadow-sm">
-                    Hi! How can we help your business today?
+            <div className="p-6 bg-matte-black/40 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+                <p className="text-gray-100 text-[11px] mb-4 bg-white/5 p-3 rounded-2xl rounded-tl-none inline-block border border-white/10 shadow-sm backdrop-blur-sm max-w-[85%] font-bold">
+                    Welcome to BizSense Elite Support. How can we optimize your business today?
                 </p>
 
                 {/* Quick Chips */}
@@ -78,7 +78,7 @@ const WhatsAppModal: React.FC = () => {
                         <button
                             key={i}
                             onClick={() => setMessage(q)}
-                            className="text-[10px] md:text-xs bg-[#1F2C34] text-[#25D366] px-3 py-2 rounded-full border border-[#25D366]/20 hover:bg-[#25D366]/10 transition-colors"
+                            className="text-[10px] bg-gold-500/5 text-gold-400 px-3 py-2 rounded-xl border border-gold-500/20 hover:bg-gold-500/10 hover:border-gold-500 transition-all font-bold tracking-wide"
                         >
                             {q}
                         </button>
@@ -86,19 +86,19 @@ const WhatsAppModal: React.FC = () => {
                 </div>
 
                 {/* Input Area */}
-                <div className="flex items-center gap-2 bg-[#1F2C34] p-2 rounded-full border border-white/10">
+                <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded-full border border-white/10 focus-within:border-gold-500/50 transition-all group">
                     <input 
                         type="text" 
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Type a message..."
-                        className="flex-1 bg-transparent px-3 text-white text-sm placeholder:text-gray-500 focus:outline-none"
+                        placeholder="Type your inquiry..."
+                        className="flex-1 bg-transparent px-4 text-white text-xs placeholder:text-gray-600 focus:outline-none font-bold"
                     />
                     <button 
                         onClick={handleSend}
-                        className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg hover:scale-105 transition-transform"
+                        className="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-700 flex items-center justify-center text-black shadow-lg hover:scale-105 transition-transform"
                     >
-                        <Send size={18} />
+                        <Send size={16} strokeWidth={3} />
                     </button>
                 </div>
             </div>
