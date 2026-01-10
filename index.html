@@ -2,7 +2,8 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Prevent zooming and horizontal shifting -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     
     <!-- Primary Meta Tags -->
     <title>BizSense Experts | High-Tier Business Strategy</title>
@@ -52,20 +53,31 @@
       }
     </script>
     <style>
+      :root {
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+
       body {
         background-color: #01080e;
         color: #f1f5f9;
+        margin: 0;
+        padding: 0;
         overflow-x: hidden;
+        width: 100%;
         font-family: 'Inter', sans-serif;
+        /* Prevent accidental pull-to-refresh on mobile if needed */
+        overscroll-behavior-y: none;
       }
       
       canvas#bg-canvas {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
+        width: 100vw;
+        height: 100vh;
+        /* Ensure particles appear ON TOP of sections for better visual depth */
+        z-index: 50; 
         pointer-events: none;
       }
 
@@ -100,13 +112,14 @@
       }
 
       .mesh-blob {
-        position: absolute;
-        width: 60vw;
-        height: 60vw;
+        position: fixed;
+        width: 80vw;
+        height: 80vw;
         border-radius: 50%;
         filter: blur(100px);
         z-index: -1;
-        opacity: 0.1;
+        opacity: 0.08;
+        pointer-events: none;
       }
     </style>
     <script type="importmap">
@@ -128,8 +141,8 @@
 </script>
   </head>
   <body>
-    <div class="mesh-blob bg-biz-emerald top-[-10%] right-[-10%] animate-mesh-flow"></div>
-    <div class="mesh-blob bg-biz-cyan bottom-[-10%] left-[-10%] animate-mesh-flow" style="animation-delay: -5s;"></div>
+    <div class="mesh-blob bg-biz-emerald top-[-20%] right-[-10%] animate-mesh-flow"></div>
+    <div class="mesh-blob bg-biz-cyan bottom-[-20%] left-[-10%] animate-mesh-flow" style="animation-delay: -5s;"></div>
     
     <canvas id="bg-canvas"></canvas>
     
@@ -144,27 +157,35 @@
       let scrollY = 0;
       
       function init() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Fix pixelation on high-DPI screens
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        ctx.scale(dpr, dpr);
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        
         particles = [];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 60; i++) {
           particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 1.5 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.15,
-            speedY: (Math.random() - 0.5) * 0.15,
-            opacity: Math.random() * 0.4 + 0.1
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            size: Math.random() * 2 + 0.5,
+            speedX: (Math.random() - 0.5) * 0.2,
+            speedY: (Math.random() - 0.5) * 0.2,
+            opacity: Math.random() * 0.6 + 0.2
           });
         }
       }
 
       function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         
         particles.forEach(p => {
-          const adjustedY = p.y - (scrollY * 0.05);
-          const wrappedY = ((adjustedY % canvas.height) + canvas.height) % canvas.height;
+          // React to scroll velocity/position
+          const adjustedY = p.y - (scrollY * 0.08);
+          // Loop particles
+          const wrappedY = ((adjustedY % window.innerHeight) + window.innerHeight) % window.innerHeight;
           
           ctx.beginPath();
           ctx.arc(p.x, wrappedY, p.size, 0, Math.PI * 2);
@@ -174,10 +195,10 @@
           p.x += p.speedX;
           p.y += p.speedY;
           
-          if (p.x < 0) p.x = canvas.width;
-          if (p.x > canvas.width) p.x = 0;
-          if (p.y < 0) p.y = canvas.height;
-          if (p.y > canvas.height) p.y = 0;
+          if (p.x < 0) p.x = window.innerWidth;
+          if (p.x > window.innerWidth) p.x = 0;
+          if (p.y < 0) p.y = window.innerHeight;
+          if (p.y > window.innerHeight) p.y = 0;
         });
         
         requestAnimationFrame(animate);
