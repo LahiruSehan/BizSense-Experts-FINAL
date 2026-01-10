@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Calendar, ChevronRight } from 'lucide-react';
+import { Calendar, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -68,23 +68,23 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Full Paragraph with Sharp Word Highlighting */}
+          {/* Full High-Impact Bio Paragraph */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="mt-10 md:mt-14 max-w-4xl"
+            className="mt-10 md:mt-14 max-w-5xl"
           >
-            <p className="text-gray-400 text-sm md:text-xl leading-[1.7] md:leading-[1.9] tracking-tight font-medium">
+            <p className="text-gray-400 text-sm md:text-[19px] leading-[1.8] md:leading-[1.9] tracking-tight font-medium">
               <span className="text-white font-black tracking-tight">BizSense Experts</span> is a 
               <span className="text-white/60 mx-1">multi-disciplinary</span> business solutions firm providing 
-              <span className="text-biz-emerald font-bold px-1">ERP systems</span>, 
+              <span className="text-biz-emerald font-bold px-1 underline decoration-biz-emerald/20 underline-offset-4">ERP systems</span>, 
               <span className="text-biz-cyan font-bold italic px-1">digital marketing</span>, 
               <span className="text-white font-bold border-b border-biz-emerald/30">B2B trade facilitation</span>, and 
-              <span className="text-gray-300 mx-1">SME advisory services</span> to local and international clients. 
-              With over <span className="text-biz-emerald font-black underline decoration-biz-emerald/40 underline-offset-4 px-1">20 years</span> of 
-              hands-on experience in <span className="text-white font-extrabold tracking-widest uppercase text-[10px] md:text-base">finance, operations, exports</span>, and 
-              <span className="text-gray-300 italic mx-1">SME consulting</span>, we bridge the gap between technology and 
+              <span className="text-gray-300 mx-1 font-semibold">SME advisory services</span> to local and international clients. 
+              With over <span className="text-biz-emerald font-black text-xl md:text-2xl px-1">20 years</span> of 
+              hands-on experience in <span className="text-white font-extrabold tracking-widest uppercase text-[10px] md:text-[15px] bg-white/5 px-2 py-0.5 rounded">finance, operations, exports</span>, and 
+              <span className="text-gray-300 italic mx-1">SME consulting</span>, we <span className="italic text-white/50">bridge the gap</span> between technology and 
               <span className="text-white font-bold"> practical business needs</span>. We design and implement 
               <span className="text-biz-cyan font-extrabold tracking-tighter italic px-1 text-lg md:text-2xl">intelligent systems</span> that enhance 
               <span className="text-biz-emerald font-black"> profitability</span>, strengthen 
