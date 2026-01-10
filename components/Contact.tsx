@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MessageCircle, ArrowRight } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import Button from './UI/Button';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -14,87 +14,82 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `*Inquiry:* ${formData.message}\n*From:* ${formData.name}\n*Org:* ${formData.company}`;
+    const message = `*New Inquiry via Website*\n\n*Name:* ${formData.name}\n*Company:* ${formData.company}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${config.company.whatsappNumber}?text=${encodedMessage}`, '_blank');
+    setFormData({ name: '', email: '', company: '', message: '' });
   };
 
   return (
-    <section className="py-24 md:py-40 bg-biz-deep relative border-t border-white/5 overflow-hidden" id="contact">
-       <div className="container mx-auto px-6 relative z-10">
-         <div className="flex flex-col lg:flex-row gap-20 items-start">
+    <section className="py-12 bg-biz-deep relative border-t border-white/5 overflow-hidden flex flex-col justify-center min-h-[60vh]" id="contact">
+       <div className="container mx-auto px-4 md:px-6 relative z-10">
+         <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
            
            <motion.div 
-             initial={{ opacity: 0, x: -30 }}
+             initial={{ opacity: 0, x: -20 }}
              whileInView={{ opacity: 1, x: 0 }}
              viewport={{ once: true }}
-             className="lg:w-1/2 space-y-10"
+             className="lg:w-2/5 text-center lg:text-left space-y-4"
            >
-             <div>
-               <h2 className="text-biz-emerald font-display font-bold uppercase tracking-[0.4em] text-sm mb-6">Engagement</h2>
-               <h3 className="text-5xl md:text-8xl font-display text-white font-extrabold tracking-tighter leading-[0.9] uppercase">
-                 Start the <br /> Convergence.
-               </h3>
+             <h2 className="text-biz-emerald font-bold uppercase tracking-widest text-[10px]">Connect With Us</h2>
+             
+             <div className="flex items-center justify-center lg:justify-start gap-1.5 overflow-hidden whitespace-nowrap">
+                <span className="text-sm md:text-xl font-serif text-white/90 font-bold">Business</span>
+                <span className="text-sm md:text-lg text-white/30 font-serif">+</span>
+                <span className="text-sm md:text-xl font-serif text-white/70 font-medium">Sense</span>
+                <span className="text-sm md:text-lg text-white/30 font-serif">=</span>
+                <span className="text-lg md:text-2xl font-serif text-biz-emerald font-black tracking-tight uppercase">BIZSENSE</span>
              </div>
 
-             <p className="text-gray-400 font-normal leading-relaxed text-lg md:text-xl max-w-md">
+             <p className="text-gray-400 font-medium leading-relaxed text-[11px] md:text-sm max-w-sm mx-auto lg:mx-0">
                {config.contact.subtitle}
              </p>
 
-             <div className="space-y-6 pt-10 border-t border-white/5">
-               <div className="flex items-center gap-6 group">
-                 <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-biz-emerald group-hover:bg-biz-emerald group-hover:text-biz-deep transition-all duration-500">
-                   <Mail size={24} />
+             <div className="flex flex-row flex-wrap justify-center lg:justify-start items-center gap-x-6 gap-y-3 pt-6 border-t border-white/5">
+               <div className="flex items-center gap-2">
+                 <div className="w-7 h-7 bg-biz-emerald/10 border border-biz-emerald/20 rounded-full flex items-center justify-center text-biz-emerald shrink-0">
+                   <Mail size={12} />
                  </div>
-                 <div>
-                   <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Electronic Mail</p>
-                   <p className="text-white font-display text-lg font-bold">{config.company.email}</p>
-                 </div>
+                 <p className="text-white font-serif text-[10px] truncate max-w-[150px]">{config.company.email}</p>
                </div>
                
-               <div className="flex items-center gap-6 group">
-                 <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-biz-emerald group-hover:bg-biz-emerald group-hover:text-biz-deep transition-all duration-500">
-                   <MessageCircle size={24} />
+               <div className="flex items-center gap-2">
+                 <div className="w-7 h-7 bg-biz-emerald/10 border border-biz-emerald/20 rounded-full flex items-center justify-center text-biz-emerald shrink-0">
+                   <MessageCircle size={12} />
                  </div>
-                 <div>
-                   <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Direct Priority</p>
-                   <p className="text-white font-display text-lg font-bold">{config.company.phone}</p>
-                 </div>
+                 <p className="text-white font-serif text-[10px]">{config.company.phone}</p>
                </div>
              </div>
            </motion.div>
 
            <motion.div 
-             initial={{ opacity: 0, y: 40 }}
+             initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
-             className="w-full lg:w-1/2"
+             className="w-full lg:w-3/5 bg-biz-navy/40 border border-white/10 p-6 md:p-8 rounded-3xl relative overflow-hidden shadow-2xl max-w-xl"
            >
-             <form onSubmit={handleSubmit} className="space-y-8 glass-panel p-10 md:p-16 rounded-[40px] border-white/10">
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div className="relative group">
-                   <input type="text" name="name" value={formData.name} onChange={handleChange} className="peer w-full bg-transparent border-b border-white/10 py-4 text-white focus:outline-none focus:border-biz-emerald transition-all font-medium" placeholder=" " required />
-                   <label className="absolute left-0 top-4 text-gray-500 text-sm font-bold uppercase tracking-widest transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-biz-emerald pointer-events-none">Full Name</label>
+             <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+               <div className="grid grid-cols-2 gap-4">
+                 <div>
+                   <label className="block text-[8px] text-biz-emerald uppercase font-bold mb-1">{config.contact.form.name}</label>
+                   <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-biz-deep/50 border border-white/10 p-2.5 text-white rounded-xl focus:outline-none focus:border-biz-emerald/50 text-xs font-bold" required />
                  </div>
-                 <div className="relative group">
-                   <input type="text" name="company" value={formData.company} onChange={handleChange} className="peer w-full bg-transparent border-b border-white/10 py-4 text-white focus:outline-none focus:border-biz-emerald transition-all font-medium" placeholder=" " />
-                   <label className="absolute left-0 top-4 text-gray-500 text-sm font-bold uppercase tracking-widest transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-biz-emerald pointer-events-none">Organization</label>
+                 <div>
+                   <label className="block text-[8px] text-biz-emerald uppercase font-bold mb-1">{config.contact.form.company}</label>
+                   <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full bg-biz-deep/50 border border-white/10 p-2.5 text-white rounded-xl focus:outline-none focus:border-biz-emerald/50 text-xs font-bold" />
                  </div>
                </div>
-               
-               <div className="relative group">
-                 <input type="email" name="email" value={formData.email} onChange={handleChange} className="peer w-full bg-transparent border-b border-white/10 py-4 text-white focus:outline-none focus:border-biz-emerald transition-all font-medium" placeholder=" " required />
-                 <label className="absolute left-0 top-4 text-gray-500 text-sm font-bold uppercase tracking-widest transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-biz-emerald pointer-events-none">Digital ID (Email)</label>
+               <div>
+                 <label className="block text-[8px] text-biz-emerald uppercase font-bold mb-1">{config.contact.form.email}</label>
+                 <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-biz-deep/50 border border-white/10 p-2.5 text-white rounded-xl focus:outline-none focus:border-biz-emerald/50 text-xs font-bold" required />
                </div>
-               
-               <div className="relative group">
-                 <textarea rows={3} name="message" value={formData.message} onChange={handleChange} className="peer w-full bg-transparent border-b border-white/10 py-4 text-white focus:outline-none focus:border-biz-emerald transition-all font-medium resize-none" placeholder=" " required />
-                 <label className="absolute left-0 top-4 text-gray-500 text-sm font-bold uppercase tracking-widest transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-biz-emerald pointer-events-none">Brief Project Brief</label>
+               <div>
+                 <label className="block text-[8px] text-biz-emerald uppercase font-bold mb-1">{config.contact.form.message}</label>
+                 <textarea rows={3} name="message" value={formData.message} onChange={handleChange} className="w-full bg-biz-deep/50 border border-white/10 p-2.5 text-white rounded-xl focus:outline-none focus:border-biz-emerald/50 text-xs font-bold" required />
                </div>
-
-               <div className="pt-8">
-                 <Button type="submit" className="w-full !py-6 text-lg group">
-                   Initialize Project <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
+               <div className="pt-2">
+                 <Button type="submit" className="w-full !min-w-0 !py-3">
+                   {config.contact.form.button}
                  </Button>
                </div>
              </form>
