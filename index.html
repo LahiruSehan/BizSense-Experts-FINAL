@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <!-- Prevent zooming and horizontal shifting -->
+    <!-- Prevent zooming and horizontal shifting for a fixed high-end experience -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     
     <!-- Primary Meta Tags -->
@@ -77,8 +77,14 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 50; 
+        /* Positioned behind content but above ambient mesh blobs */
+        z-index: 1; 
         pointer-events: none;
+      }
+
+      #root {
+        position: relative;
+        z-index: 10;
       }
 
       .glass-panel {
@@ -117,7 +123,7 @@
         height: 80vw;
         border-radius: 50%;
         filter: blur(100px);
-        z-index: -1;
+        z-index: 0;
         opacity: 0.08;
         pointer-events: none;
       }
@@ -157,6 +163,23 @@
       let scrollY = 0;
       let mouse = { x: -1000, y: -1000 };
       
+      // Regions to avoid (Central Hero Area)
+      // We calculate these based on screen center
+      const getAvoidanceRegions = () => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        return [
+          {
+            // Main Hero Text Region
+            x: w * 0.15,
+            y: h * 0.15,
+            w: w * 0.7,
+            h: h * 0.6,
+            force: 0.05
+          }
+        ];
+      };
+
       function init() {
         const dpr = window.devicePixelRatio || 1;
         canvas.width = window.innerWidth * dpr;
@@ -166,71 +189,98 @@
         canvas.style.height = window.innerHeight + 'px';
         
         particles = [];
-        const particleCount = Math.min(100, (window.innerWidth * window.innerHeight) / 8000);
+        const particleCount = Math.min(70, (window.innerWidth * window.innerHeight) / 12000);
         for (let i = 0; i < particleCount; i++) {
           particles.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            speedX: (Math.random() - 0.5) * 0.4,
-            speedY: (Math.random() - 0.5) * 0.4,
-            radius: Math.random() * 1.5 + 0.5
+            size: Math.random() * 5 + 3,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            opacity: Math.random() * 0.4 + 0.1,
+            rotation: Math.random() * Math.PI,
+            rotationSpeed: (Math.random() - 0.5) * 0.015
           });
         }
+      }
+
+      function drawDiamond(ctx, x, y, size, rotation, opacity) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        ctx.beginPath();
+        ctx.moveTo(0, -size);
+        ctx.lineTo(size * 0.7, 0);
+        ctx.lineTo(0, size);
+        ctx.lineTo(-size * 0.7, 0);
+        ctx.closePath();
+        
+        ctx.fillStyle = `rgba(16, 185, 129, ${opacity * 0.4})`;
+        ctx.fill();
+        ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        
+        ctx.restore();
       }
 
       function animate() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         
-        const connectionDistance = 160;
-        const mouseDistance = 250;
+        const regions = getAvoidanceRegions();
+        const mouseRadius = 250;
+        const friction = 0.99;
 
-        for (let i = 0; i < particles.length; i++) {
-          let p = particles[i];
-
-          // React to mouse/touch - more visible attraction
+        particles.forEach(p => {
+          // 1. Mouse Avoidance (Push away)
           const dx = mouse.x - p.x;
           const dy = mouse.y - (p.y - (scrollY * 0.05));
           const dist = Math.sqrt(dx * dx + dy * dy);
           
-          if (dist < mouseDistance) {
-            const force = (mouseDistance - dist) / mouseDistance;
-            p.x += dx * 0.005 * force;
-            p.y += dy * 0.005 * force;
+          if (dist < mouseRadius) {
+            const angle = Math.atan2(dy, dx);
+            const force = (mouseRadius - dist) / mouseRadius;
+            p.vx -= Math.cos(angle) * force * 1.5;
+            p.vy -= Math.sin(angle) * force * 1.5;
           }
 
-          const wrappedY = (( (p.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
-
-          // Drawing connections
-          for (let j = i + 1; j < particles.length; j++) {
-            let p2 = particles[j];
-            const wrappedY2 = (( (p2.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
-            
-            const dx2 = p.x - p2.x;
-            const dy2 = wrappedY - wrappedY2;
-            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-
-            if (dist2 < connectionDistance) {
-              // Increased alpha for better visibility as requested
-              const alpha = (1 - dist2 / connectionDistance) * 0.22;
-              ctx.beginPath();
-              ctx.moveTo(p.x, wrappedY);
-              ctx.lineTo(p2.x, wrappedY2);
-              ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
-              ctx.lineWidth = 0.8;
-              ctx.stroke();
+          // 2. Region Avoidance (Hero Text)
+          regions.forEach(r => {
+            const visualY = (( (p.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
+            // If inside the avoidance rectangle, nudge outward
+            if (p.x > r.x && p.x < r.x + r.w && visualY > r.y && visualY < r.y + r.h) {
+              const centerX = r.x + r.w / 2;
+              const centerY = r.y + r.h / 2;
+              const dirX = p.x - centerX;
+              const dirY = visualY - centerY;
+              p.vx += dirX * 0.0005;
+              p.vy += dirY * 0.0005;
             }
-          }
+          });
 
-          // Move particles
-          p.x += p.speedX;
-          p.y += p.speedY;
+          // Apply velocity and friction
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= friction;
+          p.vy *= friction;
+          
+          // Re-add baseline drift if it gets too slow
+          if (Math.abs(p.vx) < 0.1) p.vx += (Math.random() - 0.5) * 0.05;
+          if (Math.abs(p.vy) < 0.1) p.vy += (Math.random() - 0.5) * 0.05;
 
-          // Boundary wrap
-          if (p.x < 0) p.x = window.innerWidth;
-          if (p.x > window.innerWidth) p.x = 0;
-          if (p.y < 0) p.y = window.innerHeight;
-          if (p.y > window.innerHeight) p.y = 0;
-        }
+          p.rotation += p.rotationSpeed;
+
+          // Boundary Wrap
+          const visualY = (( (p.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
+          
+          // Display the particle
+          drawDiamond(ctx, p.x, visualY, p.size, p.rotation, p.opacity);
+
+          if (p.x < -20) p.x = window.innerWidth + 20;
+          if (p.x > window.innerWidth + 20) p.x = -20;
+          if (p.y < -20) p.y = window.innerHeight + 20;
+          if (p.y > window.innerHeight + 20) p.y = -20;
+        });
         
         requestAnimationFrame(animate);
       }
@@ -240,24 +290,18 @@
         scrollY = window.pageYOffset;
       });
 
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      });
-
-      window.addEventListener('touchstart', (e) => {
-        if(e.touches.length > 0) {
-          mouse.x = e.touches[0].clientX;
-          mouse.y = e.touches[0].clientY;
+      const handleInteraction = (e) => {
+        const x = e.clientX || (e.touches && e.touches[0].clientX);
+        const y = e.clientY || (e.touches && e.touches[0].clientY);
+        if (x !== undefined && y !== undefined) {
+          mouse.x = x;
+          mouse.y = y;
         }
-      });
+      };
 
-      window.addEventListener('touchmove', (e) => {
-        if(e.touches.length > 0) {
-          mouse.x = e.touches[0].clientX;
-          mouse.y = e.touches[0].clientY;
-        }
-      });
+      window.addEventListener('mousemove', handleInteraction);
+      window.addEventListener('touchstart', handleInteraction);
+      window.addEventListener('touchmove', handleInteraction);
       
       init();
       animate();
