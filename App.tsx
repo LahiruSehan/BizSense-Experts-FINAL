@@ -12,6 +12,7 @@ import WhatsAppFloat from './components/UI/WhatsAppFloat';
 import LanguageToggle from './components/UI/LanguageToggle';
 import WhatsAppModal from './components/WhatsAppModal';
 import PortfolioButton from './components/UI/PortfolioButton';
+import ServiceLifecycle from './components/ServiceLifecycle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Facebook } from 'lucide-react';
 import { useLanguage } from './context/LanguageContext';
@@ -32,6 +33,7 @@ const Home: React.FC = () => (
   <PageWrapper pt="pt-0">
     <Hero />
     <HomeServices />
+    <ServiceLifecycle />
     <WhyChoose />
     <Staff />
     <Contact />

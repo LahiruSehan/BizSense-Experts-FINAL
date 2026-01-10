@@ -2,10 +2,8 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <!-- Prevent zooming and horizontal shifting for a fixed high-end experience -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     
-    <!-- Primary Meta Tags -->
     <title>BizSense Experts | High-Tier Business Strategy</title>
     <meta name="title" content="BizSense Experts | High-Tier Business Strategy" />
     <meta name="description" content="Elite cinematic tech-finance advisory. Specializing in high-performance digital growth and intelligent business systems." />
@@ -32,100 +30,43 @@
               sans: ['Inter', 'sans-serif'],
               display: ['Space Grotesk', 'sans-serif'],
             },
-            animation: {
-              'glow-pulse': 'glowPulse 8s ease-in-out infinite',
-              'mesh-flow': 'meshFlow 20s ease infinite',
-              'float': 'float 6s ease-in-out infinite',
-            },
-            keyframes: {
-              glowPulse: {
-                '0%, 100%': { opacity: '0.3', filter: 'blur(80px)' },
-                '50%': { opacity: '0.6', filter: 'blur(120px)' },
-              },
-              meshFlow: {
-                '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-                '33%': { transform: 'translate(5%, 5%) scale(1.1)' },
-                '66%': { transform: 'translate(-5%, 10%) scale(0.9)' },
-              }
-            }
           }
         }
       }
     </script>
     <style>
-      :root {
-        overflow-x: hidden;
-        -webkit-text-size-adjust: 100%;
-        touch-action: none;
-      }
-
+      :root { overflow-x: hidden; -webkit-text-size-adjust: 100%; touch-action: none; }
       body {
         background-color: #01080e;
         color: #f1f5f9;
-        margin: 0;
-        padding: 0;
+        margin: 0; padding: 0;
         overflow-x: hidden;
         width: 100%;
         font-family: 'Inter', sans-serif;
-        overscroll-behavior-y: none;
         user-select: none;
       }
       
       canvas#bg-canvas {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        /* Positioned behind content but above ambient mesh blobs */
-        z-index: 1; 
-        pointer-events: none;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 50; /* Now ABOVE everything */
+        pointer-events: none; /* User clicks through to buttons */
       }
 
-      #root {
-        position: relative;
-        z-index: 10;
-      }
-
-      .glass-panel {
-        background: rgba(1, 22, 39, 0.4);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-      }
-
+      #root { position: relative; z-index: 10; }
       .text-gradient-teal {
         background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-
       .btn-modern-primary {
         background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
         box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4);
       }
-      
       .btn-modern-outline {
         border: 1px solid rgba(16, 185, 129, 0.3);
         background: rgba(16, 185, 129, 0.02);
-      }
-
-      ::-webkit-scrollbar { width: 5px; }
-      ::-webkit-scrollbar-track { background: #01080e; }
-      ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
-      
-      h1, h2, h3, .font-display {
-        font-family: 'Space Grotesk', sans-serif;
-      }
-
-      .mesh-blob {
-        position: fixed;
-        width: 80vw;
-        height: 80vw;
-        border-radius: 50%;
-        filter: blur(100px);
-        z-index: 0;
-        opacity: 0.08;
-        pointer-events: none;
       }
     </style>
     <script type="importmap">
@@ -147,39 +88,15 @@
 </script>
   </head>
   <body>
-    <div class="mesh-blob bg-biz-emerald top-[-20%] right-[-10%] animate-mesh-flow"></div>
-    <div class="mesh-blob bg-biz-cyan bottom-[-20%] left-[-10%] animate-mesh-flow" style="animation-delay: -5s;"></div>
-    
     <canvas id="bg-canvas"></canvas>
-    
     <div id="root"></div>
-    
     <script type="module" src="./index.tsx"></script>
-    
     <script>
       const canvas = document.getElementById('bg-canvas');
       const ctx = canvas.getContext('2d');
       let particles = [];
-      let scrollY = 0;
       let mouse = { x: -1000, y: -1000 };
       
-      // Regions to avoid (Central Hero Area)
-      // We calculate these based on screen center
-      const getAvoidanceRegions = () => {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        return [
-          {
-            // Main Hero Text Region
-            x: w * 0.15,
-            y: h * 0.15,
-            w: w * 0.7,
-            h: h * 0.6,
-            force: 0.05
-          }
-        ];
-      };
-
       function init() {
         const dpr = window.devicePixelRatio || 1;
         canvas.width = window.innerWidth * dpr;
@@ -189,119 +106,74 @@
         canvas.style.height = window.innerHeight + 'px';
         
         particles = [];
-        const particleCount = Math.min(70, (window.innerWidth * window.innerHeight) / 12000);
-        for (let i = 0; i < particleCount; i++) {
+        const count = Math.min(80, (window.innerWidth * window.innerHeight) / 10000);
+        for (let i = 0; i < count; i++) {
           particles.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            size: Math.random() * 5 + 3,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            opacity: Math.random() * 0.4 + 0.1,
+            size: Math.random() * 4 + 2,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            opacity: Math.random() * 0.5 + 0.2,
             rotation: Math.random() * Math.PI,
-            rotationSpeed: (Math.random() - 0.5) * 0.015
           });
         }
       }
 
-      function drawDiamond(ctx, x, y, size, rotation, opacity) {
+      function drawDiamond(x, y, size, rotation, opacity) {
         ctx.save();
         ctx.translate(x, y);
         ctx.rotate(rotation);
         ctx.beginPath();
         ctx.moveTo(0, -size);
-        ctx.lineTo(size * 0.7, 0);
+        ctx.lineTo(size, 0);
         ctx.lineTo(0, size);
-        ctx.lineTo(-size * 0.7, 0);
+        ctx.lineTo(-size, 0);
         ctx.closePath();
-        
         ctx.fillStyle = `rgba(16, 185, 129, ${opacity * 0.4})`;
         ctx.fill();
         ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
-        ctx.lineWidth = 0.8;
+        ctx.lineWidth = 1;
         ctx.stroke();
-        
         ctx.restore();
       }
 
       function animate() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        
-        const regions = getAvoidanceRegions();
-        const mouseRadius = 250;
-        const friction = 0.99;
+        const radius = 200;
 
         particles.forEach(p => {
-          // 1. Mouse Avoidance (Push away)
           const dx = mouse.x - p.x;
-          const dy = mouse.y - (p.y - (scrollY * 0.05));
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
           
-          if (dist < mouseRadius) {
+          if (dist < radius) {
             const angle = Math.atan2(dy, dx);
-            const force = (mouseRadius - dist) / mouseRadius;
+            const force = (radius - dist) / radius;
             p.vx -= Math.cos(angle) * force * 1.5;
             p.vy -= Math.sin(angle) * force * 1.5;
           }
 
-          // 2. Region Avoidance (Hero Text)
-          regions.forEach(r => {
-            const visualY = (( (p.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
-            // If inside the avoidance rectangle, nudge outward
-            if (p.x > r.x && p.x < r.x + r.w && visualY > r.y && visualY < r.y + r.h) {
-              const centerX = r.x + r.w / 2;
-              const centerY = r.y + r.h / 2;
-              const dirX = p.x - centerX;
-              const dirY = visualY - centerY;
-              p.vx += dirX * 0.0005;
-              p.vy += dirY * 0.0005;
-            }
-          });
-
-          // Apply velocity and friction
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vx *= friction;
-          p.vy *= friction;
+          p.x += p.vx; p.y += p.vy;
+          p.vx *= 0.98; p.vy *= 0.98;
           
-          // Re-add baseline drift if it gets too slow
-          if (Math.abs(p.vx) < 0.1) p.vx += (Math.random() - 0.5) * 0.05;
-          if (Math.abs(p.vy) < 0.1) p.vy += (Math.random() - 0.5) * 0.05;
+          if (Math.abs(p.vx) < 0.1) p.vx += (Math.random()-0.5)*0.1;
+          if (Math.abs(p.vy) < 0.1) p.vy += (Math.random()-0.5)*0.1;
 
-          p.rotation += p.rotationSpeed;
-
-          // Boundary Wrap
-          const visualY = (( (p.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
-          
-          // Display the particle
-          drawDiamond(ctx, p.x, visualY, p.size, p.rotation, p.opacity);
+          drawDiamond(p.x, p.y, p.size, p.rotation, p.opacity);
+          p.rotation += 0.01;
 
           if (p.x < -20) p.x = window.innerWidth + 20;
           if (p.x > window.innerWidth + 20) p.x = -20;
           if (p.y < -20) p.y = window.innerHeight + 20;
           if (p.y > window.innerHeight + 20) p.y = -20;
         });
-        
         requestAnimationFrame(animate);
       }
 
       window.addEventListener('resize', init);
-      window.addEventListener('scroll', () => {
-        scrollY = window.pageYOffset;
-      });
-
-      const handleInteraction = (e) => {
-        const x = e.clientX || (e.touches && e.touches[0].clientX);
-        const y = e.clientY || (e.touches && e.touches[0].clientY);
-        if (x !== undefined && y !== undefined) {
-          mouse.x = x;
-          mouse.y = y;
-        }
-      };
-
-      window.addEventListener('mousemove', handleInteraction);
-      window.addEventListener('touchstart', handleInteraction);
-      window.addEventListener('touchmove', handleInteraction);
+      window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+      window.addEventListener('touchmove', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
       
       init();
       animate();
