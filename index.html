@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
-    <title>BizSense Experts | Intelligent Business Solutions</title>
-    <meta name="title" content="BizSense Experts | Intelligent Business Solutions" />
-    <meta name="description" content="Elite business consultancy bridging Technology and Growth. Specializing in Odoo ERP, Global Trade, and Digital Strategy." />
+    <title>BizSense Experts | High-Tier Business Strategy</title>
+    <meta name="title" content="BizSense Experts | High-Tier Business Strategy" />
+    <meta name="description" content="Elite cinematic tech-finance advisory. Specializing in high-performance digital growth and intelligent business systems." />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Manrope:wght@300;400;600;700;800&family=Abhaya+Libre:wght@400;700&family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
       tailwind.config = {
@@ -20,35 +20,31 @@
           extend: {
             colors: {
               biz: {
-                deep: '#000c14',
+                deep: '#01080e',
                 navy: '#011627',
                 teal: '#0d9488',
                 emerald: '#10b981',
-                lime: '#a3e635',
                 cyan: '#06b6d4',
               }
             },
             fontFamily: {
-              serif: ['Cinzel', 'serif'],
-              sans: ['Manrope', 'sans-serif'],
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
             },
             animation: {
-              'glow-pulse': 'glowPulse 4s ease-in-out infinite',
+              'glow-pulse': 'glowPulse 8s ease-in-out infinite',
+              'mesh-flow': 'meshFlow 20s ease infinite',
               'float': 'float 6s ease-in-out infinite',
-              'shimmer': 'shimmer 3s infinite linear',
             },
             keyframes: {
               glowPulse: {
-                '0%, 100%': { opacity: '0.4', filter: 'blur(20px)' },
-                '50%': { opacity: '0.8', filter: 'blur(40px)' },
+                '0%, 100%': { opacity: '0.3', filter: 'blur(80px)' },
+                '50%': { opacity: '0.6', filter: 'blur(120px)' },
               },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
-              },
-              shimmer: {
-                '0%': { transform: 'translateX(-100%)' },
-                '100%': { transform: 'translateX(100%)' },
+              meshFlow: {
+                '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                '33%': { transform: 'translate(5%, 5%) scale(1.1)' },
+                '66%': { transform: 'translate(-5%, 10%) scale(0.9)' },
               }
             }
           }
@@ -57,13 +53,13 @@
     </script>
     <style>
       body {
-        background-color: #000c14;
-        color: #f8fafc;
+        background-color: #01080e;
+        color: #f1f5f9;
         overflow-x: hidden;
-        font-weight: 600;
+        font-family: 'Inter', sans-serif;
       }
       
-      canvas#particle-canvas {
+      canvas#bg-canvas {
         position: fixed;
         top: 0;
         left: 0;
@@ -73,29 +69,45 @@
         pointer-events: none;
       }
 
-      .glass-card {
+      .glass-panel {
         background: rgba(1, 22, 39, 0.4);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(16, 185, 129, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
 
-      .text-glow-green {
-        text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+      .text-gradient-teal {
+        background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
-      .btn-luxury-green {
+      .btn-modern-primary {
         background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
-        box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4);
       }
       
-      .btn-luxury-outline {
-        border: 1px solid rgba(16, 185, 129, 0.4);
-        background: rgba(16, 185, 129, 0.05);
+      .btn-modern-outline {
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        background: rgba(16, 185, 129, 0.02);
       }
 
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: #000c14; }
-      ::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 10px; }
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: #01080e; }
+      ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+      
+      h1, h2, h3, .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      .mesh-blob {
+        position: absolute;
+        width: 60vw;
+        height: 60vw;
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: -1;
+        opacity: 0.1;
+      }
     </style>
     <script type="importmap">
 {
@@ -116,56 +128,66 @@
 </script>
   </head>
   <body>
-    <canvas id="particle-canvas"></canvas>
+    <div class="mesh-blob bg-biz-emerald top-[-10%] right-[-10%] animate-mesh-flow"></div>
+    <div class="mesh-blob bg-biz-cyan bottom-[-10%] left-[-10%] animate-mesh-flow" style="animation-delay: -5s;"></div>
+    
+    <canvas id="bg-canvas"></canvas>
+    
     <div id="root"></div>
+    
     <script type="module" src="./index.tsx"></script>
+    
     <script>
-      const canvas = document.getElementById('particle-canvas');
+      const canvas = document.getElementById('bg-canvas');
       const ctx = canvas.getContext('2d');
       let particles = [];
+      let scrollY = 0;
       
       function init() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         particles = [];
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 50; i++) {
           particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            length: Math.random() * 80 + 20,
-            speed: Math.random() * 0.5 + 0.1,
-            opacity: Math.random() * 0.4,
-            width: Math.random() * 2 + 0.5
+            size: Math.random() * 1.5 + 0.5,
+            speedX: (Math.random() - 0.5) * 0.15,
+            speedY: (Math.random() - 0.5) * 0.15,
+            opacity: Math.random() * 0.4 + 0.1
           });
         }
       }
 
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'rgba(16, 185, 129, 0.15)';
-        ctx.lineCap = 'round';
         
         particles.forEach(p => {
+          const adjustedY = p.y - (scrollY * 0.05);
+          const wrappedY = ((adjustedY % canvas.height) + canvas.height) % canvas.height;
+          
           ctx.beginPath();
-          ctx.lineWidth = p.width;
-          ctx.globalAlpha = p.opacity;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x + p.length, p.y - p.length / 2);
-          ctx.stroke();
+          ctx.arc(p.x, wrappedY, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
+          ctx.fill();
           
-          p.x += p.speed;
-          p.y -= p.speed / 2;
+          p.x += p.speedX;
+          p.y += p.speedY;
           
-          if (p.x > canvas.width || p.y < 0) {
-            p.x = -p.length;
-            p.y = Math.random() * canvas.height;
-          }
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
         });
         
         requestAnimationFrame(animate);
       }
 
       window.addEventListener('resize', init);
+      window.addEventListener('scroll', () => {
+        scrollY = window.pageYOffset;
+      });
+      
       init();
       animate();
     </script>

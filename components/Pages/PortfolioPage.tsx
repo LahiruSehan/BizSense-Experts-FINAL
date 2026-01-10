@@ -35,34 +35,34 @@ const PortfolioPage: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-6">
           <button 
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-biz-emerald font-black uppercase tracking-widest text-[10px] hover:text-white transition-colors group"
+            className="flex items-center gap-2 text-biz-emerald font-display font-black uppercase tracking-widest text-[10px] hover:text-white transition-colors group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back Home
           </button>
           
           <div className="text-center">
-            <h1 className="text-3xl md:text-5xl font-serif text-white font-bold tracking-tight mb-2">Our Portfolio</h1>
-            <p className="text-gray-500 text-xs md:text-sm font-bold uppercase tracking-[0.3em]">Excellence in Action</p>
+            <h1 className="text-3xl md:text-5xl font-display text-white font-extrabold tracking-tight mb-2">Our Portfolio</h1>
+            <p className="text-gray-500 text-xs md:text-sm font-display font-bold uppercase tracking-[0.4em]">Strategic Case Studies</p>
           </div>
 
           <div className="w-[100px] hidden md:block" />
         </div>
 
-        {/* 3-Item Navigation Bar */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-biz-navy/60 p-1.5 rounded-full border border-white/5 backdrop-blur-xl">
+        {/* 3-Item Navigation Bar with Text Labels */}
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex flex-wrap justify-center bg-white/5 p-2 rounded-2xl md:rounded-full border border-white/10 backdrop-blur-xl">
             {categories.map((cat) => (
               <button
                 key={cat.name}
                 onClick={() => setActiveTab(cat.name as Category)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 ${
+                className={`flex items-center gap-2 px-5 md:px-8 py-3 rounded-xl md:rounded-full text-[10px] md:text-xs font-display font-bold uppercase tracking-widest transition-all duration-500 ${
                   activeTab === cat.name 
-                    ? 'bg-biz-emerald text-biz-deep shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
+                    ? 'bg-biz-emerald text-biz-deep shadow-lg' 
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <cat.icon size={14} />
-                <span className="hidden sm:inline">{cat.name}</span>
+                <cat.icon size={16} />
+                <span>{cat.name}</span>
               </button>
             ))}
           </div>
@@ -71,7 +71,7 @@ const PortfolioPage: React.FC = () => {
         {/* Portfolio Grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-24"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-32"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
@@ -82,23 +82,23 @@ const PortfolioPage: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className="group relative bg-biz-navy/40 border border-white/5 rounded-3xl overflow-hidden hover:border-biz-emerald/50 transition-all duration-500"
+                className="group relative bg-white/5 border border-white/10 rounded-[40px] overflow-hidden hover:border-biz-emerald/30 transition-all duration-500"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img 
                     src={item.image} 
                     alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.8] group-hover:grayscale-0"
                   />
                 </div>
-                <div className="p-8">
-                  <span className="text-biz-emerald text-[9px] font-black uppercase tracking-widest block mb-2">{item.category}</span>
-                  <h3 className="text-white font-serif text-xl font-bold mb-1">{item.title}</h3>
-                  <p className="text-gray-500 text-xs font-bold">{item.client}</p>
+                <div className="p-10">
+                  <span className="text-biz-emerald text-[10px] font-display font-bold uppercase tracking-[0.2em] block mb-2">{item.category}</span>
+                  <h3 className="text-white font-display text-2xl font-bold mb-2 tracking-tight">{item.title}</h3>
+                  <p className="text-gray-500 text-sm font-medium">{item.client}</p>
                   
-                  <div className="mt-6 flex justify-end">
-                    <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-biz-emerald hover:bg-biz-emerald hover:text-biz-deep transition-all">
-                      <ExternalLink size={16} />
+                  <div className="mt-8 flex justify-end">
+                    <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-biz-emerald hover:bg-biz-emerald hover:text-biz-deep transition-all">
+                      <ExternalLink size={18} />
                     </button>
                   </div>
                 </div>

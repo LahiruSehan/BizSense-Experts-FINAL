@@ -10,23 +10,18 @@ const WhatsAppFloat: React.FC = () => {
       href={`https://wa.me/${config.company.whatsappNumber}`}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 1.5, duration: 0.8 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="fixed bottom-[96px] right-4 md:right-8 z-40 group flex items-center gap-3 cursor-pointer"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.5 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="fixed bottom-6 right-6 z-[160] group flex items-center gap-3 cursor-pointer"
     >
-      <span className="hidden md:block bg-matte-black/90 backdrop-blur border border-white/10 px-3 py-1.5 rounded text-[10px] uppercase font-bold tracking-widest text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
-        Talk to Expert
-      </span>
-      <div className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.3)] border border-white/10 relative overflow-hidden">
-        {/* Shine effect */}
+      <div className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_10px_30px_rgba(37,211,102,0.3)] border border-white/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-        
         <svg 
-          width="24" 
-          height="24" 
+          width="28" 
+          height="28" 
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
