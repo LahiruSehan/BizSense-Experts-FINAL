@@ -13,7 +13,7 @@ const ServiceLifecycle: React.FC = () => {
   const platforms = ["Odoo", "ERPNext", "Zoho", "SAP", "Local Custom Solutions"];
 
   return (
-    <section className="py-24 bg-biz-deep/50 relative border-y border-white/5">
+    <section className="py-24 bg-transparent relative border-y border-white/5">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           
@@ -30,7 +30,7 @@ const ServiceLifecycle: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-biz-emerald/30 transition-all"
+                  className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-biz-emerald/30 transition-all"
                 >
                   <p.icon size={24} className="text-biz-emerald mb-4" />
                   <h4 className="text-white font-bold mb-2 uppercase text-xs tracking-widest">{p.title}</h4>

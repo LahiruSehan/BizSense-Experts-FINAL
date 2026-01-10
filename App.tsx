@@ -23,7 +23,7 @@ const PageWrapper: React.FC<{children: React.ReactNode, pt?: string}> = ({ child
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.8 }}
-    className={pt}
+    className={`${pt} bg-transparent`}
   >
     {children}
   </motion.div>
@@ -43,7 +43,7 @@ const Home: React.FC = () => (
 const Footer: React.FC = () => {
   const { config } = useLanguage();
   return (
-    <footer className="bg-biz-deep/80 border-t border-white/5 pt-12 pb-12 relative z-10">
+    <footer className="bg-transparent border-t border-white/5 pt-12 pb-12 relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
             <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" alt="Logo" className="h-10 opacity-60" />
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="min-h-screen bg-biz-deep text-slate-200 font-sans selection:bg-biz-emerald selection:text-biz-deep overflow-x-hidden relative">
+      <div className="min-h-screen bg-transparent text-slate-200 font-display selection:bg-biz-emerald selection:text-biz-deep overflow-x-hidden relative">
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />

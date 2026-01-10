@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// Added missing 'Calendar' import
 import { BarChart3, Megaphone, Handshake, ChevronRight, Calendar } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -37,13 +36,13 @@ const HomeServices: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className="glass-card p-10 rounded-3xl group flex flex-col items-center text-center transition-all duration-500 hover:border-biz-emerald/40"
+              className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-3xl group flex flex-col items-center text-center transition-all duration-500 hover:border-biz-emerald/40"
             >
               <div className="w-24 h-24 rounded-full bg-biz-emerald/5 flex items-center justify-center text-biz-emerald mb-8 group-hover:bg-biz-emerald/10 transition-colors shadow-[0_0_40px_rgba(163,230,53,0.1)]">
                 <service.icon size={44} strokeWidth={1} />
               </div>
               
-              <h3 className="text-lg md:text-xl font-sans text-white font-bold uppercase tracking-widest mb-4 group-hover:text-biz-emerald transition-colors">
+              <h3 className="text-lg md:text-xl font-display text-white font-bold uppercase tracking-widest mb-4 group-hover:text-biz-emerald transition-colors">
                 {service.title}
               </h3>
               
@@ -58,16 +57,15 @@ const HomeServices: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom CTA Row from screenshot */}
         <div className="mt-24 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 text-center">
-            <h4 className="text-xl md:text-3xl font-serif text-white font-bold tracking-tight">
+            <h4 className="text-xl md:text-3xl font-display text-white font-bold tracking-tight">
                 Ready to Accelerate Your Business Growth? <span className="inline-block animate-bounce ml-2">↗</span>
             </h4>
             <div className="flex gap-4">
-                <button className="btn-luxury-green px-8 py-3 rounded-xl text-biz-deep text-[10px] font-black uppercase tracking-widest">
+                <button className="btn-modern-primary px-8 py-3 rounded-xl text-biz-deep text-[10px] font-black uppercase tracking-widest">
                     Request Consultation
                 </button>
-                <button className="btn-luxury-outline px-8 py-3 rounded-xl text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                <button className="btn-modern-outline px-8 py-3 rounded-xl text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                     <Calendar size={14} className="text-biz-emerald" /> Book a Demo
                 </button>
             </div>

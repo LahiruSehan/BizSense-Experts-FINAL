@@ -9,13 +9,13 @@ const Services: React.FC = () => {
   const selectedService = CONFIG.services.find(s => s.id === selectedId);
 
   return (
-    <section className="min-h-screen py-8 md:py-16 bg-biz-deep relative overflow-hidden flex flex-col justify-center">
+    <section className="min-h-screen py-24 bg-transparent relative overflow-hidden flex flex-col justify-center">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-transparent via-biz-emerald/10 to-transparent" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-20">
-        <div className="text-center mb-6 md:mb-10">
+        <div className="text-center mb-10">
           <h2 className="text-biz-emerald text-[8px] md:text-[10px] font-bold tracking-[0.3em] uppercase mb-1">Expertise</h2>
-          <h3 className="text-xl md:text-3xl font-serif text-white leading-tight font-bold uppercase tracking-tight">
+          <h3 className="text-xl md:text-3xl font-display text-white leading-tight font-bold uppercase tracking-tight">
             Core Services
           </h3>
         </div>
@@ -30,14 +30,14 @@ const Services: React.FC = () => {
               whileHover={{ scale: 1.01, borderColor: "rgba(16,185,129,0.25)" }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
-              className="group relative bg-biz-navy/60 border border-white/5 p-4 cursor-pointer rounded-2xl flex flex-col justify-center transition-all duration-300 overflow-hidden shadow-lg"
+              className="group relative bg-white/5 backdrop-blur-md border border-white/5 p-4 cursor-pointer rounded-2xl flex flex-col justify-center transition-all duration-300 overflow-hidden shadow-lg"
             >
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-3">
-                    <div className="text-biz-emerald group-hover:text-biz-lime transition-colors">
+                    <div className="text-biz-emerald group-hover:text-white transition-colors">
                         <service.icon size={20} strokeWidth={1.5} />
                     </div>
-                    <h4 className="text-sm md:text-base font-serif text-white group-hover:text-biz-emerald font-bold uppercase tracking-wide">
+                    <h4 className="text-sm md:text-base font-display text-white group-hover:text-biz-emerald font-bold uppercase tracking-wide">
                         {service.title}
                     </h4>
                 </div>

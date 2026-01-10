@@ -35,9 +35,9 @@
       }
     </script>
     <style>
-      :root { overflow-x: hidden; -webkit-text-size-adjust: 100%; touch-action: none; }
+      :root { overflow-x: hidden; -webkit-text-size-adjust: 100%; touch-action: none; background: #01080e; }
       body {
-        background-color: #01080e;
+        background-color: transparent;
         color: #f1f5f9;
         margin: 0; padding: 0;
         overflow-x: hidden;
@@ -54,8 +54,8 @@
         background-image: url('https://i.ibb.co/sdPbVNNK/Chat-GPT-Image-Jan-10-2026-05-19-36-PM.png');
         background-size: cover;
         background-position: center;
-        opacity: 0.12; /* Dark and subtle */
-        filter: grayscale(100%) contrast(120%);
+        opacity: 0.18; 
+        filter: grayscale(100%) contrast(150%) brightness(0.6);
       }
 
       /* Moving Gradient Overlay */
@@ -68,12 +68,11 @@
           #01080e 0%,
           #011627 30%,
           #01080e 50%,
-          #0d948810 70%,
+          #0d948815 75%,
           #01080e 100%
         );
-        background-size: 300% 300%;
-        animation: gradientShift 15s ease-in-out infinite;
-        mix-blend-mode: multiply;
+        background-size: 400% 400%;
+        animation: gradientShift 18s ease-in-out infinite;
       }
 
       /* Subtle Interactive Particles (Above Content) */
@@ -81,11 +80,11 @@
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        z-index: 100; /* Floats over everything */
-        pointer-events: none; /* Don't block clicks */
+        z-index: 100;
+        pointer-events: none;
       }
 
-      #root { position: relative; z-index: 10; }
+      #root { position: relative; z-index: 10; background: transparent; }
       
       .text-gradient-teal {
         background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
@@ -154,12 +153,12 @@
         constructor(x, y) {
           this.x = x;
           this.y = y;
-          this.size = Math.random() * 3 + 1.5; // Smaller and subtler
-          this.speedX = (Math.random() - 0.5) * 1.2;
-          this.speedY = (Math.random() - 0.5) * 1.2;
-          this.color = Math.random() > 0.6 ? '#10b981' : '#06b6d4';
-          this.life = 0.8;
-          this.decay = Math.random() * 0.025 + 0.02; // Faster decay for ghost-like trail
+          this.size = Math.random() * 2 + 1;
+          this.speedX = (Math.random() - 0.5) * 1.5;
+          this.speedY = (Math.random() - 0.5) * 1.5;
+          this.color = Math.random() > 0.5 ? '#10b981' : '#06b6d4';
+          this.life = 0.7;
+          this.decay = Math.random() * 0.02 + 0.015;
         }
 
         update() {
@@ -171,15 +170,10 @@
         draw() {
           if (this.life <= 0) return;
           ctx.save();
-          ctx.globalAlpha = this.life * 0.4; // Very subtle
+          ctx.globalAlpha = this.life * 0.35;
           ctx.fillStyle = this.color;
           ctx.beginPath();
-          // Minimalistic diamond
-          ctx.moveTo(this.x, this.y - this.size);
-          ctx.lineTo(this.x + this.size * 0.8, this.y);
-          ctx.lineTo(this.x, this.y + this.size);
-          ctx.lineTo(this.x - this.size * 0.8, this.y);
-          ctx.closePath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
         }
@@ -187,7 +181,6 @@
 
       function animate() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        
         for (let i = 0; i < trail.length; i++) {
           trail[i].update();
           trail[i].draw();
@@ -196,26 +189,19 @@
             i--;
           }
         }
-        
         requestAnimationFrame(animate);
       }
 
       window.addEventListener('resize', init);
-      
       const handleInteraction = (e) => {
         const x = e.clientX || (e.touches && e.touches[0].clientX);
         const y = e.clientY || (e.touches && e.touches[0].clientY);
         if (x !== undefined && y !== undefined) {
-          // Subtle spawning
-          if (Math.random() > 0.3) {
-            trail.push(new Particle(x, y));
-          }
+          if (Math.random() > 0.4) trail.push(new Particle(x, y));
         }
       };
-
       window.addEventListener('mousemove', handleInteraction);
       window.addEventListener('touchmove', handleInteraction);
-      
       init();
       animate();
     </script>
