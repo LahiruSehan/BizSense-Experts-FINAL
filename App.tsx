@@ -1,12 +1,12 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import HomeServices from './components/HomeServices';
 import Services from './components/Services';
 import WhyChoose from './components/WhyChoose';
 import Staff from './components/Staff';
 import ERPPage from './components/Pages/ERPPage';
+import PortfolioPage from './components/Pages/PortfolioPage';
 import Contact from './components/Contact';
 import WhatsAppFloat from './components/UI/WhatsAppFloat';
 import LanguageToggle from './components/UI/LanguageToggle';
@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Facebook } from 'lucide-react';
 import { useLanguage } from './context/LanguageContext';
 
-const PageWrapper: React.FC<{children: React.ReactNode, pt?: string}> = ({ children, pt = "pt-24" }) => (
+const PageWrapper: React.FC<{children: React.ReactNode, pt?: string}> = ({ children, pt = "pt-12" }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -36,13 +36,6 @@ const Home: React.FC = () => (
     <Staff />
     <Contact />
   </PageWrapper>
-);
-
-const About: React.FC = () => (
-    <PageWrapper pt="pt-20">
-        <WhyChoose />
-        <Staff />
-    </PageWrapper>
 );
 
 const Footer: React.FC = () => {
@@ -75,14 +68,13 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="min-h-screen bg-biz-deep text-slate-200 font-sans selection:bg-biz-emerald selection:text-biz-deep overflow-x-hidden relative">
-        <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<PageWrapper pt="pt-20"><Services /></PageWrapper>} />
+            <Route path="/portfolio" element={<PageWrapper pt="pt-0"><PortfolioPage /></PageWrapper>} />
+            <Route path="/services" element={<PageWrapper pt="pt-12"><Services /></PageWrapper>} />
             <Route path="/services/erp" element={<PageWrapper pt="pt-0"><ERPPage /></PageWrapper>} />
-            <Route path="/contact" element={<PageWrapper pt="pt-20"><Contact /></PageWrapper>} />
+            <Route path="/contact" element={<PageWrapper pt="pt-12"><Contact /></PageWrapper>} />
           </Routes>
         </AnimatePresence>
         
