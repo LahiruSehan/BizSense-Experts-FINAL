@@ -5,34 +5,31 @@ import { useLanguage } from '../context/LanguageContext';
 const WhyChoose: React.FC = () => {
   const { config } = useLanguage();
   return (
-    <section className="py-12 bg-biz-deep border-t border-white/5 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.03),transparent_70%)] pointer-events-none" />
+    <section className="py-24 md:py-40 bg-biz-deep relative overflow-hidden border-t border-white/5">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16 md:mb-24">
+           <h2 className="text-sm font-display font-bold uppercase tracking-[0.4em] text-biz-emerald mb-6">Competitive Edge</h2>
+           <h3 className="text-4xl md:text-6xl font-display font-extrabold text-white tracking-tighter">Why Global Leaders Trust Us.</h3>
+        </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="w-full max-w-5xl mx-auto"
-        >
-          <h3 className="text-center text-biz-emerald text-[10px] uppercase tracking-[0.3em] font-bold mb-10">Why Choose BizSense?</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {config.hero.whyChoose.map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  whileHover={{ y: -5 }}
-                  className="flex flex-col items-center text-center p-6 bg-biz-navy/40 border border-white/5 rounded-2xl hover:border-biz-emerald/30 hover:bg-biz-navy/60 transition-all group shadow-xl relative"
-                >
-                  <div className="absolute inset-0 bg-biz-emerald/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                  <div className="w-12 h-12 rounded-full bg-biz-emerald/10 flex items-center justify-center text-biz-emerald mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.15)] relative z-10">
-                    <item.icon size={22} />
-                  </div>
-                  <h4 className="text-gray-100 text-[11px] md:text-xs font-bold uppercase tracking-wider mb-2 relative z-10">{item.title}</h4>
-                  <p className="text-biz-cyan text-[10px] leading-relaxed font-bold max-w-[200px] relative z-10 opacity-70 group-hover:opacity-100 transition-opacity">{item.text}</p>
-                </motion.div>
-              ))}
-          </div>
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {config.hero.whyChoose.map((item, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="p-8 glass-panel rounded-3xl group flex flex-col items-center text-center hover:border-biz-emerald/20 transition-all duration-500"
+              >
+                <div className="w-14 h-14 rounded-full bg-biz-emerald/5 flex items-center justify-center text-biz-emerald mb-6 group-hover:bg-biz-emerald/10 group-hover:scale-110 transition-all">
+                  <item.icon size={24} />
+                </div>
+                <h4 className="text-white font-display font-bold text-lg mb-3 tracking-tight">{item.title}</h4>
+                <p className="text-gray-400 text-sm leading-relaxed font-normal opacity-80">{item.text}</p>
+              </motion.div>
+            ))}
+        </div>
       </div>
     </section>
   );

@@ -9,45 +9,42 @@ const Services: React.FC = () => {
   const selectedService = CONFIG.services.find(s => s.id === selectedId);
 
   return (
-    <section className="min-h-screen py-8 md:py-16 bg-biz-deep relative overflow-hidden flex flex-col justify-center">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-transparent via-biz-emerald/10 to-transparent" />
-      
-      <div className="container mx-auto px-4 md:px-6 relative z-20">
-        <div className="text-center mb-6 md:mb-10">
-          <h2 className="text-biz-emerald text-[8px] md:text-[10px] font-bold tracking-[0.3em] uppercase mb-1">Expertise</h2>
-          <h3 className="text-xl md:text-3xl font-serif text-white leading-tight font-bold uppercase tracking-tight">
-            Core Services
+    <section className="min-h-screen py-24 md:py-40 bg-biz-deep relative overflow-hidden flex flex-col justify-center">
+      <div className="container mx-auto px-6 relative z-20">
+        <div className="max-w-4xl mb-16 md:mb-24">
+          <h2 className="text-biz-emerald text-sm font-display font-bold tracking-[0.4em] uppercase mb-4">Capabilities</h2>
+          <h3 className="text-4xl md:text-7xl font-display text-white font-extrabold tracking-tighter leading-none uppercase">
+            Core Expert <br /> Systems
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {CONFIG.services.map((service, idx) => (
             <motion.div
               key={service.id}
               onClick={() => setSelectedId(service.id)}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.01, borderColor: "rgba(16,185,129,0.25)" }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
-              className="group relative bg-biz-navy/60 border border-white/5 p-4 cursor-pointer rounded-2xl flex flex-col justify-center transition-all duration-300 overflow-hidden shadow-lg"
+              className="group relative glass-panel p-10 cursor-pointer rounded-[40px] flex flex-col transition-all duration-500 hover:border-biz-emerald/40 hover:bg-biz-navy/40"
             >
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-3">
-                    <div className="text-biz-emerald group-hover:text-biz-lime transition-colors">
-                        <service.icon size={20} strokeWidth={1.5} />
-                    </div>
-                    <h4 className="text-sm md:text-base font-serif text-white group-hover:text-biz-emerald font-bold uppercase tracking-wide">
-                        {service.title}
-                    </h4>
-                </div>
-                <div className="w-8 h-[1px] bg-biz-emerald/20 mb-3 group-hover:w-12 transition-all" />
-                <p className="text-[10px] md:text-[11px] text-gray-400 font-bold leading-relaxed mb-4 line-clamp-2">
-                   {service.summary}
-                </p>
-                <div className="flex justify-end">
-                    <ArrowRight size={14} className="-rotate-45 group-hover:rotate-0 text-biz-emerald/60 group-hover:text-biz-emerald transition-all" />
-                </div>
+              <div className="flex items-center justify-between mb-8">
+                  <div className="text-biz-emerald p-4 bg-white/5 rounded-2xl group-hover:bg-biz-emerald group-hover:text-biz-deep transition-all duration-500">
+                      <service.icon size={28} strokeWidth={1.5} />
+                  </div>
+                  <ArrowRight size={24} className="-rotate-45 group-hover:rotate-0 text-white/20 group-hover:text-biz-emerald transition-all duration-500" />
+              </div>
+              
+              <h4 className="text-2xl font-display text-white group-hover:text-biz-emerald font-bold mb-4 transition-colors">
+                  {service.title}
+              </h4>
+              <p className="text-sm text-gray-400 font-normal leading-relaxed line-clamp-2">
+                 {service.summary}
+              </p>
+              
+              <div className="mt-10 h-1 w-full bg-white/5 overflow-hidden rounded-full">
+                 <div className="h-full w-0 group-hover:w-full bg-biz-emerald transition-all duration-1000 ease-out" />
               </div>
             </motion.div>
           ))}
