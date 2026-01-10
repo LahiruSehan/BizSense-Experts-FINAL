@@ -71,13 +71,14 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
+          {/* Summarized Stylized Description */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="mt-8 md:mt-12 text-gray-400 text-sm md:text-xl font-normal leading-relaxed max-w-2xl opacity-80"
+            className="mt-8 md:mt-12 text-gray-400 text-sm md:text-xl font-normal leading-relaxed max-w-3xl opacity-90"
           >
-            Strategic tech-finance advisory designed for modern enterprises bridging the gap between complexity and growth.
+            Bridging <span className="text-white font-bold tracking-tight">Technology</span> and <span className="text-white font-bold tracking-tight">Financial Logic</span> to drive <span className="text-biz-emerald font-bold">Profitability</span>, secure <span className="text-biz-emerald font-bold">Control</span>, and engineer <span className="text-biz-cyan font-bold italic">Scalable Global Growth</span> for modern enterprises.
           </motion.p>
 
           {/* Unified Single Row Buttons Grid */}

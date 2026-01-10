@@ -56,7 +56,7 @@
       :root {
         overflow-x: hidden;
         -webkit-text-size-adjust: 100%;
-        touch-action: none; /* Helps prevent zoom on some devices */
+        touch-action: none;
       }
 
       body {
@@ -166,14 +166,14 @@
         canvas.style.height = window.innerHeight + 'px';
         
         particles = [];
-        const particleCount = Math.min(80, (window.innerWidth * window.innerHeight) / 10000);
+        const particleCount = Math.min(100, (window.innerWidth * window.innerHeight) / 8000);
         for (let i = 0; i < particleCount; i++) {
           particles.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            speedX: (Math.random() - 0.5) * 0.3,
-            speedY: (Math.random() - 0.5) * 0.3,
-            radius: Math.random() * 1 + 0.5
+            speedX: (Math.random() - 0.5) * 0.4,
+            speedY: (Math.random() - 0.5) * 0.4,
+            radius: Math.random() * 1.5 + 0.5
           });
         }
       }
@@ -181,20 +181,21 @@
       function animate() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         
-        const connectionDistance = 150;
-        const mouseDistance = 200;
+        const connectionDistance = 160;
+        const mouseDistance = 250;
 
         for (let i = 0; i < particles.length; i++) {
           let p = particles[i];
 
-          // React to mouse/touch - subtle attraction
+          // React to mouse/touch - more visible attraction
           const dx = mouse.x - p.x;
           const dy = mouse.y - (p.y - (scrollY * 0.05));
           const dist = Math.sqrt(dx * dx + dy * dy);
           
           if (dist < mouseDistance) {
-            p.x += dx * 0.001;
-            p.y += dy * 0.001;
+            const force = (mouseDistance - dist) / mouseDistance;
+            p.x += dx * 0.005 * force;
+            p.y += dy * 0.005 * force;
           }
 
           const wrappedY = (( (p.y - (scrollY * 0.05)) % window.innerHeight) + window.innerHeight) % window.innerHeight;
@@ -209,13 +210,13 @@
             const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
             if (dist2 < connectionDistance) {
-              // Digital line opacity based on distance
-              const alpha = (1 - dist2 / connectionDistance) * 0.05;
+              // Increased alpha for better visibility as requested
+              const alpha = (1 - dist2 / connectionDistance) * 0.22;
               ctx.beginPath();
               ctx.moveTo(p.x, wrappedY);
               ctx.lineTo(p2.x, wrappedY2);
               ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
-              ctx.lineWidth = 0.5;
+              ctx.lineWidth = 0.8;
               ctx.stroke();
             }
           }
@@ -239,7 +240,6 @@
         scrollY = window.pageYOffset;
       });
 
-      // Track interaction (using window since canvas is pointer-events: none)
       window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;

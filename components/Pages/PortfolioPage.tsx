@@ -48,20 +48,20 @@ const PortfolioPage: React.FC = () => {
           <div className="w-[100px] hidden md:block" />
         </div>
 
-        {/* 3-Item Navigation Bar with Text Labels */}
+        {/* Single Row Navigation Bar (No Wrapping) */}
         <div className="flex justify-center mb-16">
-          <div className="inline-flex flex-wrap justify-center bg-white/5 p-2 rounded-2xl md:rounded-full border border-white/10 backdrop-blur-xl">
+          <div className="inline-flex flex-nowrap items-center bg-white/5 p-2 rounded-2xl md:rounded-full border border-white/10 backdrop-blur-xl overflow-x-auto no-scrollbar max-w-full">
             {categories.map((cat) => (
               <button
                 key={cat.name}
                 onClick={() => setActiveTab(cat.name as Category)}
-                className={`flex items-center gap-2 px-5 md:px-8 py-3 rounded-xl md:rounded-full text-[10px] md:text-xs font-display font-bold uppercase tracking-widest transition-all duration-500 ${
+                className={`flex-none flex items-center gap-2 px-4 sm:px-8 py-3 rounded-xl md:rounded-full text-[9px] sm:text-xs font-display font-bold uppercase tracking-widest transition-all duration-500 whitespace-nowrap ${
                   activeTab === cat.name 
                     ? 'bg-biz-emerald text-biz-deep shadow-lg' 
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <cat.icon size={16} />
+                <cat.icon size={16} className="hidden sm:block" />
                 <span>{cat.name}</span>
               </button>
             ))}
