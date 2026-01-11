@@ -54,8 +54,8 @@
         background-image: url('https://i.ibb.co/sdPbVNNK/Chat-GPT-Image-Jan-10-2026-05-19-36-PM.png');
         background-size: cover;
         background-position: center;
-        opacity: 0.28; /* Increased from 0.18 */
-        filter: grayscale(40%) contrast(110%) brightness(0.5); /* Less grayscale, more clarity */
+        opacity: 0.28; 
+        filter: grayscale(40%) contrast(110%) brightness(0.5);
       }
 
       /* Moving Gradient Overlay */
@@ -86,7 +86,7 @@
 
       #root { position: relative; z-index: 10; background: transparent; }
       
-      /* Cinematic Embedded Light Sweep (No rectangle, just light in text) */
+      /* Cinematic Embedded Light Sweep */
       .text-shine-embedded {
         background: linear-gradient(
           to right,
@@ -189,17 +189,17 @@
         constructor(x, y) {
           this.x = x; this.y = y;
           this.size = Math.random() * 2 + 0.5;
-          this.speedX = (Math.random() - 0.5) * 1.2;
-          this.speedY = (Math.random() - 0.5) * 1.2;
+          this.speedX = (Math.random() - 0.5) * 1.5;
+          this.speedY = (Math.random() - 0.5) * 1.5;
           this.color = Math.random() > 0.5 ? '#10b981' : '#06b6d4';
-          this.life = 0.6;
-          this.decay = 0.02;
+          this.life = 0.8;
+          this.decay = Math.random() * 0.015 + 0.01;
         }
         update() { this.x += this.speedX; this.y += this.speedY; this.life -= this.decay; }
         draw() {
           if (this.life <= 0) return;
           ctx.save();
-          ctx.globalAlpha = this.life * 0.3;
+          ctx.globalAlpha = this.life * 0.35;
           ctx.fillStyle = this.color;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -220,7 +220,11 @@
         const x = e.clientX || (e.touches && e.touches[0].clientX);
         const y = e.clientY || (e.touches && e.touches[0].clientY);
         if (x !== undefined && y !== undefined) {
-          if (Math.random() > 0.4) trail.push(new Particle(x, y));
+          // Generate 2-4 particles per movement on touch for a denser trail
+          const count = e.touches ? 3 : 1;
+          for(let i = 0; i < count; i++) {
+            if (Math.random() > 0.1) trail.push(new Particle(x, y));
+          }
         }
       };
       window.addEventListener('mousemove', handleInteraction);

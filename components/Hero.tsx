@@ -84,7 +84,7 @@ const Hero: React.FC = () => {
             transition={{ delay: 0.8, duration: 1 }}
             className="mt-4 md:mt-8 max-w-4xl px-2"
           >
-            <p className="text-gray-400 text-[12px] md:text-[18px] leading-[1.7] md:leading-[1.9] font-medium tracking-tight">
+            <p className="text-gray-400 text-[12px] md:text-[18px] leading-[1.7] md:leading-[1.9] font-medium tracking-tight text-center">
               <span className="text-white font-black">BizSense Experts</span> is a 
               <span className="text-white/60 mx-1">multi-disciplinary</span> business solutions firm providing 
               <span className="text-biz-emerald font-bold px-1 underline decoration-biz-emerald/20 underline-offset-4">ERP systems</span>, 
@@ -96,12 +96,12 @@ const Hero: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* 3-Button Row - Fit to Screen */}
+          {/* 3-Button Row - Fit to Screen with Increased Spacing on Mobile */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="w-full grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mt-12 md:mt-16 max-w-2xl px-2"
+            className="w-full grid grid-cols-3 gap-5 sm:gap-6 md:gap-10 mt-12 md:mt-16 max-w-2xl px-2"
           >
             {/* Portfolio CTA */}
             <button
