@@ -16,15 +16,44 @@ const PortfolioPage: React.FC = () => {
   ];
 
   const portfolioItems = [
+    // Digital Marketing
     { id: 1, category: 'Digital Marketing', title: 'Global SEO Strategy', client: 'Export Corp', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop' },
-    { id: 2, category: 'ERP', title: 'Odoo Implementation', client: 'Retail Chain', image: 'https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2670&auto=format&fit=crop' },
-    { id: 3, category: 'Graphic & Web', title: 'Luxury Brand Identity', client: 'Aura Homes', image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2671&auto=format&fit=crop' },
     { id: 4, category: 'Digital Marketing', title: 'Social Media Management', client: 'Café Blue', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop' },
-    { id: 5, category: 'ERP', title: 'Inventory Control System', client: 'Agro Export', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop' },
-    { id: 6, category: 'Graphic & Web', title: 'B2B Portal Design', client: 'BizConnect', image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2670&auto=format&fit=crop' },
+    
+    // ERP
+    { 
+      id: 5, 
+      category: 'ERP', 
+      title: 'BizSense Outstanding Statement Generator', 
+      client: 'Financial Automation Tool', 
+      image: 'https://i.ibb.co/fzZHqXhm/Chat-GPT-Image-Jan-11-2026-04-46-39-PM.png' 
+    },
+    
+    // Graphic & Web
+    { 
+      id: 3, 
+      category: 'Graphic & Web', 
+      title: 'Modern Tour Agent Website', 
+      client: 'www.dreamstaytours.com', 
+      image: 'https://i.ibb.co/b5wg2QjG/Dream-Stay-Tours-Webbsite.png',
+      url: 'https://www.dreamstaytours.com'
+    },
+    { 
+      id: 6, 
+      category: 'Graphic & Web', 
+      title: 'BizSense Experts Website', 
+      client: 'BizSense Corporate', 
+      image: 'https://i.ibb.co/MkJ93wNs/Biz-Sense-Experts-Website.png' 
+    },
   ];
 
   const filteredItems = portfolioItems.filter(item => item.category === activeTab);
+
+  const handleLinkClick = (url?: string) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-biz-deep relative pt-12">
@@ -48,7 +77,7 @@ const PortfolioPage: React.FC = () => {
           <div className="w-[100px] hidden md:block" />
         </div>
 
-        {/* Single Row Navigation Bar (No Wrapping) */}
+        {/* Single Row Navigation Bar */}
         <div className="flex justify-center mb-16">
           <div className="inline-flex flex-nowrap items-center bg-white/5 p-2 rounded-2xl md:rounded-full border border-white/10 backdrop-blur-xl overflow-x-auto no-scrollbar max-w-full">
             {categories.map((cat) => (
@@ -84,9 +113,9 @@ const PortfolioPage: React.FC = () => {
                 transition={{ duration: 0.4 }}
                 className="group relative bg-white/5 border border-white/10 rounded-[40px] overflow-hidden hover:border-biz-emerald/30 transition-all duration-500"
               >
-                <div className="aspect-[4/3] overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden bg-black/40">
                   <img 
-                    src={item.image} 
+                    src={(item as any).image} 
                     alt={item.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.8] group-hover:grayscale-0"
                   />
@@ -94,10 +123,15 @@ const PortfolioPage: React.FC = () => {
                 <div className="p-10">
                   <span className="text-biz-emerald text-[10px] font-display font-bold uppercase tracking-[0.2em] block mb-2">{item.category}</span>
                   <h3 className="text-white font-display text-2xl font-bold mb-2 tracking-tight">{item.title}</h3>
-                  <p className="text-gray-500 text-sm font-medium">{item.client}</p>
+                  <p className="text-gray-500 text-xs font-black uppercase tracking-widest mb-2">{item.client}</p>
                   
                   <div className="mt-8 flex justify-end">
-                    <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-biz-emerald hover:bg-biz-emerald hover:text-biz-deep transition-all">
+                    <button 
+                      onClick={() => handleLinkClick((item as any).url)}
+                      className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-biz-emerald transition-all ${
+                        (item as any).url ? 'hover:bg-biz-emerald hover:text-biz-deep cursor-pointer' : 'opacity-20 cursor-default'
+                      }`}
+                    >
                       <ExternalLink size={18} />
                     </button>
                   </div>
