@@ -46,7 +46,7 @@
         user-select: none;
       }
       
-      /* Base Image Layer */
+      /* Base Image Layer - Enhanced Visibility */
       .bg-image-layer {
         position: fixed;
         inset: 0;
@@ -54,8 +54,8 @@
         background-image: url('https://i.ibb.co/sdPbVNNK/Chat-GPT-Image-Jan-10-2026-05-19-36-PM.png');
         background-size: cover;
         background-position: center;
-        opacity: 0.18; 
-        filter: grayscale(100%) contrast(150%) brightness(0.6);
+        opacity: 0.28; /* Increased from 0.18 */
+        filter: grayscale(40%) contrast(110%) brightness(0.5); /* Less grayscale, more clarity */
       }
 
       /* Moving Gradient Overlay */
@@ -65,17 +65,17 @@
         z-index: 1;
         background: linear-gradient(
           125deg,
-          #01080e 0%,
-          #011627 30%,
-          #01080e 50%,
-          #0d948815 75%,
-          #01080e 100%
+          rgba(1, 8, 14, 0.8) 0%,
+          rgba(1, 22, 39, 0.6) 30%,
+          rgba(1, 8, 14, 0.8) 50%,
+          rgba(13, 148, 136, 0.1) 75%,
+          rgba(1, 8, 14, 0.9) 100%
         );
         background-size: 400% 400%;
         animation: gradientShift 18s ease-in-out infinite;
       }
 
-      /* Subtle Interactive Particles (Above Content) */
+      /* Subtle Interactive Particles */
       canvas#bg-canvas {
         position: fixed;
         top: 0; left: 0;
@@ -86,79 +86,67 @@
 
       #root { position: relative; z-index: 10; background: transparent; }
       
-      .text-gradient-teal {
-        background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      /* Cinematic Embedded Light Sweep (No rectangle, just light in text) */
+      .text-shine-embedded {
+        background: linear-gradient(
+          to right,
+          #10b981 0%,
+          #10b981 40%,
+          #ffffff 50%,
+          #06b6d4 60%,
+          #06b6d4 100%
+        );
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        animation: embeddedShine 3.5s linear infinite;
+        display: inline-block;
       }
 
-      /* Cinematic Flare / Godrays for Text */
-      .cinematic-flare {
-        position: relative;
-        text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
-      }
-      .cinematic-flare::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: -50%;
-        width: 200%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), rgba(255,255,255,0.2), rgba(255,255,255,0.05), transparent);
-        transform: translateY(-50%) skewX(-20deg);
-        animation: flareSweep 4s infinite linear;
-        pointer-events: none;
+      @keyframes embeddedShine {
+        0% { background-position: 200% center; }
+        100% { background-position: -200% center; }
       }
 
-      /* 3D Embossed Hard Buttons */
+      /* 3D Embossed Hard Buttons - Constrained */
       .btn-embossed-hard {
         position: relative;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: 
-          0 4px 0px rgba(0, 0, 0, 0.6),
-          inset 1px 1px 0px rgba(255, 255, 255, 0.15),
-          inset -1px -1px 0px rgba(0, 0, 0, 0.3);
+          0 3px 0px rgba(0, 0, 0, 0.8),
+          inset 1px 1px 0px rgba(255, 255, 255, 0.2),
+          inset -1px -1px 0px rgba(0, 0, 0, 0.4);
         transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
       }
       .btn-embossed-hard:active {
         transform: translateY(2px);
         box-shadow: 
-          0 2px 0px rgba(0, 0, 0, 0.6),
+          0 1px 0px rgba(0, 0, 0, 0.6),
           inset 1px 1px 0px rgba(255, 255, 255, 0.1),
-          inset -1px -1px 0px rgba(0, 0, 0, 0.5);
+          inset -1px -1px 0px rgba(0, 0, 0, 0.6);
       }
 
       /* White Shining Stroke Animation */
       .shine-stroke {
-        animation: strokeShine 3s infinite;
+        animation: strokeShine 4s infinite;
       }
 
       @keyframes strokeShine {
         0% { border-color: rgba(255,255,255,0.1); }
-        50% { border-color: rgba(255,255,255,0.7); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        50% { border-color: rgba(255,255,255,0.6); box-shadow: 0 0 12px rgba(255,255,255,0.1); }
         100% { border-color: rgba(255,255,255,0.1); }
-      }
-
-      @keyframes flareSweep {
-        0% { left: -150%; }
-        100% { left: 150%; }
-      }
-      
-      .btn-modern-primary {
-        background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
-        box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4);
-      }
-      
-      .btn-modern-outline {
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        background: rgba(16, 185, 129, 0.05);
-        backdrop-filter: blur(10px);
       }
 
       @keyframes gradientShift {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
+      }
+      
+      .btn-modern-primary {
+        background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+        box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4);
       }
     </style>
     <script type="importmap">
@@ -183,15 +171,12 @@
     <div class="bg-image-layer"></div>
     <div class="bg-dynamic-gradient"></div>
     <canvas id="bg-canvas"></canvas>
-    
     <div id="root"></div>
-    
     <script type="module" src="./index.tsx"></script>
     <script>
       const canvas = document.getElementById('bg-canvas');
       const ctx = canvas.getContext('2d');
       let trail = [];
-      
       function init() {
         const dpr = window.devicePixelRatio || 1;
         canvas.width = window.innerWidth * dpr;
@@ -200,29 +185,21 @@
         canvas.style.width = window.innerWidth + 'px';
         canvas.style.height = window.innerHeight + 'px';
       }
-
       class Particle {
         constructor(x, y) {
-          this.x = x;
-          this.y = y;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = (Math.random() - 0.5) * 1.5;
-          this.speedY = (Math.random() - 0.5) * 1.5;
+          this.x = x; this.y = y;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 1.2;
+          this.speedY = (Math.random() - 0.5) * 1.2;
           this.color = Math.random() > 0.5 ? '#10b981' : '#06b6d4';
-          this.life = 0.7;
-          this.decay = Math.random() * 0.02 + 0.015;
+          this.life = 0.6;
+          this.decay = 0.02;
         }
-
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          this.life -= this.decay;
-        }
-
+        update() { this.x += this.speedX; this.y += this.speedY; this.life -= this.decay; }
         draw() {
           if (this.life <= 0) return;
           ctx.save();
-          ctx.globalAlpha = this.life * 0.35;
+          ctx.globalAlpha = this.life * 0.3;
           ctx.fillStyle = this.color;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -230,20 +207,14 @@
           ctx.restore();
         }
       }
-
       function animate() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         for (let i = 0; i < trail.length; i++) {
-          trail[i].update();
-          trail[i].draw();
-          if (trail[i].life <= 0) {
-            trail.splice(i, 1);
-            i--;
-          }
+          trail[i].update(); trail[i].draw();
+          if (trail[i].life <= 0) { trail.splice(i, 1); i--; }
         }
         requestAnimationFrame(animate);
       }
-
       window.addEventListener('resize', init);
       const handleInteraction = (e) => {
         const x = e.clientX || (e.touches && e.touches[0].clientX);
@@ -254,8 +225,7 @@
       };
       window.addEventListener('mousemove', handleInteraction);
       window.addEventListener('touchmove', handleInteraction);
-      init();
-      animate();
+      init(); animate();
     </script>
   </body>
 </html>
