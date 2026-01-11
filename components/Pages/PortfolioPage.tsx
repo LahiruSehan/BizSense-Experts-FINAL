@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ArrowLeft, Layout, Settings, Palette } from 'lucide-react';
+import { ExternalLink, ArrowLeft, Settings, Palette, Globe, Megaphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-type Category = 'Digital Marketing' | 'ERP' | 'Graphic & Web';
+type Category = 'ERP' | 'Graphics' | 'Web' | 'Digital Marketing';
 
 const PortfolioPage: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<Category>('Digital Marketing');
+  const [activeTab, setActiveTab] = useState<Category>('ERP');
 
   const categories = [
-    { name: 'Digital Marketing', icon: Layout },
     { name: 'ERP', icon: Settings },
-    { name: 'Graphic & Web', icon: Palette }
+    { name: 'Graphics', icon: Palette },
+    { name: 'Web', icon: Globe },
+    { name: 'Digital Marketing', icon: Megaphone }
   ];
 
   const portfolioItems = [
-    // Digital Marketing
-    { id: 1, category: 'Digital Marketing', title: 'Global SEO Strategy', client: 'Export Corp', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop' },
-    { id: 4, category: 'Digital Marketing', title: 'Social Media Management', client: 'Café Blue', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop' },
-    
     // ERP
     { 
       id: 5, 
@@ -29,10 +26,19 @@ const PortfolioPage: React.FC = () => {
       image: 'https://i.ibb.co/fzZHqXhm/Chat-GPT-Image-Jan-11-2026-04-46-39-PM.png' 
     },
     
-    // Graphic & Web
+    // Graphics (Placeholder or related branding)
+    { 
+      id: 7, 
+      category: 'Graphics', 
+      title: 'Corporate Identity Design', 
+      client: 'BizSense Branding', 
+      image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2671&auto=format&fit=crop' 
+    },
+
+    // Web
     { 
       id: 3, 
-      category: 'Graphic & Web', 
+      category: 'Web', 
       title: 'Modern Tour Website', 
       client: 'Dream Stay Tours', 
       image: 'https://i.ibb.co/b5wg2QjG/Dream-Stay-Tours-Webbsite.png',
@@ -40,11 +46,15 @@ const PortfolioPage: React.FC = () => {
     },
     { 
       id: 6, 
-      category: 'Graphic & Web', 
+      category: 'Web', 
       title: 'BizSense Experts Site', 
       client: 'BizSense Corporate', 
       image: 'https://i.ibb.co/MkJ93wNs/Biz-Sense-Experts-Website.png' 
     },
+
+    // Digital Marketing
+    { id: 1, category: 'Digital Marketing', title: 'Global SEO Strategy', client: 'Export Corp', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop' },
+    { id: 4, category: 'Digital Marketing', title: 'Social Media Management', client: 'Café Blue', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop' },
   ];
 
   const filteredItems = portfolioItems.filter(item => item.category === activeTab);
@@ -98,51 +108,58 @@ const PortfolioPage: React.FC = () => {
         </div>
 
         {/* Portfolio Grid - 2 columns on mobile */}
-        <motion.div 
-          layout
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-8 pb-32"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="group relative bg-white/5 border border-white/10 rounded-3xl md:rounded-[40px] overflow-hidden hover:border-biz-emerald/30 transition-all duration-500"
-              >
-                {/* 1:1 Aspect Ratio Container */}
-                <div className="aspect-square overflow-hidden bg-black/40">
-                  <img 
-                    src={(item as any).image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                
-                {/* Content - Scaled down for 2-column mobile */}
-                <div className="p-4 md:p-8">
-                  <span className="text-biz-emerald text-[7px] md:text-[10px] font-display font-bold uppercase tracking-[0.2em] block mb-1">{item.category}</span>
-                  <h3 className="text-white font-display text-xs md:text-xl font-bold mb-1 tracking-tight line-clamp-2">{item.title}</h3>
-                  <p className="text-gray-500 text-[6px] md:text-[9px] font-black uppercase tracking-widest mb-3">{item.client}</p>
-                  
-                  <div className="flex justify-end">
-                    <button 
-                      onClick={() => handleLinkClick((item as any).url)}
-                      className={`w-7 h-7 md:w-12 md:h-12 rounded-lg md:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-biz-emerald transition-all ${
-                        (item as any).url ? 'hover:bg-biz-emerald hover:text-biz-deep cursor-pointer' : 'opacity-20 cursor-default'
-                      }`}
-                    >
-                      <ExternalLink size={14} className="md:w-[18px] md:h-[18px]" />
-                    </button>
+        <div className="min-h-[400px]">
+          <motion.div 
+            layout
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-8 pb-32"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredItems.map((item) => (
+                <motion.div
+                  key={item.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="group relative bg-white/5 border border-white/10 rounded-3xl md:rounded-[40px] overflow-hidden hover:border-biz-emerald/30 transition-all duration-500"
+                >
+                  {/* 1:1 Aspect Ratio Container */}
+                  <div className="aspect-square overflow-hidden bg-black/40">
+                    <img 
+                      src={(item as any).image} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                  
+                  {/* Content - Scaled down for 2-column mobile */}
+                  <div className="p-4 md:p-8">
+                    <span className="text-biz-emerald text-[7px] md:text-[10px] font-display font-bold uppercase tracking-[0.2em] block mb-1">{item.category}</span>
+                    <h3 className="text-white font-display text-xs md:text-xl font-bold mb-1 tracking-tight line-clamp-2">{item.title}</h3>
+                    <p className="text-gray-500 text-[6px] md:text-[9px] font-black uppercase tracking-widest mb-3">{item.client}</p>
+                    
+                    <div className="flex justify-end">
+                      <button 
+                        onClick={() => handleLinkClick((item as any).url)}
+                        className={`w-7 h-7 md:w-12 md:h-12 rounded-lg md:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-biz-emerald transition-all ${
+                          (item as any).url ? 'hover:bg-biz-emerald hover:text-biz-deep cursor-pointer' : 'opacity-20 cursor-default'
+                        }`}
+                      >
+                        <ExternalLink size={14} className="md:w-[18px] md:h-[18px]" />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+          {filteredItems.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-20 text-gray-500 font-display font-bold uppercase tracking-widest text-xs">
+              Coming Soon
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
