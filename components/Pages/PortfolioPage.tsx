@@ -1,9 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, ArrowLeft, Settings, Globe, Palette, Megaphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 type Category = 'ERP' | 'Web' | 'Graphics' | 'Digital Marketing';
+
+// Progressive Image Loader Component
+const ProgressiveImage: React.FC<{ src: string; alt: string; index: number }> = ({ src, alt, index }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="relative overflow-hidden bg-white/5">
+      {/* Pixelated/Blurred Placeholder */}
+      <AnimatePresence>
+        {!isLoaded && (
+          <motion.div 
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 z-10 bg-biz-emerald/10 backdrop-blur-3xl flex items-center justify-center"
+          >
+            <div className="w-4 h-4 rounded-full bg-biz-emerald/20 animate-pulse" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.img
+        src={src}
+        alt={alt}
+        onLoad={() => setIsLoaded(true)}
+        initial={{ opacity: 0, filter: 'blur(20px)', scale: 1.1 }}
+        animate={isLoaded ? { 
+          opacity: 1, 
+          filter: 'blur(0px)', 
+          scale: 1,
+        } : {}}
+        transition={{ 
+          duration: 1.2, 
+          delay: index * 0.15, // Staggered loading feel
+          ease: "easeOut" 
+        }}
+        className="w-full h-auto block object-contain transition-transform duration-700 group-hover:scale-105"
+      />
+    </div>
+  );
+};
 
 const PortfolioPage: React.FC = () => {
   const navigate = useNavigate();
@@ -43,21 +84,21 @@ const PortfolioPage: React.FC = () => {
       image: 'https://i.ibb.co/MkJ93wNs/Biz-Sense-Experts-Website.png' 
     },
     
-    // Graphics (Updated with new images)
-    { id: 201, category: 'Graphics', title: 'Creative Design 26', client: 'Visual Identity', image: 'https://i.ibb.co/9Ht4Rgrd/Design-26.png' },
-    { id: 202, category: 'Graphics', title: 'Creative Design 31', client: 'Visual Identity', image: 'https://i.ibb.co/x8jrWgtZ/Design-31.png' },
-    { id: 203, category: 'Graphics', title: 'Creative Design 34', client: 'Visual Identity', image: 'https://i.ibb.co/B2Wr5LLR/Design-34.png' },
-    { id: 204, category: 'Graphics', title: 'Creative Design 39', client: 'Visual Identity', image: 'https://i.ibb.co/fdS2Fxrg/Design-39.png' },
-    { id: 205, category: 'Graphics', title: 'Creative Design 44', client: 'Visual Identity', image: 'https://i.ibb.co/YFCMtZtF/Design-44.png' },
-    { id: 206, category: 'Graphics', title: 'Creative Design 2', client: 'Visual Identity', image: 'https://i.ibb.co/G4TZxBgf/Design-2.png' },
-    { id: 207, category: 'Graphics', title: 'Creative Design 4', client: 'Visual Identity', image: 'https://i.ibb.co/Z6MkWCC7/Design-4.png' },
-    { id: 208, category: 'Graphics', title: 'Creative Design 5', client: 'Visual Identity', image: 'https://i.ibb.co/601nX4hd/Design-5.png' },
-    { id: 209, category: 'Graphics', title: 'Creative Design 7 (JPG)', client: 'Visual Identity', image: 'https://i.ibb.co/C54xtrKQ/Design-7.jpg' },
-    { id: 210, category: 'Graphics', title: 'Creative Design 7 (PNG)', client: 'Visual Identity', image: 'https://i.ibb.co/MyH9mWFm/Design-7.png' },
-    { id: 211, category: 'Graphics', title: 'Creative Design 8', client: 'Visual Identity', image: 'https://i.ibb.co/ds2cWfZq/Design-8.jpg' },
-    { id: 212, category: 'Graphics', title: 'Creative Design 9', client: 'Visual Identity', image: 'https://i.ibb.co/501bT8z/Design-9.jpg' },
-    { id: 213, category: 'Graphics', title: 'Creative Design 19', client: 'Visual Identity', image: 'https://i.ibb.co/jPqGKwsP/Design-19.png' },
-    { id: 214, category: 'Graphics', title: 'Creative Design 20', client: 'Visual Identity', image: 'https://i.ibb.co/cWbxfMt/Design-20.png' },
+    // Graphics (Footer updated to Social Media Post)
+    { id: 201, category: 'Graphics', title: 'Creative Brand Asset', client: 'Social Media Post', image: 'https://i.ibb.co/9Ht4Rgrd/Design-26.png' },
+    { id: 202, category: 'Graphics', title: 'Visual Identity', client: 'Social Media Post', image: 'https://i.ibb.co/x8jrWgtZ/Design-31.png' },
+    { id: 203, category: 'Graphics', title: 'Marketing Graphic', client: 'Social Media Post', image: 'https://i.ibb.co/B2Wr5LLR/Design-34.png' },
+    { id: 204, category: 'Graphics', title: 'Corporate Design', client: 'Social Media Post', image: 'https://i.ibb.co/fdS2Fxrg/Design-39.png' },
+    { id: 205, category: 'Graphics', title: 'Digital Artwork', client: 'Social Media Post', image: 'https://i.ibb.co/YFCMtZtF/Design-44.png' },
+    { id: 206, category: 'Graphics', title: 'Brand Element', client: 'Social Media Post', image: 'https://i.ibb.co/G4TZxBgf/Design-2.png' },
+    { id: 207, category: 'Graphics', title: 'Creative Poster', client: 'Social Media Post', image: 'https://i.ibb.co/Z6MkWCC7/Design-4.png' },
+    { id: 208, category: 'Graphics', title: 'Strategic Ad', client: 'Social Media Post', image: 'https://i.ibb.co/601nX4hd/Design-5.png' },
+    { id: 209, category: 'Graphics', title: 'Social Media Post', client: 'Social Media Post', image: 'https://i.ibb.co/C54xtrKQ/Design-7.jpg' },
+    { id: 210, category: 'Graphics', title: 'Visual Narrative', client: 'Social Media Post', image: 'https://i.ibb.co/MyH9mWFm/Design-7.png' },
+    { id: 211, category: 'Graphics', title: 'Concept Art', client: 'Social Media Post', image: 'https://i.ibb.co/ds2cWfZq/Design-8.jpg' },
+    { id: 212, category: 'Graphics', title: 'Interface Concept', client: 'Social Media Post', image: 'https://i.ibb.co/501bT8z/Design-9.jpg' },
+    { id: 213, category: 'Graphics', title: 'Graphic Layout', client: 'Social Media Post', image: 'https://i.ibb.co/jPqGKwsP/Design-19.png' },
+    { id: 214, category: 'Graphics', title: 'Brand Signature', client: 'Social Media Post', image: 'https://i.ibb.co/cWbxfMt/Design-20.png' },
 
     // Digital Marketing
     { id: 1, category: 'Digital Marketing', title: 'Global SEO Strategy', client: 'Export Corp', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop' },
@@ -117,26 +158,21 @@ const PortfolioPage: React.FC = () => {
         {/* Portfolio Content */}
         <div className="min-h-[400px]">
           {activeTab === 'Graphics' ? (
-            /* Masonry Layout for Graphics - colorful and full image */
+            /* Masonry Layout for Graphics - with Progressive Loading */
             <div className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-8 pb-32">
               <AnimatePresence mode="popLayout">
-                {filteredItems.map((item) => (
+                {filteredItems.map((item, idx) => (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
                     className="mb-3 md:mb-8 break-inside-avoid group relative bg-white/5 border border-white/10 rounded-2xl md:rounded-[32px] overflow-hidden hover:border-biz-emerald/30 transition-all duration-500 shadow-xl"
                   >
-                    <div className="overflow-hidden bg-black/20">
-                      <img 
-                        src={(item as any).image} 
-                        alt={item.title} 
-                        className="w-full h-auto block object-contain transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-3 md:p-6 bg-biz-deep/60 backdrop-blur-md">
+                    <ProgressiveImage src={(item as any).image} alt={item.title} index={idx} />
+                    
+                    <div className="p-3 md:p-6 bg-biz-deep/60 backdrop-blur-md border-t border-white/5">
                       <span className="text-biz-emerald text-[6px] md:text-[9px] font-display font-bold uppercase tracking-[0.2em] block mb-1">{item.category}</span>
                       <h3 className="text-white font-display text-[10px] md:text-lg font-bold mb-1 tracking-tight">{item.title}</h3>
                       <p className="text-gray-500 text-[5px] md:text-[8px] font-black uppercase tracking-widest">{item.client}</p>
@@ -152,14 +188,14 @@ const PortfolioPage: React.FC = () => {
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-8 pb-32"
             >
               <AnimatePresence mode="popLayout">
-                {filteredItems.map((item) => (
+                {filteredItems.map((item, idx) => (
                   <motion.div
                     key={item.id}
                     layout
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
                     className="group relative bg-white/5 border border-white/10 rounded-3xl md:rounded-[40px] overflow-hidden hover:border-biz-emerald/30 transition-all duration-500 shadow-xl"
                   >
                     <div className="aspect-square overflow-hidden bg-black/40">
@@ -169,7 +205,7 @@ const PortfolioPage: React.FC = () => {
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-4 md:p-8 bg-biz-deep/40 backdrop-blur-sm">
+                    <div className="p-4 md:p-8 bg-biz-deep/40 backdrop-blur-sm border-t border-white/5">
                       <span className="text-biz-emerald text-[7px] md:text-[10px] font-display font-bold uppercase tracking-[0.2em] block mb-1">{item.category}</span>
                       <h3 className="text-white font-display text-xs md:text-xl font-bold mb-1 tracking-tight line-clamp-2">{item.title}</h3>
                       <p className="text-gray-500 text-[6px] md:text-[9px] font-black uppercase tracking-widest mb-3">{item.client}</p>
