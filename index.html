@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
       tailwind.config = {
@@ -90,6 +90,58 @@
         background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+      }
+
+      /* Cinematic Flare / Godrays for Text */
+      .cinematic-flare {
+        position: relative;
+        text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+      }
+      .cinematic-flare::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -50%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), rgba(255,255,255,0.2), rgba(255,255,255,0.05), transparent);
+        transform: translateY(-50%) skewX(-20deg);
+        animation: flareSweep 4s infinite linear;
+        pointer-events: none;
+      }
+
+      /* 3D Embossed Hard Buttons */
+      .btn-embossed-hard {
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          0 4px 0px rgba(0, 0, 0, 0.6),
+          inset 1px 1px 0px rgba(255, 255, 255, 0.15),
+          inset -1px -1px 0px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .btn-embossed-hard:active {
+        transform: translateY(2px);
+        box-shadow: 
+          0 2px 0px rgba(0, 0, 0, 0.6),
+          inset 1px 1px 0px rgba(255, 255, 255, 0.1),
+          inset -1px -1px 0px rgba(0, 0, 0, 0.5);
+      }
+
+      /* White Shining Stroke Animation */
+      .shine-stroke {
+        animation: strokeShine 3s infinite;
+      }
+
+      @keyframes strokeShine {
+        0% { border-color: rgba(255,255,255,0.1); }
+        50% { border-color: rgba(255,255,255,0.7); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        100% { border-color: rgba(255,255,255,0.1); }
+      }
+
+      @keyframes flareSweep {
+        0% { left: -150%; }
+        100% { left: 150%; }
       }
       
       .btn-modern-primary {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, ChevronRight, Briefcase, MessageCircle, ArrowUpRight } from 'lucide-react';
+import { Calendar, ChevronRight, Briefcase, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,54 +31,58 @@ const Hero: React.FC = () => {
           <img 
             src="https://i.ibb.co/7mmBhMJ/LOGO.png" 
             alt="BizSense" 
-            className="h-10 md:h-14 w-auto object-contain opacity-90 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+            className="h-10 md:h-14 w-auto object-contain opacity-90 drop-shadow-[0_0_20px_rgba(16,185,129,0.3)]"
           />
         </motion.div>
 
         <div className="flex flex-col items-center max-w-6xl mx-auto w-full">
-          {/* Main Title with Centering */}
+          {/* Extra Thick Bold Main Title */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <h1 className="text-[38px] sm:text-[60px] md:text-[100px] leading-[1.1] md:leading-[0.95] font-display font-extrabold tracking-[-0.05em] text-white mb-6">
+            <h1 className="text-[44px] sm:text-[68px] md:text-[110px] leading-[1.0] font-display font-[950] tracking-[-0.06em] text-white mb-6 uppercase">
               Empowering <br className="md:block" /> Businesses
             </h1>
           </motion.div>
 
-          {/* Sub-headline Animation */}
+          {/* Cinematic "- with -" Connector */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="flex flex-col items-center gap-1 md:gap-2"
+            className="flex flex-row items-center gap-4 md:gap-8 mb-2"
           >
-            <span className="text-sm md:text-2xl font-display font-light text-white/40 tracking-[0.25em] uppercase">
+            <div className="w-8 md:w-16 h-[2px] bg-gradient-to-r from-transparent to-white/40" />
+            <span className="text-base md:text-2xl font-display font-black text-white/50 tracking-[0.4em] uppercase italic">
               with
             </span>
-            <div className="h-[36px] md:h-[60px] flex items-center overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-xl sm:text-4xl md:text-5xl font-display font-bold text-gradient-teal tracking-tighter"
-                >
-                  {headlines[index]}
-                </motion.span>
-              </AnimatePresence>
-            </div>
+            <div className="w-8 md:w-16 h-[2px] bg-gradient-to-l from-transparent to-white/40" />
           </motion.div>
 
-          {/* Bio Description - Mobile Centered & Highly Readable */}
+          {/* Animated Headlines with Cinematic Flare */}
+          <div className="h-[40px] md:h-[70px] flex items-center overflow-hidden mb-8">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, scale: 1.1, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="cinematic-flare text-2xl sm:text-5xl md:text-6xl font-display font-black text-gradient-teal tracking-tighter uppercase"
+              >
+                {headlines[index]}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
+          {/* Bio Description */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="mt-8 md:mt-14 max-w-5xl px-2 md:px-0"
+            className="mt-4 md:mt-8 max-w-5xl px-2 md:px-0"
           >
             <p className="text-gray-400 text-[13px] md:text-[19px] leading-[1.8] md:leading-[1.9] tracking-normal md:tracking-tight font-medium">
               <span className="text-white font-black">BizSense Experts</span> is a 
@@ -98,40 +102,37 @@ const Hero: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* 3-Button Row for Mobile CTAs */}
+          {/* 3-Button Row: 3D Embossed Hard + Shining Stroke */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="w-full flex flex-row items-center justify-center gap-2 md:gap-4 mt-12 md:mt-16 max-w-2xl px-2"
+            className="w-full flex flex-row items-center justify-center gap-3 md:gap-8 mt-14 md:mt-20 max-w-2xl px-2"
           >
             {/* Portfolio CTA */}
             <button
               onClick={() => navigate('/portfolio')}
-              className="flex-1 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 py-4 md:py-5 px-2 rounded-2xl md:rounded-full bg-white/5 border border-white/10 text-white font-display font-bold text-[10px] md:text-base hover:bg-biz-emerald hover:text-biz-deep hover:border-transparent transition-all group"
+              className="flex-1 flex flex-col items-center justify-center gap-1.5 py-4 md:py-6 px-1 rounded-2xl bg-white/5 btn-embossed-hard shine-stroke text-white font-display font-black text-[9px] sm:text-[10px] md:text-sm tracking-widest hover:bg-white/10 transition-all uppercase"
             >
-              <Briefcase size={18} className="md:w-5 md:h-5 text-biz-emerald group-hover:text-biz-deep" />
-              <span className="hidden sm:inline">Portfolio</span>
-              <span className="sm:hidden">Projects</span>
+              <Briefcase size={22} className="text-biz-emerald drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+              <span>Projects</span>
             </button>
             
-            {/* Direct WhatsApp CTA - The Primary High-Impact Button */}
+            {/* Direct WhatsApp CTA - The King Button */}
             <button
               onClick={() => window.open(`https://wa.me/94701757576`, '_blank')}
-              className="flex-1 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 py-5 md:py-6 px-2 rounded-2xl md:rounded-full btn-modern-primary text-biz-deep font-display font-black text-[10px] md:text-base shadow-[0_0_30px_rgba(16,185,129,0.4)] scale-110 md:scale-100"
+              className="flex-1 flex flex-col items-center justify-center gap-1.5 py-6 md:py-8 px-1 rounded-2xl bg-gradient-to-br from-biz-emerald to-biz-teal btn-embossed-hard shine-stroke text-biz-deep font-display font-black text-[10px] sm:text-[11px] md:text-base scale-110 shadow-[0_15px_40px_-5px_rgba(16,185,129,0.5)] transition-all uppercase"
             >
-              <MessageCircle size={20} className="md:w-6 md:h-6" />
-              <span className="hidden sm:inline">WhatsApp</span>
-              <span className="sm:hidden">Contact</span>
+              <MessageCircle size={24} className="animate-pulse" />
+              <span>Contact</span>
             </button>
             
             {/* Demo/Calendar CTA */}
             <button
-              className="flex-1 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 py-4 md:py-5 px-2 rounded-2xl md:rounded-full bg-white/5 border border-white/10 text-white font-display font-bold text-[10px] md:text-base hover:border-biz-cyan transition-all group"
+              className="flex-1 flex flex-col items-center justify-center gap-1.5 py-4 md:py-6 px-1 rounded-2xl bg-white/5 btn-embossed-hard shine-stroke text-white font-display font-black text-[9px] sm:text-[10px] md:text-sm tracking-widest hover:bg-white/10 transition-all uppercase"
             >
-              <Calendar size={18} className="md:w-5 md:h-5 text-biz-cyan" />
-              <span className="hidden sm:inline">Book Demo</span>
-              <span className="sm:hidden">Demo</span>
+              <Calendar size={22} className="text-biz-cyan drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" />
+              <span>Demo</span>
             </button>
           </motion.div>
         </div>
@@ -140,10 +141,10 @@ const Hero: React.FC = () => {
         <motion.div 
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="mt-20 md:mt-24 pb-10 flex flex-col items-center opacity-20"
+          className="mt-24 md:mt-32 pb-10 flex flex-col items-center opacity-30"
         >
-          <span className="text-[9px] uppercase tracking-[0.4em] font-black mb-3">Scroll</span>
-          <div className="w-px h-16 bg-gradient-to-b from-biz-emerald to-transparent" />
+          <span className="text-[9px] uppercase tracking-[0.5em] font-black mb-3 text-biz-emerald">Discover</span>
+          <div className="w-[2px] h-20 bg-gradient-to-b from-biz-emerald via-biz-emerald/50 to-transparent" />
         </motion.div>
       </div>
     </section>
