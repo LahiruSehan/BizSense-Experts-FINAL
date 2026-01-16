@@ -1,30 +1,9 @@
-// BizSense Experts Core Engine - Refined Portfolio & UI
+// BizSense Experts Core Engine - Emerald Luxury Build
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
-// 1. ROTATING HEADLINES
-const HEADLINES = [
-  "Digital Marketing",
-  "Tailored ERP Systems",
-  "Strategic Digital Growth",
-  "Global B2B Connections",
-  "Financial Advisory",
-  "Innovative Solutions"
-];
-let hIdx = 0;
-const hEl = document.getElementById('rotating-headline');
-setInterval(() => {
-  if (!hEl) return;
-  hEl.classList.add('opacity-0', 'translate-y-4');
-  setTimeout(() => {
-    hIdx = (hIdx + 1) % HEADLINES.length;
-    hEl.textContent = HEADLINES[hIdx];
-    hEl.classList.remove('opacity-0', 'translate-y-4');
-  }, 500);
-}, 3500);
-
-// 2. PORTFOLIO DATA
+// 1. PORTFOLIO DATA
 const PORTFOLIO = [
   // ERP
   { id: 1, cat: 'ERP', title: 'BizSense Statement Generator', client: 'Financial Automation', img: 'https://i.ibb.co/fzZHqXhm/Chat-GPT-Image-Jan-11-2026-04-46-39-PM.png' },
@@ -55,125 +34,99 @@ const PORTFOLIO = [
   { id: 19, cat: 'Marketing', title: 'Lead Funnel Opt.', client: 'SME Retail', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop' }
 ];
 
-// 3. SERVICE MODAL DATA
 const SERVICE_CONTENT: Record<string, string> = {
   erp: `
     <div class="max-w-4xl mx-auto py-12">
-      <h2 class="text-biz-emerald text-[10px] font-black uppercase tracking-[0.4em] mb-4">Core Pillar</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-white mb-8">ERP Solutions</h1>
-      <p class="text-xl md:text-2xl text-biz-emerald italic mb-10 border-l-4 border-biz-emerald pl-8 font-medium">"Systemic Control leads to Scalability."</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-400">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Core Pillar</h2>
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">ERP Solutions</h1>
+      <p class="text-xl md:text-2xl text-biz-primary italic mb-10 border-l-4 border-biz-primary pl-8 font-medium">"Systemic Control is the Foundation of Profit."</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-600">
         <div>
-          <h3 class="text-white text-lg font-bold mb-4">Control & Visibility</h3>
-          <p class="mb-6 leading-relaxed">Integrated workflows across finance, sales, and supply chain. We implement professional-grade ERP platforms that fit your specific scale.</p>
+          <h3 class="text-black text-lg font-bold mb-4">Authority & Visibility</h3>
+          <p class="mb-6 leading-relaxed">Financial-grade ERP deployment. We bridge the gap between complex software and real SME operational needs.</p>
         </div>
-        <div class="bg-white/5 p-8 rounded-3xl border border-white/5 flex flex-wrap gap-2 h-fit">
-            <span class="px-3 py-1 bg-biz-emerald/10 text-biz-emerald rounded-full text-[9px] font-black uppercase">Odoo</span>
-            <span class="px-3 py-1 bg-biz-emerald/10 text-biz-emerald rounded-full text-[9px] font-black uppercase">Zoho</span>
-            <span class="px-3 py-1 bg-biz-emerald/10 text-biz-emerald rounded-full text-[9px] font-black uppercase">ERP Next</span>
+        <div class="bg-black/5 p-8 rounded-3xl border border-black/5 flex flex-wrap gap-2 h-fit">
+            <span class="px-4 py-1 bg-biz-primary text-white rounded-full text-[10px] font-black uppercase">Odoo</span>
+            <span class="px-4 py-1 bg-biz-primary text-white rounded-full text-[10px] font-black uppercase">Zoho</span>
+            <span class="px-4 py-1 bg-biz-primary text-white rounded-full text-[10px] font-black uppercase">ERP Next</span>
         </div>
       </div>
     </div>`,
   b2b: `
     <div class="max-w-4xl mx-auto py-12">
-      <h2 class="text-biz-emerald text-[10px] font-black uppercase tracking-[0.4em] mb-4">Global Reach</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-white mb-8">B2B Trade Support</h1>
-      <p class="text-gray-400 text-lg md:text-xl mb-12 italic border-l-4 border-biz-emerald pl-8 font-medium">"Export-ready consulting and international matching."</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center"><p class="text-white font-bold text-[10px] uppercase">Buyer ID</p></div>
-          <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center"><p class="text-white font-bold text-[10px] uppercase">Trade Connect</p></div>
-          <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center"><p class="text-white font-bold text-[10px] uppercase">MIS Audit</p></div>
-      </div>
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Trade</h2>
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">B2B Trade Solutions</h1>
+      <p class="text-gray-600 text-lg md:text-xl mb-12 italic border-l-4 border-biz-primary pl-8 font-medium">"Strategic market entry for global commerce."</p>
+      <p class="text-gray-600 leading-relaxed">Connecting verified buyers and sellers in the UK, EU, Middle East, and Asia.</p>
     </div>`,
   marketing: `
-    <div class="max-w-4xl mx-auto py-12 text-center">
-      <h2 class="text-biz-emerald text-[10px] font-black uppercase tracking-[0.4em] mb-4">Results</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-white mb-8">ROI Marketing</h1>
-      <p class="text-xl md:text-2xl text-biz-emerald italic mb-10 border-l-4 border-biz-emerald pl-8 font-medium">"Revenue growth over vanity metrics."</p>
-      <p class="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed">High-performance web architectures, global SEO, and strategic lead generation campaigns built for actual business expansion.</p>
+    <div class="max-w-4xl mx-auto py-12">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Growth</h2>
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">Digital Marketing</h1>
+      <p class="text-xl md:text-2xl text-biz-primary italic mb-10 border-l-4 border-biz-primary pl-8 font-medium">"ROI-driven strategies for actual business revenue."</p>
+      <p class="text-gray-600 text-sm leading-relaxed">From international SEO to high-performance web development, we focus on conversions and global presence.</p>
+    </div>`,
+  finance: `
+    <div class="max-w-4xl mx-auto py-12">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Advisory</h2>
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">Finance Consulting</h1>
+      <p class="text-xl md:text-2xl text-biz-primary italic mb-10 border-l-4 border-biz-primary pl-8 font-medium">"20+ years of banking and credit analysis at your service."</p>
+      <p class="text-gray-600 text-sm leading-relaxed">Strategic cash flow oversight, risk assessment, and financial control frameworks built for SME scalability.</p>
     </div>`
 };
 
-// 4. PORTFOLIO ENGINE
 function renderPortfolio(cat: string = 'ERP') {
   const filtered = PORTFOLIO.filter(p => p.cat === cat);
   const isGraphics = cat === 'Graphics';
   
   return `
     <div class="py-12">
-      <!-- Top Row Controls -->
       <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-        <h1 class="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter">Our Work</h1>
+        <h1 class="text-3xl md:text-5xl font-display font-black text-black uppercase tracking-tighter">Our Work</h1>
         <div class="flex flex-row flex-nowrap overflow-x-auto no-scrollbar justify-center gap-2 max-w-full px-2">
           ${['ERP', 'Web', 'Graphics', 'Marketing'].map(c => `
-            <button onclick="updatePortfolio('${c}')" class="flex-none px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${cat === c ? 'bg-biz-emerald text-biz-deep shadow-lg' : 'bg-white/5 text-gray-500 hover:bg-white/10'}">${c}</button>
+            <button onclick="updatePortfolio('${c}')" class="flex-none px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${cat === c ? 'bg-biz-primary text-white shadow-lg' : 'bg-black/5 text-gray-400 hover:bg-black/10'}">${c}</button>
           `).join('')}
         </div>
       </div>
       
-      <!-- Portfolio Render: Masonry for Graphics, Grid for others -->
       ${isGraphics ? `
         <div class="masonry-columns">
           ${filtered.map(item => `
-            <div class="masonry-item group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 transition-all duration-500 hover:border-biz-emerald/40 shadow-2xl">
-              <img 
-                src="${item.img}" 
-                alt="${item.title}" 
-                class="w-full h-auto block img-loading"
-                onload="this.classList.add('img-loaded');"
-              >
+            <div class="masonry-item group relative rounded-2xl overflow-hidden border border-black/5 bg-black/5 transition-all duration-500 hover:border-biz-primary/40 shadow-sm">
+              <img src="${item.img}" alt="${item.title}" class="w-full h-auto block" onload="this.style.opacity='1';" style="opacity: 0; transition: opacity 1s ease;">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                <span class="text-biz-emerald text-[6px] font-black uppercase tracking-widest">${item.cat}</span>
+                <span class="text-white text-[6px] font-black uppercase tracking-widest">${item.cat}</span>
                 <p class="text-white font-bold text-[8px] uppercase tracking-tight">${item.client}</p>
               </div>
             </div>
           `).join('')}
         </div>
       ` : `
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           ${filtered.map(item => `
-            <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-xl transition-all duration-500 hover:border-biz-emerald/40 aspect-square">
-              <img 
-                src="${item.img}" 
-                alt="${item.title}" 
-                class="w-full h-full object-cover img-loading"
-                onload="this.classList.add('img-loaded');"
-              >
+            <div class="group relative rounded-2xl overflow-hidden border border-black/5 bg-black/5 shadow-sm transition-all duration-500 hover:border-biz-primary/40 aspect-square">
+              <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover" onload="this.style.opacity='1';" style="opacity: 0; transition: opacity 1s ease;">
               <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-left">
-                <span class="text-biz-emerald text-[7px] font-black uppercase mb-1 tracking-widest">${item.cat}</span>
+                <span class="text-white text-[7px] font-black uppercase mb-1 tracking-widest">${item.cat}</span>
                 <p class="text-white font-display font-bold text-[10px] uppercase tracking-tight leading-tight">${item.title}</p>
-                
-                ${item.cat === 'Web' && item.url ? `
-                  <button 
-                    onclick="window.open('${item.url}', '_blank')" 
-                    class="mt-3 w-full bg-biz-emerald text-biz-deep text-[8px] font-black py-2 rounded uppercase tracking-widest hover:bg-white transition-colors"
-                  >
-                    Visit Site
-                  </button>
-                ` : `
-                  <p class="text-gray-500 text-[8px] uppercase mt-1">${item.client}</p>
-                `}
+                ${item.url ? `<button onclick="window.open('${item.url}', '_blank')" class="mt-3 w-full bg-biz-primary text-white text-[8px] font-black py-2 rounded uppercase tracking-widest hover:bg-black transition-colors">Visit Site</button>` : `<p class="text-gray-300 text-[8px] uppercase mt-1">${item.client}</p>`}
               </div>
             </div>
           `).join('')}
         </div>
       `}
-      
-      <p class="text-center text-gray-600 text-[8px] uppercase font-black tracking-[0.5em] mt-16 pb-12">Expert Strategic Portfolio</p>
+      <p class="text-center text-gray-400 text-[8px] uppercase font-black tracking-[0.5em] mt-16 pb-12">Expert Strategic Portfolio</p>
     </div>
   `;
 }
 
-// Global Handlers
 (window as any).openModal = (id: string) => {
   const modal = document.getElementById('main-modal');
   const content = document.getElementById('modal-content');
   if (modal && content) {
-    if (id === 'portfolio') {
-      content.innerHTML = renderPortfolio('ERP');
-    } else {
-      content.innerHTML = SERVICE_CONTENT[id] || '<div class="text-center py-24 text-white uppercase font-black">Content Coming Soon</div>';
-    }
+    if (id === 'portfolio') content.innerHTML = renderPortfolio('ERP');
+    else content.innerHTML = SERVICE_CONTENT[id] || '<div class="text-center py-24 text-black uppercase font-black">Content Coming Soon</div>';
     modal.classList.add('modal-active');
     document.body.style.overflow = 'hidden';
   }
@@ -189,12 +142,5 @@ function renderPortfolio(cat: string = 'ERP') {
 
 (window as any).updatePortfolio = (cat: string) => {
   const content = document.getElementById('modal-content');
-  if (content) {
-    content.innerHTML = renderPortfolio(cat);
-  }
+  if (content) content.innerHTML = renderPortfolio(cat);
 };
-
-// Initial setup
-document.addEventListener('DOMContentLoaded', () => {
-  // Logic for footer or other DOM elements
-});
