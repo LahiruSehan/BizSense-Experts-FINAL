@@ -1,59 +1,71 @@
-// BizSense Experts Core Engine - Pure ESM
+// BizSense Experts Core Engine - V4
 import { GoogleGenAI } from "@google/genai";
 
-// --- CONFIGURATION & DATA ---
+// --- CONFIGURATION ---
 const HEADLINES = [
   "Digital Marketing",
-  "Innovative Solutions",
   "Tailored ERP Systems",
-  "Strategic Digital Growth",
-  "Global B2B Connections",
+  "Global B2B Trade",
   "Financial Advisory",
+  "Strategic Growth",
   "Accounting Control"
 ];
 
 const SERVICE_INFO: Record<string, string> = {
   erp: `
-    <div class="max-w-4xl mx-auto py-12">
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">ERP Solutions</h1>
-      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"Systemic Control is the Foundation of Profit."</p>
-      <p class="text-gray-600 leading-relaxed text-lg mb-8">Achieve absolute precision in inventory, cash flow management, and real-time reporting architectures with our high-grade ERP implementations.</p>
-      <div class="flex flex-wrap gap-3">
-        <span class="px-5 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase">Odoo</span>
-        <span class="px-5 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase">ERPNext</span>
-        <span class="px-5 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase">Zoho</span>
+    <div class="py-12 animate-reveal active">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Core Systems</h2>
+      <h1 class="text-4xl md:text-7xl font-display font-black text-white mb-10 uppercase tracking-tighter">ERP Solutions</h1>
+      <div class="glass-card p-10 rounded-[40px] border-l-4 border-biz-primary mb-12">
+        <p class="text-xl md:text-2xl text-slate-300 italic font-medium leading-relaxed">"Systemic Control is the Foundation of Profit."</p>
+      </div>
+      <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-12">Achieve absolute precision in inventory, cash flow management, and real-time reporting architectures with our high-grade ERP implementations.</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-card p-6 rounded-3xl text-center"><p class="text-white font-black text-xs uppercase tracking-widest">ODOO</p></div>
+        <div class="glass-card p-6 rounded-3xl text-center"><p class="text-white font-black text-xs uppercase tracking-widest">ERPNext</p></div>
+        <div class="glass-card p-6 rounded-3xl text-center"><p class="text-white font-black text-xs uppercase tracking-widest">Zoho</p></div>
+        <div class="glass-card p-6 rounded-3xl text-center"><p class="text-white font-black text-xs uppercase tracking-widest">QuickBooks</p></div>
       </div>
     </div>
   `,
   b2b: `
-    <div class="max-w-4xl mx-auto py-12">
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">B2B Trade</h1>
-      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"Strategic market entry for global commerce."</p>
-      <p class="text-gray-600 leading-relaxed text-lg mb-8">Connecting verified buyers and sellers in the UK, EU, Middle East, and Asia. We help businesses navigate global commerce with ease.</p>
+    <div class="py-12 animate-reveal active">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Global Trade</h2>
+      <h1 class="text-4xl md:text-7xl font-display font-black text-white mb-10 uppercase tracking-tighter">B2B Trade</h1>
+      <div class="glass-card p-10 rounded-[40px] border-l-4 border-biz-secondary mb-12">
+        <p class="text-xl md:text-2xl text-slate-300 italic font-medium leading-relaxed">"Strategic market entry for global commerce."</p>
+      </div>
+      <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-12">Connecting verified buyers and sellers in the UK, EU, Middle East, and Asia. We help businesses navigate global commerce with ease and preparation.</p>
     </div>
   `,
   marketing: `
-    <div class="max-w-4xl mx-auto py-12">
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">Digital Growth</h1>
-      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"ROI-driven strategies for actual revenue."</p>
-      <p class="text-gray-600 leading-relaxed text-lg mb-8">Vanity metrics don't pay bills. We focus on conversion optimization, international SEO, and high-performance branding.</p>
+    <div class="py-12 animate-reveal active">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Growth Engine</h2>
+      <h1 class="text-4xl md:text-7xl font-display font-black text-white mb-10 uppercase tracking-tighter">Marketing</h1>
+      <div class="glass-card p-10 rounded-[40px] border-l-4 border-biz-accent mb-12">
+        <p class="text-xl md:text-2xl text-slate-300 italic font-medium leading-relaxed">"ROI-driven strategies for actual revenue."</p>
+      </div>
+      <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-12">Vanity metrics don't pay bills. We focus on conversion optimization, international SEO, and high-performance branding that connects with your financials.</p>
     </div>
   `,
   finance: `
-    <div class="max-w-4xl mx-auto py-12">
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">Finance Advisory</h1>
-      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"20+ years of professional financial advisory."</p>
-      <p class="text-gray-600 leading-relaxed text-lg mb-8">Strategic cash flow oversight, risk assessment, and financial control frameworks built for scalable enterprises.</p>
+    <div class="py-12 animate-reveal active">
+      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Financial Oversight</h2>
+      <h1 class="text-4xl md:text-7xl font-display font-black text-white mb-10 uppercase tracking-tighter">Advisory</h1>
+      <div class="glass-card p-10 rounded-[40px] border-l-4 border-biz-gold mb-12">
+        <p class="text-xl md:text-2xl text-slate-300 italic font-medium leading-relaxed">"20+ years of professional financial advisory."</p>
+      </div>
+      <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-12">Strategic cash flow oversight, risk assessment, and financial control frameworks built for scalable enterprises and SMEs.</p>
     </div>
   `
 };
 
-// --- CORE ENGINE ---
+// --- ENGINE COMPONENTS ---
 
-// 1. Particle Background System
+// 1. Particle System
 const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
-let particles: Particle[] = [];
+let particles: any[] = [];
 
 function resize() {
   canvas.width = window.innerWidth;
@@ -65,10 +77,10 @@ class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 0.5;
-    this.spX = (Math.random() - 0.5) * 0.4;
-    this.spY = (Math.random() - 0.5) * 0.4;
-    this.opacity = Math.random() * 0.4 + 0.1;
+    this.size = Math.random() * 1.2 + 0.3;
+    this.spX = (Math.random() - 0.5) * 0.2;
+    this.spY = (Math.random() - 0.5) * 0.2;
+    this.opacity = Math.random() * 0.15 + 0.05;
   }
   update() {
     this.x += this.spX;
@@ -85,88 +97,78 @@ class Particle {
 }
 
 function initParticles() {
-  particles = Array.from({length: 80}, () => new Particle());
+  particles = Array.from({length: 100}, () => new Particle());
 }
 
-function animate() {
+function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateParticles);
 }
 
-// 2. Rotating Headline System
+// 2. Headline Rotation
 const rotatingTextEl = document.getElementById('rotating-text');
-let headlineIdx = 0;
+let headIdx = 0;
 
-function updateHeadline() {
+function rotateHeadline() {
   if (!rotatingTextEl) return;
-  
-  // Transition Out
   rotatingTextEl.style.opacity = '0';
-  rotatingTextEl.style.transform = 'translateY(15px)';
-  rotatingTextEl.style.filter = 'blur(10px)';
+  rotatingTextEl.style.transform = 'translateY(15px) scale(0.95)';
   
   setTimeout(() => {
-    headlineIdx = (headlineIdx + 1) % HEADLINES.length;
-    const text = HEADLINES[headlineIdx];
-    
-    // Dynamic Font Scaling for Long Words
-    if (text.length > 22) {
-      rotatingTextEl.className = 'text-shine text-[20px] sm:text-3xl md:text-5xl lg:text-6xl font-display font-black uppercase tracking-tighter whitespace-nowrap';
-    } else if (text.length > 16) {
-      rotatingTextEl.className = 'text-shine text-[24px] sm:text-4xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter whitespace-nowrap';
-    } else {
-      rotatingTextEl.className = 'text-shine text-[28px] sm:text-5xl md:text-7xl lg:text-8xl font-display font-black uppercase tracking-tighter whitespace-nowrap';
-    }
-
-    rotatingTextEl.textContent = text;
-    
-    // Transition In
+    headIdx = (headIdx + 1) % HEADLINES.length;
+    rotatingTextEl.textContent = HEADLINES[headIdx];
     rotatingTextEl.style.opacity = '1';
-    rotatingTextEl.style.transform = 'translateY(0)';
-    rotatingTextEl.style.filter = 'blur(0)';
+    rotatingTextEl.style.transform = 'translateY(0) scale(1)';
   }, 600);
 }
 
-// 3. Luxury Background Transition System
-const luxuryBg = document.getElementById('luxuryBg');
-function bgCycle() {
-  if (!luxuryBg) return;
-  const roll = Math.random();
-  // Randomly flicker/appear for luxury "glimmer" effect
-  if (roll > 0.7) {
-    luxuryBg.style.opacity = (Math.random() * 0.2 + 0.15).toString();
+// 3. Scroll Behavior (Navbar & Reveal)
+const navEl = document.getElementById('main-nav');
+const observerOptions = { threshold: 0.1 };
+
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, observerOptions);
+
+function handleScroll() {
+  const scrollPos = window.scrollY;
+  if (scrollPos > 300) {
+    navEl?.classList.add('visible');
   } else {
-    luxuryBg.style.opacity = '0';
+    navEl?.classList.remove('visible');
   }
-  setTimeout(bgCycle, Math.random() * 6000 + 3000);
 }
 
-// 4. Global UI Handlers
+// 4. Modal Handlers
 (window as any).openServiceModal = (id: string) => {
   const modal = document.getElementById('service-modal');
   const content = document.getElementById('modal-content');
   if (modal && content) {
-    content.innerHTML = SERVICE_INFO[id] || '<div class="text-center py-20 text-gray-400 uppercase font-black">Content Loading...</div>';
+    content.innerHTML = SERVICE_INFO[id] || '<div class="text-center py-20 text-gray-500 uppercase font-black">Loading...</div>';
     modal.classList.add('modal-active');
     document.body.style.overflow = 'hidden';
   }
 };
 
 (window as any).closeModal = () => {
-  const modal = document.getElementById('service-modal');
-  if (modal) {
-    modal.classList.remove('modal-active');
-    document.body.style.overflow = 'auto';
-  }
+  document.getElementById('service-modal')?.classList.remove('modal-active');
+  document.body.style.overflow = 'auto';
 };
 
-// --- START UP ---
+// --- STARTUP ---
+window.addEventListener('scroll', handleScroll);
 window.addEventListener('resize', resize);
+
 resize();
 initParticles();
-animate();
-setInterval(updateHeadline, 4500);
-setTimeout(bgCycle, 2000);
+animateParticles();
+setInterval(rotateHeadline, 4000);
 
-console.log('BizSense Core Architecture - Live');
+document.querySelectorAll('.animate-reveal').forEach(el => scrollObserver.observe(el));
+
+console.log('BizSense Ultra V4.1 Engine Active');

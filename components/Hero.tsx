@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
           >
             <div className="h-px w-24 bg-biz-primary mb-4" />
             <span className="text-gray-400 font-display font-black uppercase tracking-[0.4em] text-[8px] md:text-sm">
-              Consultancy & Systems <span class="mx-2 text-biz-primary">|</span> 20+ Years Excellence
+              Consultancy & Systems <span className="mx-2 text-biz-primary">|</span> 20+ Years Excellence
             </span>
           </motion.div>
 
