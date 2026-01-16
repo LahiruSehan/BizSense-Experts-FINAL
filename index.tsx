@@ -1,146 +1,172 @@
-// BizSense Experts Core Engine - Emerald Luxury Build
+// BizSense Experts Core Engine - Pure ESM
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-
-// 1. PORTFOLIO DATA
-const PORTFOLIO = [
-  // ERP
-  { id: 1, cat: 'ERP', title: 'BizSense Statement Generator', client: 'Financial Automation', img: 'https://i.ibb.co/fzZHqXhm/Chat-GPT-Image-Jan-11-2026-04-46-39-PM.png' },
-  
-  // Web
-  { id: 2, cat: 'Web', title: 'Dream Stay Tours Website', client: 'Tourism Sector', img: 'https://i.ibb.co/b5wg2QjG/Dream-Stay-Tours-Webbsite.png', url: 'https://www.dreamstaytours.com' },
-  { id: 3, cat: 'Web', title: 'BizSense Experts Website', client: 'Corporate Site', img: 'https://i.ibb.co/MkJ93wNs/Biz-Sense-Experts-Website.png', url: 'https://www.bizsenselk.com' },
-  { id: 301, cat: 'Web', title: 'Shani Fashion E-Commerce', client: 'Fashion Retail', img: 'https://i.ibb.co/prhH4nj0/Chat-GPT-Image-Jan-16-2026-03-22-33-PM.png', url: 'https://lahirusehan.github.io/DEMO-E-COMMERCE-SITE/' },
-  
-  // Graphics
-  { id: 4, cat: 'Graphics', title: 'Design 26', client: 'Social Asset', img: 'https://i.ibb.co/9Ht4Rgrd/Design-26.png' },
-  { id: 5, cat: 'Graphics', title: 'Design 31', client: 'Social Asset', img: 'https://i.ibb.co/x8jrWgtZ/Design-31.png' },
-  { id: 6, cat: 'Graphics', title: 'Design 34', client: 'Social Asset', img: 'https://i.ibb.co/B2Wr5LLR/Design-34.png' },
-  { id: 7, cat: 'Graphics', title: 'Design 39', client: 'Social Asset', img: 'https://i.ibb.co/fdS2Fxrg/Design-39.png' },
-  { id: 8, cat: 'Graphics', title: 'Design 44', client: 'Social Asset', img: 'https://i.ibb.co/YFCMtZtF/Design-44.png' },
-  { id: 9, cat: 'Graphics', title: 'Design 2', client: 'Social Asset', img: 'https://i.ibb.co/G4TZxBgf/Design-2.png' },
-  { id: 10, cat: 'Graphics', title: 'Design 4', client: 'Social Asset', img: 'https://i.ibb.co/Z6MkWCC7/Design-4.png' },
-  { id: 11, cat: 'Graphics', title: 'Design 5', client: 'Social Asset', img: 'https://i.ibb.co/601nX4hd/Design-5.png' },
-  { id: 12, cat: 'Graphics', title: 'Design 7', client: 'Social Asset', img: 'https://i.ibb.co/C54xtrKQ/Design-7.jpg' },
-  { id: 13, cat: 'Graphics', title: 'Design 7 PNG', client: 'Social Asset', img: 'https://i.ibb.co/MyH9mWFm/Design-7.png' },
-  { id: 14, cat: 'Graphics', title: 'Design 8', client: 'Social Asset', img: 'https://i.ibb.co/ds2cWfZq/Design-8.jpg' },
-  { id: 15, cat: 'Graphics', title: 'Design 9', client: 'Social Asset', img: 'https://i.ibb.co/501bT8z/Design-9.jpg' },
-  { id: 16, cat: 'Graphics', title: 'Design 19', client: 'Social Asset', img: 'https://i.ibb.co/jPqGKwsP/Design-19.png' },
-  { id: 17, cat: 'Graphics', title: 'Design 20', client: 'Social Asset', img: 'https://i.ibb.co/cWbxfMt/Design-20.png' },
-  
-  // Marketing
-  { id: 18, cat: 'Marketing', title: 'Global SEO Strategy', client: 'Export Corp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop' },
-  { id: 19, cat: 'Marketing', title: 'Lead Funnel Opt.', client: 'SME Retail', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop' }
+// --- CONFIGURATION & DATA ---
+const HEADLINES = [
+  "Digital Marketing",
+  "Innovative Solutions",
+  "Tailored ERP Systems",
+  "Strategic Digital Growth",
+  "Global B2B Connections",
+  "Financial Advisory",
+  "Accounting Control"
 ];
 
-const SERVICE_CONTENT: Record<string, string> = {
+const SERVICE_INFO: Record<string, string> = {
   erp: `
     <div class="max-w-4xl mx-auto py-12">
-      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Core Pillar</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">ERP Solutions</h1>
-      <p class="text-xl md:text-2xl text-biz-primary italic mb-10 border-l-4 border-biz-primary pl-8 font-medium">"Systemic Control is the Foundation of Profit."</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-600">
-        <div>
-          <h3 class="text-black text-lg font-bold mb-4">Authority & Visibility</h3>
-          <p class="mb-6 leading-relaxed">Financial-grade ERP deployment. We bridge the gap between complex software and real SME operational needs.</p>
-        </div>
-        <div class="bg-black/5 p-8 rounded-3xl border border-black/5 flex flex-wrap gap-2 h-fit">
-            <span class="px-4 py-1 bg-biz-primary text-white rounded-full text-[10px] font-black uppercase">Odoo</span>
-            <span class="px-4 py-1 bg-biz-primary text-white rounded-full text-[10px] font-black uppercase">Zoho</span>
-            <span class="px-4 py-1 bg-biz-primary text-white rounded-full text-[10px] font-black uppercase">ERP Next</span>
-        </div>
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">ERP Solutions</h1>
+      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"Systemic Control is the Foundation of Profit."</p>
+      <p class="text-gray-600 leading-relaxed text-lg mb-8">Achieve absolute precision in inventory, cash flow management, and real-time reporting architectures with our high-grade ERP implementations.</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-5 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase">Odoo</span>
+        <span class="px-5 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase">ERPNext</span>
+        <span class="px-5 py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase">Zoho</span>
       </div>
-    </div>`,
+    </div>
+  `,
   b2b: `
     <div class="max-w-4xl mx-auto py-12">
-      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Trade</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">B2B Trade Solutions</h1>
-      <p class="text-gray-600 text-lg md:text-xl mb-12 italic border-l-4 border-biz-primary pl-8 font-medium">"Strategic market entry for global commerce."</p>
-      <p class="text-gray-600 leading-relaxed">Connecting verified buyers and sellers in the UK, EU, Middle East, and Asia.</p>
-    </div>`,
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">B2B Trade</h1>
+      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"Strategic market entry for global commerce."</p>
+      <p class="text-gray-600 leading-relaxed text-lg mb-8">Connecting verified buyers and sellers in the UK, EU, Middle East, and Asia. We help businesses navigate global commerce with ease.</p>
+    </div>
+  `,
   marketing: `
     <div class="max-w-4xl mx-auto py-12">
-      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Growth</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">Digital Marketing</h1>
-      <p class="text-xl md:text-2xl text-biz-primary italic mb-10 border-l-4 border-biz-primary pl-8 font-medium">"ROI-driven strategies for actual business revenue."</p>
-      <p class="text-gray-600 text-sm leading-relaxed">From international SEO to high-performance web development, we focus on conversions and global presence.</p>
-    </div>`,
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">Digital Growth</h1>
+      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"ROI-driven strategies for actual revenue."</p>
+      <p class="text-gray-600 leading-relaxed text-lg mb-8">Vanity metrics don't pay bills. We focus on conversion optimization, international SEO, and high-performance branding.</p>
+    </div>
+  `,
   finance: `
     <div class="max-w-4xl mx-auto py-12">
-      <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Advisory</h2>
-      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8">Finance Consulting</h1>
-      <p class="text-xl md:text-2xl text-biz-primary italic mb-10 border-l-4 border-biz-primary pl-8 font-medium">"20+ years of banking and credit analysis at your service."</p>
-      <p class="text-gray-600 text-sm leading-relaxed">Strategic cash flow oversight, risk assessment, and financial control frameworks built for SME scalability.</p>
-    </div>`
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black mb-8 uppercase tracking-tighter">Finance Advisory</h1>
+      <p class="text-xl md:text-2xl text-emerald-600 italic border-l-4 border-emerald-500 pl-8 mb-10 font-medium">"20+ years of professional financial advisory."</p>
+      <p class="text-gray-600 leading-relaxed text-lg mb-8">Strategic cash flow oversight, risk assessment, and financial control frameworks built for scalable enterprises.</p>
+    </div>
+  `
 };
 
-function renderPortfolio(cat: string = 'ERP') {
-  const filtered = PORTFOLIO.filter(p => p.cat === cat);
-  const isGraphics = cat === 'Graphics';
-  
-  return `
-    <div class="py-12">
-      <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-        <h1 class="text-3xl md:text-5xl font-display font-black text-black uppercase tracking-tighter">Our Work</h1>
-        <div class="flex flex-row flex-nowrap overflow-x-auto no-scrollbar justify-center gap-2 max-w-full px-2">
-          ${['ERP', 'Web', 'Graphics', 'Marketing'].map(c => `
-            <button onclick="updatePortfolio('${c}')" class="flex-none px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${cat === c ? 'bg-biz-primary text-white shadow-lg' : 'bg-black/5 text-gray-400 hover:bg-black/10'}">${c}</button>
-          `).join('')}
-        </div>
-      </div>
-      
-      ${isGraphics ? `
-        <div class="masonry-columns">
-          ${filtered.map(item => `
-            <div class="masonry-item group relative rounded-2xl overflow-hidden border border-black/5 bg-black/5 transition-all duration-500 hover:border-biz-primary/40 shadow-sm">
-              <img src="${item.img}" alt="${item.title}" class="w-full h-auto block" onload="this.style.opacity='1';" style="opacity: 0; transition: opacity 1s ease;">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                <span class="text-white text-[6px] font-black uppercase tracking-widest">${item.cat}</span>
-                <p class="text-white font-bold text-[8px] uppercase tracking-tight">${item.client}</p>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      ` : `
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          ${filtered.map(item => `
-            <div class="group relative rounded-2xl overflow-hidden border border-black/5 bg-black/5 shadow-sm transition-all duration-500 hover:border-biz-primary/40 aspect-square">
-              <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover" onload="this.style.opacity='1';" style="opacity: 0; transition: opacity 1s ease;">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-left">
-                <span class="text-white text-[7px] font-black uppercase mb-1 tracking-widest">${item.cat}</span>
-                <p class="text-white font-display font-bold text-[10px] uppercase tracking-tight leading-tight">${item.title}</p>
-                ${item.url ? `<button onclick="window.open('${item.url}', '_blank')" class="mt-3 w-full bg-biz-primary text-white text-[8px] font-black py-2 rounded uppercase tracking-widest hover:bg-black transition-colors">Visit Site</button>` : `<p class="text-gray-300 text-[8px] uppercase mt-1">${item.client}</p>`}
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      `}
-      <p class="text-center text-gray-400 text-[8px] uppercase font-black tracking-[0.5em] mt-16 pb-12">Expert Strategic Portfolio</p>
-    </div>
-  `;
+// --- CORE ENGINE ---
+
+// 1. Particle Background System
+const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
+const ctx = canvas.getContext('2d')!;
+let particles: Particle[] = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 
-(window as any).openModal = (id: string) => {
-  const modal = document.getElementById('main-modal');
+class Particle {
+  x: number; y: number; size: number; spX: number; spY: number; opacity: number;
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.spX = (Math.random() - 0.5) * 0.4;
+    this.spY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.4 + 0.1;
+  }
+  update() {
+    this.x += this.spX;
+    this.y += this.spY;
+    if (this.x < 0 || this.x > canvas.width) this.spX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.spY *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(16, 185, 129, ${this.opacity})`;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = Array.from({length: 80}, () => new Particle());
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+
+// 2. Rotating Headline System
+const rotatingTextEl = document.getElementById('rotating-text');
+let headlineIdx = 0;
+
+function updateHeadline() {
+  if (!rotatingTextEl) return;
+  
+  // Transition Out
+  rotatingTextEl.style.opacity = '0';
+  rotatingTextEl.style.transform = 'translateY(15px)';
+  rotatingTextEl.style.filter = 'blur(10px)';
+  
+  setTimeout(() => {
+    headlineIdx = (headlineIdx + 1) % HEADLINES.length;
+    const text = HEADLINES[headlineIdx];
+    
+    // Dynamic Font Scaling for Long Words
+    if (text.length > 22) {
+      rotatingTextEl.className = 'text-shine text-[20px] sm:text-3xl md:text-5xl lg:text-6xl font-display font-black uppercase tracking-tighter whitespace-nowrap';
+    } else if (text.length > 16) {
+      rotatingTextEl.className = 'text-shine text-[24px] sm:text-4xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter whitespace-nowrap';
+    } else {
+      rotatingTextEl.className = 'text-shine text-[28px] sm:text-5xl md:text-7xl lg:text-8xl font-display font-black uppercase tracking-tighter whitespace-nowrap';
+    }
+
+    rotatingTextEl.textContent = text;
+    
+    // Transition In
+    rotatingTextEl.style.opacity = '1';
+    rotatingTextEl.style.transform = 'translateY(0)';
+    rotatingTextEl.style.filter = 'blur(0)';
+  }, 600);
+}
+
+// 3. Luxury Background Transition System
+const luxuryBg = document.getElementById('luxuryBg');
+function bgCycle() {
+  if (!luxuryBg) return;
+  const roll = Math.random();
+  // Randomly flicker/appear for luxury "glimmer" effect
+  if (roll > 0.7) {
+    luxuryBg.style.opacity = (Math.random() * 0.2 + 0.15).toString();
+  } else {
+    luxuryBg.style.opacity = '0';
+  }
+  setTimeout(bgCycle, Math.random() * 6000 + 3000);
+}
+
+// 4. Global UI Handlers
+(window as any).openServiceModal = (id: string) => {
+  const modal = document.getElementById('service-modal');
   const content = document.getElementById('modal-content');
   if (modal && content) {
-    if (id === 'portfolio') content.innerHTML = renderPortfolio('ERP');
-    else content.innerHTML = SERVICE_CONTENT[id] || '<div class="text-center py-24 text-black uppercase font-black">Content Coming Soon</div>';
+    content.innerHTML = SERVICE_INFO[id] || '<div class="text-center py-20 text-gray-400 uppercase font-black">Content Loading...</div>';
     modal.classList.add('modal-active');
     document.body.style.overflow = 'hidden';
   }
 };
 
 (window as any).closeModal = () => {
-  const modal = document.getElementById('main-modal');
+  const modal = document.getElementById('service-modal');
   if (modal) {
     modal.classList.remove('modal-active');
     document.body.style.overflow = 'auto';
   }
 };
 
-(window as any).updatePortfolio = (cat: string) => {
-  const content = document.getElementById('modal-content');
-  if (content) content.innerHTML = renderPortfolio(cat);
-};
+// --- START UP ---
+window.addEventListener('resize', resize);
+resize();
+initParticles();
+animate();
+setInterval(updateHeadline, 4500);
+setTimeout(bgCycle, 2000);
+
+console.log('BizSense Core Architecture - Live');
