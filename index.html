@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    
-    <title>BizSense Experts | High-Tier Business Strategy</title>
-    <meta name="title" content="BizSense Experts | High-Tier Business Strategy" />
-    <meta name="description" content="Elite cinematic tech-finance advisory. Specializing in high-performance digital growth and intelligent business systems." />
-
+    <title>BizSense Experts | Business Systems for Growth</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <script>
       tailwind.config = {
         theme: {
@@ -35,201 +30,54 @@
       }
     </script>
     <style>
-      :root { overflow-x: hidden; -webkit-text-size-adjust: 100%; touch-action: none; background: #01080e; }
       body {
-        background-color: transparent;
+        background-color: #01080e;
         color: #f1f5f9;
         margin: 0; padding: 0;
         overflow-x: hidden;
-        width: 100%;
-        font-family: 'Inter', sans-serif;
-        user-select: none;
       }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #01080e; }
+      ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
       
-      /* Base Image Layer - Enhanced Visibility */
-      .bg-image-layer {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        background-image: url('https://i.ibb.co/sdPbVNNK/Chat-GPT-Image-Jan-10-2026-05-19-36-PM.png');
-        background-size: cover;
-        background-position: center;
-        opacity: 0.28; 
-        filter: grayscale(40%) contrast(110%) brightness(0.5);
-      }
-
-      /* Moving Gradient Overlay */
-      .bg-dynamic-gradient {
-        position: fixed;
-        inset: 0;
-        z-index: 1;
-        background: linear-gradient(
-          125deg,
-          rgba(1, 8, 14, 0.8) 0%,
-          rgba(1, 22, 39, 0.6) 30%,
-          rgba(1, 8, 14, 0.8) 50%,
-          rgba(13, 148, 136, 0.1) 75%,
-          rgba(1, 8, 14, 0.9) 100%
-        );
-        background-size: 400% 400%;
-        animation: gradientShift 18s ease-in-out infinite;
-      }
-
-      /* Subtle Interactive Particles */
-      canvas#bg-canvas {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        z-index: 100;
-        pointer-events: none;
-      }
-
-      #root { position: relative; z-index: 10; background: transparent; }
-      
-      /* Cinematic Embedded Light Sweep */
       .text-shine-embedded {
-        background: linear-gradient(
-          to right,
-          #10b981 0%,
-          #10b981 40%,
-          #ffffff 50%,
-          #06b6d4 60%,
-          #06b6d4 100%
-        );
+        background: linear-gradient(to right, #fff 20%, #10b981 40%, #10b981 60%, #fff 80%);
         background-size: 200% auto;
+        color: #000;
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: embeddedShine 3.5s linear infinite;
-        display: inline-block;
+        animation: shine 5s linear infinite;
       }
+      @keyframes shine { to { background-position: 200% center; } }
 
-      @keyframes embeddedShine {
-        0% { background-position: 200% center; }
-        100% { background-position: -200% center; }
-      }
-
-      /* 3D Embossed Hard Buttons - Constrained */
       .btn-embossed-hard {
-        position: relative;
-        border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: 
-          0 3px 0px rgba(0, 0, 0, 0.8),
-          inset 1px 1px 0px rgba(255, 255, 255, 0.2),
-          inset -1px -1px 0px rgba(0, 0, 0, 0.4);
-        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        overflow: hidden;
-      }
-      .btn-embossed-hard:active {
-        transform: translateY(2px);
-        box-shadow: 
-          0 1px 0px rgba(0, 0, 0, 0.6),
-          inset 1px 1px 0px rgba(255, 255, 255, 0.1),
-          inset -1px -1px 0px rgba(0, 0, 0, 0.6);
-      }
-
-      /* White Shining Stroke Animation */
-      .shine-stroke {
-        animation: strokeShine 4s infinite;
-      }
-
-      @keyframes strokeShine {
-        0% { border-color: rgba(255,255,255,0.1); }
-        50% { border-color: rgba(255,255,255,0.6); box-shadow: 0 0 12px rgba(255,255,255,0.1); }
-        100% { border-color: rgba(255,255,255,0.1); }
-      }
-
-      @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      
-      .btn-modern-primary {
-        background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
-        box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4);
+          inset 0 1px 1px rgba(255,255,255,0.1),
+          0 10px 20px -10px rgba(0,0,0,0.5);
       }
     </style>
     <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.0?external=react,react-dom",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react,react-dom",
-    "react-router-dom": "https://esm.sh/react-router-dom@6.22.0?external=react,react-dom",
-    "@google/genai": "https://esm.sh/@google/genai@1.35.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "framer-motion": "https://esm.sh/framer-motion@^12.26.2",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "react/": "https://esm.sh/react@^19.2.3/",
     "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
-  </head>
-  <body>
-    <div class="bg-image-layer"></div>
-    <div class="bg-dynamic-gradient"></div>
-    <canvas id="bg-canvas"></canvas>
+</head>
+<body>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
-    <script>
-      const canvas = document.getElementById('bg-canvas');
-      const ctx = canvas.getContext('2d');
-      let trail = [];
-      function init() {
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = window.innerWidth * dpr;
-        canvas.height = window.innerHeight * dpr;
-        ctx.scale(dpr, dpr);
-        canvas.style.width = window.innerWidth + 'px';
-        canvas.style.height = window.innerHeight + 'px';
-      }
-      class Particle {
-        constructor(x, y) {
-          this.x = x; this.y = y;
-          this.size = Math.random() * 2 + 0.5;
-          this.speedX = (Math.random() - 0.5) * 1.5;
-          this.speedY = (Math.random() - 0.5) * 1.5;
-          this.color = Math.random() > 0.5 ? '#10b981' : '#06b6d4';
-          this.life = 0.8;
-          this.decay = Math.random() * 0.015 + 0.01;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; this.life -= this.decay; }
-        draw() {
-          if (this.life <= 0) return;
-          ctx.save();
-          ctx.globalAlpha = this.life * 0.35;
-          ctx.fillStyle = this.color;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-        }
-      }
-      function animate() {
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        for (let i = 0; i < trail.length; i++) {
-          trail[i].update(); trail[i].draw();
-          if (trail[i].life <= 0) { trail.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-      }
-      window.addEventListener('resize', init);
-      const handleInteraction = (e) => {
-        const x = e.clientX || (e.touches && e.touches[0].clientX);
-        const y = e.clientY || (e.touches && e.touches[0].clientY);
-        if (x !== undefined && y !== undefined) {
-          // Generate 2-4 particles per movement on touch for a denser trail
-          const count = e.touches ? 3 : 1;
-          for(let i = 0; i < count; i++) {
-            if (Math.random() > 0.1) trail.push(new Particle(x, y));
-          }
-        }
-      };
-      window.addEventListener('mousemove', handleInteraction);
-      window.addEventListener('touchmove', handleInteraction);
-      init(); animate();
-    </script>
-  </body>
+</body>
 </html>
