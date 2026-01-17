@@ -14,12 +14,12 @@
           extend: {
             colors: {
               biz: {
-                primary: '#10b981', 
-                secondary: '#06b6d4',
-                accent: '#34d399',
-                deep: '#030712',
+                primary: '#38bdf8', 
+                secondary: '#1d4ed8', 
+                accent: '#facc15', 
+                deep: '#020617', 
                 navy: '#010409',
-                gold: '#d4af37',
+                gold: '#fbbf24',
               }
             },
             fontFamily: {
@@ -32,7 +32,7 @@
     </script>
     <style>
       body {
-        background-color: #030712;
+        background-color: #020617;
         color: #f8fafc;
         margin: 0; padding: 0;
         overflow-x: hidden;
@@ -42,19 +42,32 @@
       #luxuryBg {
         position: fixed;
         inset: 0;
+        z-index: -3;
+        background-color: #020617;
+      }
+
+      /* Fixed Skyscraper Hero Background - URL UPDATED */
+      .hero-visual-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: -2;
-        background-image: url('https://i.ibb.co/sdPbVNNK/Chat-GPT-Image-Jan-10-2026-05-19-36-PM.png');
+        /* Replaced broken ibb.co link with a working Unsplash image */
+        background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000');
         background-size: cover;
-        background-position: center;
-        opacity: 0.12;
-        filter: saturate(0.5) brightness(0.2);
+        background-position: center 20%;
+        filter: brightness(0.45) saturate(0.8) contrast(1.1);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
       }
 
       .bg-gradient-overlay {
         position: fixed;
         inset: 0;
         z-index: -1;
-        background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
         pointer-events: none;
       }
 
@@ -67,21 +80,21 @@
       }
 
       @keyframes revealUp {
-        0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+        0% { opacity: 0; transform: translateY(15px); filter: blur(10px); }
         100% { opacity: 1; transform: translateY(0); filter: blur(0); }
       }
       .animate-reveal { opacity: 0; }
       .animate-reveal.active { animation: revealUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
 
       .glass-card {
-        background: rgba(255, 255, 255, 0.02);
+        background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .text-shine {
-        background: linear-gradient(135deg, #10b981 0%, #ffffff 45%, #ffffff 55%, #10b981 100%);
+        background: linear-gradient(135deg, #38bdf8 0%, #ffffff 45%, #ffffff 55%, #38bdf8 100%);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -90,55 +103,62 @@
       @keyframes shine-sweep { to { background-position: 200% center; } }
 
       #main-nav {
-        transform: translateY(-100%);
+        transform: translateY(0); /* Default visible */
         transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      #main-nav.visible { transform: translateY(0); }
+      #main-nav.hidden-nav { transform: translateY(-100%); }
 
       .service-icon-btn {
         aspect-ratio: 1/1;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
       }
       .service-icon-btn:hover {
-        transform: translateY(-8px) scale(1.03);
-        border-color: #10b981;
-        box-shadow: 0 15px 30px -10px rgba(16, 185, 129, 0.3);
+        transform: translateY(-5px) scale(1.05);
+        border-color: #38bdf8;
+        box-shadow: 0 12px 24px -8px rgba(56, 189, 248, 0.4);
       }
 
       .modal-fullscreen {
         position: fixed;
         inset: 0;
         z-index: 500;
-        background: #030712;
-        display: none;
+        background: rgba(2, 6, 23, 0.8);
+        backdrop-filter: blur(5px);
+        display: none; /* Hidden by default */
         overflow-y: auto;
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
-      .modal-active { display: block !important; }
+      .modal-fullscreen.modal-active { 
+        display: flex !important; 
+        opacity: 1;
+      }
 
-      .step-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; bottom: 0;
-        width: 4px;
-        background: #10b981;
-        opacity: 0.3;
+      @keyframes star-flicker {
+        0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 5px #facc15); }
+        50% { transform: scale(1.3) rotate(180deg); opacity: 0.8; filter: drop-shadow(0 0 12px #facc15); }
       }
-      .step-card:hover::before { opacity: 1; }
+      .star-animate {
+        display: inline-block;
+        animation: star-flicker 2.5s infinite ease-in-out;
+        color: #facc15;
+      }
 
       .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
     "react": "https://esm.sh/react@^19.2.3",
     "framer-motion": "https://esm.sh/framer-motion@^12.26.2",
     "react/": "https://esm.sh/react@^19.2.3/",
     "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0"
   }
 }
 </script>
@@ -150,120 +170,146 @@
 
     <!-- SCROLLING NAVBAR -->
     <nav id="main-nav" class="fixed top-0 left-0 right-0 z-[200] px-4 py-3">
-      <div class="max-w-4xl mx-auto glass-card rounded-full px-6 py-2 flex items-center justify-between shadow-2xl">
-        <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" alt="BizSense" class="h-6 object-contain">
-        <div class="hidden md:flex items-center gap-6">
-          <a href="#erp" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary">ERP</a>
-          <a href="#trade" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary">Trade</a>
-          <a href="#marketing" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary">Marketing</a>
-          <a href="#finance" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary">Finance</a>
+      <div class="max-w-4xl mx-auto glass-card rounded-full px-6 py-2 flex items-center justify-between shadow-2xl bg-black/40">
+        <!-- Replaced Logo with Text fallback if image fails, but using your URL -->
+        <div class="flex items-center gap-2">
+            <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="BizSense" class="h-5 md:h-6 object-contain">
+            <span class="hidden text-white font-bold tracking-widest text-sm uppercase">BizSense</span>
         </div>
-        <button onclick="window.open('https://wa.me/94701757576')" class="bg-biz-primary text-biz-deep text-[9px] font-black uppercase tracking-widest px-5 py-2 rounded-full">Connect</button>
+        
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#erp" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">ERP</a>
+          <a href="#trade" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">Trade</a>
+          <a href="#marketing" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">Marketing</a>
+          <a href="#finance" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">Finance</a>
+        </div>
+        <button onclick="window.open('https://wa.me/94701757576')" class="bg-biz-primary hover:bg-biz-secondary transition-colors text-biz-deep text-[9px] font-black uppercase tracking-widest px-5 py-2 rounded-full font-bold">Connect</button>
       </div>
     </nav>
 
     <!-- COMPACT HERO SECTION -->
-    <section class="relative min-h-screen flex flex-col items-center pt-8 md:pt-12 px-4">
-      <div class="animate-reveal active flex flex-col items-center gap-2" style="animation-delay: 0.1s;">
-        <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" alt="BizSense Logo" class="h-14 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-        <div class="px-4 py-1.5 rounded-full border border-biz-primary/20 bg-biz-primary/5">
-          <span class="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] text-biz-primary">Consultancy & Systems | 20+ Years Excellence</span>
+    <section class="relative min-h-screen flex flex-col items-center pt-24 md:pt-32 px-4 pb-12">
+      <div class="hero-visual-bg"></div>
+      
+      <div class="animate-reveal active flex flex-col items-center gap-1.5 mb-6" style="animation-delay: 0.1s;">
+        <!-- Logo with fallback -->
+        <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" onerror="this.style.display='none'" alt="BizSense Logo" class="h-10 md:h-14 object-contain drop-shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+        
+        <div class="px-4 py-1 rounded-full border border-biz-primary/30 bg-biz-primary/10 flex items-center gap-2 mt-2">
+          <span class="star-animate text-xs">⭐</span>
+          <span class="text-[7px] md:text-[9px] font-black uppercase tracking-[0.3em] text-white">Consultancy & Systems | 20+ Years</span>
+          <span class="star-animate text-xs" style="animation-delay: 1.25s;">⭐</span>
         </div>
       </div>
 
-      <div class="w-full max-w-5xl text-center mt-6">
-        <div class="animate-reveal active glass-card rounded-[40px] md:rounded-[50px] p-6 md:p-10 mb-6 border-white/5" style="animation-delay: 0.2s;">
-          <h1 class="text-[36px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-display font-[950] text-white leading-[0.9] uppercase tracking-tighter">
+      <div class="w-full max-w-5xl text-center">
+        <!-- Main Headline Box -->
+        <div class="animate-reveal active glass-card rounded-[30px] md:rounded-[40px] p-6 md:p-10 mb-6 border-white/10" style="animation-delay: 0.2s;">
+          <h1 class="text-[32px] sm:text-[50px] md:text-[68px] lg:text-[84px] font-display font-[950] text-white leading-[0.9] uppercase tracking-tighter">
             Empowering<br>Businesses
           </h1>
 
-          <div class="flex items-center justify-center gap-4 my-4">
-            <div class="w-10 md:w-24 h-[1px] bg-white/10"></div>
-            <span class="text-[10px] md:text-xl font-display font-black text-white/20 tracking-[0.4em] uppercase italic">with</span>
-            <div class="w-10 md:w-24 h-[1px] bg-white/10"></div>
+          <div class="flex items-center justify-center gap-3 my-4">
+            <div class="w-8 md:w-16 h-[1px] bg-white/10"></div>
+            <span class="text-[8px] md:text-base font-display font-black text-biz-primary/40 tracking-[0.3em] uppercase italic">with</span>
+            <div class="w-8 md:w-16 h-[1px] bg-white/10"></div>
           </div>
 
-          <div class="h-[50px] md:h-[90px] flex items-center justify-center overflow-hidden">
-            <span id="rotating-text" class="text-shine text-[24px] sm:text-4xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter whitespace-nowrap">
+          <div class="h-[35px] md:h-[65px] flex items-center justify-center overflow-hidden">
+            <span id="rotating-text" class="text-shine text-[18px] sm:text-2xl md:text-4xl lg:text-5xl font-display font-black uppercase tracking-tighter whitespace-nowrap">
               Digital Marketing
             </span>
           </div>
         </div>
 
-        <!-- HERO BUTTONS (Integrated inside Hero View) -->
-        <div class="grid grid-cols-4 gap-3 md:gap-8 w-full max-w-4xl mx-auto mb-8 px-2 animate-reveal active" style="animation-delay: 0.5s;">
+        <!-- HERO BUTTONS -->
+        <div class="grid grid-cols-4 gap-2 md:gap-4 w-full max-w-xl mx-auto mb-8 px-1 animate-reveal active" style="animation-delay: 0.4s;">
           <div class="flex flex-col items-center gap-2 group">
-            <button onclick="openServiceModal('erp')" class="service-icon-btn rounded-2xl md:rounded-3xl p-0 w-full overflow-hidden bg-white">
-              <img src="https://i.ibb.co/KzfDwZrz/Chat-GPT-Image-Jan-16-2026-06-15-27-PM.png" alt="ERP" class="w-full h-full object-cover">
+            <button onclick="openServiceModal('erp')" class="service-icon-btn rounded-xl md:rounded-2xl p-0 w-full overflow-hidden bg-white/5 relative group">
+              <!-- Using icons instead of external images to ensure reliability -->
+              <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-900 to-slate-900">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 md:w-12 md:h-12 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
             </button>
-            <h4 class="font-display font-black text-[8px] md:text-xs uppercase tracking-widest text-white/40 group-hover:text-biz-primary transition-colors">ERP</h4>
+            <h4 class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-white/60 group-hover:text-biz-primary transition-colors">ERP</h4>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <button onclick="openServiceModal('b2b')" class="service-icon-btn rounded-2xl md:rounded-3xl p-0 w-full overflow-hidden bg-white">
-              <img src="https://i.ibb.co/5x4LPY0L/Chat-GPT-Image-Jan-16-2026-06-14-36-PM.png" alt="B2B" class="w-full h-full object-cover">
+            <button onclick="openServiceModal('b2b')" class="service-icon-btn rounded-xl md:rounded-2xl p-0 w-full overflow-hidden bg-white/5 relative group">
+               <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-900 to-slate-900">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 md:w-12 md:h-12 text-indigo-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path></svg>
+              </div>
             </button>
-            <h4 class="font-display font-black text-[8px] md:text-xs uppercase tracking-widest text-white/40 group-hover:text-biz-primary transition-colors">B2B</h4>
+            <h4 class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-white/60 group-hover:text-biz-primary transition-colors">B2B</h4>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <button onclick="openServiceModal('marketing')" class="service-icon-btn rounded-2xl md:rounded-3xl p-0 w-full overflow-hidden bg-white">
-              <img src="https://i.ibb.co/TDY6Sf4m/Chat-GPT-Image-Jan-16-2026-06-13-54-PM.png" alt="Marketing" class="w-full h-full object-cover">
+            <button onclick="openServiceModal('marketing')" class="service-icon-btn rounded-xl md:rounded-2xl p-0 w-full overflow-hidden bg-white/5 relative group">
+               <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-pink-900 to-slate-900">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 md:w-12 md:h-12 text-pink-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
             </button>
-            <h4 class="font-display font-black text-[8px] md:text-xs uppercase tracking-widest text-white/40 group-hover:text-biz-primary transition-colors">Digital</h4>
+            <h4 class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-white/60 group-hover:text-biz-primary transition-colors">Digital</h4>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <button onclick="openServiceModal('finance')" class="service-icon-btn rounded-2xl md:rounded-3xl p-0 w-full overflow-hidden bg-white">
-              <img src="https://i.ibb.co/JWXLhgjD/Chat-GPT-Image-Jan-16-2026-06-13-01-PM.png" alt="Finance" class="w-full h-full object-cover">
+            <button onclick="openServiceModal('finance')" class="service-icon-btn rounded-xl md:rounded-2xl p-0 w-full overflow-hidden bg-white/5 relative group">
+               <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-900 to-slate-900">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 md:w-12 md:h-12 text-emerald-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
             </button>
-            <h4 class="font-display font-black text-[8px] md:text-xs uppercase tracking-widest text-white/40 group-hover:text-biz-primary transition-colors">Finance</h4>
+            <h4 class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-white/60 group-hover:text-biz-primary transition-colors">Finance</h4>
           </div>
         </div>
 
-        <div class="animate-reveal active max-w-3xl mx-auto px-6 mb-8" style="animation-delay: 0.6s;">
-          <p class="text-slate-400 text-[10px] md:text-lg leading-relaxed font-medium">
-            Bridging the gap between technology and financial logic. 
-            We design systems that improve <span class="text-white font-bold">profitability</span> and <span class="text-biz-primary font-bold">control</span>.
+        <!-- BIO SENTENCE -->
+        <div class="animate-reveal active max-w-3xl mx-auto px-4 mb-4" style="animation-delay: 0.6s;">
+          <p class="text-gray-300 text-[10px] md:text-sm lg:text-base leading-relaxed font-medium tracking-tight">
+            <span class="text-white font-black">BizSense Experts</span> is a 
+            <span class="text-white/60 mx-1">multi-disciplinary</span> business solutions firm providing 
+            <span class="text-biz-primary font-bold">ERP systems</span>, 
+            <span class="text-biz-accent font-bold italic">digital marketing</span>, and 
+            <span class="text-white font-bold underline decoration-biz-primary/30 underline-offset-2">B2B trade facilitation</span>. 
+            Bridging the gap between technology and <span class="text-white font-bold">real business needs</span>.
           </p>
         </div>
 
-        <div class="animate-reveal active flex flex-col items-center opacity-20" style="animation-delay: 0.8s;">
-          <div class="w-[1px] h-12 bg-gradient-to-b from-biz-primary to-transparent"></div>
+        <div class="animate-reveal active flex flex-col items-center opacity-30 mt-8" style="animation-delay: 0.8s;">
+          <div class="w-[1px] h-16 bg-gradient-to-b from-biz-primary to-transparent"></div>
         </div>
       </div>
     </section>
 
     <!-- SECTION: WHY ERP IS CRITICAL -->
-    <section id="erp" class="py-20 md:py-32 border-t border-white/5 bg-biz-navy/30">
+    <section id="erp" class="py-16 md:py-32 border-t border-white/5 bg-biz-secondary/5 relative z-10">
       <div class="container mx-auto px-6 max-w-6xl">
-        <div class="animate-reveal flex flex-col lg:flex-row gap-16 items-center">
+        <div class="animate-reveal flex flex-col lg:flex-row gap-12 md:gap-16 items-center">
           <div class="lg:w-1/2">
-            <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Discipline of Growth</h2>
+            <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Strategic Framework</h2>
             <h3 class="text-3xl md:text-6xl font-display font-black text-white uppercase leading-[0.9] tracking-tighter mb-8">
               Why ERP Is Critical<br>for Growing Businesses
             </h3>
             <p class="text-gray-400 text-sm md:text-lg mb-10 leading-relaxed">
-              Businesses without ERP operate on assumptions. <span class="text-white font-bold">ERP creates one source of truth</span> across the organisation.
+              Businesses without ERP operate on assumptions. <span class="text-biz-primary font-bold">ERP creates one source of truth</span> across the organisation.
             </p>
             <div class="grid gap-4">
-              <div class="glass-card p-5 rounded-2xl border-l-4 border-biz-primary">
+              <div class="glass-card p-4 rounded-2xl border-l-4 border-biz-primary shadow-lg hover:bg-white/5 transition-colors">
                 <p class="text-white text-xs md:text-base font-bold">Eliminate disconnected spreadsheets.</p>
               </div>
-              <div class="glass-card p-5 rounded-2xl border-l-4 border-biz-primary">
+              <div class="glass-card p-4 rounded-2xl border-l-4 border-biz-primary shadow-lg hover:bg-white/5 transition-colors">
                 <p class="text-white text-xs md:text-base font-bold">Achieve absolute stock and debtor control.</p>
               </div>
-              <div class="glass-card p-5 rounded-2xl border-l-4 border-biz-primary">
+              <div class="glass-card p-4 rounded-2xl border-l-4 border-biz-primary shadow-lg hover:bg-white/5 transition-colors">
                 <p class="text-white text-xs md:text-base font-bold">Real-time financial visibility.</p>
               </div>
-              <div class="glass-card p-5 rounded-2xl border-l-4 border-biz-primary">
-                <p class="text-white text-xs md:text-base font-bold">System-dependent (not owner-dependent) decisions.</p>
+              <div class="glass-card p-4 rounded-2xl border-l-4 border-biz-primary shadow-lg hover:bg-white/5 transition-colors">
+                <p class="text-white text-xs md:text-base font-bold">System-dependent decisions.</p>
               </div>
             </div>
           </div>
-          <div class="lg:w-1/2">
+          <div class="lg:w-1/2 w-full">
             <div class="rounded-[40px] overflow-hidden border border-white/10 shadow-3xl aspect-square relative group">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 transition-all duration-1000">
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-              <div class="absolute bottom-8 left-8 right-8 p-8 glass-card rounded-3xl border-biz-primary/20">
-                <p class="text-white italic text-base md:text-xl font-medium">"Implementing an ERP system is not an IT project — it is a change in business culture."</p>
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000" class="w-full h-full object-cover brightness-50 contrast-125 group-hover:brightness-75 transition-all duration-1000 transform group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-biz-deep via-transparent to-transparent opacity-80"></div>
+              <div class="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 md:right-8 p-6 md:p-8 glass-card rounded-3xl border-biz-primary/30">
+                <p class="text-white italic text-sm md:text-xl font-medium">"Implementing an ERP system is not an IT project — it is a change in business culture."</p>
               </div>
             </div>
           </div>
@@ -272,105 +318,73 @@
     </section>
 
     <!-- SECTION: FRAMEWORK -->
-    <section class="py-20 md:py-32 bg-black/40">
+    <section class="py-16 md:py-32 bg-black/40 relative z-10">
       <div class="container mx-auto px-6 max-w-6xl">
         <div class="text-center mb-16 animate-reveal">
-          <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Methodology</h2>
-          <h3 class="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter">Implementation Framework</h3>
+          <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Implementation</h2>
+          <h3 class="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter">Business-First Framework</h3>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-reveal">
-          <div class="glass-card p-8 rounded-[30px] step-card relative overflow-hidden">
-            <span class="text-biz-primary font-black text-3xl opacity-20">01</span>
-            <h4 class="text-white font-bold text-sm uppercase mt-4 mb-2">Process Study</h4>
-            <p class="text-gray-500 text-xs leading-relaxed">Understand current operations, workflows, and pain points in-depth.</p>
+          <div class="glass-card p-8 rounded-[25px] relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+            <span class="text-biz-primary font-black text-2xl opacity-20">01</span>
+            <h4 class="text-white font-bold text-xs uppercase mt-3 mb-2">Process Study</h4>
+            <p class="text-gray-500 text-[11px] leading-relaxed">Understand current operations, workflows, and pain points in-depth.</p>
           </div>
-          <div class="glass-card p-8 rounded-[30px] step-card relative overflow-hidden">
-            <span class="text-biz-primary font-black text-3xl opacity-20">02</span>
-            <h4 class="text-white font-bold text-sm uppercase mt-4 mb-2">Gap Analysis</h4>
-            <p class="text-gray-500 text-xs leading-relaxed">Identify gaps between current processes and global best practices.</p>
+          <div class="glass-card p-8 rounded-[25px] relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+            <span class="text-biz-primary font-black text-2xl opacity-20">02</span>
+            <h4 class="text-white font-bold text-xs uppercase mt-3 mb-2">Gap Analysis</h4>
+            <p class="text-gray-500 text-[11px] leading-relaxed">Identify gaps between current processes and global best practices.</p>
           </div>
-          <div class="glass-card p-8 rounded-[30px] step-card relative overflow-hidden">
-            <span class="text-biz-primary font-black text-3xl opacity-20">03</span>
-            <h4 class="text-white font-bold text-sm uppercase mt-4 mb-2">Selection</h4>
-            <p class="text-gray-500 text-xs leading-relaxed">Recommend Odoo, Zoho, or QuickBooks based on needs — not trends.</p>
+          <div class="glass-card p-8 rounded-[25px] relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+            <span class="text-biz-primary font-black text-2xl opacity-20">03</span>
+            <h4 class="text-white font-bold text-xs uppercase mt-3 mb-2">Selection</h4>
+            <p class="text-gray-500 text-[11px] leading-relaxed">Recommend Odoo, Zoho, or QuickBooks based on needs.</p>
           </div>
-          <div class="glass-card p-8 rounded-[30px] step-card relative overflow-hidden">
-            <span class="text-biz-primary font-black text-3xl opacity-20">04</span>
-            <h4 class="text-white font-bold text-sm uppercase mt-4 mb-2">Customisation</h4>
-            <p class="text-gray-500 text-xs leading-relaxed">Configure the system to match real-world business hierarchies.</p>
+          <div class="glass-card p-8 rounded-[25px] relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+            <span class="text-biz-primary font-black text-2xl opacity-20">04</span>
+            <h4 class="text-white font-bold text-xs uppercase mt-3 mb-2">Customisation</h4>
+            <p class="text-gray-500 text-[11px] leading-relaxed">Configure the system to match real-world business hierarchies.</p>
           </div>
-          <div class="glass-card p-8 rounded-[30px] step-card relative overflow-hidden">
-            <span class="text-biz-primary font-black text-3xl opacity-20">05</span>
-            <h4 class="text-white font-bold text-sm uppercase mt-4 mb-2">User Training</h4>
-            <p class="text-gray-500 text-xs leading-relaxed">Ensure total adoption, discipline, and operational ownership.</p>
+          <div class="glass-card p-8 rounded-[25px] relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+            <span class="text-biz-primary font-black text-2xl opacity-20">05</span>
+            <h4 class="text-white font-bold text-xs uppercase mt-3 mb-2">User Training</h4>
+            <p class="text-gray-500 text-[11px] leading-relaxed">Ensure total adoption and operational ownership.</p>
           </div>
-          <div class="glass-card p-8 rounded-[30px] step-card relative overflow-hidden">
-            <span class="text-biz-primary font-black text-3xl opacity-20">06</span>
-            <h4 class="text-white font-bold text-sm uppercase mt-4 mb-2">Go-Live Support</h4>
-            <p class="text-gray-500 text-xs leading-relaxed">Monitoring and continuous improvement beyond initial setup.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: INDUSTRIES & B2B -->
-    <section id="trade" class="py-20 md:py-32">
-      <div class="container mx-auto px-6 max-w-6xl">
-        <div class="animate-reveal grid lg:grid-cols-2 gap-20">
-          <div>
-            <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Market Presence</h2>
-            <h3 class="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter mb-8">Industries Served</h3>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="glass-card p-4 rounded-xl text-center"><p class="text-white text-[10px] font-black uppercase tracking-widest">Manufacturing</p></div>
-              <div class="glass-card p-4 rounded-xl text-center"><p class="text-white text-[10px] font-black uppercase tracking-widest">Trading</p></div>
-              <div class="glass-card p-4 rounded-xl text-center"><p class="text-white text-[10px] font-black uppercase tracking-widest">Exporters</p></div>
-              <div class="glass-card p-4 rounded-xl text-center"><p class="text-white text-[10px] font-black uppercase tracking-widest">Retail & POS</p></div>
-              <div class="glass-card p-4 rounded-xl text-center"><p class="text-white text-[10px] font-black uppercase tracking-widest">Agriculture</p></div>
-              <div class="glass-card p-4 rounded-xl text-center"><p class="text-white text-[10px] font-black uppercase tracking-widest">Service SMEs</p></div>
-            </div>
-            <p class="mt-8 text-gray-500 text-xs md:text-sm font-medium">Our expertise is shaped by real-world banking exposure across multiple industries.</p>
-          </div>
-          <div class="glass-card p-8 md:p-12 rounded-[50px] border-biz-primary/20">
-            <h3 class="text-white font-display font-black text-2xl md:text-4xl uppercase mb-6">B2B Trade Support</h3>
-            <p class="text-slate-400 mb-8 text-sm md:text-base">We don’t just introduce contacts — we prepare businesses to close deals through readiness assessments and margin validation.</p>
-            <ul class="space-y-4">
-              <li class="flex items-center gap-3 text-white/70 text-[10px] md:text-xs uppercase font-black"><span class="w-2 h-2 rounded-full bg-biz-primary"></span> Costing & Margin Validation</li>
-              <li class="flex items-center gap-3 text-white/70 text-[10px] md:text-xs uppercase font-black"><span class="w-2 h-2 rounded-full bg-biz-primary"></span> B2B Meeting Coordination</li>
-              <li class="flex items-center gap-3 text-white/70 text-[10px] md:text-xs uppercase font-black"><span class="w-2 h-2 rounded-full bg-biz-primary"></span> Registration on Global Platforms</li>
-            </ul>
+          <div class="glass-card p-8 rounded-[25px] relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+            <span class="text-biz-primary font-black text-2xl opacity-20">06</span>
+            <h4 class="text-white font-bold text-xs uppercase mt-3 mb-2">Go-Live Support</h4>
+            <p class="text-gray-500 text-[11px] leading-relaxed">Monitoring and continuous improvement beyond initial setup.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- SECTION: MARKETING & FINANCE -->
-    <section id="marketing" class="py-20 md:py-32 bg-biz-navy/40">
+    <section id="marketing" class="py-16 md:py-32 bg-biz-deep relative z-10">
       <div class="container mx-auto px-6 max-w-5xl text-center animate-reveal">
-        <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-8">Growth Strategy</h2>
+        <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-8">Revenue Logic</h2>
         <h3 class="text-4xl md:text-7xl font-display font-black text-white uppercase leading-[0.8] tracking-tighter mb-10">
-          Marketing Should Create Revenue — <br><span class="text-biz-primary">Not Just Likes.</span>
+          Marketing Should Create Revenue — <br><span class="text-biz-accent">Not Just Likes.</span>
         </h3>
-        <p class="text-gray-400 text-sm md:text-lg mb-16 leading-relaxed max-w-3xl mx-auto">
+        <p class="text-gray-400 text-sm md:text-lg mb-12 max-w-3xl mx-auto">
           Marketing without systems creates noise. Marketing with systems creates revenue. 
-          We align content with sales, operations, and finance.
         </p>
-        <div id="finance" class="glass-card p-10 md:p-16 rounded-[60px] text-left border-white/10">
-          <h3 class="text-2xl md:text-4xl font-display font-black text-white uppercase mb-6">Accounting & Consulting</h3>
-          <p class="text-slate-400 text-sm md:text-lg mb-8 italic">"Profit Is Opinion. Cash Flow Is Reality."</p>
+        <div id="finance" class="glass-card p-8 md:p-14 rounded-[50px] text-left border-biz-primary/20 bg-gradient-to-br from-biz-secondary/10 to-transparent">
+          <h3 class="text-2xl md:text-4xl font-display font-black text-white uppercase mb-4">Accounting & Consulting</h3>
+          <p class="text-biz-primary text-sm md:text-lg mb-8 italic font-bold">"Profit Is Opinion. Cash Flow Is Reality."</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="space-y-4">
-              <h5 class="text-biz-primary font-black uppercase text-[10px] tracking-widest">Deliverables</h5>
-              <p class="text-white/80 text-xs md:text-sm">Cash flow forecasting & control</p>
-              <p class="text-white/80 text-xs md:text-sm">Working capital optimisation</p>
-              <p class="text-white/80 text-xs md:text-sm">Management dashboards & MIS</p>
+            <div class="space-y-3">
+              <h5 class="text-biz-accent font-black uppercase text-[9px] tracking-widest">Deliverables</h5>
+              <p class="text-white/80 text-[10px] md:text-sm flex items-center gap-2"><span class="w-1 h-1 bg-biz-primary rounded-full"></span> Cash flow forecasting & control</p>
+              <p class="text-white/80 text-[10px] md:text-sm flex items-center gap-2"><span class="w-1 h-1 bg-biz-primary rounded-full"></span> Working capital optimisation</p>
+              <p class="text-white/80 text-[10px] md:text-sm flex items-center gap-2"><span class="w-1 h-1 bg-biz-primary rounded-full"></span> Management dashboards & MIS</p>
             </div>
-            <div class="space-y-4">
-              <h5 class="text-biz-primary font-black uppercase text-[10px] tracking-widest">Enablers</h5>
+            <div class="space-y-3">
+              <h5 class="text-biz-accent font-black uppercase text-[9px] tracking-widest">Enablers</h5>
               <div class="flex flex-wrap gap-2">
-                <span class="px-4 py-1.5 bg-white/5 rounded-full text-[9px] font-black text-white/50 border border-white/10">ODOO</span>
-                <span class="px-4 py-1.5 bg-white/5 rounded-full text-[9px] font-black text-white/50 border border-white/10">ZOHO</span>
-                <span class="px-4 py-1.5 bg-white/5 rounded-full text-[9px] font-black text-white/50 border border-white/10">QUICKBOOKS</span>
-                <span class="px-4 py-1.5 bg-white/5 rounded-full text-[9px] font-black text-white/50 border border-white/10">POWER BI</span>
+                <span class="px-3 py-1 bg-biz-primary/10 rounded-full text-[8px] font-black text-biz-primary border border-biz-primary/20">ODOO</span>
+                <span class="px-3 py-1 bg-biz-primary/10 rounded-full text-[8px] font-black text-biz-primary border border-biz-primary/20">ZOHO</span>
+                <span class="px-3 py-1 bg-biz-primary/10 rounded-full text-[8px] font-black text-biz-primary border border-biz-primary/20">QUICKBOOKS</span>
               </div>
             </div>
           </div>
@@ -378,66 +392,191 @@
       </div>
     </section>
 
-    <!-- SECTION: WHY BIZSENSE -->
-    <section class="py-20 md:py-32">
-      <div class="container mx-auto px-6 max-w-4xl text-center animate-reveal">
-        <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-12">Differentiation</h2>
-        <h3 class="text-3xl md:text-5xl font-display font-black text-white uppercase mb-16">Why BizSense Experts</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-          <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
-            <p class="text-white font-bold text-sm mb-2">20+ Years Banking Experience</p>
-            <p class="text-gray-500 text-[10px] uppercase font-black">Credit & Financial Analysis</p>
-          </div>
-          <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
-            <p class="text-white font-bold text-sm mb-2">Hands-on SME Consulting</p>
-            <p class="text-gray-500 text-[10px] uppercase font-black">Actual Implementation</p>
-          </div>
-          <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
-            <p class="text-white font-bold text-sm mb-2">Multi-industry Exposure</p>
-            <p class="text-gray-500 text-[10px] uppercase font-black">Trading to Manufacturing</p>
-          </div>
-          <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
-            <p class="text-white font-bold text-sm mb-2">One-Stop Solution</p>
-            <p class="text-gray-500 text-[10px] uppercase font-black">Systems, Finance & Strategy</p>
-          </div>
-        </div>
-        <div class="mt-20">
-          <p class="text-white font-display font-bold italic text-xl md:text-2xl">
-            "We think like bankers, design like consultants, and implement like operators."
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT / CALL TO ACTION -->
-    <section class="py-24 px-6 border-t border-white/5">
-      <div class="container mx-auto max-w-4xl text-center animate-reveal">
-        <h3 class="text-3xl md:text-6xl font-display font-black text-white uppercase mb-10 tracking-tighter">Start Your Transformation</h3>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button onclick="window.open('https://wa.me/94701757576')" class="w-full sm:w-auto px-10 py-5 bg-biz-primary text-biz-deep rounded-full font-display font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-all">WhatsApp Consultation</button>
-          <button class="w-full sm:w-auto px-10 py-5 border border-white/20 text-white rounded-full font-display font-black uppercase text-[10px] tracking-widest hover:bg-white/5 transition-all">Talk to an Expert</button>
-        </div>
-      </div>
-    </section>
-
     <!-- FOOTER -->
-    <footer class="py-16 border-t border-white/5 bg-black">
+    <footer class="py-12 border-t border-white/5 bg-black relative z-10">
       <div class="container mx-auto px-6 text-center">
-        <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" alt="BizSense Logo" class="h-8 opacity-20 mx-auto mb-8 grayscale">
-        <p class="text-gray-700 text-[8px] font-black uppercase tracking-[0.6em]">&copy; 2026 BIZSENSE EXPERTS. ALL RIGHTS RESERVED.</p>
+        <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" onerror="this.style.display='none'" alt="BizSense Logo" class="h-6 opacity-30 mx-auto mb-6 grayscale hover:grayscale-0 transition-all cursor-pointer">
+        <p class="text-gray-700 text-[7px] font-black uppercase tracking-[0.5em]">&copy; 2026 BIZSENSE EXPERTS. ALL RIGHTS RESERVED.</p>
       </div>
     </footer>
 
-    <!-- MODAL (Ensuring no stray buttons) -->
-    <div id="service-modal" class="modal-fullscreen">
-      <div class="min-h-screen p-6 md:p-20 relative flex flex-col items-center">
-        <button onclick="closeModal()" class="absolute top-8 right-8 z-[600] p-4 glass-card rounded-full text-white hover:border-biz-primary transition-all shadow-xl shadow-black/50">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    <!-- MODAL -->
+    <div id="service-modal" class="modal-fullscreen items-center justify-center">
+      <div class="w-full max-w-4xl min-h-screen p-6 relative flex flex-col items-center justify-start bg-biz-deep/95 backdrop-blur-xl rounded-[0px] md:rounded-[40px] shadow-3xl my-0 md:my-10 overflow-y-auto">
+        <button onclick="closeModal()" class="absolute top-6 right-6 z-[600] p-4 glass-card rounded-full text-white border-biz-primary/40 hover:bg-biz-primary/20 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <div id="modal-content" class="w-full max-w-5xl"></div>
+        <div id="modal-content" class="w-full pt-12 md:pt-4"></div>
       </div>
     </div>
 
-    <script type="module" src="./index.tsx"></script>
+    <!-- Scripts (Inlined for single-file functionality) -->
+    <script>
+        // 1. Text Rotator Logic
+        const words = ["Digital Marketing", "ERP Implementation", "Financial Analysis", "Business Strategy", "Process Automation"];
+        let wordIndex = 0;
+        const textElement = document.getElementById("rotating-text");
+        
+        setInterval(() => {
+          wordIndex = (wordIndex + 1) % words.length;
+          // Simple fade-out/in effect could be added here, currently just text swap
+          textElement.textContent = words[wordIndex];
+        }, 3000);
+
+        // 2. Modal Logic
+        const modal = document.getElementById("service-modal");
+        const modalContent = document.getElementById("modal-content");
+        
+        const contentData = {
+          erp: `
+            <h2 class="text-4xl font-display font-black text-biz-primary mb-4">Enterprise Resource Planning</h2>
+            <p class="text-white/80 mb-6">Centralize your business operations into a single source of truth.</p>
+            <ul class="space-y-4 text-white/70">
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Inventory Management</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Accounting & Invoicing</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>HR & Payroll</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>CRM Integration</li>
+            </ul>
+          `,
+          b2b: `
+            <h2 class="text-4xl font-display font-black text-biz-primary mb-4">B2B Trade Facilitation</h2>
+            <p class="text-white/80 mb-6">Connecting you with verified suppliers and buyers globally.</p>
+            <ul class="space-y-4 text-white/70">
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Supplier Vetting</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Contract Negotiation</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Logistics Coordination</li>
+            </ul>
+          `,
+          marketing: `
+            <h2 class="text-4xl font-display font-black text-biz-primary mb-4">Digital Marketing</h2>
+            <p class="text-white/80 mb-6">Data-driven strategies to increase ROI and brand visibility.</p>
+            <ul class="space-y-4 text-white/70">
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Social Media Management</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>SEO & Content Strategy</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Performance Marketing (Ads)</li>
+            </ul>
+          `,
+          finance: `
+            <h2 class="text-4xl font-display font-black text-biz-primary mb-4">Financial Consulting</h2>
+            <p class="text-white/80 mb-6">Robust financial planning for sustainable growth.</p>
+            <ul class="space-y-4 text-white/70">
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Cash Flow Management</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Financial Modeling</li>
+              <li class="flex items-start gap-3"><span class="text-biz-primary font-bold">✓</span>Audit Preparation</li>
+            </ul>
+          `
+        };
+
+        function openServiceModal(service) {
+          if (contentData[service]) {
+            modalContent.innerHTML = contentData[service];
+            modal.classList.add("modal-active");
+            document.body.style.overflow = "hidden"; // Prevent background scroll
+          }
+        }
+
+        function closeModal() {
+          modal.classList.remove("modal-active");
+          document.body.style.overflow = "";
+        }
+
+        // Close modal on click outside
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+
+        // 3. Scroll Reveal Logic
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+
+        // 4. Navbar Scroll Logic
+        let lastScroll = 0;
+        const nav = document.getElementById('main-nav');
+        
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset;
+          if (currentScroll <= 0) {
+            nav.classList.remove('hidden-nav');
+            return;
+          }
+          if (currentScroll > lastScroll && currentScroll > 100) {
+            // Scrolling down
+            nav.classList.add('hidden-nav');
+          } else {
+            // Scrolling up
+            nav.classList.remove('hidden-nav');
+          }
+          lastScroll = currentScroll;
+        });
+
+        // 5. Particle Canvas (Simple Starfield)
+        const canvas = document.getElementById("particleCanvas");
+        const ctx = canvas.getContext("2d");
+        let width, height;
+        let particles = [];
+
+        function resize() {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+          constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 2;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random();
+          }
+          update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x < 0) this.x = width;
+            if (this.x > width) this.x = 0;
+            if (this.y < 0) this.y = height;
+            if (this.y > height) this.y = 0;
+            
+            // Twinkle effect
+            if (Math.random() > 0.99) {
+                this.opacity = Math.random();
+            }
+          }
+          draw() {
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.5})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        function initParticles() {
+          resize();
+          for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+          }
+          animateParticles();
+        }
+
+        function animateParticles() {
+          ctx.clearRect(0, 0, width, height);
+          particles.forEach(p => {
+            p.update();
+            p.draw();
+          });
+          requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resize);
+        window.onload = initParticles;
+
+    </script>
   </body>
 </html>
