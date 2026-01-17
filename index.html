@@ -142,34 +142,23 @@
         position: fixed;
         inset: 0;
         z-index: 500;
-        background: rgba(2, 6, 23, 0.8);
-        backdrop-filter: blur(5px);
+        background: rgba(2, 6, 23, 0.85); /* Slightly darker for better readability */
+        backdrop-filter: blur(10px);
         display: none; /* Hidden by default */
         overflow-y: auto;
         opacity: 0;
         transition: opacity 0.3s ease;
+        /* Changed from items-center/justify-center to allow natural scrolling of tall content */
+        align-items: flex-start; 
+        justify-content: center;
+        padding-top: 2rem; /* Initial padding from top */
       }
       .modal-fullscreen.modal-active { 
         display: flex !important; 
         opacity: 1;
       }
       
-      /* Mobile Menu Transitions */
-      #mobile-menu {
-        transition: all 0.3s ease-out;
-        transform-origin: top center;
-        opacity: 0;
-        transform: scaleY(0);
-        height: 0;
-        overflow: hidden;
-      }
-      #mobile-menu.menu-open {
-        opacity: 1;
-        transform: scaleY(1);
-        height: auto;
-        margin-top: 10px;
-        padding: 1rem;
-      }
+      /* Mobile Menu Transitions - REMOVED */
 
       @keyframes star-flicker {
         0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 5px #facc15); }
@@ -182,6 +171,22 @@
       }
 
       .no-scrollbar::-webkit-scrollbar { display: none; }
+      
+      /* Close button specific style to ensure it's always visible */
+      .modal-close-btn {
+          position: fixed;
+          top: 1rem;
+          right: 1rem;
+          z-index: 600;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      }
+      .modal-close-btn:hover {
+          background: rgba(56, 189, 248, 0.2);
+          border-color: #38bdf8;
+      }
     </style>
 </head>
   <body class="bg-biz-deep overflow-x-hidden selection:bg-biz-primary selection:text-white">
@@ -190,39 +195,27 @@
     <canvas id="particleCanvas"></canvas>
 
     <!-- SCROLLING NAVBAR -->
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-[200] px-4 py-3">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-[200] px-3 py-3 md:px-4">
       <div class="max-w-4xl mx-auto relative">
-        <div class="glass-card rounded-full px-6 py-2 flex items-center justify-between shadow-2xl bg-black/40 relative z-20">
+        <div class="glass-card rounded-full px-4 md:px-6 py-2 flex items-center justify-between shadow-2xl bg-black/40 relative z-20">
             <!-- Logo -->
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 shrink-0">
                 <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" alt="BizSense" class="h-5 md:h-6 object-contain">
                 <span class="hidden text-white font-bold tracking-widest text-sm uppercase">BizSense</span>
             </div>
             
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-6">
-              <a href="#erp" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">ERP</a>
-              <a href="#trade" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">Trade</a>
-              <a href="#marketing" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">Marketing</a>
-              <a href="#finance" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-biz-primary transition-colors">Finance</a>
+            <!-- Navbar Buttons (Visible on Mobile & Desktop) -->
+            <div class="flex items-center gap-2 md:gap-6 overflow-x-auto no-scrollbar mx-2">
+              <button onclick="openServiceModal('erp')" class="text-[9px] font-black uppercase tracking-widest text-white/70 hover:text-biz-primary transition-colors whitespace-nowrap">ERP</button>
+              <button onclick="openServiceModal('b2b')" class="text-[9px] font-black uppercase tracking-widest text-white/70 hover:text-biz-primary transition-colors whitespace-nowrap">Trade</button>
+              <button onclick="openServiceModal('marketing')" class="text-[9px] font-black uppercase tracking-widest text-white/70 hover:text-biz-primary transition-colors whitespace-nowrap">Digital</button>
+              <button onclick="openServiceModal('finance')" class="text-[9px] font-black uppercase tracking-widest text-white/70 hover:text-biz-primary transition-colors whitespace-nowrap">Finance</button>
             </div>
 
             <!-- Right Side Actions -->
-            <div class="flex items-center gap-3">
-                <button onclick="window.open('https://wa.me/94701757576')" class="bg-biz-primary hover:bg-biz-secondary transition-colors text-biz-deep text-[9px] font-black uppercase tracking-widest px-5 py-2 rounded-full font-bold">Connect</button>
-                <!-- Mobile Hamburger -->
-                <button onclick="toggleMobileMenu()" class="md:hidden text-white p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
+            <div class="flex items-center gap-3 shrink-0">
+                <button onclick="window.open('https://wa.me/94701757576')" class="bg-biz-primary hover:bg-biz-secondary transition-colors text-biz-deep text-[9px] font-black uppercase tracking-widest px-4 py-2 md:px-5 rounded-full font-bold">Connect</button>
             </div>
-        </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="glass-card rounded-[20px] bg-black/60 flex flex-col gap-3 items-center z-10">
-             <a href="#erp" onclick="toggleMobileMenu()" class="text-xs font-black uppercase tracking-widest text-white/70 hover:text-biz-primary py-2 w-full text-center border-b border-white/5">ERP Solutions</a>
-             <a href="#trade" onclick="toggleMobileMenu()" class="text-xs font-black uppercase tracking-widest text-white/70 hover:text-biz-primary py-2 w-full text-center border-b border-white/5">Global Trade</a>
-             <a href="#marketing" onclick="toggleMobileMenu()" class="text-xs font-black uppercase tracking-widest text-white/70 hover:text-biz-primary py-2 w-full text-center border-b border-white/5">Digital Marketing</a>
-             <a href="#finance" onclick="toggleMobileMenu()" class="text-xs font-black uppercase tracking-widest text-white/70 hover:text-biz-primary py-2 w-full text-center">Finance</a>
         </div>
       </div>
     </nav>
@@ -459,12 +452,14 @@
     </footer>
 
     <!-- MODAL -->
-    <div id="service-modal" class="modal-fullscreen items-center justify-center">
-      <div class="w-full max-w-4xl min-h-screen p-6 relative flex flex-col items-center justify-start bg-biz-deep/95 backdrop-blur-xl rounded-[0px] md:rounded-[40px] shadow-3xl my-0 md:my-10 overflow-y-auto">
-        <button onclick="closeModal()" class="absolute top-6 right-6 z-[600] p-4 glass-card rounded-full text-white border-biz-primary/40 hover:bg-biz-primary/20 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-        <div id="modal-content" class="w-full pt-12 md:pt-4"></div>
+    <div id="service-modal" class="modal-fullscreen">
+      <!-- Fixed Close Button placed outside scrollable area to be always visible -->
+      <button onclick="closeModal()" class="modal-close-btn p-3 rounded-full text-white transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="w-full max-w-4xl p-6 relative flex flex-col items-center justify-start bg-biz-deep/95 backdrop-blur-xl rounded-[0px] md:rounded-[40px] shadow-3xl mb-10 mx-4 border border-white/10">
+        <div id="modal-content" class="w-full pt-4"></div>
       </div>
     </div>
 
@@ -495,10 +490,8 @@
 
         // 3. Navbar Logic
         const nav = document.getElementById('main-nav');
-        const mobileMenu = document.getElementById("mobile-menu");
-        function toggleMobileMenu() {
-            mobileMenu.classList.toggle("menu-open");
-        }
+        // Mobile menu var removed as we are now always showing buttons
+        
         window.addEventListener('scroll', () => {
           const currentScroll = window.pageYOffset;
           const heroHeight = window.innerHeight * 0.15; 
@@ -506,7 +499,6 @@
             nav.classList.add('nav-visible');
           } else {
             nav.classList.remove('nav-visible');
-            mobileMenu.classList.remove("menu-open");
           }
         });
 
