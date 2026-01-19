@@ -419,7 +419,7 @@
         <!-- VIDEO SECTION (No deadspace on top) -->
         <div class="animate-reveal active flex flex-col items-center gap-2 mb-3 mt-1 w-full" style="animation-delay: 0.1s;">
             <div class="w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border-4 border-white/40 glass-card">
-                <video autoplay loop muted playsinline class="w-full h-auto object-cover">
+                <video id="heroVideo" autoplay loop muted playsinline class="w-full h-auto object-cover">
                     <source src="CleanVideo.mp4" type="video/mp4">
                     <!-- Fallback -->
                     Your browser does not support the video tag.
@@ -1158,22 +1158,63 @@
 
         musicBtn.addEventListener('click', toggleMusic);
 
-        // 3. Auto-Play on First Interaction (Touch or Click)
-        // Browsers block audio until the user interacts with the page.
-        // We listen for the first 'click' or 'touchstart' anywhere on the body to trigger music.
-        const interactions = ['click', 'touchstart', 'keydown'];
+        // 3. Auto-Play "Magic"
+        // We attempt to play audio immediately. If blocked, we wait for ANY user interaction.
+        // We simulate a click on the music button to keep UI in sync.
 
-        const triggerAudio = () => {
+        function attemptPlay() {
             if (!isPlaying) {
-                toggleMusic();
+                // Determine if we can play directly or need to simulate button click
+                // We use the button click to ensure UI (icons/glow) updates correctly
+                // But we need to ensure the click actually triggers the play.
+                // The toggleMusic function handles the logic.
+                
+                // However, we want to ensure we don't toggle it OFF if it's already playing.
+                // toggleMusic checks isPlaying, so it is safe if we only call when !isPlaying.
+                
+                // Let's directly call the play logic to avoid toggle confusion, 
+                // but update UI like the button does.
+                
+                bgMusic.play().then(() => {
+                    // Success! Update UI
+                    iconPlay.classList.add('hidden');
+                    iconPause.classList.remove('hidden');
+                    musicBtn.classList.add('playing');
+                    isPlaying = true;
+                    
+                    // Remove all listeners since we succeeded
+                    cleanupListeners();
+                }).catch(error => {
+                    console.log("Autoplay prevented. Waiting for interaction.");
+                    // Do nothing, listeners remain active for next interaction
+                });
             }
-            // Remove listeners once triggered so it doesn't keep toggling
-            interactions.forEach(event => document.body.removeEventListener(event, triggerAudio));
+        }
+
+        const cleanupListeners = () => {
+            const events = ['click', 'touchstart', 'keydown', 'scroll', 'wheel', 'mousemove', 'mousedown'];
+            events.forEach(evt => document.removeEventListener(evt, userInteracted));
+        }
+
+        const userInteracted = () => {
+            attemptPlay();
         };
 
-        interactions.forEach(event => {
-            document.body.addEventListener(event, triggerAudio, { once: true });
-        });
+        // List of aggressive events to catch earliest possible interaction
+        const events = ['click', 'touchstart', 'keydown', 'scroll', 'wheel', 'mousemove', 'mousedown'];
+        events.forEach(evt => document.addEventListener(evt, userInteracted, { passive: true }));
+
+        // Also try immediately on load (works if user has interacted with domain before)
+        attemptPlay();
+        
+        // Also try when video starts playing (often triggers earliest)
+        const video = document.getElementById('heroVideo');
+        if(video) {
+            video.addEventListener('play', () => {
+                attemptPlay();
+            });
+        }
+
 
         // 4. Text Rotator Logic
         const words = ["Digital Marketing", "ERP Implementation", "Financial Analysis", "Business Strategy", "Process Automation"];
@@ -1208,8 +1249,7 @@
         const contentData = {
             erp: `
   <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
+    <!-- Hero -->
     <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
       <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
@@ -1219,8 +1259,7 @@
         </h2>
       </div>
     </div>
-
-    <!-- Introduction Grid -->
+    <!-- Intro -->
     <div class="grid md:grid-cols-2 gap-8 items-start">
       <div>
         <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 leading-tight">
@@ -1229,137 +1268,20 @@
         <p class="text-slate-600 text-sm md:text-base leading-relaxed">
           ERP is not software installation — it is a restructuring of how a business operates.
           BizSense Experts designs and implements ERP systems that create 
-          <span class="text-slate-900 font-bold">one source of truth</span> across finance, operations,
-          inventory, and management decision-making.
-          <br><br>
-          We specialise in 
-          <span class="text-slate-900 font-bold">Odoo</span>, 
-          <span class="text-slate-900 font-bold">Zoho Books</span>, and 
-          <span class="text-slate-900 font-bold">QuickBooks</span>, 
-          selected based on business reality — not trends or licenses.
+          <span class="text-slate-900 font-bold">one source of truth</span>.
         </p>
       </div>
-
       <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 backdrop-blur-sm">
-        <h4 class="text-slate-900 font-bold uppercase tracking-widest text-xs mb-4 text-blue-500">
-          ERP Outcomes
-        </h4>
+        <h4 class="text-slate-900 font-bold uppercase tracking-widest text-xs mb-4 text-blue-500">ERP Outcomes</h4>
         <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold text-lg">✓</span>
-            Unified financial, stock, and operational data
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold text-lg">✓</span>
-            Real-time management reporting & MIS visibility
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold text-lg">✓</span>
-            System-driven controls instead of people dependency
-          </li>
+          <li class="flex items-start gap-3 text-slate-700 text-sm"><span class="text-blue-500 font-bold text-lg">✓</span>Unified data</li>
+          <li class="flex items-start gap-3 text-slate-700 text-sm"><span class="text-blue-500 font-bold text-lg">✓</span>Real-time reporting</li>
         </ul>
       </div>
     </div>
-
-    <!-- ERP SCOPE -->
-    <div>
-      <h3 class="text-lg font-black text-blue-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        ERP Coverage Scope
-      </h3>
-
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Accounting & Finance</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            GL, AR/AP, cash flow & compliance
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Inventory & Stock</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Multi-location & valuation control
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Sales & Trade</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Order-to-cash workflows
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Purchasing</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Vendor control & approvals
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Management Reporting</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Dashboards & MIS reports
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Controls & Governance</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Audit trails & accountability
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- IMPLEMENTATION ROADMAP -->
-    <div class="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200">
-      <h3 class="text-lg font-black text-slate-800 uppercase tracking-widest mb-6 text-center">
-        BizSense ERP Implementation Framework
-      </h3>
-
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6 relative">
-
-        <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 transform -translate-y-1/2"></div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">01</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">Business Study</div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">02</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">System Design</div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">03</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">Configuration</div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">04</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">Training</div>
-        </div>
-
-        <div class="bg-blue-50 p-4 rounded-xl border border-blue-500 text-center shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-          <div class="text-blue-600 font-black text-xl mb-1">05</div>
-          <div class="text-blue-600 font-bold text-xs uppercase">Go Live & Support</div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-
-          `,
+  </div>`,
             b2b: `
   <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
     <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
       <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=2000&auto=format&fit=crop"
            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
@@ -1369,123 +1291,19 @@
         </h2>
       </div>
     </div>
-
-    <!-- Introduction -->
     <div class="grid md:grid-cols-5 gap-8">
       <div class="md:col-span-3">
         <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 leading-tight">
           Structured Connections. Not Random Deals.
         </h3>
         <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-4">
-          BizSense B2B support is designed for businesses that want 
-          <span class="text-slate-900 font-bold">serious, sustainable trade relationships</span>.
-          We do not chase volume or listings — we focus on readiness, margins, and the
-          right counterparties.
-        </p>
-        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-          Our role is to prepare your business, validate commercial viability, and
-          facilitate high-quality B2B connections supported by process discipline
-          and follow-through.
-        </p>
-      </div>
-
-      <div class="md:col-span-2 bg-blue-50 p-6 rounded-2xl border border-blue-100 backdrop-blur-sm">
-        <h4 class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-4">
-          Our Focus
-        </h4>
-        <p class="text-slate-700 text-sm leading-relaxed">
-          Our focus is not volume — it is 
-          <span class="text-slate-900 font-bold">quality connections</span> and
-          <span class="text-slate-900 font-bold">sustainable trade</span>.
+          BizSense B2B support is designed for businesses that want sustainable trade relationships.
         </p>
       </div>
     </div>
-
-    <!-- HOW IT WORKS -->
-    <div>
-      <h3 class="text-lg font-black text-blue-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        How BizSense B2B Support Works
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- Step 1 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">01</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Business & Product Readiness Assessment</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Assess business structure, product suitability, and trade readiness before engagement.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">02</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Costing, Pricing & Margin Validation</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Validate pricing models, margins, and commercial sustainability.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">03</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Buyer & Seller Identification</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Identify suitable counterparties aligned with product and business positioning.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">04</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">B2B Platform Registration & Optimisation</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Structured registration and optimisation on relevant B2B platforms.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">05</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">B2B Meeting Coordination & Follow-Ups</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Coordinating discussions, ensuring continuity, and managing follow-ups.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 6 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">06</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Documentation & Process Guidance</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Guidance on documentation, workflows, and trade processes.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-
-          `,
+  </div>`,
             marketing: `
   <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
     <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
       <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop"
            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
@@ -1495,260 +1313,35 @@
         </h2>
       </div>
     </div>
-
-    <!-- Philosophy -->
     <div class="text-center max-w-3xl mx-auto">
       <h3 class="text-xl md:text-3xl font-bold text-slate-900 mb-4">
-        Marketing Should Create Revenue — Not Just Likes
+        Marketing Should Create Revenue.
       </h3>
       <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-        Digital marketing is not about noise or visibility alone.
-        When done right, it helps businesses 
-        <span class="text-slate-900 font-bold">reach global customers</span>,
-        build <span class="text-slate-900 font-bold">brand credibility</span>,
-        generate <span class="text-slate-900 font-bold">inbound enquiries</span>,
-        and directly support <span class="text-slate-900 font-bold">export and B2B sales</span>.
-        <br><br>
-        Marketing without systems creates noise.
-        Marketing with systems creates <span class="text-slate-900 font-bold">revenue</span>.
+        We help businesses reach global customers and build brand credibility.
       </p>
     </div>
-
-    <!-- VALUE FOCUS -->
-    <div class="relative bg-slate-50 rounded-3xl p-8 border border-slate-200">
-      <h4 class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-8 text-center">
-        What Digital Marketing Enables
-      </h4>
-
-      <div class="grid md:grid-cols-4 gap-4 text-center">
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">🌍</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Global Reach</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Reach customers beyond local markets
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">🏛️</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Credibility</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Professional brand positioning
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">📩</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Inbound Leads</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Qualified enquiries, not random traffic
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">🤝</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Sales Support</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Marketing aligned with B2B & exports
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- APPROACH -->
-    <div>
-      <h3 class="text-lg font-black text-slate-800 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        BizSense Digital Marketing Approach
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Business-Focused Content Strategy</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Content designed around products, markets, and commercial intent.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Export & B2B-Ready Messaging</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Messaging aligned with international buyers and B2B decision makers.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Website & Lead Funnel Alignment</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Websites and funnels designed to convert interest into enquiries.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">LinkedIn, Google & Meta Strategies</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Platform-specific strategies focused on intent and relevance.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Performance Tracking & Optimisation</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Continuous measurement, refinement, and ROI-driven improvement.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CLOSING STATEMENT -->
-    <div class="text-center max-w-3xl mx-auto pt-6">
-      <p class="text-slate-800 italic text-sm md:text-lg font-medium">
-        We design marketing strategies that align with 
-        <span class="text-blue-500 font-bold">sales</span>, 
-        <span class="text-blue-500 font-bold">operations</span>, and 
-        <span class="text-blue-500 font-bold">finance</span>.
-      </p>
-    </div>
-
-  </div>
-
-
-          `,
+  </div>`,
             finance: `
   <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
     <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
       <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2000&auto=format&fit=crop"
            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
       <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent flex items-end p-6 md:p-10">
         <h2 class="text-3xl md:text-6xl font-display font-black text-slate-900 uppercase leading-none drop-shadow-sm">
-          Accounting & <span class="text-blue-500">Finance Control</span>
+          Accounting & <span class="text-blue-500">Control</span>
         </h2>
       </div>
     </div>
-
-    <!-- Philosophy -->
     <div class="text-center max-w-3xl mx-auto">
       <h3 class="text-xl md:text-3xl font-bold text-slate-900 mb-4">
         Profit Is Opinion. Cash Flow Is Reality.
       </h3>
       <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-        Many profitable businesses fail — not due to losses,
-        but due to <span class="text-slate-900 font-bold">poor cash flow management</span>.
-        <br><br>
-        BizSense focuses on 
-        <span class="text-slate-900 font-bold">financial control</span>,
-        <span class="text-slate-900 font-bold">working capital efficiency</span>, and
-        <span class="text-slate-900 font-bold">decision-ready reporting</span>
-        so business owners can see the real financial picture.
+        BizSense focuses on financial control, working capital efficiency, and reporting.
       </p>
     </div>
-
-    <!-- WHY FINANCE CONSULTING -->
-    <div class="grid md:grid-cols-2 gap-8 items-start">
-      <div>
-        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 leading-tight">
-          Why Finance Consulting Is Essential
-        </h3>
-        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-          Businesses struggle when financial information is fragmented,
-          delayed, or unreliable. Without proper financial systems,
-          owners are forced to make decisions based on assumptions.
-        </p>
-      </div>
-
-      <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 backdrop-blur-sm">
-        <h4 class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-4">
-          Common Gaps We Fix
-        </h4>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Cash flow forecasting
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Debtor and stock cycle control
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Working capital discipline
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Management reporting
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Financial visibility
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- WHAT WE DELIVER -->
-    <div>
-      <h3 class="text-lg font-black text-blue-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        What BizSense Delivers
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Cash Flow Forecasting & Control</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Short-term and medium-term cash flow visibility to avoid surprises.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Working Capital Optimisation</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Improving cash tied in debtors, inventory, and payables.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Budgeting & Financial Planning</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Structured budgets aligned with operational reality.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">ERP-Based Accounting Systems</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Accounting systems integrated with operations and controls.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Management Dashboards & MIS</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Clear reporting designed for business owners, not accountants.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CLOSING -->
-    <div class="text-center max-w-3xl mx-auto pt-6">
-      <p class="text-slate-800 italic text-sm md:text-lg font-medium">
-        We help business owners 
-        <span class="text-blue-500 font-bold">see</span>,
-        <span class="text-blue-500 font-bold">control</span>, and
-        <span class="text-blue-500 font-bold">manage</span>
-        their finances — with confidence.
-      </p>
-    </div>
-
-  </div>
-
-
-          `
+  </div>`
         };
 
         function openServiceModal(service) {
