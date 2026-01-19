@@ -197,14 +197,10 @@
             }
         }
 
-        /* Nav Animation */
+        /* Nav Animation - Updated to be always visible */
         #main-nav {
-            transform: translateY(-200%);
+            transform: translateY(0); /* Always visible now */
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        #main-nav.nav-visible {
-            transform: translateY(0);
         }
 
         /* Service Icons */
@@ -267,7 +263,8 @@
             color: white;
         }
         
-        .logo-img {
+        /* Logo filter class (Only applied to footer now) */
+        .logo-img-filter {
             filter: invert(var(--logo-invert)) brightness(var(--logo-brightness, 100%));
         }
 
@@ -372,11 +369,11 @@
         <div class="max-w-4xl mx-auto relative">
             <div
                 class="glass-card rounded-full px-4 md:px-6 py-2 flex items-center justify-between shadow-lg relative z-20">
-                <!-- Logo -->
+                <!-- Logo (Original Colors Restored) -->
                 <div class="flex items-center gap-2 shrink-0">
                     <img src="https://i.ibb.co/7mmBhMJ/LOGO.png"
                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
-                        alt="BizSense" class="h-5 md:h-6 object-contain logo-img">
+                        alt="BizSense" class="h-5 md:h-6 object-contain"> 
                     <span class="hidden text-biz-text font-bold tracking-widest text-sm uppercase">BizSense</span>
                 </div>
 
@@ -1100,7 +1097,7 @@
     <footer class="py-12 border-t border-biz-border bg-biz-navy relative z-10">
         <div class="container mx-auto px-6 text-center">
             <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" onerror="this.style.display='none'" alt="BizSense Logo"
-                class="h-6 opacity-30 mx-auto mb-6 grayscale hover:grayscale-0 transition-all cursor-pointer logo-img">
+                class="h-6 opacity-30 mx-auto mb-6 grayscale hover:grayscale-0 transition-all cursor-pointer logo-img-filter">
             <p class="text-slate-400 text-[7px] font-black uppercase tracking-[0.5em]">&copy; 2026 BIZSENSE EXPERTS. ALL
                 RIGHTS RESERVED.</p>
         </div>
@@ -1131,9 +1128,6 @@
             setTimeout(() => {
                 loader.style.visibility = 'hidden';
             }, 800);
-            
-            // Attempt autoplay logic on first click/interaction if blocked
-            document.body.addEventListener('click', tryPlayMusic, { once: true });
         });
 
         // 2. Audio Control Logic
@@ -1162,16 +1156,26 @@
             }
         }
 
-        // Try to play on load, but catch error if blocked
-        function tryPlayMusic() {
-            if(!isPlaying) {
-                toggleMusic();
-            }
-        }
-
         musicBtn.addEventListener('click', toggleMusic);
 
-        // 3. Text Rotator Logic
+        // 3. Auto-Play on First Interaction (Touch or Click)
+        // Browsers block audio until the user interacts with the page.
+        // We listen for the first 'click' or 'touchstart' anywhere on the body to trigger music.
+        const interactions = ['click', 'touchstart', 'keydown'];
+
+        const triggerAudio = () => {
+            if (!isPlaying) {
+                toggleMusic();
+            }
+            // Remove listeners once triggered so it doesn't keep toggling
+            interactions.forEach(event => document.body.removeEventListener(event, triggerAudio));
+        };
+
+        interactions.forEach(event => {
+            document.body.addEventListener(event, triggerAudio, { once: true });
+        });
+
+        // 4. Text Rotator Logic
         const words = ["Digital Marketing", "ERP Implementation", "Financial Analysis", "Business Strategy", "Process Automation"];
         let wordIndex = 0;
         const textElement = document.getElementById("rotating-text");
@@ -1185,7 +1189,7 @@
             }, 500);
         }, 3000);
 
-        // 4. Hero Background Slideshow
+        // 5. Hero Background Slideshow
         const slides = document.querySelectorAll('.hero-slide');
         let currentSlide = 0;
         setInterval(() => {
@@ -1194,23 +1198,14 @@
             slides[currentSlide].classList.add('active');
         }, 5000);
 
-        // 5. Navbar Logic
-        const nav = document.getElementById('main-nav');
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            const heroHeight = window.innerHeight * 0.15;
-            if (currentScroll > heroHeight) {
-                nav.classList.add('nav-visible');
-            } else {
-                nav.classList.remove('nav-visible');
-            }
-        });
+        // 6. Navbar Logic (Simplified - Always Visible)
+        // Previous scroll logic removed to keep navbar fixed and visible.
 
-        // 6. Modal Logic
+        // 7. Modal Logic
         const modal = document.getElementById("service-modal");
         const modalContent = document.getElementById("modal-content");
 
-          const contentData = {
+        const contentData = {
             erp: `
   <div class="space-y-8 md:space-y-12 pb-10">
 
@@ -1773,7 +1768,7 @@
             if (e.target === modal) closeModal();
         });
 
-        // 7. Scroll Reveal Logic (Enhanced)
+        // 8. Scroll Reveal Logic (Enhanced)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1784,7 +1779,7 @@
 
         document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
 
-        // 8. Particle Canvas
+        // 9. Particle Canvas
         const canvas = document.getElementById("particleCanvas");
         const ctx = canvas.getContext("2d");
         let width, height;
