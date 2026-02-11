@@ -1162,24 +1162,9 @@
             }, 2100);
         });
 
-        // 2. Enter Website & Start Music Logic
+        // 2. Enter Website
         function enterWebsite() {
             const screen = document.getElementById('welcome-screen');
-            const bgMusic = document.getElementById('bgMusic');
-            const musicBtn = document.getElementById('musicToggle');
-            const iconPlay = document.getElementById('icon-play');
-            const iconPause = document.getElementById('icon-pause');
-            
-            // Play Audio immediately on user interaction
-            bgMusic.play().then(() => {
-                // Update UI to reflect playing state
-                iconPlay.classList.add('hidden');
-                iconPause.classList.remove('hidden');
-                musicBtn.classList.add('playing');
-                isPlaying = true;
-            }).catch(err => {
-                console.log("Audio play blocked:", err);
-            });
 
             // Fade out welcome screen
             screen.style.opacity = '0';
@@ -1188,54 +1173,6 @@
                 screen.remove();
             }, 1000);
         }
-
-        // 3. Audio Control Logic (Toggle)
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicToggle');
-        const iconPlay = document.getElementById('icon-play');
-        const iconPause = document.getElementById('icon-pause');
-        let isPlaying = false;
-
-        function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                iconPlay.classList.remove('hidden');
-                iconPause.classList.add('hidden');
-                musicBtn.classList.remove('playing');
-                isPlaying = false;
-            } else {
-                bgMusic.play();
-                iconPlay.classList.add('hidden');
-                iconPause.classList.remove('hidden');
-                musicBtn.classList.add('playing');
-                isPlaying = true;
-            }
-        }
-
-        musicBtn.addEventListener('click', toggleMusic);
-
-        // 4. Fallback Auto-Play (In case user didn't click button but interacted otherwise)
-        // We still keep this but it's secondary to the main Enter button now.
-        function attemptPlay() {
-            if (!isPlaying && document.getElementById('welcome-screen') === null) {
-                toggleMusic();
-            }
-        }
-
-        const cleanupListeners = () => {
-            const events = ['click', 'touchstart', 'keydown', 'scroll', 'wheel'];
-            events.forEach(evt => document.removeEventListener(evt, userInteracted));
-        }
-
-        const userInteracted = () => {
-            // Only try auto-playing if the welcome screen is GONE.
-            if (!document.getElementById('welcome-screen')) {
-                 attemptPlay();
-            }
-        };
-
-        const events = ['click', 'touchstart', 'keydown', 'scroll', 'wheel'];
-        events.forEach(evt => document.addEventListener(evt, userInteracted, { passive: true }));
 
 
         // 5. Text Rotator Logic
