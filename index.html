@@ -322,29 +322,7 @@
             transform: scale(1.1) rotate(10deg);
         }
 
-        /* Floating Music Button */
-        .float-music-btn {
-            position: fixed;
-            bottom: 90px; /* Above WhatsApp */
-            right: 20px;
-            z-index: 1000;
-            background: var(--color-text);
-            color: var(--color-navy);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .float-music-btn.playing {
-            animation: pulse-music 1.5s infinite;
-            background: var(--color-primary);
-            color: white;
-        }
+
 
         @keyframes pulse-green {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
@@ -392,11 +370,7 @@
         </div>
     </div>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="bgMusic" loop>
-        <source src="Digital Technology.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+
 
     <div id="luxuryBg"></div>
     <div class="bg-gradient-overlay"></div>
@@ -404,13 +378,7 @@
 
     <!-- FLOATING BUTTONS -->
     
-    <!-- Music Control -->
-    <button id="musicToggle" class="float-music-btn" title="Play/Pause Music">
-        <!-- Play Icon -->
-        <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-        <!-- Pause Icon (Hidden by default) -->
-        <svg id="icon-pause" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-    </button>
+
 
     <!-- WhatsApp -->
     <a href="https://wa.me/94701757576" target="_blank" class="float-call-btn" title="Contact Us on WhatsApp">
