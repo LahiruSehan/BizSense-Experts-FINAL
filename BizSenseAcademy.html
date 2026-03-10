@@ -28,9 +28,26 @@
     color: var(--white);
     font-family: 'Space Grotesk', sans-serif;
     overflow-x: hidden;
-    max-width: 430px;
+    position: relative;
+  }
+
+  /* === RESPONSIVE WRAPPER === */
+  .page-wrapper {
+    max-width: 600px;
     margin: 0 auto;
     position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .page-wrapper {
+      max-width: 760px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-wrapper {
+      max-width: 900px;
+    }
   }
 
   /* === PARTICLE BG === */
@@ -41,6 +58,24 @@
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
+  }
+
+  /* === DESKTOP RESPONSIVE ENHANCEMENTS === */
+  @media (min-width: 768px) {
+    .hero-title { font-size: 72px; }
+    .hero-title .line2 { font-size: 80px; }
+    .section-title { font-size: 52px; }
+    .hero-sub { font-size: 17px; }
+    section { padding: 60px 40px; }
+    .stats-row { gap: 16px; }
+    .stat-num { font-size: 28px; }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title { font-size: 88px; }
+    .hero-title .line2 { font-size: 96px; }
+    .section-title { font-size: 60px; }
+    section { padding: 70px 60px; }
   }
   .particle {
     position: absolute;
@@ -185,6 +220,7 @@
     position: relative;
     z-index: 2;
     padding: 50px 20px;
+    text-align: center;
   }
 
   .section-label {
@@ -194,15 +230,22 @@
     color: var(--cyan);
     text-transform: uppercase;
     margin-bottom: 8px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
+    justify-content: center;
   }
   .section-label::after {
     content: '';
-    flex: 1;
+    width: 40px;
     height: 1px;
     background: linear-gradient(to right, var(--cyan), transparent);
+  }
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to left, var(--cyan), transparent);
   }
 
   .section-title {
@@ -211,6 +254,7 @@
     line-height: 1;
     margin-bottom: 20px;
     letter-spacing: 1px;
+    text-align: center;
   }
 
   /* === VIDEO SECTION === */
@@ -256,8 +300,7 @@
     overflow: hidden;
     border: 2px solid rgba(0,245,255,0.3);
     box-shadow: 0 0 40px rgba(0,245,255,0.15), 0 0 80px rgba(139,92,246,0.1);
-    aspect-ratio: 9/16;
-    max-height: 500px;
+    aspect-ratio: 16/9;
     background: #000;
   }
   .video-wrapper iframe {
@@ -290,6 +333,8 @@
     gap: 12px;
     position: relative;
     overflow: hidden;
+    align-items: center;
+    text-align: center;
   }
   .presenter-card::before {
     content: '⚡';
@@ -311,6 +356,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    justify-content: center;
   }
   .role-chip {
     background: rgba(0,245,255,0.1);
@@ -327,8 +373,10 @@
     color: rgba(240,244,255,0.8);
     line-height: 1.7;
     border-left: 3px solid var(--gold);
-    padding-left: 14px;
+    border-right: 3px solid var(--gold);
+    padding: 0 14px;
     margin: 8px 0;
+    text-align: center;
   }
 
   /* === COURSE CARDS === */
@@ -336,6 +384,13 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .day-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .day-card {
@@ -346,6 +401,7 @@
     transform: translateX(-20px);
     opacity: 0;
     transition: all 0.6s ease;
+    text-align: center;
   }
   .day-card.visible {
     transform: translateX(0);
@@ -420,6 +476,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
   }
   .price-single .label { font-size: 13px; color: rgba(240,244,255,0.7); }
   .price-single .price { font-family: 'Orbitron', monospace; font-size: 20px; color: var(--white); font-weight: 700; }
@@ -587,7 +644,7 @@
     transform: translateX(-50%);
     z-index: 100;
     width: calc(100% - 40px);
-    max-width: 390px;
+    max-width: 500px;
   }
   .floating-btn {
     display: flex;
@@ -764,6 +821,8 @@
 </head>
 <body>
 
+<div class="page-wrapper">
+
 <!-- PARTICLES -->
 <div id="particles"></div>
 
@@ -882,7 +941,7 @@
     <div class="sinhala-text">
       මේ Masterclass, ඔයාට ඔයාගේ ජීවිතයේ Digital Agency business එකක් ගොඩනගන්න අවශ්‍ය හැම skill එකක්ම ඉගෙන දෙනවා. අදම ගමන් පටන් ගන්න!
     </div>
-    <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(240,244,255,0.6);">
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:rgba(240,244,255,0.6);">
       <span>📍</span>
       <span>Platform: <strong style="color:var(--cyan);">Zoom Live</strong></span>
     </div>
@@ -1021,6 +1080,8 @@
   <p>Presented by BizSense Experts</p>
   <p style="margin-top:4px;">Stop scrolling and start earning! 🚀</p>
 </footer>
+
+</div><!-- end page-wrapper -->
 
 <script>
   // PARTICLES
