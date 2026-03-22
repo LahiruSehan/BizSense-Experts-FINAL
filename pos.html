@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BizSensePOS — Sri Lanka's #1 POS for Mobile Phone Shops</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A1628;--white:#F8FBFF;--sky:#E8F3FC;--sky2:#C9E3F6;
+  --blue:#1A6BB5;--blue-lt:#3B8FD4;--gold:#F0B429;--gold-lt:#FFD666;
+  --muted:#5A7490;--line:#D0E5F5;--r:20px;--r2:28px;
+  --shadow:0 8px 40px rgba(10,22,40,.10);
+  --shadow2:0 20px 70px rgba(10,22,40,.16);
+  --gBlue:linear-gradient(135deg,#1A6BB5 0%,#0E4A8A 100%);
+  --gGold:linear-gradient(135deg,#F0B429 0%,#E8960A 100%);
+  --gSky:linear-gradient(160deg,#E8F3FC 0%,#F8FBFF 100%);
+  --gDark:linear-gradient(160deg,#0A1628 0%,#0E2340 100%);
+}
+*,::before,::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Manrope',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;line-height:1.65}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--sky)}
+::-webkit-scrollbar-thumb{background:var(--blue-lt);border-radius:3px}
+button{cursor:pointer;font-family:inherit}a{text-decoration:none}
+
+/* ── ANIMATIONS ── */
+[data-a]{opacity:0;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+[data-a="up"]   {transform:translateY(48px)}
+[data-a="left"] {transform:translateX(-52px)}
+[data-a="right"]{transform:translateX(52px)}
+[data-a="scale"]{transform:scale(.91)}
+[data-a].in{opacity:1!important;transform:none!important}
+
+/* ── NAV ── */
+nav{position:fixed;inset:0 0 auto 0;z-index:300;height:64px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;background:rgba(248,251,255,.9);backdrop-filter:blur(24px);border-bottom:1px solid rgba(208,229,245,.6);transition:box-shadow .3s}
+nav.sc{box-shadow:0 4px 30px rgba(10,22,40,.08)}
+.nl{display:flex;flex-direction:column;gap:2px;line-height:1}
+.nl .mark{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:-.02em}
+.mark .b{color:var(--ink)}.mark .s{color:var(--gold)}
+.mark .p{background:var(--gBlue);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nl .sub{font-size:.55rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nlinks{display:flex;gap:1.8rem;list-style:none}
+.nlinks a{font-size:.83rem;font-weight:500;color:var(--muted);transition:color .2s}
+.nlinks a:hover{color:var(--ink)}
+.ndl{display:flex;align-items:center;gap:7px;background:var(--gBlue);color:#fff;border:none;border-radius:50px;padding:10px 22px;font-size:.82rem;font-weight:700;box-shadow:0 4px 18px rgba(26,107,181,.35);transition:all .2s;text-decoration:none}
+.ndl:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,107,181,.45)}
+.ndl svg{width:14px;height:14px;flex-shrink:0}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.hbg span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mn{position:fixed;top:64px;left:0;right:0;z-index:299;background:rgba(248,251,255,.97);backdrop-filter:blur(20px);padding:28px 5vw 44px;border-top:1px solid var(--line);display:none;flex-direction:column;gap:20px;pointer-events:none}
+.mn.open{display:flex;pointer-events:auto}
+.mn a{font-size:1rem;font-weight:600;color:var(--ink)}
+.mn-dl{background:var(--gBlue);color:#fff;border:none;border-radius:14px;padding:15px;font-size:.94rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;text-decoration:none}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding:110px 5vw 80px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--gDark)}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.o1{width:clamp(380px,52vw,780px);height:clamp(380px,52vw,780px);background:radial-gradient(circle,rgba(26,107,181,.3) 0%,transparent 70%);top:-20%;left:-15%;animation:fa 8s ease-in-out infinite}
+.o2{width:clamp(280px,38vw,560px);height:clamp(280px,38vw,560px);background:radial-gradient(circle,rgba(240,180,41,.18) 0%,transparent 70%);bottom:-10%;right:-10%;animation:fb 10s ease-in-out infinite}
+.o3{width:180px;height:180px;background:radial-gradient(circle,rgba(59,143,212,.22) 0%,transparent 70%);top:42%;right:26%;animation:fa 6s ease-in-out infinite reverse}
+@keyframes fa{0%,100%{transform:translate(0,0)}50%{transform:translate(28px,-36px)}}
+@keyframes fb{0%,100%{transform:translate(0,0)}50%{transform:translate(-22px,28px)}}
+.hi{position:relative;z-index:2;max-width:860px;text-align:center;margin:0 auto}
+.hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(240,180,41,.14);border:1px solid rgba(240,180,41,.32);border-radius:50px;padding:6px 18px;margin-bottom:32px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-lt);animation:bi .8s .1s both cubic-bezier(.16,1,.3,1)}
+.hdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pl 1.5s infinite;flex-shrink:0}
+@keyframes bi{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes pl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.7)}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,6.5vw,5.4rem);font-weight:800;line-height:1.04;letter-spacing:-.03em;color:#fff;animation:hi .9s .2s both cubic-bezier(.16,1,.3,1)}
+@keyframes hi{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.gg{background:linear-gradient(90deg,var(--gold-lt),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gb{background:linear-gradient(90deg,#7FC8F8,#C5E8FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gbl{background:var(--gBlue);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsub{margin:24px auto 0;max-width:540px;color:rgba(255,255,255,.52);font-size:1.02rem;animation:hi .9s .35s both cubic-bezier(.16,1,.3,1)}
+.hbtns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:36px;animation:hi .9s .45s both cubic-bezier(.16,1,.3,1)}
+.btn-gold{display:inline-flex;align-items:center;gap:9px;background:var(--gGold);color:var(--ink);border:none;border-radius:50px;padding:15px 32px;font-size:.93rem;font-weight:700;box-shadow:0 6px 28px rgba(240,180,41,.42);transition:all .22s;text-decoration:none}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(240,180,41,.55)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:15px 32px;font-size:.93rem;font-weight:600;transition:all .22s;cursor:pointer}
+.btn-ghost:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+.tnote{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.72rem;color:rgba(255,255,255,.35);animation:hi .9s .55s both cubic-bezier(.16,1,.3,1)}
+.tnote svg{width:13px;height:13px;flex-shrink:0}
+.hpills{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:50px;animation:hi .9s .62s both cubic-bezier(.16,1,.3,1)}
+.hpill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:50px;padding:6px 15px;font-size:.73rem;font-weight:600;color:rgba(255,255,255,.68)}
+.hpill svg{width:13px;height:13px;flex-shrink:0}
+.si{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.22);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;z-index:2}
+.mouse{width:20px;height:32px;border:1.5px solid rgba(255,255,255,.18);border-radius:10px;display:flex;justify-content:center;padding-top:6px}
+.wheel{width:3px;height:7px;background:rgba(255,255,255,.38);border-radius:2px;animation:sw 1.8s ease-in-out infinite}
+@keyframes sw{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+/* ── STATS ── */
+.sstrip{background:var(--gBlue);padding:0 5vw;display:flex;flex-wrap:wrap}
+.si2{flex:1;min-width:150px;padding:30px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden}
+.si2::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 50%)}
+.si2:last-child{border-right:none}
+.sn{font-family:'Syne',sans-serif;font-size:2.1rem;font-weight:800;color:#fff;line-height:1}
+.sl{font-size:.7rem;color:rgba(255,255,255,.48);margin-top:6px;letter-spacing:.04em}
+
+/* ── SECTION ── */
+.sec{padding:clamp(64px,9vw,110px) 5vw}
+.stag{display:inline-flex;align-items:center;gap:7px;font-size:.67rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:rgba(26,107,181,.08);border-radius:50px;padding:5px 14px;margin-bottom:18px}
+.stag svg{width:12px;height:12px;flex-shrink:0}
+.stag-w{color:rgba(255,255,255,.65);background:rgba(255,255,255,.1)}
+.stag-g{color:var(--gold);background:rgba(240,180,41,.12)}
+.sh{font-family:'Syne',sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--ink)}
+.sh-w{color:#fff}
+.sp{margin-top:14px;color:var(--muted);max-width:520px;font-size:.96rem}
+.sp-w{color:rgba(255,255,255,.45)}
+
+/* ── PRICING SECTION ── */
+.pricing-sec{background:var(--gDark);position:relative;overflow:hidden}
+.pricing-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(26,107,181,.2) 0%,transparent 55%);pointer-events:none}
+.pricing-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;text-align:center}
+.price-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--r2);padding:clamp(36px,5vw,60px);margin-top:48px;position:relative;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt))}
+.price-amount{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:800;color:#fff;line-height:1;letter-spacing:-.04em}
+.price-amount sup{font-size:.4em;vertical-align:super;margin-right:2px;color:rgba(255,255,255,.6)}
+.price-amount sub{font-size:.28em;vertical-align:baseline;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.02em}
+.price-sub{font-size:.85rem;color:rgba(255,255,255,.4);margin-top:8px}
+.price-note{display:inline-flex;align-items:center;gap:7px;background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.25);border-radius:50px;padding:6px 16px;margin-top:20px;font-size:.73rem;color:var(--gold-lt);font-weight:600}
+.price-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:36px;text-align:left}
+.pf{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:12px 14px}
+.pf svg{width:15px;height:15px;color:var(--gold);flex-shrink:0}
+.pf span{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:500}
+
+/* ── CUSTOMIZABLE SECTION ── */
+.custom-sec{background:var(--gSky)}
+.custom-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:50px}
+.cc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:all .28s;position:relative;overflow:hidden}
+.cc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gBlue);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.cc:hover{transform:translateY(-6px);box-shadow:var(--shadow2);border-color:var(--sky2)}
+.cc:hover::after{transform:scaleX(1)}
+.cc-ic{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--sky),var(--sky2));display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.cc-ic svg{width:22px;height:22px;color:var(--blue)}
+.cc h3{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:7px}
+.cc p{font-size:.81rem;color:var(--muted);line-height:1.6}
+
+/* ── SUPPORT SECTION ── */
+.support-sec{background:var(--ink);position:relative;overflow:hidden}
+.support-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 10% 50%,rgba(26,107,181,.2) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 90% 10%,rgba(240,180,41,.08) 0%,transparent 55%);pointer-events:none}
+.support-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
+.support-pts{display:flex;flex-direction:column;gap:16px;margin-top:36px}
+.spt{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:18px 20px;transition:all .25s}
+.spt:hover{background:rgba(255,255,255,.08);border-color:rgba(59,143,212,.4);transform:translateX(5px)}
+.spt-ic{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(26,107,181,.4),rgba(59,143,212,.3));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.spt-ic svg{width:20px;height:20px;color:#7FC8F8}
+.spt h4{font-size:.93rem;font-weight:700;color:#fff;margin-bottom:4px}
+.spt p{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.55}
+.support-highlight{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);padding:32px;position:relative;overflow:hidden}
+.support-highlight::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-lt))}
+.sh-label{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.sh-rows{display:flex;flex-direction:column;gap:10px}
+.sh-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid rgba(255,255,255,.07)}
+.sh-row svg{width:16px;height:16px;color:var(--gold-lt);flex-shrink:0}
+.sh-row .sr-text{font-size:.82rem;font-weight:600;color:#fff}
+.sh-row .sr-sub{font-size:.72rem;color:rgba(255,255,255,.38);margin-top:1px}
+
+/* ── VARIANTS ── */
+.var-sec{background:var(--white)}
+.var-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:start}
+.var-pts{display:flex;flex-direction:column;gap:14px;margin-top:34px}
+.vpt{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:all .25s;position:relative;overflow:hidden}
+.vpt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gBlue);transform:scaleY(0);transition:transform .3s;transform-origin:bottom}
+.vpt:hover{box-shadow:var(--shadow);border-color:var(--sky2);transform:translateX(5px)}
+.vpt:hover::before{transform:scaleY(1)}
+.vpt-ic{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--sky),var(--sky2));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vpt-ic svg{width:18px;height:18px;color:var(--blue)}
+.vpt h4{font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.vpt p{font-size:.8rem;color:var(--muted);line-height:1.55}
+/* variant feature list right side */
+.var-more{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.vm{display:flex;align-items:flex-start;gap:11px;font-size:.84rem;color:var(--muted);line-height:1.55}
+.vm .chk{width:22px;height:22px;border-radius:6px;background:var(--gBlue);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.vm .chk svg{width:12px;height:12px;color:#fff}
+.vm strong{color:var(--ink);font-weight:700;display:block;font-size:.87rem}
+
+/* ── POS GRID ── */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:50px}
+.pc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:all .28s;position:relative;overflow:hidden}
+.pc::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,107,181,.04) 0%,transparent 55%);opacity:0;transition:opacity .3s}
+.pc:hover{transform:translateY(-6px);box-shadow:var(--shadow2);border-color:var(--sky2)}
+.pc:hover::after{opacity:1}
+.pc-ic{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--sky),var(--sky2));display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.pc-ic svg{width:22px;height:22px;color:var(--blue)}
+.pc h3{font-size:.94rem;font-weight:700;color:var(--ink);margin-bottom:7px}
+.pc p{font-size:.81rem;color:var(--muted);line-height:1.6}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}
+.ptags span{font-size:.65rem;font-weight:700;letter-spacing:.04em;background:var(--sky);color:var(--blue);border-radius:50px;padding:3px 10px}
+
+/* ── SPEC ── */
+.spec-sec{background:var(--ink);position:relative;overflow:hidden}
+.spec-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 10% 50%,rgba(26,107,181,.2) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 90% 10%,rgba(240,180,41,.08) 0%,transparent 55%);pointer-events:none}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:50px;position:relative;z-index:1}
+.sc2{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:28px;transition:all .28s;position:relative;overflow:hidden}
+.sc2::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(240,180,41,.5),transparent);transform:scaleX(0);transition:transform .4s}
+.sc2:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);transform:translateY(-5px)}
+.sc2:hover::before{transform:scaleX(1)}
+.sc2-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.scn{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:800;color:var(--gold);opacity:.55;min-width:28px}
+.sci{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center}
+.sci svg{width:20px;height:20px;color:rgba(255,255,255,.65)}
+.sc2 h4{font-size:.94rem;font-weight:700;color:#fff;margin-bottom:7px}
+.sc2 p{font-size:.79rem;color:rgba(255,255,255,.42);line-height:1.6}
+
+/* ── FINANCIALS ── */
+.fin-sec{background:var(--gSky)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:50px}
+.fc{border-radius:var(--r);padding:28px;transition:all .28s;position:relative;overflow:hidden}
+.fc:hover{transform:translateY(-5px);box-shadow:var(--shadow2)}
+.fc.d{background:var(--ink)}.fc.bl{background:var(--gBlue)}.fc.lt{background:#fff;border:1px solid var(--line)}.fc.gd{background:linear-gradient(135deg,#FFF8E7,#FFF0C0);border:1px solid rgba(240,180,41,.2)}
+.fc .bar{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt))}
+.fi{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.fc.d .fi,.fc.bl .fi{background:rgba(255,255,255,.1)}
+.fc.lt .fi,.fc.gd .fi{background:var(--sky)}
+.fc.d .fi svg,.fc.bl .fi svg{color:rgba(255,255,255,.75);width:22px;height:22px}
+.fc.lt .fi svg,.fc.gd .fi svg{color:var(--blue);width:22px;height:22px}
+.fc.d h4,.fc.bl h4{font-size:.94rem;font-weight:700;color:#fff;margin-bottom:8px}
+.fc.lt h4,.fc.gd h4{font-size:.94rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.fc.d p,.fc.bl p{font-size:.8rem;color:rgba(255,255,255,.43);line-height:1.6}
+.fc.lt p,.fc.gd p{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* ── ADMIN ── */
+.admin-sec{background:var(--gDark);position:relative;overflow:hidden}
+.admin-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(26,107,181,.18) 0%,transparent 55%);pointer-events:none}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:15px;margin-top:50px;position:relative;z-index:1}
+.ac{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:25px;transition:all .28s}
+.ac:hover{background:rgba(255,255,255,.08);border-color:rgba(59,143,212,.38);transform:translateY(-4px)}
+.aic{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,rgba(26,107,181,.35),rgba(59,143,212,.25));border:1px solid rgba(59,143,212,.28);display:flex;align-items:center;justify-content:center;margin-bottom:13px}
+.aic svg{width:20px;height:20px;color:#7FC8F8}
+.ac h4{font-size:.91rem;font-weight:700;color:#fff;margin-bottom:7px}
+.ac p{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6}
+
+/* ── REPORTS ── */
+.rl{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:11px;margin-top:46px}
+.ri{display:flex;align-items:center;gap:11px;background:var(--sky);border:1px solid var(--line);border-radius:11px;padding:13px 15px;transition:all .22s}
+.ri:hover{border-color:var(--blue);background:#fff;box-shadow:var(--shadow);transform:translateX(5px)}
+.ri-ic{width:32px;height:32px;border-radius:8px;background:var(--gBlue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ri-ic svg{width:15px;height:15px;color:#fff}
+.ri span{font-size:.81rem;font-weight:600;color:var(--ink)}
+
+/* ── DOWNLOAD ── */
+.dl-sec{background:var(--gSky);padding:clamp(64px,9vw,110px) 5vw}
+.dl-in{background:var(--gDark);border-radius:28px;padding:clamp(48px,7vw,88px) clamp(28px,6vw,80px);text-align:center;position:relative;overflow:hidden}
+.dl-in::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 25% 50%,rgba(26,107,181,.22) 0%,transparent 65%),radial-gradient(ellipse 50% 50% at 80% 30%,rgba(240,180,41,.1) 0%,transparent 60%);pointer-events:none}
+.dl-in>*{position:relative;z-index:1}
+.trial-b{display:inline-flex;align-items:center;gap:10px;background:rgba(240,180,41,.14);border:1px solid rgba(240,180,41,.28);border-radius:50px;padding:7px 20px;margin-bottom:26px;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-lt)}
+.trial-b svg{width:14px;height:14px;flex-shrink:0}
+.dl-in h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.08;margin-bottom:16px}
+.dl-in h2 em{font-style:italic;background:linear-gradient(90deg,var(--gold-lt),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dl-in>p{color:rgba(255,255,255,.42);max-width:500px;margin:0 auto 38px;font-size:.95rem}
+.dlbtns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+.dlb{display:flex;align-items:center;gap:12px;border-radius:15px;padding:14px 24px;font-family:'Manrope',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .22s;border:none}
+.dlb.main{background:var(--gGold);color:var(--ink);box-shadow:0 6px 28px rgba(240,180,41,.4);text-decoration:none}
+.dlb.main:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(240,180,41,.55)}
+.dlb.sec{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.14);text-decoration:none}
+.dlb.sec:hover{background:rgba(255,255,255,.13);transform:translateY(-2px)}
+.di{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dlb.main .di{background:rgba(10,22,40,.14)}
+.di svg{width:18px;height:18px;flex-shrink:0}
+.dlb .dt small{display:block;font-size:.63rem;opacity:.55;font-weight:400}
+.dlb .dt strong{display:block;font-size:.87rem}
+.wbadge{display:inline-flex;align-items:center;gap:8px;margin-top:26px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:7px 18px;font-size:.71rem;color:rgba(255,255,255,.38);font-weight:500}
+.wbadge svg{width:15px;height:15px;flex-shrink:0}
+.tf{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.tfi{display:flex;align-items:center;gap:7px;font-size:.73rem;color:rgba(255,255,255,.38)}
+.tfi svg{width:14px;height:14px;color:var(--gold);opacity:.75;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:clamp(48px,7vw,80px) 5vw 30px}
+.ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;margin-bottom:52px}
+.fbl .flogo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.02em}
+.flogo .b{color:#fff}.flogo .s{color:var(--gold)}
+.flogo .p{background:linear-gradient(90deg,#7FC8F8,#C5E8FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fbl .fsub{font-size:.55rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:3px}
+.fbl>p{font-size:.81rem;color:rgba(255,255,255,.33);max-width:230px;margin-top:13px;line-height:1.65}
+.fc2 h5{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px}
+.fc2 ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fc2 a{font-size:.82rem;color:rgba(255,255,255,.46);transition:color .2s}
+.fc2 a:hover{color:#fff}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);font-size:.73rem;color:rgba(255,255,255,.28);flex-wrap:wrap;gap:8px}
+.fbot a{color:rgba(255,255,255,.28)}.fbot a:hover{color:rgba(255,255,255,.6)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .var-layout,.support-inner{grid-template-columns:1fr;gap:36px}
+}
+@media(max-width:640px){
+  nav{padding:0 4vw}.nlinks,.ndl{display:none}.hbg{display:flex}
+  .sec{padding:60px 4vw}
+  .sstrip{flex-direction:column}
+  .si2{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:20px 14px}
+  .si2:last-child{border-bottom:none}
+  .hpills{gap:6px}.hpill{padding:5px 11px;font-size:.67rem}
+  .dlbtns{flex-direction:column;align-items:center}
+  .dlb{width:100%;max-width:340px;justify-content:flex-start}
+  .ft{flex-direction:column;gap:28px}.fbot{flex-direction:column;text-align:center}
+  .fgrid{grid-template-columns:1fr}
+  .price-features{grid-template-columns:1fr 1fr}
+}
+@media(max-width:400px){.price-features{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nl">
+    <div class="mark"><span class="b">Biz</span><span class="s">Sense</span><span class="p">POS</span></div>
+    <div class="sub">Phone Shop Edition · Sri Lanka</div>
+  </div>
+  <ul class="nlinks">
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#variants">Variants</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#spec">Mobile Specific</a></li>
+    <li><a href="#support">Support</a></li>
+    <li><a href="#reports">Reports</a></li>
+  </ul>
+  <a class="ndl" href="https://drive.google.com/uc?export=download&id=1xNlroVyR5k6WmaZVz976QC6EJkNAzb5q" download>
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+    Download Free Trial
+  </a>
+  <button class="hbg" id="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mn" id="mn">
+  <a href="#pricing"  onclick="cm()">Pricing</a>
+  <a href="#variants" onclick="cm()">Variants</a>
+  <a href="#features" onclick="cm()">Features</a>
+  <a href="#spec"     onclick="cm()">Mobile Specific</a>
+  <a href="#support"  onclick="cm()">Support</a>
+  <a href="#reports"  onclick="cm()">Reports</a>
+  <a class="mn-dl" href="https://drive.google.com/uc?export=download&id=1xNlroVyR5k6WmaZVz976QC6EJkNAzb5q" download onclick="cm()">
+    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+    Download Free Trial
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hgrid"></div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="hi">
+    <div class="hbadge"><span>🇱🇰</span><span class="hdot"></span>Sri Lanka's #1 POS for Phone Shops</div>
+    <h1>Run Your Phone Shop<br>Like <span class="gb">Never</span> <span class="gg">Before</span></h1>
+    <p class="hsub">The only fully customizable, complete POS in Sri Lanka built exclusively for mobile phone retailers — shaped exactly around how your business works.</p>
+    <div class="hbtns">
+      <a class="btn-gold" href="https://drive.google.com/uc?export=download&id=1xNlroVyR5k6WmaZVz976QC6EJkNAzb5q" download>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+        Download 3-Day Free Trial
+      </a>
+      <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M10 7v6M7 10h6"/></svg>
+        See Pricing
+      </button>
+    </div>
+    <div class="tnote">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+      3-day full trial · No credit card · Windows 10 &amp; 11 · $14.50 / month after
+    </div>
+    <div class="hpills">
+      <div class="hpill"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="10" height="16" rx="2"/><circle cx="10" cy="15" r=".5" fill="currentColor"/></svg>IMEI Tracking</div>
+      <div class="hpill"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12v4H4zM4 10h12v4H4z"/><path d="M7 4v12M13 4v12"/></svg>Phone Variants</div>
+      <div class="hpill"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h4l2-4 4 8 2-4h4"/></svg>Repair Management</div>
+      <div class="hpill"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h14M7 6l-4 4 4 4M13 6l4 4-4 4"/></svg>EMI Plans</div>
+      <div class="hpill"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>Fully Customizable</div>
+      <div class="hpill"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>24-Hour Support</div>
+    </div>
+  </div>
+  <div class="si"><div class="mouse"><div class="wheel"></div></div>Scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="sstrip">
+  <div class="si2" data-a="up"><div class="sn">#1</div><div class="sl">Phone Shop POS in Sri Lanka</div></div>
+  <div class="si2" data-a="up"><div class="sn">$14.50</div><div class="sl">Per Month — All Features Included</div></div>
+  <div class="si2" data-a="up"><div class="sn">24hr</div><div class="sl">Support &amp; Feature Delivery</div></div>
+  <div class="si2" data-a="up"><div class="sn">100%</div><div class="sl">Customizable to Your Business</div></div>
+</div>
+
+<!-- PRICING -->
+<section class="sec pricing-sec" id="pricing">
+  <div class="pricing-inner">
+    <div class="stag stag-g" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M6 10h8M6 13h4"/></svg>Simple Pricing</div>
+    <h2 class="sh sh-w" data-a="up">One Plan.<br>Everything <span class="gg">Included.</span></h2>
+    <p class="sp sp-w" data-a="up" style="margin:0 auto">No tiers, no hidden fees, no feature limits. Every module, every update, and 24-hour support — all for one flat monthly price.</p>
+
+    <div class="price-card" data-a="scale">
+      <div class="price-amount"><sup>$</sup>14.50<sub>/ month</sub></div>
+      <div class="price-sub">Per store · Billed monthly · Cancel anytime</div>
+      <div class="price-note">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+        3-day free trial — full access, no credit card required
+      </div>
+      <div class="price-features">
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>All 20+ modules included</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>Unlimited IMEI records</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>Unlimited staff accounts</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>24-hour support response</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>Free feature requests</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>New features in 24 hours</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>Full customization</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>Free setup assistance</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>All future updates free</span></div>
+        <div class="pf" data-a="up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 8l4 4 8-8"/></svg><span>Cloud backup included</span></div>
+      </div>
+      <div style="margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+        <a class="btn-gold" href="https://drive.google.com/uc?export=download&id=1xNlroVyR5k6WmaZVz976QC6EJkNAzb5q" download>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+          Start Free 3-Day Trial
+        </a>
+        <a class="dlb sec" href="#" style="color:#fff;text-decoration:none">
+          <div class="di"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14v10H3z"/><path d="M3 5l7 6 7-6"/></svg></div>
+          <div class="dt"><small>Have questions?</small><strong>Chat on WhatsApp</strong></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMIZABLE -->
+<section class="sec custom-sec" id="custom">
+  <div class="stag" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3v4M10 13v4M3 10h4M13 10h4"/><circle cx="10" cy="10" r="3"/></svg>Fully Customizable</div>
+  <h2 class="sh" data-a="up">Built Around <span class="gbl">Your</span> Business</h2>
+  <p class="sp" data-a="up">BizSensePOS isn't a locked-down product. It's a living system that adapts to exactly how you run your shop — your workflows, your terminology, your rules.</p>
+  <div class="custom-grid">
+    <div class="cc" data-a="up">
+      <div class="cc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3v4M10 13v4M3 10h4M13 10h4"/><circle cx="10" cy="10" r="3"/></svg></div>
+      <h3>Custom Fields &amp; Labels</h3>
+      <p>Rename any field, add custom product attributes, and define your own data labels to match exactly how your team talks about inventory and customers.</p>
+    </div>
+    <div class="cc" data-a="up">
+      <div class="cc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h12v12H4z"/><path d="M4 8h12M8 4v8"/></svg></div>
+      <h3>Custom Receipt &amp; Invoice Layout</h3>
+      <p>Design your receipts and invoices with your logo, shop name, address, and any custom footer message. Looks exactly like your brand.</p>
+    </div>
+    <div class="cc" data-a="up">
+      <div class="cc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="7" r="3"/><path d="M4 18v-1a6 6 0 0112 0v1"/></svg></div>
+      <h3>Custom Staff Roles</h3>
+      <p>Define exactly what each staff member can and cannot do — down to individual buttons. Cashier, manager, technician — each sees only what they need.</p>
+    </div>
+    <div class="cc" data-a="up">
+      <div class="cc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10h4l2-4 4 8 2-4h4"/></svg></div>
+      <h3>Custom Repair Statuses</h3>
+      <p>Add your own repair job stages and status names. Whether it's "Awaiting Part" or "Sent to Service Centre" — the system fits your repair workflow, not the other way around.</p>
+    </div>
+    <div class="cc" data-a="up">
+      <div class="cc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10h14M7 6l-4 4 4 4M13 6l4 4-4 4"/></svg></div>
+      <h3>Custom EMI &amp; Payment Plans</h3>
+      <p>Create any instalment structure — any down payment, any tenure, any interest rate. Build the plans that match how your customers actually pay.</p>
+    </div>
+    <div class="cc" data-a="up">
+      <div class="cc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg></div>
+      <h3>Custom Loyalty Rules</h3>
+      <p>Set your own points earning rate, redemption value, and tier thresholds. Build a loyalty program that makes sense for your shop and your customers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="sec support-sec" id="support">
+  <div class="support-inner">
+    <div>
+      <div class="stag stag-w" data-a="left"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>Support &amp; Updates</div>
+      <h2 class="sh sh-w" data-a="left">We Move as Fast<br>as <span class="gg">You Do.</span></h2>
+      <p class="sp sp-w" data-a="left">You're not buying a frozen product. BizSensePOS is actively developed and your subscription gives you a direct line to the team — including the power to shape the roadmap.</p>
+      <div class="support-pts">
+        <div class="spt" data-a="left">
+          <div class="spt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg></div>
+          <div><h4>24-Hour Support Response</h4><p>Submit any issue, question, or request — we respond and resolve within 24 hours. Every time. No tickets left hanging.</p></div>
+        </div>
+        <div class="spt" data-a="left">
+          <div class="spt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3v4M10 13v4M3 10h4M13 10h4"/><circle cx="10" cy="10" r="3"/></svg></div>
+          <div><h4>Request Any Feature — Delivered in 24 Hours</h4><p>Need something the system doesn't do yet? Request it. If it fits the product vision, it gets built and pushed to you within 24 hours — not months from now on a roadmap.</p></div>
+        </div>
+        <div class="spt" data-a="left">
+          <div class="spt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18V7l7-5 7 5v11M8 18v-5h4v5"/></svg></div>
+          <div><h4>All Updates Included Free</h4><p>Every new feature, improvement, and fix is pushed to your installation automatically. Your $14.50/month never goes stale.</p></div>
+        </div>
+        <div class="spt" data-a="left">
+          <div class="spt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h14v10H3z"/><path d="M3 5l7 6 7-6"/></svg></div>
+          <div><h4>WhatsApp &amp; Direct Support</h4><p>No chatbots, no call centres. Reach us directly via WhatsApp and get a real person who knows your setup.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="support-highlight" data-a="right">
+      <div class="sh-label">What you get with every plan</div>
+      <div class="sh-rows">
+        <div class="sh-row"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg><div><div class="sr-text">24-Hour Support</div><div class="sr-sub">Any issue, resolved same day</div></div></div>
+        <div class="sh-row"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3v4M10 13v4M3 10h4M13 10h4"/><circle cx="10" cy="10" r="3"/></svg><div><div class="sr-text">Feature Requests in 24 Hours</div><div class="sr-sub">You ask, we build and ship</div></div></div>
+        <div class="sh-row"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg><div><div class="sr-text">Full System Customization</div><div class="sr-sub">Shaped around your workflow</div></div></div>
+        <div class="sh-row"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18V7l7-5 7 5v11M8 18v-5h4v5"/></svg><div><div class="sr-text">Free Updates Forever</div><div class="sr-sub">Every new feature at no extra cost</div></div></div>
+        <div class="sh-row"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14v10H3z"/><path d="M3 5l7 6 7-6"/></svg><div><div class="sr-text">Direct WhatsApp Access</div><div class="sr-sub">Real people, real answers</div></div></div>
+        <div class="sh-row"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="16" height="13" rx="2"/><path d="M7 16v2M13 16v2M5 18h10"/></svg><div><div class="sr-text">Free Setup &amp; Onboarding</div><div class="sr-sub">We get you live from day one</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VARIANTS -->
+<section class="sec var-sec" id="variants">
+  <div class="var-layout">
+    <div>
+      <div class="stag" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12v4H4zM4 10h12v4H4z"/><path d="M7 4v12M13 4v12"/></svg>Highlight Feature</div>
+      <h2 class="sh" data-a="up">One Phone.<br>Infinite <span class="gbl">Variants.</span></h2>
+      <p class="sp" data-a="up">Sell the same phone in every colour and storage combination as a single product — each variant tracks its own stock, price, and IMEI list independently.</p>
+      <div class="var-pts">
+        <div class="vpt" data-a="left">
+          <div class="vpt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="10" r="3"/><circle cx="14" cy="6" r="3"/><circle cx="14" cy="14" r="3"/></svg></div>
+          <div><h4>Colour &amp; Storage Attributes</h4><p>Create any combination — 128GB Midnight Black, 256GB Titanium, 512GB Desert Sand. Each tracked separately with its own stock level and price.</p></div>
+        </div>
+        <div class="vpt" data-a="left">
+          <div class="vpt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M3 8h14M8 3v14"/></svg></div>
+          <div><h4>Per-Variant IMEI Lists</h4><p>IMEI numbers are assigned to the exact colour and storage at stock entry. Every unit is tied precisely — never mix up variants again.</p></div>
+        </div>
+        <div class="vpt" data-a="left">
+          <div class="vpt-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17V7l6-4 6 4v10"/><path d="M8 17v-5h4v5"/></svg></div>
+          <div><h4>Independent Pricing Per Variant</h4><p>Set a different selling price for each storage and colour combination. Discount one without affecting the others.</p></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="var-more" style="margin-top:0">
+        <div class="vm" data-a="right"><div class="chk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><strong>Variant selection at POS counter</strong>Staff pick colour and storage at sale — the system auto-fetches the matching IMEI and current stock level instantly.</div></div>
+        <div class="vm" data-a="right"><div class="chk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><strong>Bundle specific variants</strong>Package a specific variant — e.g. iPhone 15 Pro 256GB Black — with a case and screen protector as one priced bundle deal.</div></div>
+        <div class="vm" data-a="right"><div class="chk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><strong>GRN assigns IMEI per variant</strong>When stock arrives, each IMEI is logged against the exact variant it belongs to during Goods Received Note entry.</div></div>
+        <div class="vm" data-a="right"><div class="chk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><strong>Low stock alerts per variant</strong>Get alerted when any specific colour or storage option drops below your minimum threshold — not just the overall model.</div></div>
+        <div class="vm" data-a="right"><div class="chk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><strong>Variant-level profit reporting</strong>See which specific storage and colour combinations make you the most margin — not just which model sells most.</div></div>
+        <div class="vm" data-a="right"><div class="chk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><strong>Unlimited custom attributes</strong>Add any attribute type beyond colour and storage — condition, network lock status, grade — fully customizable.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POS FEATURES -->
+<section class="sec" id="features" style="background:var(--gSky)">
+  <div class="stag" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="16" height="14" rx="2"/><path d="M6 4V2M14 4V2M2 9h16"/></svg>Point of Sale</div>
+  <h2 class="sh" data-a="up">A Counter Built for <span class="gbl">Speed</span></h2>
+  <p class="sp" data-a="up">Every tool your staff needs — fast, intuitive, designed for the way phone shops actually work at the counter.</p>
+  <div class="pgrid">
+    <div class="pc" data-a="up"><div class="pc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h14l-1.5 8H4.5L3 6z"/><circle cx="8" cy="17" r="1"/><circle cx="14" cy="17" r="1"/><path d="M1 2h3l1 4"/></svg></div><h3>Cart Management</h3><p>Add items, apply per-item or cart-wide discounts, edit quantities, and close the sale in seconds.</p><div class="ptags"><span>Discounts</span><span>Multi-item</span></div></div>
+    <div class="pc" data-a="up"><div class="pc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M6 10h8M6 13h4"/></svg></div><h3>Flexible Payments</h3><p>Cash, card, split payments, vouchers, store credit, and EMI — processed from one screen with full receipt printing.</p><div class="ptags"><span>Cash</span><span>Card</span><span>Split</span><span>Voucher</span><span>EMI</span></div></div>
+    <div class="pc" data-a="up"><div class="pc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h12v12H4z"/><path d="M4 8h12M8 4v8"/></svg></div><h3>Quotations</h3><p>Create professional quotations instantly. Convert to a confirmed sale with one click when the customer is ready.</p><div class="ptags"><span>One-click convert</span></div></div>
+    <div class="pc" data-a="up"><div class="pc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h12v4H4zM4 10h12v4H4z"/><path d="M7 4v12M13 4v12"/></svg></div><h3>Variants at the Counter</h3><p>Select colour and storage at POS — matching IMEI and live stock auto-pulled instantly. No manual lookup needed.</p><div class="ptags"><span>IMEI auto-link</span><span>Live stock</span></div></div>
+    <div class="pc" data-a="up"><div class="pc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h14l-1 8H4L3 6zM7 6l1-4h4l1 4"/></svg></div><h3>Product Bundles</h3><p>Sell phone + accessories as a single deal. One line item, custom bundle pricing, single receipt entry.</p><div class="ptags"><span>Bundle deals</span><span>Custom price</span></div></div>
+    <div class="pc" data-a="up"><div class="pc-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg></div><h3>Day-End Closing</h3><p>Guided daily reconciliation — count cash, verify card totals, flag variances, lock the day with an auditable record.</p><div class="ptags"><span>Reconciliation</span><span>Audit log</span></div></div>
+  </div>
+</section>
+
+<!-- SPECIALIZED -->
+<section class="sec spec-sec" id="spec">
+  <div class="stag stag-g" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>Mobile Phone Shop Specific</div>
+  <h2 class="sh sh-w" data-a="up">Features No Other POS<br>in Sri Lanka <span style="background:linear-gradient(90deg,#FFD666,#F0B429);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Has</span></h2>
+  <p class="sp sp-w" data-a="up">Not add-ons. Core built-in capabilities designed from day one for the phone retail industry.</p>
+  <div class="sgrid">
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">01</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="10" height="16" rx="2"/><path d="M8 5h4M10 15v.01"/></svg></div></div><h4>IMEI &amp; Serial Tracking</h4><p>Every device tracked from arrival to sale and beyond. IMEI tied to GRN, variant, receipt, and customer record. Includes device blacklist for flagged handsets.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">02</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l-5 5M10 3l7 7-5 5-7-7V3h5z"/></svg></div></div><h4>Repair Job Management</h4><p>Log repairs with fault description, assigned technician, and parts used. Track every status from intake to collection. Bill directly from the repair record.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">03</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg></div></div><h4>Warranty Management</h4><p>Issue warranties at point of sale. Manage the full lifecycle — record claims, track resolutions, and maintain complete per-device history.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">04</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10h14M7 6l-4 4 4 4M13 6l4 4-4 4"/></svg></div></div><h4>EMI Plan Management</h4><p>Create instalment plans with custom down payments, tenure, and interest. Auto-generate schedules. Track outstanding balances per customer in real time.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">05</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M10 7v3l2 2"/></svg></div></div><h4>Device Blacklist</h4><p>Flag stolen or reported IMEI numbers. Staff get an instant alert when a blacklisted device is scanned — protecting your business from buying hot stock.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">06</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="7" r="3"/><path d="M4 18v-1a6 6 0 0112 0v1"/></svg></div></div><h4>Technician Assignment</h4><p>Assign repair jobs to specific technicians. Track workload and individual performance across your workshop team.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">07</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h14v12H3z"/><path d="M3 9h14M7 9v8"/></svg></div></div><h4>Parts &amp; Labour Tracking</h4><p>Parts used in repairs auto-deducted from accessories inventory. Labour tracked separately for true cost and profit per job.</p></div>
+    <div class="sc2" data-a="up"><div class="sc2-top"><div class="scn">08</div><div class="sci"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h14v10H3z"/><path d="M3 5l7 6 7-6"/></svg></div></div><h4>SMS Customer Notifications</h4><p>Auto-send SMS when a repair is ready, a warranty is expiring, or an EMI payment is due. Customers stay informed automatically.</p></div>
+  </div>
+</section>
+
+<!-- FINANCIALS -->
+<section class="sec fin-sec" id="fin">
+  <div class="stag" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>Financial Management</div>
+  <h2 class="sh" data-a="up">Complete Financial Control —<br><span class="gbl">Out of the Box</span></h2>
+  <p class="sp" data-a="up">Financial tools no other POS in Sri Lanka provides at this depth or completeness.</p>
+  <div class="fgrid">
+    <div class="fc d" data-a="up"><div class="fi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M6 10h8M6 13h4"/></svg></div><h4>Cash Book</h4><p>Real-time record of every cash movement in and out. Know your exact cash position at any moment.</p></div>
+    <div class="fc bl" data-a="up"><div class="fi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h14v10H3zM3 10h14M7 6V4a3 3 0 016 0v2"/></svg></div><h4>Bank Book</h4><p>Track all bank transactions. Reconcile statements directly in BizSensePOS — no separate accounting software needed.</p></div>
+    <div class="fc gd" data-a="up"><div class="bar"></div><div class="fi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h12v12H4z"/><path d="M7 8h6M7 11h4M7 14h2"/></svg></div><h4>Cheque Book</h4><p>Manage issued and received cheques. Track pending, cleared, and bounced. Alerts for upcoming cheque dates — unique to BizSensePOS in Sri Lanka.</p></div>
+    <div class="fc lt" data-a="up"><div class="fi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h14v12H3zM3 9h14M7 9v8"/></svg></div><h4>Credit Ledger</h4><p>Dedicated ledger for all credit sales. View every customer's balance and payment history in one organised place.</p></div>
+    <div class="fc lt" data-a="up"><div class="fi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h12v12H4z"/><path d="M8 4v12M4 8h8M4 12h8"/></svg></div><h4>Supplier Payables Ledger</h4><p>Track everything owed to every supplier. View ageing balances and never miss a payment again.</p></div>
+    <div class="fc d" data-a="up"><div class="fi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18V7l7-5 7 5v11"/><path d="M8 18v-5h4v5"/></svg></div><h4>Day-End Reconciliation</h4><p>Structured daily close — count cash, verify totals, flag variances, lock the day with a clean auditable record every night.</p></div>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section class="sec admin-sec" id="admin">
+  <div class="stag stag-w" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="16" height="13" rx="2"/><path d="M7 16v2M13 16v2M5 18h10"/></svg>Multi-Store Admin Panel</div>
+  <h2 class="sh sh-w" data-a="up">One Panel.<br>Every <span class="gb">Store.</span></h2>
+  <p class="sp sp-w" data-a="up">Complete central control for multi-branch owners — manage all locations from a single powerful dashboard.</p>
+  <div class="agrid">
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="16" height="13" rx="2"/><path d="M6 8h2M10 8h2M14 8h.01M6 11h2M10 11h2"/></svg></div><h4>Centralised Dashboard</h4><p>Real-time performance across all branches — sales, stock, repairs, and cash positions at a glance.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M6 10h8M6 13h4"/></svg></div><h4>Billing Management</h4><p>Manage subscriptions and billing for every store from one panel — no need to log into each separately.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="10" height="13" rx="2"/><path d="M8 3V1M12 3V1M5 9h10"/></svg></div><h4>Remote Store Lock</h4><p>Lock any store's application remotely with one click — for non-payment or security. Unlock just as easily.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="7" r="3"/><path d="M4 18v-1a6 6 0 0112 0v1"/></svg></div><h4>Staff Roles &amp; Permissions</h4><p>Granular control per staff member — who can discount, refund, view financials, or access reports, per store.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg></div><h4>Audit Trail</h4><p>Every action logged with timestamp and user ID — edits, discounts, deletions, overrides. Complete accountability.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10h4l2-4 4 8 2-4h4"/></svg></div><h4>Cross-Store Reports</h4><p>Consolidated reports across all branches or drill into a single store. Compare performance, identify trends.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10h12M10 4l-6 6 6 6"/></svg></div><h4>Stock Transfers</h4><p>Move stock between branches with full IMEI-level tracking per transferred unit.</p></div>
+    <div class="ac" data-a="up"><div class="aic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3v4M10 13v4M3 10h4M13 10h4"/><circle cx="10" cy="10" r="3"/></svg></div><h4>Centralised Configuration</h4><p>Push pricing and settings to all stores simultaneously — no need to update each terminal separately.</p></div>
+  </div>
+</section>
+
+<!-- REPORTS -->
+<section class="sec" id="reports" style="background:#fff">
+  <div class="stag" data-a="up"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18V7l7-5 7 5v11M8 18v-5h4v5"/></svg>Reporting Engine</div>
+  <h2 class="sh" data-a="up">Every Report Your Business <span class="gbl">Needs</span></h2>
+  <p class="sp" data-a="up">Real visibility into sales, stock, staff, finances, and customers — not just numbers, but answers.</p>
+  <div class="rl">
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18V7l7-5 7 5v11"/></svg></div><span>Daily Sales Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14v12H3z"/><path d="M3 9h14M7 9v8"/></svg></div><span>Stock Valuation Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="10" height="16" rx="2"/></svg></div><span>IMEI Sales Audit</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h4l2-4 4 8 2-4h4"/></svg></div><span>Repair Jobs Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h14M7 6l-4 4 4 4M13 6l4 4-4 4"/></svg></div><span>EMI Instalment Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg></div><span>Warranty Claims Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="7" r="3"/><path d="M4 18v-1a6 6 0 0112 0v1"/></svg></div><span>Customer Purchase History</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M6 10h8"/></svg></div><span>Profit &amp; Loss Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12v12H4z"/><path d="M8 4v12M4 8h8"/></svg></div><span>Supplier Payables Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14v12H3z"/></svg></div><span>Credit Outstanding Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12v12H4z"/><path d="M7 8h6M7 11h4"/></svg></div><span>Cheque Management Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg></div><span>Loyalty Points Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12M10 4l-6 6 6 6"/></svg></div><span>Stock Transfer Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="7" r="3"/><path d="M4 18v-1a6 6 0 0112 0v1"/></svg></div><span>Staff Performance Report</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h4l2-4 4 8 2-4h4"/></svg></div><span>Day-End Closing Summary</span></div>
+    <div class="ri" data-a="up"><div class="ri-ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg></div><span>Full Audit Trail Log</span></div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="dl-sec" id="download">
+  <div class="dl-in" data-a="scale">
+    <div class="trial-b"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>3-Day Free Trial · No Credit Card · Full Access</div>
+    <h2>Start Free.<br>Then just <em>$14.50 / month.</em></h2>
+    <p>Download now and try every single feature for 3 full days at no cost. After that, keep running your entire shop for $14.50 per month — with 24-hour support, free feature requests, and all updates included.</p>
+    <div class="dlbtns">
+      <a class="dlb main" href="https://drive.google.com/uc?export=download&id=1xNlroVyR5k6WmaZVz976QC6EJkNAzb5q" download>
+        <div class="di"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg></div>
+        <div class="dt"><small>Windows 10 &amp; 11 · Free</small><strong>Download BizSensePOS (.exe)</strong></div>
+      </a>
+      <a class="dlb sec" href="#">
+        <div class="di"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12v12H4z"/><path d="M7 8h6M7 11h4M7 14h2"/></svg></div>
+        <div class="dt"><small>Download PDF</small><strong>Full Feature Brochure</strong></div>
+      </a>
+      <a class="dlb sec" href="#">
+        <div class="di"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14v10H3z"/><path d="M3 5l7 6 7-6"/></svg></div>
+        <div class="dt"><small>Have a question?</small><strong>Chat on WhatsApp</strong></div>
+      </a>
+    </div>
+    <div class="wbadge">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="16" height="13" rx="2"/><path d="M7 16v2M13 16v2M5 18h10"/></svg>
+      Windows 10 &amp; Windows 11 · Desktop Application Only
+    </div>
+    <div class="tf">
+      <div class="tfi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>All features unlocked</div>
+      <div class="tfi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>3 full days free</div>
+      <div class="tfi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>No credit card</div>
+      <div class="tfi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>$14.50/mo after trial</div>
+      <div class="tfi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Free setup support</div>
+      <div class="tfi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>24-hr feature requests</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="fbl">
+      <div class="flogo"><span class="b">Biz</span><span class="s">Sense</span><span class="p">POS</span></div>
+      <div class="fsub">Phone Shop Edition · Sri Lanka</div>
+      <p>Sri Lanka's most complete &amp; customizable POS system built exclusively for mobile phone retailers. $14.50/month. Everything included.</p>
+    </div>
+    <div class="fc2">
+      <h5>Key Features</h5>
+      <ul>
+        <li><a href="#variants">Phone Variants</a></li>
+        <li><a href="#spec">IMEI Tracking</a></li>
+        <li><a href="#spec">Repair Management</a></li>
+        <li><a href="#spec">EMI Plans</a></li>
+        <li><a href="#spec">Warranty System</a></li>
+        <li><a href="#custom">Customization</a></li>
+      </ul>
+    </div>
+    <div class="fc2">
+      <h5>Business Tools</h5>
+      <ul>
+        <li><a href="#features">Point of Sale</a></li>
+        <li><a href="#fin">Financial Modules</a></li>
+        <li><a href="#admin">Multi-Store Panel</a></li>
+        <li><a href="#reports">Reports Engine</a></li>
+        <li><a href="#support">24-Hr Support</a></li>
+      </ul>
+    </div>
+    <div class="fc2">
+      <h5>Get Started</h5>
+      <ul>
+        <li><a href="https://drive.google.com/uc?export=download&id=1xNlroVyR5k6WmaZVz976QC6EJkNAzb5q" download>Download Free Trial</a></li>
+        <li><a href="#pricing">View Pricing</a></li>
+        <li><a href="#">Feature Brochure</a></li>
+        <li><a href="#">WhatsApp Us</a></li>
+        <li><a href="#">Contact Support</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2025 BizSenseSystems · BizSensePOS Phone Shop Edition · All rights reserved</span>
+    <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></span>
+  </div>
+</footer>
+
+<script>
+/* Nav scroll */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>20));
+
+/* Mobile nav */
+function toggleMob(){document.getElementById('mn').classList.toggle('open');document.getElementById('hbg').classList.toggle('open')}
+function cm(){document.getElementById('mn').classList.remove('open');document.getElementById('hbg').classList.remove('open')}
+
+/* Scroll reveal with stagger */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.style.transitionDelay=(e.target._d||0)+'s';
+    e.target.classList.add('in');
+    obs.unobserve(e.target);
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('[data-a]').forEach(el=>{
+  const sibs=[...el.parentElement.children].filter(c=>c.hasAttribute('data-a'));
+  el._d=(sibs.indexOf(el)*0.08).toFixed(2);
+  obs.observe(el);
+});
+
+/* Parallax orbs */
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/innerWidth-.5)*28,y=(e.clientY/innerHeight-.5)*18;
+  const o1=document.querySelector('.o1'),o2=document.querySelector('.o2');
+  if(o1)o1.style.transform=`translate(${x*.7}px,${y*.7}px)`;
+  if(o2)o2.style.transform=`translate(${-x*.4}px,${-y*.4}px)`;
+});
+</script>
+</body>
+</html>
