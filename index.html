@@ -1,1841 +1,1662 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>BizSense Experts | Strategic Business Systems</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- CSS Variables (Locked to Default/Light Theme) -->
-    <style>
-        :root {
-            --color-primary: #0ea5e9;   /* Sky 500 */
-            --color-secondary: #2563eb; /* Blue 600 */
-            --color-accent: #f59e0b;    /* Amber 500 */
-            --color-deep: #f8fafc;      /* Slate 50 */
-            --color-navy: #ffffff;      /* White */
-            --color-text: #0f172a;      /* Slate 900 */
-            --color-muted: #475569;     /* Slate 600 */
-            --color-border: #cbd5e1;    /* Slate 300 */
-            
-            --hero-opacity: 1.0;
-            --hero-blur: 8px;
-            
-            --glass-bg: rgba(255, 255, 255, 0.90); 
-            --glass-border: rgba(226, 232, 240, 0.8);
-            --logo-invert: 1;           /* 1 = Black Logo */
-        }
-    </style>
+<!-- PWA Core -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BizSensePOS">
+<meta name="application-name" content="BizSensePOS">
+<meta name="theme-color" content="#090910">
+<meta name="msapplication-TileColor" content="#090910">
+<meta name="msapplication-TileImage" content="./app.png">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        biz: {
-                            primary: 'var(--color-primary)',
-                            secondary: 'var(--color-secondary)',
-                            accent: 'var(--color-accent)',
-                            deep: 'var(--color-deep)',
-                            navy: 'var(--color-navy)',
-                            text: 'var(--color-text)',
-                            muted: 'var(--color-muted)',
-                            border: 'var(--color-border)',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: var(--color-deep);
-            color: var(--color-text);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="./app.png">
+<link rel="apple-touch-icon" href="./app.png">
+<link rel="apple-touch-icon" sizes="152x152" href="./app.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./app.png">
+<link rel="apple-touch-icon" sizes="192x192" href="./app.png">
 
-        /* WELCOME SCREEN */
-        #welcome-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-        }
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
 
-        .welcome-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            animation: fadeInWelcome 1s ease-out forwards;
-        }
+<!-- SEO / Open Graph / Social -->
+<title>BizSensePOS</title>
+<meta name="description" content="BizSensePOS — Mobile Point of Sale for your business">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BizSensePOS">
+<meta property="og:description" content="BizSensePOS — Mobile Point of Sale for your business">
+<meta property="og:image" content="https://i.ibb.co/n8jGVxnR/imagethumb.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BizSensePOS">
+<meta name="twitter:image" content="https://i.ibb.co/n8jGVxnR/imagethumb.jpg">
 
-        @keyframes fadeInWelcome {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+<style>
+/* ════════════════════════════════════════════════════
+   BIZSENSE — MOBILE WEB APP
+   Glass morphism · Dark theme · App-native feel
+════════════════════════════════════════════════════ */
+:root {
+  --bg:       #08080f;
+  --surface:  rgba(255,255,255,0.04);
+  --surface2: rgba(255,255,255,0.06);
+  --surface3: rgba(255,255,255,0.09);
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.11);
+  --text:     #eeeef8;
+  --text2:    #7474a8;
+  --text3:    #3a3a58;
+  --accent:   #6366f1;
+  --accent2:  #818cf8;
+  --accent3:  rgba(99,102,241,0.15);
+  --green:    #22c55e;
+  --red:      #f43f5e;
+  --yellow:   #f59e0b;
+  --blue:     #3b82f6;
+  --purple:   #a855f7;
+  --teal:     #2dd4bf;
+  --orange:   #fb923c;
+  --pink:     #ec4899;
+  --r:        16px;
+  --r-sm:     12px;
+  --r-xs:     8px;
+  --nav-h:    68px;
+  --safe-b:   env(safe-area-inset-bottom, 0px);
+  --safe-t:   env(safe-area-inset-top, 0px);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body {
+  height: 100%; width: 100%; overflow: hidden;
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 15% 0%, rgba(99,102,241,.07) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 35% at 85% 100%, rgba(168,85,247,.05) 0%, transparent 100%), #08080f;
+  background-attachment: fixed;
+}
+[hidden] { display: none !important; }
+button { font-family: inherit; }
 
-        /* Luxury Gradient Text */
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #0f172a 0%, #2563eb 50%, #0ea5e9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 3s linear infinite;
-        }
+/* ── DESKTOP GATE ─────────────────────────────────── */
+#gate {
+  position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 48px 32px; text-align: center; gap: 0;
+}
+.gate-logo {
+  width: 88px; height: 88px; background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%);
+  border-radius: 24px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 32px; box-shadow: 0 0 60px rgba(99,102,241,.35), 0 0 120px rgba(99,102,241,.1);
+}
+.gate-logo svg { width: 44px; height: 44px; }
+#gate h1 { font-size: 30px; font-weight: 800; margin-bottom: 12px; letter-spacing: -.5px;
+  background: linear-gradient(135deg, #eeeef8, #9090c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#gate .gate-sub { color: var(--text2); line-height: 1.7; margin-bottom: 36px; max-width: 340px; font-size: 16px; }
+.gate-dl-btn {
+  display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #6366f1, #7c3aed);
+  color: #fff; text-decoration: none; padding: 16px 36px; border-radius: var(--r); font-size: 17px; font-weight: 700;
+  box-shadow: 0 4px 32px rgba(99,102,241,.45), 0 0 60px rgba(99,102,241,.15);
+}
+.gate-dl-btn svg { width: 18px; height: 18px; }
+.gate-url { margin-top: 32px; font-size: 12px; color: var(--text3); word-break: break-all; max-width: 360px; }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+/* ── APP SHELL ────────────────────────────────────── */
+#app { position: fixed; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
+.screen { display: none; flex-direction: column; flex: 1; overflow: hidden; animation: screenIn .2s cubic-bezier(.25,.46,.45,.94); }
+.screen.active { display: flex; }
+@keyframes screenIn { from { opacity: 0; transform: scale(.99) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* Pulsing Button Glow */
-        .btn-glow {
-            box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
-            animation: pulse-blue 2s infinite;
-        }
+/* ── LOGIN ────────────────────────────────────────── */
+#login-screen {
+  align-items: center; justify-content: center; padding: 32px 24px;
+  background: radial-gradient(ellipse at 50% -10%, rgba(99,102,241,.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 110%, rgba(168,85,247,.1) 0%, transparent 50%), var(--bg);
+}
+.login-wrap {
+  width: 100%; max-width: 360px; background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.09); border-radius: 24px; padding: 36px 28px;
+  box-shadow: 0 0 80px rgba(99,102,241,.06), 0 32px 64px rgba(0,0,0,.3); display: flex; flex-direction: column; align-items: center;
+}
+.app-logo {
+  width: 72px; height: 72px; background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%);
+  border-radius: 20px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px; box-shadow: 0 8px 32px rgba(99,102,241,.45);
+}
+.app-logo svg { width: 36px; height: 36px; }
+.login-title { font-size: 24px; font-weight: 800; margin-bottom: 6px; letter-spacing: -.4px; }
+.login-sub   { color: var(--text2); font-size: 14px; margin-bottom: 28px; }
+.login-form  { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.field-wrap input {
+  width: 100%; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--r-sm); padding: 14px 16px; color: var(--text); font-size: 15px; outline: none; transition: all .2s;
+}
+.field-wrap input::placeholder { color: var(--text3); }
+.field-wrap input:focus { border-color: rgba(99,102,241,.6); background: rgba(255,255,255,0.08); box-shadow: 0 0 0 3px rgba(99,102,241,.1); }
+.login-err { color: var(--red); font-size: 13px; min-height: 16px; text-align: center; }
+.login-btn {
+  width: 100%; background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%); color: #fff; border: none;
+  border-radius: var(--r-sm); padding: 15px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 4px;
+  transition: opacity .15s, transform .1s; box-shadow: 0 4px 20px rgba(99,102,241,.4);
+}
+.login-btn:active { opacity: .85; transform: scale(.99); }
+.login-btn:disabled { opacity: .5; cursor: default; }
 
-        @keyframes pulse-blue {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
-        }
+/* ── TOPBAR ───────────────────────────────────────── */
+.topbar {
+  background: rgba(8,8,15,0.8); backdrop-filter: blur(24px) saturate(200%); -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0; padding-top: calc(12px + var(--safe-t)); min-height: calc(52px + var(--safe-t)); z-index: 10;
+}
+.topbar-home { padding-top: calc(16px + var(--safe-t)); min-height: calc(60px + var(--safe-t)); }
+.topbar-title { font-size: 18px; font-weight: 700; flex: 1; letter-spacing: -.3px; }
+.topbar-greeting { font-size: 12px; color: var(--text2); margin-bottom: 1px; letter-spacing: .2px; }
+.icon-btn, .back-btn {
+  width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.07);
+  border-radius: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .12s;
+}
+.icon-btn { color: var(--text2); }
+.back-btn { color: var(--text); }
+.icon-btn svg { width: 16px; height: 16px; }
+.back-btn svg { width: 20px; height: 20px; }
+.icon-btn:active, .back-btn:active { background: rgba(255,255,255,0.12); }
+.shop-pill { background: var(--accent3); color: var(--accent2); border: 1px solid rgba(99,102,241,.2); border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 600; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        #luxuryBg {
-            position: fixed;
-            inset: 0;
-            z-index: -3;
-            background-color: var(--color-deep);
-        }
+/* ── SCROLL ───────────────────────────────────────── */
+.scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+.scroll::-webkit-scrollbar { display: none; }
 
-        /* Hero Background Slideshow */
-        #hero-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-            background: var(--color-deep);
-        }
+/* ── BOTTOM NAV ───────────────────────────────────── */
+#bottom-nav {
+  display: flex; background: rgba(8,8,15,0.88); backdrop-filter: blur(28px) saturate(200%); -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; padding-bottom: var(--safe-b); height: calc(var(--nav-h) + var(--safe-b)); z-index: 100;
+}
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: none; background: none; color: var(--text3); cursor: pointer; padding: 0; transition: color .15s; position: relative; }
+.nav-btn svg { width: 22px; height: 22px; transition: transform .15s; }
+.nav-btn span { font-size: 10px; font-weight: 600; letter-spacing: .3px; text-transform: uppercase; }
+.nav-btn.active { color: var(--accent2); }
+.nav-btn.active svg { transform: scale(1.08); }
+.nav-btn.active::before { content: ''; position: absolute; bottom: calc(var(--safe-b) + 2px); left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: var(--accent); border-radius: 3px 3px 0 0; }
+.nav-btn:active { opacity: .6; }
 
-        .hero-slide {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center 20%;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
-            transform: scale(1.05);
-            filter: brightness(1.0) saturate(1.1) opacity(var(--hero-opacity)) blur(var(--hero-blur));
-        }
+/* ── CHIPS ────────────────────────────────────────── */
+.chip-bar { display: flex; gap: 8px; padding: 10px 16px; overflow-x: auto; flex-shrink: 0; }
+.chip-bar::-webkit-scrollbar { display: none; }
+.chip { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.09); color: var(--text2); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; transition: all .15s; white-space: nowrap; user-select: none; }
+.chip.active { background: rgba(99,102,241,.18); border-color: rgba(99,102,241,.4); color: var(--accent2); box-shadow: 0 0 16px rgba(99,102,241,.12); }
 
-        .hero-slide.active {
-            opacity: 1;
-            transform: scale(1.1);
-        }
+/* ── SEARCH ───────────────────────────────────────── */
+.search-bar { padding: 8px 16px; flex-shrink: 0; }
+.search-wrap { position: relative; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text3); pointer-events: none; display: flex; }
+.search-icon svg { width: 16px; height: 16px; }
+.search-input { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.09); border-radius: var(--r-sm); padding: 11px 14px 11px 38px; color: var(--text); font-size: 15px; outline: none; transition: all .2s; }
+.search-input:focus { border-color: rgba(99,102,241,.5); background: rgba(255,255,255,0.07); box-shadow: 0 0 0 3px rgba(99,102,241,.08); }
+.search-input::placeholder { color: var(--text3); }
 
-        .bg-gradient-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 0%, rgba(var(--color-primary), 0.1) 0%, transparent 60%);
-            pointer-events: none;
-        }
+/* ── LIST ITEMS ───────────────────────────────────── */
+.list-item { display: flex; align-items: center; gap: 13px; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); cursor: pointer; transition: background .1s; user-select: none; }
+.list-item:last-child { border-bottom: none; }
+.list-item:active { background: rgba(255,255,255,0.04); }
+.li-avatar { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; color: #fff;}
+.li-avatar svg { width: 20px; height: 20px; }
+.li-body { flex: 1; min-width: 0; }
+.li-title { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.li-sub { font-size: 12px; color: var(--text2); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.li-right { text-align: right; flex-shrink: 0; }
+.li-amount { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.li-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
+.b-paid { background: rgba(34,197,94,.12); color: var(--green); }
+.b-partial { background: rgba(59,130,246,.12); color: var(--blue); }
+.b-credit { background: rgba(168,85,247,.12); color: var(--purple); }
+.b-refund { background: rgba(244,63,94,.12); color: var(--red); }
+.b-pending { background: rgba(245,158,11,.12); color: var(--yellow); }
+.b-quote { background: rgba(116,116,168,.1); color: var(--text2); }
+.b-voided { background: rgba(244,63,94,.08); color: var(--red); }
+.b-active { background: rgba(34,197,94,.12); color: var(--green); }
+.b-expired { background: rgba(244,63,94,.12); color: var(--red); }
+.b-in { background: rgba(34,197,94,.12); color: var(--green); }
+.b-out { background: rgba(244,63,94,.12); color: var(--red); }
+.b-default { background: rgba(255,255,255,0.07); color: var(--text2); }
 
-        #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
+/* ── CARDS ────────────────────────────────────────── */
+.kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; }
+.kpi-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r); padding: 16px; position: relative; }
+.kpi-card.c-accent { background: rgba(99,102,241,.08); border-color: rgba(99,102,241,.22); }
+.kpi-card.c-green { background: rgba(34,197,94,.07); border-color: rgba(34,197,94,.2); }
+.kpi-card.c-blue { background: rgba(59,130,246,.07); border-color: rgba(59,130,246,.2); }
+.kpi-card.c-red { background: rgba(244,63,94,.07); border-color: rgba(244,63,94,.2); }
+.kpi-card.c-yellow { background: rgba(245,158,11,.07); border-color: rgba(245,158,11,.2); }
+.kpi-card.c-purple { background: rgba(168,85,247,.07); border-color: rgba(168,85,247,.2); }
+.kpi-card.c-full { grid-column: 1 / -1; }
+.kpi-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; font-weight: 600; }
+.kpi-value { font-size: 22px; font-weight: 800; letter-spacing: -.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 12px; color: var(--text2); margin-top: 6px; }
+.section-hdr { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 8px; }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--text2); }
+.section-link { font-size: 13px; color: var(--accent2); cursor: pointer; font-weight: 600; }
+.section-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r); overflow: hidden; margin: 0 16px 16px; }
 
-        /* ENTRANCE ANIMATIONS */
-        @keyframes revealUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-                filter: blur(5px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-        }
+/* ── PRODUCT GRID ─────────────────────────────────── */
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px 16px 80px; }
+.prod-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r); padding: 14px; cursor: pointer; transition: all .15s; display: flex; flex-direction: column; gap: 6px; }
+.prod-card:active { transform: scale(.97); border-color: rgba(99,102,241,.35); }
+.prod-cat { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; font-weight: 700; }
+.prod-name { font-size: 14px; font-weight: 700; line-height: 1.35; }
+.prod-price { font-size: 18px; font-weight: 800; color: var(--accent2); letter-spacing: -.3px; font-variant-numeric: tabular-nums; }
+.prod-stock { font-size: 11px; font-weight: 700; letter-spacing: .2px; }
+.prod-stock.ok { color: var(--green); }
+.prod-stock.low { color: var(--red); }
 
-        .animate-reveal {
-            opacity: 0; /* Initially hidden */
-        }
+/* ── TABS ─────────────────────────────────────────── */
+.tab-bar { display: flex; background: rgba(8,8,15,0.5); border-bottom: 1px solid rgba(255,255,255,0.06); overflow-x: auto; flex-shrink: 0; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn { flex-shrink: 0; padding: 13px 20px; font-size: 13px; font-weight: 700; color: var(--text2); border: none; background: none; cursor: pointer; position: relative; transition: color .15s; text-transform: uppercase; letter-spacing: .4px; }
+.tab-btn::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 2px; background: linear-gradient(90deg, #6366f1, #818cf8); border-radius: 2px 2px 0 0; transform: scaleX(0); transition: transform .2s; }
+.tab-btn.active { color: var(--accent2); }
+.tab-btn.active::after { transform: scaleX(1); }
+.tab-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; }
+.tab-panel.active { display: flex; }
 
-        .animate-reveal.active {
-            animation: revealUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
+/* ── FORMS ────────────────────────────────────────── */
+.form-body { padding: 20px 16px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 40px; }
+.form-field { display: flex; flex-direction: column; gap: 7px; }
+.form-field label { font-size: 12px; color: var(--text2); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+.form-field input, .form-field select, .form-field textarea { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.09); border-radius: var(--r-sm); padding: 13px 14px; color: var(--text); font-size: 15px; outline: none; transition: all .2s; font-family: inherit; -webkit-appearance: none; }
+.form-field input:focus, .form-field textarea:focus { border-color: rgba(99,102,241,.5); background: rgba(255,255,255,0.08); box-shadow: 0 0 0 3px rgba(99,102,241,.08); }
+.submit-btn { background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%); color: #fff; border: none; border-radius: var(--r-sm); padding: 15px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: opacity .15s; box-shadow: 0 4px 20px rgba(99,102,241,.35); }
+.submit-btn:active { opacity: .85; }
 
-        /* Dynamic Glass Card */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+/* ── MORE GRID ────────────────────────────────────── */
+.more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px; padding-bottom: 80px; }
+.more-tile { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r); padding: 20px 8px 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: all .15s; user-select: none; }
+.more-tile:active { background: rgba(255,255,255,0.08); transform: scale(.96); }
+.m-icon { width: 52px; height: 52px; border-radius: 15px; display: flex; align-items: center; justify-content: center; }
+.m-icon svg { width: 22px; height: 22px; }
+.m-lbl { font-size: 11px; font-weight: 700; color: var(--text2); text-align: center; line-height: 1.3; text-transform: uppercase; }
 
-        /* Text Rotation Transition */
-        .text-shine {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-text) 45%, var(--color-text) 55%, var(--color-primary) 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine-sweep 4s linear infinite;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            display: inline-block;
-        }
+/* ── REPORTS ──────────────────────────────────────── */
+.rpt-date-bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+.date-inp { flex: 1; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.09); border-radius: var(--r-xs); padding: 9px 10px; color: var(--text); font-size: 14px; outline: none; color-scheme: dark; }
+.date-inp:focus { border-color: rgba(99,102,241,.5); }
+.date-sep { color: var(--text3); font-size: 12px; }
+.rpt-go { background: rgba(99,102,241,.2); color: var(--accent2); border: 1px solid rgba(99,102,241,.3); border-radius: var(--r-xs); padding: 9px 16px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background .15s; }
+.rpt-go:active { background: rgba(99,102,241,.3); }
+.bar-chart { padding: 4px 16px 16px; }
+.bar-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+.bar-label { font-size: 12px; color: var(--text2); width: 80px; flex-shrink: 0; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; background: rgba(255,255,255,0.06); border-radius: 4px; height: 7px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width .6s; }
+.bar-val { font-size: 12px; font-weight: 700; width: 90px; flex-shrink: 0; text-align: right; color: var(--text2); }
 
-        .text-shine.fade-out {
-            opacity: 0;
-            transform: translateY(20px);
-        }
+/* ── DETAIL SCREENS ───────────────────────────────── */
+.detail-section { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.detail-stitle { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px; font-weight: 700; }
+.detail-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 6px 0; gap: 12px; }
+.detail-key { font-size: 14px; color: var(--text2); flex-shrink: 0; }
+.detail-val { font-size: 14px; font-weight: 600; text-align: right; word-break: break-word; }
+.total-box { margin: 16px; background: rgba(255,255,255,0.05); border-radius: var(--r); padding: 16px; border: 1px solid rgba(255,255,255,0.08); }
+.total-box .detail-row:last-child .detail-key, .total-box .detail-row:last-child .detail-val { font-size: 20px; font-weight: 800; color: var(--text); }
+.items-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.items-table th { color: var(--text3); font-weight: 700; font-size: 11px; text-transform: uppercase; padding: 8px 0; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.items-table th:last-child, .items-table td:last-child { text-align: right; }
+.items-table td { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text2); vertical-align: top; }
+.items-table td:first-child { color: var(--text); }
 
-        @keyframes shine-sweep {
-            to {
-                background-position: 200% center;
-            }
-        }
+/* ── FAB ──────────────────────────────────────────── */
+.fab {
+  position: absolute; bottom: calc(var(--nav-h) + var(--safe-b) + 20px); right: 20px;
+  width: 54px; height: 54px; background: linear-gradient(135deg, #6366f1, #7c3aed); border: none; border-radius: 17px;
+  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(99,102,241,.55), 0 0 40px rgba(99,102,241,.15); z-index: 20; transition: transform .15s;
+}
+.fab:active { transform: scale(.93); }
+.fab svg { width: 22px; height: 22px; }
 
-        /* Nav Animation - Updated to be always visible */
-        #main-nav {
-            transform: translateY(0); /* Always visible now */
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+/* ── TOAST ────────────────────────────────────────── */
+#toast {
+  position: fixed; bottom: calc(var(--nav-h) + var(--safe-b) + 20px); left: 50%; transform: translateX(-50%) translateY(10px);
+  background: rgba(30,30,50,0.9); backdrop-filter: blur(20px); color: var(--text); padding: 12px 22px; border-radius: 12px;
+  font-size: 14px; font-weight: 600; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+  white-space: nowrap; border: 1px solid rgba(255,255,255,0.1); max-width: 90vw;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* Service Icons */
-        .service-icon-btn {
-            aspect-ratio: 1/1;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--color-border);
-            background: var(--color-navy);
-            cursor: pointer;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            overflow: hidden; /* Ensure video doesn't spill */
-        }
+/* ── LOADING / EMPTY ──────────────────────────────── */
+.loading-box { display: flex; align-items: center; justify-content: center; padding: 64px 24px; gap: 12px; color: var(--text2); font-size: 14px; font-weight: 500; }
+.spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 72px 24px; gap: 14px; text-align: center; }
+.empty-ico { width: 40px; height: 40px; color: var(--text3); }
+.empty-msg { color: var(--text2); font-size: 14px; line-height: 1.6; max-width: 220px; }
 
-        .service-icon-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            border-color: var(--color-primary);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Modal */
-        .modal-fullscreen {
-            position: fixed;
-            inset: 0;
-            z-index: 500;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            display: none;
-            overflow-y: auto;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 2rem;
-        }
-
-        .modal-fullscreen.modal-active {
-            display: flex !important;
-            opacity: 1;
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .modal-close-btn {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 600;
-            background: var(--color-navy);
-            backdrop-filter: blur(4px);
-            border: 1px solid var(--color-border);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            color: var(--color-text);
-        }
-
-        .modal-close-btn:hover {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: white;
-        }
-        
-        /* Logo filter class (Only applied to footer now) */
-        .logo-img-filter {
-            filter: invert(var(--logo-invert)) brightness(var(--logo-brightness, 100%));
-        }
-
-        /* Floating WhatsApp Button */
-        .float-call-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: #25D366; /* WhatsApp Green */
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: pulse-green 2s infinite;
-        }
-
-        .float-call-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        @keyframes pulse-music {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-    </style>
+/* ── UTILS ────────────────────────────────────────── */
+.section-gap { height: 16px; }
+.divider { height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
+</style>
 </head>
+<body>
 
-<body class="bg-biz-deep overflow-x-hidden selection:bg-biz-primary selection:text-white">
-    
-    <!-- WELCOME / LOADING SCREEN -->
-    <div id="welcome-screen">
-        <div class="welcome-content max-w-lg w-full px-6">
-            <!-- Animated Logo -->
-            <div class="mb-8 relative group">
-                <div class="absolute inset-0 bg-blue-500 blur-[30px] opacity-20 rounded-full group-hover:opacity-40 transition-opacity duration-1000"></div>
-                <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" alt="BizSense Logo" class="h-20 md:h-24 relative z-10 mx-auto object-contain">
-            </div>
 
-            <!-- Animated Text -->
-            <h1 class="text-3xl md:text-5xl font-display font-black text-slate-900 mb-2 leading-tight tracking-tight">
-                Welcome To<br>
-                <span class="text-gradient-gold">BizSense Experts</span>
-            </h1>
-            <p class="text-slate-400 font-bold uppercase tracking-[0.4em] text-sm md:text-lg mb-10">
-                Sri Lanka
-            </p>
+<!-- ════ DESKTOP GATE ════ -->
+<div id="gate" hidden>
+  <div class="gate-logo">
+    <svg viewBox="0 0 56 56" fill="none" width="56" height="56">
+      <rect width="56" height="56" rx="16" fill="rgba(99,102,241,.15)" stroke="rgba(99,102,241,.3)" stroke-width="1"/>
+      <text x="28" y="38" font-size="28" text-anchor="middle" fill="#818cf8" font-family="system-ui,sans-serif" font-weight="800">B</text>
+    </svg>
+  </div>
+  <h1>BizSense POS</h1>
+  <p class="gate-sub">This app is designed for mobile devices.<br>Download the desktop app for the full POS experience.</p>
+  <a class="gate-dl-btn" id="gate-dl" href="https://github.com/bizsense-sl/bizsense-pos/releases/latest" target="_blank">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="flex-shrink:0"><path d="M10 3v10m0 0l-4-4m4 4l4-4M3 17h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Download Desktop App
+  </a>
+  <div class="gate-url" id="gate-url"></div>
+</div>
 
-            <!-- Loading Bar Container -->
-            <div class="w-full max-w-xs h-1.5 bg-slate-100 rounded-full overflow-hidden mb-12 mx-auto relative shadow-inner">
-                <div id="progress-bar-fill" class="h-full bg-blue-600 w-0 transition-all ease-out" style="transition-duration: 2000ms;"></div>
-            </div>
+<!-- ════ APP ════ -->
+<div id="app" hidden>
 
-            <!-- Enter Button (Hidden Initially) -->
-            <button id="enter-website-btn" onclick="enterWebsite()" class="opacity-0 pointer-events-none transform translate-y-4 transition-all duration-700 btn-glow bg-slate-900 text-white font-display font-black uppercase tracking-widest text-sm py-4 px-10 rounded-full hover:bg-blue-600 hover:scale-105 active:scale-95 shadow-2xl">
-                Go To Website
-            </button>
+  <!-- LOGIN -->
+  <div class="screen" id="login-screen">
+    <div class="login-wrap">
+      <div class="app-logo" style="background:none;box-shadow:none;width:80px;height:80px;">
+        <img src="./app.png" alt="BizSensePOS" width="80" height="80" style="border-radius:20px;box-shadow:0 8px 32px rgba(99,102,241,.45);">
+      </div>
+      <h2 class="login-title">BizSense POS</h2>
+      <p class="login-sub">Sign in to manage your shop</p>
+      <div class="login-form">
+        <div class="field-wrap">
+          <input type="text" id="login-id" placeholder="Username or Email" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
         </div>
-    </div>
-
-
-
-    <div id="luxuryBg"></div>
-    <div class="bg-gradient-overlay"></div>
-    <canvas id="particleCanvas"></canvas>
-
-    <!-- FLOATING BUTTONS -->
-    
-
-
-    <!-- WhatsApp -->
-    <a href="https://wa.me/94701757576" target="_blank" class="float-call-btn" title="Contact Us on WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-        </svg>
-    </a>
-
-    <!-- SCROLLING NAVBAR -->
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-[200] px-3 py-3 md:px-4">
-        <div class="max-w-4xl mx-auto relative">
-            <div
-                class="glass-card rounded-full px-4 md:px-6 py-2 flex items-center justify-between shadow-lg relative z-20">
-                <!-- Logo (Original Colors Restored) -->
-                <div class="flex items-center gap-2 shrink-0">
-                    <img src="https://i.ibb.co/7mmBhMJ/LOGO.png"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
-                        alt="BizSense" class="h-5 md:h-6 object-contain"> 
-                    <span class="hidden text-biz-text font-bold tracking-widest text-sm uppercase">BizSense</span>
-                </div>
-
-                <!-- Navbar Buttons -->
-                <div class="flex items-center gap-2 md:gap-6 overflow-x-auto no-scrollbar mx-2">
-                    <button onclick="openServiceModal('erp')"
-                        class="text-[9px] font-black uppercase tracking-widest text-biz-muted hover:text-biz-primary transition-colors whitespace-nowrap">ERP</button>
-                    <button onclick="openServiceModal('b2b')"
-                        class="text-[9px] font-black uppercase tracking-widest text-biz-muted hover:text-biz-primary transition-colors whitespace-nowrap">Trade</button>
-                    <button onclick="openServiceModal('marketing')"
-                        class="text-[9px] font-black uppercase tracking-widest text-biz-muted hover:text-biz-primary transition-colors whitespace-nowrap">Digital</button>
-                    <button onclick="openServiceModal('finance')"
-                        class="text-[9px] font-black uppercase tracking-widest text-biz-muted hover:text-biz-primary transition-colors whitespace-nowrap">Finance</button>
-                </div>
-
-                <!-- Right Side Actions -->
-                <div class="flex items-center gap-3 shrink-0">
-                    <button onclick="window.open('https://wa.me/94701757576')"
-                        class="bg-biz-primary hover:bg-biz-secondary transition-colors text-white text-[9px] font-black uppercase tracking-widest px-4 py-2 md:px-5 rounded-full font-bold shadow-md">Connect</button>
-                </div>
-            </div>
+        <div class="field-wrap">
+          <input type="password" id="login-pw" placeholder="Password" autocomplete="current-password">
         </div>
-    </nav>
-
-    <!-- COMPACT HERO SECTION (Padding reduced to remove dead space) -->
-    <section class="relative min-h-screen flex flex-col items-center pt-[70px] px-4 pb-12">
-        <!-- HERO BACKGROUND SLIDESHOW -->
-        <div id="hero-slideshow">
-            <!-- Slide 1 -->
-            <div class="hero-slide active"
-                style="background-image: url('https://images.unsplash.com/photo-1745062059501-75052020c694?q=80&w=1470&auto=format&fit=crop');">
-            </div>
-            <!-- Slide 2 -->
-            <div class="hero-slide"
-                style="background-image: url('https://images.unsplash.com/photo-1568033307164-71c521fea29d?q=80&w=1470&auto=format&fit=crop');">
-            </div>
-            <!-- Slide 3 -->
-            <div class="hero-slide"
-                style="background-image: url('https://images.unsplash.com/photo-1588672489918-0791d6d46bc8?q=80&w=687&auto=format&fit=crop');">
-            </div>
-        </div>
-
-        <!-- VIDEO SECTION (No deadspace on top) -->
-        <div class="animate-reveal active flex flex-col items-center gap-2 mb-3 mt-1 w-full" style="animation-delay: 0.1s;">
-            <div class="w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border-4 border-white/40 glass-card">
-                <video id="heroVideo" autoplay loop muted playsinline class="w-full h-auto object-cover">
-                    <source src="CleanVideo.mp4" type="video/mp4">
-                    <!-- Fallback -->
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-
-        <div class="w-full max-w-5xl text-center">
-            <!-- Main Headline Box (Tight spacing) -->
-            <div class="animate-reveal active glass-card rounded-[30px] md:rounded-[40px] p-6 mb-4"
-                style="animation-delay: 0.2s;">
-                <h1
-                    class="text-[32px] sm:text-[50px] md:text-[68px] lg:text-[84px] font-display font-[950] text-biz-text leading-[0.9] uppercase tracking-tighter">
-                    Empowering<br>Businesses
-                </h1>
-
-                <div class="flex items-center justify-center gap-3 my-2">
-                    <div class="w-8 md:w-16 h-[1px] bg-biz-border"></div>
-                    <span
-                        class="text-[8px] md:text-base font-display font-black text-biz-primary/60 tracking-[0.3em] uppercase italic">with</span>
-                    <div class="w-8 md:w-16 h-[1px] bg-biz-border"></div>
-                </div>
-
-                <div class="h-[35px] md:h-[65px] flex items-center justify-center overflow-hidden">
-                    <span id="rotating-text"
-                        class="text-shine text-[18px] sm:text-2xl md:text-4xl lg:text-5xl font-display font-black uppercase tracking-tighter whitespace-nowrap">
-                        Digital Marketing
-                    </span>
-                </div>
-            </div>
-
-            <!-- HERO BUTTONS (Full Color - No Overlay) -->
-            <div class="grid grid-cols-4 gap-2 w-full max-w-xl mx-auto mb-4 px-1 animate-reveal active"
-                style="animation-delay: 0.4s;">
-
-                <!-- ERP -->
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('erp')"
-                        class="service-icon-btn relative w-full rounded-xl md:rounded-2xl overflow-hidden">
-                        <video
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                            autoplay loop muted playsinline>
-                            <source src="https://cdn-icons-mp4.flaticon.com/512/19028/19028570.mp4" type="video/mp4">
-                        </video>
-                        <!-- No overlay here to ensure full color -->
-                    </button>
-                    <h4
-                        class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-biz-text group-hover:text-biz-primary transition-colors bg-white/50 rounded-full px-2">
-                        ERP
-                    </h4>
-                </div>
-
-                <!-- B2B -->
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('b2b')"
-                        class="service-icon-btn relative w-full rounded-xl md:rounded-2xl overflow-hidden">
-                        <video
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                            autoplay loop muted playsinline>
-                            <source src="https://cdn-icons-mp4.flaticon.com/512/17907/17907839.mp4" type="video/mp4">
-                        </video>
-                    </button>
-                    <h4
-                        class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-biz-text group-hover:text-biz-primary transition-colors bg-white/50 rounded-full px-2">
-                        B2B
-                    </h4>
-                </div>
-
-                <!-- Digital -->
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('marketing')"
-                        class="service-icon-btn relative w-full rounded-xl md:rounded-2xl overflow-hidden">
-                        <video
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                            autoplay loop muted playsinline>
-                            <source src="https://cdn-icons-mp4.flaticon.com/512/17556/17556486.mp4" type="video/mp4">
-                        </video>
-                    </button>
-                    <h4
-                        class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-biz-text group-hover:text-biz-primary transition-colors bg-white/50 rounded-full px-2">
-                        Digital
-                    </h4>
-                </div>
-
-                <!-- Finance -->
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('finance')"
-                        class="service-icon-btn relative w-full rounded-xl md:rounded-2xl overflow-hidden">
-                        <video
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                            autoplay loop muted playsinline>
-                            <source src="https://cdn-icons-mp4.flaticon.com/512/17556/17556489.mp4" type="video/mp4">
-                        </video>
-                    </button>
-                    <h4
-                        class="font-display font-black text-[8px] md:text-[10px] uppercase tracking-widest text-biz-text group-hover:text-biz-primary transition-colors bg-white/50 rounded-full px-2">
-                        Finance
-                    </h4>
-                </div>
-
-            </div>
-
-            <!-- BIO SENTENCE (Tight Spacing) -->
-            <div class="animate-reveal active max-w-3xl mx-auto px-4 mb-2 glass-card p-6 rounded-3xl" style="animation-delay: 0.6s;">
-                <p class="text-biz-text font-black text-sm md:text-base lg:text-lg leading-tight tracking-tight mb-2">
-                    Designing Business Systems That Drive
-                    <span class="text-biz-primary">Control</span>,
-                    <span class="text-biz-accent italic">Profitability</span> &amp;
-                    <span class="underline decoration-biz-primary/30 underline-offset-2">Growth</span>
-                </p>
-
-                <p class="text-biz-muted text-[10px] md:text-sm lg:text-base leading-relaxed font-medium tracking-tight mb-2">
-                    <span class="text-biz-text font-black">BizSense Experts</span> is a
-                    <span class="text-biz-muted mx-1">multi-disciplinary</span> business solutions company helping
-                    <span class="text-biz-text font-bold">SMEs</span> and
-                    <span class="text-biz-text font-bold">growing enterprises</span>.
-                </p>
-                <p class="text-biz-muted text-[10px] md:text-sm lg:text-base leading-relaxed font-medium tracking-tight">
-                     We bridge the gap between <span class="text-biz-text font-bold">technology</span> and <span class="text-biz-text font-bold">real business needs</span>.
-                </p>
-            </div>
-
-            <div class="animate-reveal active flex flex-col items-center opacity-30 mt-6"
-                style="animation-delay: 0.8s;">
-                <div class="w-[1px] h-12 bg-gradient-to-b from-biz-primary to-transparent"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: WHAT WE DO -->
-    <section id="services" class="py-16 md:py-24 border-t border-biz-border bg-biz-navy relative z-10">
-        <div class="container mx-auto px-6 max-w-6xl">
-
-            <!-- HEADER -->
-            <div class="animate-reveal text-center mb-16">
-                <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                    What We Do
-                </h2>
-                <h3
-                    class="text-3xl md:text-6xl font-display font-black text-biz-text uppercase leading-[0.95] tracking-tighter mb-6">
-                    Integrated Business<br>Solutions
-                </h3>
-                <p class="text-biz-muted text-sm md:text-lg max-w-3xl mx-auto leading-relaxed">
-                    We deliver integrated business solutions under four core pillars.
-                    <span class="text-biz-text font-bold">Businesses grow faster when systems are connected.</span>
-                </p>
-            </div>
-
-            <!-- CORE PILLARS -->
-            <div class="grid md:grid-cols-2 gap-6 mb-24">
-                <div class="animate-reveal glass-card p-6 rounded-3xl border-l-4 border-l-biz-primary hover:bg-biz-deep transition">
-                    <p class="text-biz-text text-sm md:text-lg font-black">ERP Solutions & Implementation</p>
-                    <p class="text-biz-muted text-xs md:text-sm mt-2">
-                        End-to-end ERP design, configuration, and deployment aligned with real operations.
-                    </p>
-                </div>
-
-                <div class="animate-reveal glass-card p-6 rounded-3xl border-l-4 border-l-biz-primary hover:bg-biz-deep transition">
-                    <p class="text-biz-text text-sm md:text-lg font-black">B2B Trade & Export Support</p>
-                    <p class="text-biz-muted text-xs md:text-sm mt-2">
-                        Structured trade workflows, compliance readiness, and global transaction support.
-                    </p>
-                </div>
-
-                <div class="animate-reveal glass-card p-6 rounded-3xl border-l-4 border-l-biz-primary hover:bg-biz-deep transition">
-                    <p class="text-biz-text text-sm md:text-lg font-black">Digital Marketing for Global Reach</p>
-                    <p class="text-biz-muted text-xs md:text-sm mt-2">
-                        Performance-driven digital strategies aligned with sales and trade objectives.
-                    </p>
-                </div>
-
-                <div class="animate-reveal glass-card p-6 rounded-3xl border-l-4 border-l-biz-primary hover:bg-biz-deep transition">
-                    <p class="text-biz-text text-sm md:text-lg font-black">Accounting & Finance Consulting</p>
-                    <p class="text-biz-muted text-xs md:text-sm mt-2">
-                        Financial control frameworks, reporting structures, and decision-ready numbers.
-                    </p>
-                </div>
-            </div>
-
-            <!-- ERP DEEP DIVE -->
-            <div class="flex flex-col lg:flex-row gap-12 md:gap-16 items-center">
-                <div class="animate-reveal lg:w-1/2">
-                    <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                        ERP Solutions
-                    </h2>
-                    <h3
-                        class="text-3xl md:text-6xl font-display font-black text-biz-text uppercase leading-[0.9] tracking-tighter mb-8">
-                        ERP Is Not Software.<br>It Is a Business Discipline.
-                    </h3>
-                    <p class="text-biz-muted text-sm md:text-lg mb-8 leading-relaxed">
-                        ERP brings all business functions into
-                        <span class="text-biz-primary font-bold">one integrated system</span>, enabling
-                        <span class="text-biz-text font-bold">real-time visibility</span>,
-                        <span class="text-biz-text font-bold">operational control</span>, and
-                        <span class="text-biz-text font-bold">informed decision-making</span>.
-                    </p>
-                    <!-- ERP VALUE SIGNALS -->
-                    <div class="mt-10 mb-24 space-y-6">
-                        <div class="flex items-start gap-5">
-                            <div class="relative mt-1">
-                                <div class="w-8 h-8 rounded-full bg-biz-primary/10 flex items-center justify-center">
-                                    <div class="w-3 h-3 rounded-full bg-biz-primary"></div>
-                                </div>
-                            </div>
-                            <p class="text-biz-text text-sm md:text-base font-bold leading-snug">
-                                Unified data across finance, operations, sales, and inventory.
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-5">
-                            <div class="relative mt-1">
-                                <div class="w-8 h-8 rotate-45 bg-biz-primary/10 flex items-center justify-center">
-                                    <div class="w-3 h-3 bg-biz-primary rotate-45"></div>
-                                </div>
-                            </div>
-                            <p class="text-biz-text text-sm md:text-base font-bold leading-snug">
-                                Real-time reporting with zero manual reconciliation.
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-5">
-                            <div class="relative mt-1">
-                                <div class="w-8 h-8 rounded-lg bg-biz-primary/10 flex items-center justify-center">
-                                    <div class="w-3 h-3 rounded-sm bg-biz-primary"></div>
-                                </div>
-                            </div>
-                            <p class="text-biz-text text-sm md:text-base font-bold leading-snug">
-                                System-driven controls instead of people-dependent processes.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="animate-reveal lg:w-1/2 w-full">
-                    <div
-                        class="rounded-[40px] overflow-hidden border border-biz-border shadow-2xl aspect-square relative group">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000"
-                            class="w-full h-full object-cover transition-all duration-1000 transform group-hover:scale-105">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 md:right-8 p-6 md:p-8 glass-card rounded-3xl border-biz-primary/30">
-                            <p class="text-biz-text italic text-sm md:text-xl font-medium">
-                                “Without ERP, businesses operate on assumptions - With ERP, businesses operate on
-                                facts.”
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: INDUSTRIES EXPERIENCE (Updated Images) -->
-    <section class="py-16 md:py-24 bg-biz-deep border-t border-biz-border relative z-10">
-        <div class="container mx-auto px-6 max-w-7xl">
-
-            <div class="text-center mb-12 animate-reveal">
-                <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                    Industry Coverage
-                </h2>
-                <h3 class="text-3xl md:text-5xl font-display font-black text-biz-text uppercase tracking-tighter mb-4">
-                    Industries We Have<br>Experience In
-                </h3>
-            </div>
-
-            <!-- INDUSTRY GRID (3 x 2) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <!-- Manufacturing -->
-                <button
-                    class="animate-reveal group relative h-44 rounded-3xl overflow-hidden border border-biz-border shadow-lg transition-all duration-500 hover:scale-[1.02]">
-                    <img src="https://plus.unsplash.com/premium_photo-1682144509812-4734c830b486?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 h-full flex items-end p-5">
-                        <p class="text-white font-black text-sm uppercase tracking-wide">
-                            Manufacturing
-                        </p>
-                    </div>
-                </button>
-
-                <!-- Trading & Distribution -->
-                <button
-                    class="animate-reveal group relative h-44 rounded-3xl overflow-hidden border border-biz-border shadow-lg transition-all duration-500 hover:scale-[1.02]">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200"
-                        class="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 h-full flex items-end p-5">
-                        <p class="text-white font-black text-sm uppercase tracking-wide">
-                            Trading & Distribution
-                        </p>
-                    </div>
-                </button>
-
-                <!-- Exporters & Importers -->
-                <button
-                    class="animate-reveal group relative h-44 rounded-3xl overflow-hidden border border-biz-border shadow-lg transition-all duration-500 hover:scale-[1.02]">
-                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200"
-                        class="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 h-full flex items-end p-5">
-                        <p class="text-white font-black text-sm uppercase tracking-wide">
-                            Exporters & Importers
-                        </p>
-                    </div>
-                </button>
-
-                <!-- Retail & POS -->
-                <button
-                    class="animate-reveal group relative h-44 rounded-3xl overflow-hidden border border-biz-border shadow-lg transition-all duration-500 hover:scale-[1.02]">
-                    <img src="https://plus.unsplash.com/premium_photo-1664474426510-e60b4b8ad43e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 h-full flex items-end p-5">
-                        <p class="text-white font-black text-sm uppercase tracking-wide">
-                            Retail & POS Businesses
-                        </p>
-                    </div>
-                </button>
-
-                <!-- Agriculture & Animal Feed -->
-                <button
-                    class="animate-reveal group relative h-44 rounded-3xl overflow-hidden border border-biz-border shadow-lg transition-all duration-500 hover:scale-[1.02]">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200"
-                        class="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 h-full flex items-end p-5">
-                        <p class="text-white font-black text-sm uppercase tracking-wide">
-                            Agriculture & Animal Feed
-                        </p>
-                    </div>
-                </button>
-
-                <!-- Service SMEs -->
-                <button
-                    class="animate-reveal group relative h-44 rounded-3xl overflow-hidden border border-biz-border shadow-lg transition-all duration-500 hover:scale-[1.02]">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200"
-                        class="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 h-full flex items-end p-5">
-                        <p class="text-white font-black text-sm uppercase tracking-wide">
-                            Service-Based SMEs
-                        </p>
-                    </div>
-                </button>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: WHY ERP + IMPLEMENTATION FRAMEWORK -->
-    <section class="py-16 md:py-32 bg-biz-navy relative z-10">
-        <div class="container mx-auto px-6 max-w-6xl">
-
-            <div class="text-center mb-20 animate-reveal">
-                <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                    Why ERP Matters
-                </h2>
-                <h3
-                    class="text-3xl md:text-6xl font-display font-black text-biz-text uppercase tracking-tighter leading-[0.95] mb-6">
-                    Why ERP Is Critical<br>for Growing Businesses
-                </h3>
-            </div>
-
-            <!-- PROBLEM STRIP -->
-            <div class="animate-reveal max-w-5xl mx-auto mb-32">
-                <div class="space-y-6">
-                    <div
-                        class="group flex items-start gap-6 py-4 border-b border-biz-border hover:border-biz-primary/40 transition-colors">
-                        <div class="w-1 h-full bg-biz-primary/60 group-hover:bg-biz-primary transition"></div>
-                        <div>
-                            <p class="text-biz-text font-black text-sm md:text-base uppercase tracking-tight">
-                                Disconnected systems & spreadsheets
-                            </p>
-                            <p class="text-biz-muted text-xs md:text-sm mt-1 leading-relaxed">
-                                No unified, reliable view of operations or financial performance.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="group flex items-start gap-6 py-4 border-b border-biz-border hover:border-biz-primary/40 transition-colors">
-                        <div class="w-1 h-full bg-biz-primary/60 group-hover:bg-biz-primary transition"></div>
-                        <div>
-                            <p class="text-biz-text font-black text-sm md:text-base uppercase tracking-tight">
-                                Poor stock & debtor control
-                            </p>
-                            <p class="text-biz-muted text-xs md:text-sm mt-1 leading-relaxed">
-                                Revenue leakage, overstocking, and invisible cash flow risks.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="group flex items-start gap-6 py-4 border-b border-biz-border hover:border-biz-primary/40 transition-colors">
-                        <div class="w-1 h-full bg-biz-primary/60 group-hover:bg-biz-primary transition"></div>
-                        <div>
-                            <p class="text-biz-text font-black text-sm md:text-base uppercase tracking-tight">
-                                No real-time financial visibility
-                            </p>
-                            <p class="text-biz-muted text-xs md:text-sm mt-1 leading-relaxed">
-                                Decisions made using outdated or manually compiled numbers.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TRANSITION STATEMENT -->
-            <div class="text-center mb-24 animate-reveal">
-                <p class="text-biz-text text-sm md:text-xl font-semibold italic max-w-4xl mx-auto">
-                    ERP solves these problems by creating
-                    <span class="text-biz-primary">one source of truth</span> across the organisation.
-                </p>
-            </div>
-
-            <!-- FRAMEWORK HEADER -->
-            <div class="text-center mb-16 animate-reveal">
-                <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                    Implementation
-                </h2>
-                <h3 class="text-3xl md:text-5xl font-display font-black text-biz-text uppercase tracking-tighter">
-                    BizSense ERP Implementation Framework
-                </h3>
-            </div>
-
-            <!-- FRAMEWORK STEPS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-reveal">
-                <div class="glass-card p-8 rounded-[25px] hover:-translate-y-2 transition">
-                    <span class="text-biz-primary font-black text-2xl opacity-40">01</span>
-                    <h4 class="text-biz-text font-bold text-xs uppercase mt-3 mb-2">
-                        Business Process Study
-                    </h4>
-                    <p class="text-biz-muted text-[11px] leading-relaxed">
-                        Understand current operations, workflows, and real-world pain points.
-                    </p>
-                </div>
-                <div class="glass-card p-8 rounded-[25px] hover:-translate-y-2 transition">
-                    <span class="text-biz-primary font-black text-2xl opacity-40">02</span>
-                    <h4 class="text-biz-text font-bold text-xs uppercase mt-3 mb-2">
-                        Gap Analysis & System Design
-                    </h4>
-                    <p class="text-biz-muted text-[11px] leading-relaxed">
-                        Identify gaps between current processes and global best practices.
-                    </p>
-                </div>
-                <div class="glass-card p-8 rounded-[25px] hover:-translate-y-2 transition">
-                    <span class="text-biz-primary font-black text-2xl opacity-40">03</span>
-                    <h4 class="text-biz-text font-bold text-xs uppercase mt-3 mb-2">
-                        ERP Selection
-                    </h4>
-                    <p class="text-biz-muted text-[11px] leading-relaxed">
-                        Recommend the right platform — Odoo, Zoho, or QuickBooks.
-                    </p>
-                </div>
-                <div class="glass-card p-8 rounded-[25px] hover:-translate-y-2 transition">
-                    <span class="text-biz-primary font-black text-2xl opacity-40">04</span>
-                    <h4 class="text-biz-text font-bold text-xs uppercase mt-3 mb-2">
-                        Configuration & Customisation
-                    </h4>
-                    <p class="text-biz-muted text-[11px] leading-relaxed">
-                        Configure the system to mirror real business processes and controls.
-                    </p>
-                </div>
-                <div class="glass-card p-8 rounded-[25px] hover:-translate-y-2 transition">
-                    <span class="text-biz-primary font-black text-2xl opacity-40">05</span>
-                    <h4 class="text-biz-text font-bold text-xs uppercase mt-3 mb-2">
-                        User Training & Change Management
-                    </h4>
-                    <p class="text-biz-muted text-[11px] leading-relaxed">
-                        Ensure adoption, discipline, accountability, and ownership.
-                    </p>
-                </div>
-                <div class="glass-card p-8 rounded-[25px] hover:-translate-y-2 transition">
-                    <span class="text-biz-primary font-black text-2xl opacity-40">06</span>
-                    <h4 class="text-biz-text font-bold text-xs uppercase mt-3 mb-2">
-                        Go-Live & Support
-                    </h4>
-                    <p class="text-biz-muted text-[11px] leading-relaxed">
-                        Long-term support beyond implementation for sustained performance.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: FINAL IMPACT -->
-    <section class="relative py-20 md:py-36 bg-gradient-to-b from-biz-navy via-biz-deep to-biz-navy overflow-hidden">
-        <!-- Ambient Glow -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div
-                class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-biz-primary/10 blur-[180px] rounded-full">
-            </div>
-        </div>
-
-        <div class="container mx-auto px-6 max-w-7xl relative z-10">
-
-            <!-- WHAT BIZSENSE DELIVERS -->
-            <div class="animate-reveal text-center mb-28">
-                <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                    What BizSense Delivers
-                </h2>
-                <h3
-                    class="text-3xl md:text-6xl font-display font-black text-biz-text uppercase tracking-tighter mb-8 leading-[0.95]">
-                    Financial Control.<br>Operational Clarity.<br>Scalable Growth.
-                </h3>
-
-                <!-- DELIVERABLES : ICON INLINE LIST -->
-                <div class="mt-20 mb-32 animate-reveal">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 text-biz-primary">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4Z" />
-                                    <path d="M2 12h2m16 0h2M12 2v2m0 16v2" />
-                                </svg>
-                            </div>
-                            <p class="text-biz-text font-black text-sm md:text-base leading-snug">
-                                Cash Flow Forecasting & Control
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 text-biz-primary">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path d="M3 3v18h18" />
-                                    <path d="M7 15l4-4 3 3 5-5" />
-                                </svg>
-                            </div>
-                            <p class="text-biz-text font-black text-sm md:text-base leading-snug">
-                                Working Capital Optimisation
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 text-biz-primary">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path d="M8 6h13M8 12h13M8 18h13" />
-                                    <path d="M3 6h.01M3 12h.01M3 18h.01" />
-                                </svg>
-                            </div>
-                            <p class="text-biz-text font-black text-sm md:text-base leading-snug">
-                                Budgeting & Financial Planning
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- TOOLS AS ENABLERS -->
-                <div class="animate-reveal text-center mb-28">
-                    <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                        Philosophy
-                    </h2>
-                    <h3 class="text-3xl md:text-5xl font-display font-black text-biz-text uppercase tracking-tighter mb-6">
-                        Tools Are Enablers — Not Products
-                    </h3>
-                    <p class="text-biz-muted text-sm md:text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-                        We use technology as a solution — not a sale.
-                    </p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <span class="glass-card px-6 py-3 rounded-full text-biz-text font-bold text-sm border-biz-border">Odoo</span>
-                        <span class="glass-card px-6 py-3 rounded-full text-biz-text font-bold text-sm border-biz-border">Zoho Books</span>
-                        <span class="glass-card px-6 py-3 rounded-full text-biz-text font-bold text-sm border-biz-border">QuickBooks</span>
-                        <span class="glass-card px-6 py-3 rounded-full text-biz-text font-bold text-sm border-biz-border">
-                            Others
-                        </span>
-                    </div>
-                </div>
-
-                <!-- NEW SECTION: VISUAL GALLERY / MORE IMAGES (Updated) -->
-                <div class="animate-reveal mb-32">
-                    <div class="text-center mb-16">
-                        <h2 class="text-biz-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">
-                            Our Impact
-                        </h2>
-                        <h3 class="text-3xl md:text-5xl font-display font-black text-biz-text uppercase tracking-tighter">
-                            Transformation in Action
-                        </h3>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                         <div class="aspect-[4/5] rounded-2xl overflow-hidden relative group">
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-                                <span class="text-white text-xs font-bold uppercase">Strategy</span>
-                            </div>
-                         </div>
-                         <div class="aspect-[4/5] rounded-2xl overflow-hidden relative group">
-                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-                                <span class="text-white text-xs font-bold uppercase">Collaboration</span>
-                            </div>
-                         </div>
-                         <div class="aspect-[4/5] rounded-2xl overflow-hidden relative group">
-                            <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1000" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-                                <span class="text-white text-xs font-bold uppercase">Development</span>
-                            </div>
-                         </div>
-                         <div class="aspect-[4/5] rounded-2xl overflow-hidden relative group">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-                                <span class="text-white text-xs font-bold uppercase">Results</span>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-
-                <!-- NEW: CONTACT SECTION -->
-                <div id="contact" class="animate-reveal py-12 border-t border-biz-border/50">
-                    <div class="glass-card rounded-[40px] p-8 md:p-16 border border-biz-border">
-                         <div class="grid md:grid-cols-2 gap-12 items-center">
-                             <div>
-                                <h3 class="text-3xl md:text-5xl font-display font-black text-biz-text uppercase tracking-tighter mb-6">
-                                    Let's Talk Business
-                                </h3>
-                                <p class="text-biz-muted text-lg mb-8">
-                                    Ready to professionalise your business operations? Book a strategy session with our experts.
-                                </p>
-                                
-                                <div class="space-y-4">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-10 h-10 rounded-full bg-biz-primary/10 flex items-center justify-center text-biz-primary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                        </div>
-                                        <span class="text-biz-text font-bold text-lg">+94 70 175 7576</span>
-                                    </div>
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-10 h-10 rounded-full bg-biz-primary/10 flex items-center justify-center text-biz-primary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                                        </div>
-                                        <span class="text-biz-text font-bold text-lg">info@bizsense.lk</span>
-                                    </div>
-                                </div>
-                             </div>
-
-                             <div class="bg-biz-deep/50 p-6 rounded-3xl border border-biz-border">
-                                <form onsubmit="event.preventDefault(); alert('Thank you for your interest! Please contact us via WhatsApp for faster response.');">
-                                    <div class="space-y-4">
-                                        <input type="text" placeholder="Your Name" class="w-full p-4 rounded-xl bg-biz-navy border border-biz-border text-biz-text focus:outline-none focus:border-biz-primary">
-                                        <input type="text" placeholder="Company Name" class="w-full p-4 rounded-xl bg-biz-navy border border-biz-border text-biz-text focus:outline-none focus:border-biz-primary">
-                                        <input type="text" placeholder="Phone Number" class="w-full p-4 rounded-xl bg-biz-navy border border-biz-border text-biz-text focus:outline-none focus:border-biz-primary">
-                                        <button class="w-full bg-biz-primary text-white font-bold uppercase tracking-wide py-4 rounded-xl hover:bg-biz-secondary transition">Send Request</button>
-                                    </div>
-                                </form>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-
-                <!-- FINAL CTA -->
-                <div class="animate-reveal text-center">
-                    <h3 class="text-3xl md:text-6xl font-display font-black text-biz-text uppercase tracking-tighter mb-6">
-                        Start Your Business<br>Transformation
-                    </h3>
-
-                    <p class="text-biz-muted text-sm md:text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-                        Ready to bring
-                        <span class="text-biz-text font-bold">control</span>,
-                        <span class="text-biz-text font-bold">visibility</span>, and
-                        <span class="text-biz-text font-bold">scalable growth</span> to your business?
-                    </p>
-
-                    <div class="flex justify-center gap-6">
-                        <a href="https://wa.me/94701757576"
-                            class="px-10 py-4 rounded-full bg-biz-primary text-white font-black uppercase tracking-wide hover:scale-105 transition-transform shadow-lg shadow-sky-200">
-                            Book a Strategy Session
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-12 border-t border-biz-border bg-biz-navy relative z-10">
-        <div class="container mx-auto px-6 text-center">
-            <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" onerror="this.style.display='none'" alt="BizSense Logo"
-                class="h-6 opacity-30 mx-auto mb-6 grayscale hover:grayscale-0 transition-all cursor-pointer logo-img-filter">
-            <p class="text-slate-400 text-[7px] font-black uppercase tracking-[0.5em]">&copy; 2026 BIZSENSE EXPERTS. ALL
-                RIGHTS RESERVED.</p>
-        </div>
-    </footer>
-
-    <!-- MODAL -->
-    <div id="service-modal" class="modal-fullscreen">
-        <!-- Fixed Close Button -->
-        <button onclick="closeModal()" class="modal-close-btn p-3 rounded-full transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2.5">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-
-        <div
-            class="w-full max-w-4xl p-6 relative flex flex-col items-center justify-start bg-white/95 backdrop-blur-xl rounded-[0px] md:rounded-[40px] shadow-2xl mb-10 mx-4 border border-biz-border">
-            <div id="modal-content" class="w-full pt-4"></div>
-        </div>
-    </div>
-
-    <script>
-        // 1. Loading Animation & Welcome Screen Logic
-        window.addEventListener('load', () => {
-            const bar = document.getElementById('progress-bar-fill');
-            const enterBtn = document.getElementById('enter-website-btn');
-            
-            // Start progress animation
-            setTimeout(() => {
-                if(bar) bar.style.width = '100%';
-            }, 100);
-
-            // Show "Enter" button after 2.1s (when bar fills)
-            setTimeout(() => {
-                if(enterBtn) {
-                    enterBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-                }
-            }, 2100);
-        });
-
-        // 2. Enter Website
-        function enterWebsite() {
-            const screen = document.getElementById('welcome-screen');
-
-            // Fade out welcome screen
-            screen.style.opacity = '0';
-            screen.style.pointerEvents = 'none';
-            setTimeout(() => {
-                screen.remove();
-            }, 1000);
-        }
-
-
-        // 5. Text Rotator Logic
-        const words = ["Digital Marketing", "ERP Implementation", "Financial Analysis", "Business Strategy", "Process Automation"];
-        let wordIndex = 0;
-        const textElement = document.getElementById("rotating-text");
-
-        setInterval(() => {
-            textElement.classList.add("fade-out");
-            setTimeout(() => {
-                wordIndex = (wordIndex + 1) % words.length;
-                textElement.textContent = words[wordIndex];
-                textElement.classList.remove("fade-out");
-            }, 500);
-        }, 3000);
-
-        // 6. Hero Background Slideshow
-        const slides = document.querySelectorAll('.hero-slide');
-        let currentSlide = 0;
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 5000);
-
-        // 7. Modal Logic
-        const modal = document.getElementById("service-modal");
-        const modalContent = document.getElementById("modal-content");
-
-        const contentData = {
-            erp: `
-  <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
-    <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
-      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
-           class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent flex items-end p-6 md:p-10">
-        <h2 class="text-3xl md:text-6xl font-display font-black text-slate-900 uppercase leading-none drop-shadow-sm">
-          ERP As A <span class="text-blue-500">Business Discipline</span>
-        </h2>
+        <p class="login-err" id="login-err"></p>
+        <button type="button" class="login-btn" id="login-btn" onclick="doLogin()">Sign In</button>
       </div>
     </div>
-
-    <!-- Introduction Grid -->
-    <div class="grid md:grid-cols-2 gap-8 items-start">
-      <div>
-        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 leading-tight">
-          Control. Visibility. Scalable Growth.
-        </h3>
-        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-          ERP is not software installation — it is a restructuring of how a business operates.
-          BizSense Experts designs and implements ERP systems that create 
-          <span class="text-slate-900 font-bold">one source of truth</span> across finance, operations,
-          inventory, and management decision-making.
-          <br><br>
-          We specialise in 
-          <span class="text-slate-900 font-bold">Odoo</span>, 
-          <span class="text-slate-900 font-bold">Zoho Books</span>, and 
-          <span class="text-slate-900 font-bold">QuickBooks</span>, 
-          selected based on business reality — not trends or licenses.
-        </p>
-      </div>
-
-      <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 backdrop-blur-sm">
-        <h4 class="text-slate-900 font-bold uppercase tracking-widest text-xs mb-4 text-blue-500">
-          ERP Outcomes
-        </h4>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold text-lg">✓</span>
-            Unified financial, stock, and operational data
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold text-lg">✓</span>
-            Real-time management reporting & MIS visibility
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold text-lg">✓</span>
-            System-driven controls instead of people dependency
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ERP SCOPE -->
-    <div>
-      <h3 class="text-lg font-black text-blue-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        ERP Coverage Scope
-      </h3>
-
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Accounting & Finance</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            GL, AR/AP, cash flow & compliance
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Inventory & Stock</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Multi-location & valuation control
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Sales & Trade</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Order-to-cash workflows
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Purchasing</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Vendor control & approvals
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Management Reporting</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Dashboards & MIS reports
-          </p>
-        </div>
-
-        <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <h4 class="text-slate-900 font-bold text-sm uppercase">Controls & Governance</h4>
-          <p class="text-slate-500 text-[10px] mt-1">
-            Audit trails & accountability
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- IMPLEMENTATION ROADMAP -->
-    <div class="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200">
-      <h3 class="text-lg font-black text-slate-800 uppercase tracking-widest mb-6 text-center">
-        BizSense ERP Implementation Framework
-      </h3>
-
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6 relative">
-
-        <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 transform -translate-y-1/2"></div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">01</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">Business Study</div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">02</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">System Design</div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">03</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">Configuration</div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-blue-200 text-center shadow-sm">
-          <div class="text-blue-500 font-black text-xl mb-1">04</div>
-          <div class="text-slate-800 font-bold text-xs uppercase">Training</div>
-        </div>
-
-        <div class="bg-blue-50 p-4 rounded-xl border border-blue-500 text-center shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-          <div class="text-blue-600 font-black text-xl mb-1">05</div>
-          <div class="text-blue-600 font-bold text-xs uppercase">Go Live & Support</div>
-        </div>
-
-      </div>
-    </div>
-
   </div>
 
-
-          `,
-            b2b: `
-  <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
-    <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
-      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=2000&auto=format&fit=crop"
-           class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent flex items-end p-6 md:p-10">
-        <h2 class="text-3xl md:text-6xl font-display font-black text-slate-900 uppercase leading-none drop-shadow-sm">
-          B2B <span class="text-blue-500">Trade Support</span>
-        </h2>
+  <!-- HOME / DASHBOARD -->
+  <div class="screen" id="home-screen">
+    <div class="topbar topbar-home">
+      <div style="flex:1;min-width:0">
+        <div class="topbar-greeting" id="home-greeting">Good day</div>
+        <div class="topbar-title" id="home-shop-name">Loading…</div>
       </div>
+      <button class="icon-btn" onclick="loadDashboard()" title="Refresh" style="margin-right:4px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+      </button>
+      <button class="icon-btn" onclick="doLogout()" title="Sign Out">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
     </div>
-
-    <!-- Introduction -->
-    <div class="grid md:grid-cols-5 gap-8">
-      <div class="md:col-span-3">
-        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 leading-tight">
-          Structured Connections. Not Random Deals.
-        </h3>
-        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-4">
-          BizSense B2B support is designed for businesses that want 
-          <span class="text-slate-900 font-bold">serious, sustainable trade relationships</span>.
-          We do not chase volume or listings — we focus on readiness, margins, and the
-          right counterparties.
-        </p>
-        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-          Our role is to prepare your business, validate commercial viability, and
-          facilitate high-quality B2B connections supported by process discipline
-          and follow-through.
-        </p>
-      </div>
-
-      <div class="md:col-span-2 bg-blue-50 p-6 rounded-2xl border border-blue-100 backdrop-blur-sm">
-        <h4 class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-4">
-          Our Focus
-        </h4>
-        <p class="text-slate-700 text-sm leading-relaxed">
-          Our focus is not volume — it is 
-          <span class="text-slate-900 font-bold">quality connections</span> and
-          <span class="text-slate-900 font-bold">sustainable trade</span>.
-        </p>
-      </div>
+    <div class="scroll" id="home-content">
+      <div class="loading-box"><div class="spinner"></div></div>
     </div>
-
-    <!-- HOW IT WORKS -->
-    <div>
-      <h3 class="text-lg font-black text-blue-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        How BizSense B2B Support Works
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- Step 1 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">01</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Business & Product Readiness Assessment</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Assess business structure, product suitability, and trade readiness before engagement.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">02</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Costing, Pricing & Margin Validation</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Validate pricing models, margins, and commercial sustainability.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">03</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Buyer & Seller Identification</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Identify suitable counterparties aligned with product and business positioning.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">04</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">B2B Platform Registration & Optimisation</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Structured registration and optimisation on relevant B2B platforms.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">05</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">B2B Meeting Coordination & Follow-Ups</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Coordinating discussions, ensuring continuity, and managing follow-ups.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 6 -->
-        <div class="flex gap-4 items-start">
-          <div class="text-blue-500 font-black text-xl">06</div>
-          <div>
-            <h4 class="text-slate-900 font-bold mb-1">Documentation & Process Guidance</h4>
-            <p class="text-slate-500 text-xs leading-relaxed">
-              Guidance on documentation, workflows, and trade processes.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
   </div>
 
-
-          `,
-            marketing: `
-  <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
-    <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop"
-           class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent flex items-end p-6 md:p-10">
-        <h2 class="text-3xl md:text-6xl font-display font-black text-slate-900 uppercase leading-none drop-shadow-sm">
-          Digital Marketing For <span class="text-blue-500">Revenue</span>
-        </h2>
+  <!-- SALES LIST -->
+  <div class="screen" id="sales-screen">
+    <div class="topbar">
+      <div class="topbar-title">Sales History</div>
+      <button class="icon-btn" onclick="loadSales()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+      </button>
+    </div>
+    <div class="chip-bar" id="sales-chips">
+      <span class="chip active" onclick="setSalesFilter('all',this)">All</span>
+      <span class="chip" onclick="setSalesFilter('paid',this)">Paid</span>
+      <span class="chip" onclick="setSalesFilter('partial',this)">Partial</span>
+      <span class="chip" onclick="setSalesFilter('credit',this)">Credit</span>
+      <span class="chip" onclick="setSalesFilter('refund',this)">Refund</span>
+      <span class="chip" onclick="setSalesFilter('quote',this)">Quotes</span>
+    </div>
+    <div class="search-bar">
+      <div class="search-wrap">
+        <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input type="search" class="search-input" id="sales-search" placeholder="Search receipt, customer…" oninput="filterSalesList()">
       </div>
     </div>
-
-    <!-- Philosophy -->
-    <div class="text-center max-w-3xl mx-auto">
-      <h3 class="text-xl md:text-3xl font-bold text-slate-900 mb-4">
-        Marketing Should Create Revenue — Not Just Likes
-      </h3>
-      <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-        Digital marketing is not about noise or visibility alone.
-        When done right, it helps businesses 
-        <span class="text-slate-900 font-bold">reach global customers</span>,
-        build <span class="text-slate-900 font-bold">brand credibility</span>,
-        generate <span class="text-slate-900 font-bold">inbound enquiries</span>,
-        and directly support <span class="text-slate-900 font-bold">export and B2B sales</span>.
-        <br><br>
-        Marketing without systems creates noise.
-        Marketing with systems creates <span class="text-slate-900 font-bold">revenue</span>.
-      </p>
+    <div class="scroll" id="sales-list">
+      <div class="loading-box"><div class="spinner"></div></div>
     </div>
-
-    <!-- VALUE FOCUS -->
-    <div class="relative bg-slate-50 rounded-3xl p-8 border border-slate-200">
-      <h4 class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-8 text-center">
-        What Digital Marketing Enables
-      </h4>
-
-      <div class="grid md:grid-cols-4 gap-4 text-center">
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">🌍</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Global Reach</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Reach customers beyond local markets
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">🏛️</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Credibility</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Professional brand positioning
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">📩</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Inbound Leads</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Qualified enquiries, not random traffic
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-          <div class="text-2xl mb-2">🤝</div>
-          <h5 class="text-slate-900 font-bold text-sm uppercase">Sales Support</h5>
-          <p class="text-slate-500 text-[10px] mt-2">
-            Marketing aligned with B2B & exports
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- APPROACH -->
-    <div>
-      <h3 class="text-lg font-black text-slate-800 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        BizSense Digital Marketing Approach
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Business-Focused Content Strategy</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Content designed around products, markets, and commercial intent.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Export & B2B-Ready Messaging</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Messaging aligned with international buyers and B2B decision makers.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Website & Lead Funnel Alignment</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Websites and funnels designed to convert interest into enquiries.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">LinkedIn, Google & Meta Strategies</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Platform-specific strategies focused on intent and relevance.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-1">Performance Tracking & Optimisation</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Continuous measurement, refinement, and ROI-driven improvement.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CLOSING STATEMENT -->
-    <div class="text-center max-w-3xl mx-auto pt-6">
-      <p class="text-slate-800 italic text-sm md:text-lg font-medium">
-        We design marketing strategies that align with 
-        <span class="text-blue-500 font-bold">sales</span>, 
-        <span class="text-blue-500 font-bold">operations</span>, and 
-        <span class="text-blue-500 font-bold">finance</span>.
-      </p>
-    </div>
-
   </div>
 
-
-          `,
-            finance: `
-  <div class="space-y-8 md:space-y-12 pb-10">
-
-    <!-- Hero Section -->
-    <div class="relative h-64 md:h-80 rounded-[20px] md:rounded-3xl overflow-hidden group">
-      <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2000&auto=format&fit=crop"
-           class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent flex items-end p-6 md:p-10">
-        <h2 class="text-3xl md:text-6xl font-display font-black text-slate-900 uppercase leading-none drop-shadow-sm">
-          Accounting & <span class="text-blue-500">Finance Control</span>
-        </h2>
-      </div>
+  <!-- SALE DETAIL -->
+  <div class="screen" id="sale-detail-screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="goBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="topbar-title" id="sale-detail-title">Sale</div>
     </div>
-
-    <!-- Philosophy -->
-    <div class="text-center max-w-3xl mx-auto">
-      <h3 class="text-xl md:text-3xl font-bold text-slate-900 mb-4">
-        Profit Is Opinion. Cash Flow Is Reality.
-      </h3>
-      <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-        Many profitable businesses fail — not due to losses,
-        but due to <span class="text-slate-900 font-bold">poor cash flow management</span>.
-        <br><br>
-        BizSense focuses on 
-        <span class="text-slate-900 font-bold">financial control</span>,
-        <span class="text-slate-900 font-bold">working capital efficiency</span>, and
-        <span class="text-slate-900 font-bold">decision-ready reporting</span>
-        so business owners can see the real financial picture.
-      </p>
-    </div>
-
-    <!-- WHY FINANCE CONSULTING -->
-    <div class="grid md:grid-cols-2 gap-8 items-start">
-      <div>
-        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 leading-tight">
-          Why Finance Consulting Is Essential
-        </h3>
-        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
-          Businesses struggle when financial information is fragmented,
-          delayed, or unreliable. Without proper financial systems,
-          owners are forced to make decisions based on assumptions.
-        </p>
-      </div>
-
-      <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 backdrop-blur-sm">
-        <h4 class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-4">
-          Common Gaps We Fix
-        </h4>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Cash flow forecasting
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Debtor and stock cycle control
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Working capital discipline
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Management reporting
-          </li>
-          <li class="flex items-start gap-3 text-slate-700 text-sm">
-            <span class="text-blue-500 font-bold">•</span>
-            Financial visibility
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- WHAT WE DELIVER -->
-    <div>
-      <h3 class="text-lg font-black text-blue-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-200 pb-2">
-        What BizSense Delivers
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Cash Flow Forecasting & Control</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Short-term and medium-term cash flow visibility to avoid surprises.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Working Capital Optimisation</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Improving cash tied in debtors, inventory, and payables.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Budgeting & Financial Planning</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Structured budgets aligned with operational reality.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">ERP-Based Accounting Systems</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Accounting systems integrated with operations and controls.
-          </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="text-slate-900 font-bold mb-2">Management Dashboards & MIS</h4>
-          <p class="text-slate-500 text-xs leading-relaxed">
-            Clear reporting designed for business owners, not accountants.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CLOSING -->
-    <div class="text-center max-w-3xl mx-auto pt-6">
-      <p class="text-slate-800 italic text-sm md:text-lg font-medium">
-        We help business owners 
-        <span class="text-blue-500 font-bold">see</span>,
-        <span class="text-blue-500 font-bold">control</span>, and
-        <span class="text-blue-500 font-bold">manage</span>
-        their finances — with confidence.
-      </p>
-    </div>
-
+    <div class="scroll" id="sale-detail-content"></div>
   </div>
 
+  <!-- PRODUCTS -->
+  <div class="screen" id="products-screen">
+    <div class="topbar">
+      <div class="topbar-title">Products</div>
+      <button class="icon-btn" onclick="loadProducts()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+      </button>
+    </div>
+    <div class="search-bar">
+      <div class="search-wrap">
+        <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input type="search" class="search-input" id="prod-search" placeholder="Search products, barcode…" oninput="filterProducts()">
+      </div>
+    </div>
+    <div class="chip-bar" id="prod-cats">
+      <span class="chip active" onclick="setProdCat('all',this)">All</span>
+    </div>
+    <div class="scroll" id="products-list">
+      <div class="loading-box"><div class="spinner"></div></div>
+    </div>
+  </div>
 
-          `
-        };
+  <!-- PRODUCT DETAIL -->
+  <div class="screen" id="product-detail-screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="goBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="topbar-title">Product Info</div>
+    </div>
+    <div class="scroll" id="product-detail-content"></div>
+  </div>
 
-        function openServiceModal(service) {
-            if (contentData[service]) {
-                modalContent.innerHTML = contentData[service];
-                modal.classList.add("modal-active");
-                document.body.style.overflow = "hidden";
-            }
+  <!-- PEOPLE -->
+  <div class="screen" id="people-screen" style="position:relative">
+    <div class="topbar">
+      <div class="topbar-title">People</div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchPeopleTab('customers',this)">Customers</button>
+      <button class="tab-btn" onclick="switchPeopleTab('suppliers',this)">Suppliers</button>
+    </div>
+    <!-- Customers panel -->
+    <div class="tab-panel active" id="tab-customers">
+      <div class="search-bar">
+        <div class="search-wrap">
+          <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <input type="search" class="search-input" id="cust-search" placeholder="Search customers…" oninput="filterCustomers()">
+        </div>
+      </div>
+      <div class="scroll" id="customers-list">
+        <div class="loading-box"><div class="spinner"></div></div>
+      </div>
+    </div>
+    <!-- Suppliers panel -->
+    <div class="tab-panel" id="tab-suppliers">
+      <div class="search-bar">
+        <div class="search-wrap">
+          <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <input type="search" class="search-input" id="sup-search" placeholder="Search suppliers…" oninput="filterSuppliers()">
+        </div>
+      </div>
+      <div class="scroll" id="suppliers-list">
+        <div class="loading-box"><div class="spinner"></div></div>
+      </div>
+    </div>
+    <button class="fab" onclick="openAddPerson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+  </div>
+
+  <!-- ADD CUSTOMER -->
+  <div class="screen" id="add-customer-screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="topbar-title">Add Customer</div>
+    </div>
+    <div class="scroll">
+      <div class="form-body">
+        <div class="form-field"><label>Full Name *</label><input type="text" id="nc-name" placeholder="John Silva"></div>
+        <div class="form-field"><label>Phone</label><input type="tel" id="nc-phone" placeholder="+94 77 000 0000"></div>
+        <div class="form-field"><label>Email</label><input type="email" id="nc-email" placeholder="john@example.com"></div>
+        <div class="form-field"><label>Address</label><textarea id="nc-address" rows="3" placeholder="Street, City"></textarea></div>
+        <button class="submit-btn" id="nc-save" onclick="saveCustomer()">Save Customer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD SUPPLIER -->
+  <div class="screen" id="add-supplier-screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="topbar-title">Add Supplier</div>
+    </div>
+    <div class="scroll">
+      <div class="form-body">
+        <div class="form-field"><label>Company / Name *</label><input type="text" id="ns-name" placeholder="ABC Distributors"></div>
+        <div class="form-field"><label>Phone</label><input type="tel" id="ns-phone" placeholder="+94 11 000 0000"></div>
+        <div class="form-field"><label>Email</label><input type="email" id="ns-email" placeholder="supplier@example.com"></div>
+        <div class="form-field"><label>Address</label><textarea id="ns-address" rows="3" placeholder="Street, City"></textarea></div>
+        <button class="submit-btn" id="ns-save" onclick="saveSupplier()">Save Supplier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTS -->
+  <div class="screen" id="reports-screen">
+    <div class="topbar">
+      <div class="topbar-title">Reports</div>
+      <button class="icon-btn" onclick="loadReports()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg></button>
+    </div>
+    <div class="rpt-date-bar">
+      <input type="date" id="rpt-from" class="date-inp">
+      <span class="date-sep">→</span>
+      <input type="date" id="rpt-to" class="date-inp">
+      <button class="rpt-go" onclick="loadReports()">Go</button>
+    </div>
+    <div class="tab-bar" id="rpt-tabs">
+      <button class="tab-btn active" onclick="switchRptTab('overview',this)">Overview</button>
+      <button class="tab-btn" onclick="switchRptTab('breakdown',this)">Breakdown</button>
+      <button class="tab-btn" onclick="switchRptTab('inventory',this)">Inventory</button>
+    </div>
+    <div class="scroll" id="reports-content">
+      <div class="loading-box"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <!-- MORE GRID -->
+  <div class="screen" id="more-screen">
+    <div class="topbar topbar-home">
+      <div style="flex:1;min-width:0"><div class="topbar-title">More</div></div>
+      <div class="shop-pill" id="more-shop-pill">—</div>
+    </div>
+    <div class="scroll">
+      <div class="more-grid">
+        <div class="more-tile" onclick="navTo('reports')">
+          <div class="m-icon" style="background:rgba(99,102,241,.15)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" width="24" height="24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          </div>
+          <span class="m-lbl">Reports</span>
+        </div>
+        <div class="more-tile" onclick="openMore('expenses','Expenses')">
+          <div class="m-icon" style="background:rgba(244,63,94,.12)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2" width="24" height="24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <span class="m-lbl">Expenses</span>
+        </div>
+        <div class="more-tile" onclick="openMore('staff','Staff')">
+          <div class="m-icon" style="background:rgba(59,130,246,.12)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" width="24" height="24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <span class="m-lbl">Staff</span>
+        </div>
+        <div class="more-tile" onclick="openMore('repairs','Repairs')">
+          <div class="m-icon" style="background:rgba(251,146,60,.12)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" width="24" height="24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <span class="m-lbl">Repairs</span>
+        </div>
+        <div class="more-tile" onclick="openMore('po','Purchase Orders')">
+          <div class="m-icon" style="background:rgba(20,184,166,.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" width="24" height="24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          </div>
+          <span class="m-lbl">Purchase Orders</span>
+        </div>
+        <div class="more-tile" onclick="openMore('grn','GRN')">
+          <div class="m-icon" style="background:rgba(99,102,241,.12)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" width="24" height="24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+          </div>
+          <span class="m-lbl">GRN</span>
+        </div>
+        <div class="more-tile" onclick="openMore('cashbook','Cash Book')">
+          <div class="m-icon" style="background:rgba(34,197,94,.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" width="24" height="24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <span class="m-lbl">Cash Book</span>
+        </div>
+        <div class="more-tile" onclick="openMore('imei','IMEI Records')">
+          <div class="m-icon" style="background:rgba(45,212,191,.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" width="24" height="24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <span class="m-lbl">IMEI Track</span>
+        </div>
+        <div class="more-tile" onclick="openMore('warranties','Warranties')">
+          <div class="m-icon" style="background:rgba(34,197,94,.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" width="24" height="24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="m-lbl">Warranties</span>
+        </div>
+        <div class="more-tile" onclick="openMore('deliveries','Deliveries')">
+          <div class="m-icon" style="background:rgba(251,146,60,.12)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" width="24" height="24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <span class="m-lbl">Deliveries</span>
+        </div>
+        <div class="more-tile" onclick="openMore('cheques','Cheques')">
+          <div class="m-icon" style="background:rgba(168,85,247,.12)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" width="24" height="24"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M12 3L2 7h20z"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
+          </div>
+          <span class="m-lbl">Cheques</span>
+        </div>
+        <div class="more-tile" onclick="openMore('vouchers','Gift Vouchers')">
+          <div class="m-icon" style="background:rgba(236,72,153,.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" width="24" height="24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1"/></svg>
+          </div>
+          <span class="m-lbl">Vouchers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERIC SCREEN (Expenses, Staff, Repairs, etc.) -->
+  <div class="screen" id="generic-screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="topbar-title" id="generic-title">—</div>
+      <button class="icon-btn" onclick="refreshGeneric()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg></button>
+    </div>
+    <div class="search-bar">
+      <div class="search-wrap">
+        <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input type="search" class="search-input" id="generic-search" placeholder="Search…" oninput="filterGeneric()">
+      </div>
+    </div>
+    <div class="scroll" id="generic-content">
+      <div class="loading-box"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav id="bottom-nav" hidden>
+    <button class="nav-btn active" id="nav-home" onclick="navTo('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nav-btn" id="nav-sales" onclick="navTo('sales')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Sales</span>
+    </button>
+    <button class="nav-btn" id="nav-products" onclick="navTo('products')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <span>Products</span>
+    </button>
+    <button class="nav-btn" id="nav-people" onclick="navTo('people')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span>People</span>
+    </button>
+    <button class="nav-btn" id="nav-more" onclick="navTo('more')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+</div><!-- /#app -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+
+const SUPABASE_URL = 'https://sjlrksqtyrynpfcqgohw.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_PcNVGvkTomPSPVSqedmjAQ_ChVFNnnN';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false, storageKey: 'bzsense-web-auth' }
+});
+
+let SHOP_ID = null, SHOP_NAME = '';
+let screenStack = [];
+let allSales = [], filteredSales = [], salesFilter = 'all';
+let allProducts = [], filteredProducts = [], prodCat = 'all', productMap = {};
+let allCustomers = [], filteredCustomers = [];
+let allSuppliers = [], filteredSuppliers = [];
+let currentPeopleTab = 'customers';
+let rptTab = 'overview', rptData = null;
+let gType = null, gAllData = [], gFiltered = [];
+
+const icons = {
+  expenses: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>`,
+  staff: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>`,
+  repairs: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>`,
+  po: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>`,
+  grn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>`,
+  cashbookIn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>`,
+  cashbookOut: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`,
+  imei: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+  warranties: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  deliveries: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+  cheques: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M12 3L2 7h20z"/><line x1="8" y1="13" x2="14" y2="13"/></svg>`,
+  vouchers: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1"/></svg>`,
+  warning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
+};
+
+function isMobile() {
+  const ua = navigator.userAgent || '';
+  if (/Android|iPhone|iPad|iPod|Mobile/.test(ua)) return true;
+  if (window.innerWidth <= 520) return true;
+  return false;
+}
+
+function isPWA() {
+  return window.matchMedia('(display-mode: standalone)').matches ||
+         window.navigator.standalone === true ||
+         document.referrer.includes('android-app://');
+}
+
+// Capture the install prompt as early as possible
+let _deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _deferredInstallPrompt = e;
+});
+
+function showInstallGate() {
+  // Build install gate UI inline
+  const gate = document.createElement('div');
+  gate.id = 'pwa-install-gate';
+  gate.style.cssText = `
+    position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:32px 24px;text-align:center;
+    background:radial-gradient(ellipse at 50% -10%,rgba(99,102,241,.18) 0%,transparent 60%),
+               radial-gradient(ellipse at 20% 110%,rgba(168,85,247,.10) 0%,transparent 50%),#08080f;
+  `;
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPhone|iPad|iPod/.test(ua);
+  const isAndroid = /Android/.test(ua);
+
+  let instructionsHTML = '';
+  if (isIOS) {
+    instructionsHTML = `
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:20px;max-width:300px;margin-top:8px">
+        <p style="color:#7474a8;font-size:14px;margin-bottom:14px;line-height:1.6">To install on iPhone / iPad:</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <span style="font-size:22px">1.</span>
+          <span style="color:#eeeef8;font-size:14px">Tap the <strong>Share</strong> button
+            <svg style="vertical-align:middle;margin:0 2px" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" width="16" height="16"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            in Safari</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px">2.</span>
+          <span style="color:#eeeef8;font-size:14px">Tap <strong>"Add to Home Screen"</strong></span>
+        </div>
+      </div>`;
+  } else if (isAndroid) {
+    instructionsHTML = `
+      <button id="_pwa-install-btn" style="
+        margin-top:16px;width:100%;max-width:260px;padding:15px;
+        background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;
+        border:none;border-radius:14px;font-weight:700;font-size:16px;
+        box-shadow:0 4px 24px rgba(99,102,241,.45);cursor:pointer;font-family:inherit;
+      ">
+        ⬇ Install BizSensePOS
+      </button>
+      <p style="color:#3a3a58;font-size:12px;margin-top:12px;max-width:260px;line-height:1.5">
+        If the button doesn't appear, tap the browser menu (⋮) and choose <strong>"Add to Home screen"</strong>
+      </p>`;
+  } else {
+    instructionsHTML = `
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:20px;max-width:300px;margin-top:8px">
+        <p style="color:#7474a8;font-size:14px;line-height:1.6">Open this page in your mobile browser and add it to your home screen to use BizSensePOS.</p>
+      </div>`;
+  }
+
+  gate.innerHTML = `
+    <img src="./app.png" alt="BizSensePOS"
+      style="width:100px;height:100px;border-radius:24px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.4)">
+    <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px;color:#eeeef8">BizSensePOS</h2>
+    <p style="color:#7474a8;font-size:15px;line-height:1.6;max-width:280px;margin-bottom:8px">
+      Please install this app on your home screen to continue.
+    </p>
+    ${instructionsHTML}
+  `;
+  document.body.appendChild(gate);
+
+  // Wire up Android install button
+  const btn = document.getElementById('_pwa-install-btn');
+  if (btn) {
+    if (_deferredInstallPrompt) {
+      btn.addEventListener('click', async () => {
+        _deferredInstallPrompt.prompt();
+        const { outcome } = await _deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          btn.textContent = '✓ Installed! Please open from your home screen.';
+          btn.disabled = true;
         }
+        _deferredInstallPrompt = null;
+      });
+    } else {
+      // Prompt not available yet — hide the button, show menu instruction instead
+      btn.style.display = 'none';
+    }
+  }
+}
 
-        function closeModal() {
-            modal.classList.remove("modal-active");
-            document.body.style.overflow = "";
-        }
+async function init() {
+  if (!isMobile()) {
+    document.getElementById('gate').removeAttribute('hidden');
+    document.getElementById('gate-url').textContent = window.location.href;
+    return;
+  }
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
+  // Block access unless running as an installed PWA
+  if (!isPWA()) {
+    showInstallGate();
+    return;
+  }
 
-        // 8. Scroll Reveal Logic (Enhanced)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
+  document.getElementById('app').removeAttribute('hidden');
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) { await afterLogin(session.user); return; }
+  } catch (_) {}
+  showScreen('login-screen');
+}
 
-        document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+async function doLogin() {
+  const raw = document.getElementById('login-id').value.trim();
+  const pw  = document.getElementById('login-pw').value;
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-err');
 
-        // 9. Particle Canvas
-        const canvas = document.getElementById("particleCanvas");
-        const ctx = canvas.getContext("2d");
-        let width, height;
-        let particles = [];
+  if (!raw || !pw) { err.textContent = 'Enter your username/email and password.'; return; }
+  err.textContent = '';
+  btn.textContent = 'Signing in…'; btn.disabled = true;
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
+  let email = raw;
+  if (!raw.includes('@')) {
+    try {
+      const { data } = await sb.rpc('resolve_owner_login_email', { p_username: raw });
+      if (data) email = data;
+    } catch (_) {}
+  }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random();
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
-                if (Math.random() > 0.99) {
-                    this.opacity = Math.random();
-                }
-            }
-            draw() {
-                ctx.fillStyle = `rgba(15, 23, 42, ${this.opacity * 0.3})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
+  if (error) {
+    err.textContent = 'Invalid username or password.';
+    btn.textContent = 'Sign In'; btn.disabled = false;
+    return;
+  }
+  await afterLogin(data.user);
+}
 
-        function initParticles() {
-            resize();
-            for (let i = 0; i < 100; i++) {
-                particles.push(new Particle());
-            }
-            animateParticles();
-        }
+async function afterLogin(user) {
+  const { data: shops } = await sb.from('shops').select('id,name').eq('owner_id', user.id).limit(1);
+  if (!shops || shops.length === 0) {
+    showToast('No shop found for this account.');
+    await sb.auth.signOut();
+    showScreen('login-screen');
+    return;
+  }
+  SHOP_ID   = shops[0].id;
+  SHOP_NAME = shops[0].name;
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
+  const hr = new Date().getHours();
+  const greet = hr < 5 ? 'Working late' : hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('home-greeting').textContent = greet;
+  document.getElementById('home-shop-name').textContent = SHOP_NAME;
+  document.getElementById('more-shop-pill').textContent = SHOP_NAME;
 
-        window.addEventListener('resize', resize);
-        window.onload = initParticles;
+  document.getElementById('bottom-nav').removeAttribute('hidden');
+  navTo('home');
+  loadDashboard();
+}
 
-    </script>
+async function doLogout() {
+  await sb.auth.signOut();
+  SHOP_ID = null; SHOP_NAME = '';
+  allSales = []; allProducts = []; allCustomers = []; allSuppliers = []; rptData = null;
+  document.getElementById('bottom-nav').setAttribute('hidden', '');
+  screenStack = [];
+  showScreen('login-screen');
+  document.getElementById('login-id').value = '';
+  document.getElementById('login-pw').value = '';
+  document.getElementById('login-err').textContent = '';
+  document.getElementById('login-btn').textContent = 'Sign In';
+  document.getElementById('login-btn').disabled = false;
+  showToast('Signed out');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('login-screen')?.classList.contains('active')) doLogin();
+});
+
+const SCREENS = { home:'home-screen', sales:'sales-screen', products:'products-screen', people:'people-screen', reports:'reports-screen', more:'more-screen' };
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+}
+
+function navTo(tab) {
+  screenStack = [];
+  showScreen(SCREENS[tab] || SCREENS.home);
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const navId = tab === 'reports' ? 'nav-more' : 'nav-' + tab;
+  document.getElementById(navId)?.classList.add('active');
+  if (tab === 'sales'    && !allSales.length)    loadSales();
+  if (tab === 'products' && !allProducts.length) loadProducts();
+  if (tab === 'people'   && !allCustomers.length){ loadCustomers(); loadSuppliers(); }
+  if (tab === 'reports') loadReports();
+}
+
+function pushScreen(id) {
+  const cur = document.querySelector('.screen.active');
+  if (cur) screenStack.push(cur.id);
+  showScreen(id);
+}
+
+function goBack() {
+  const prev = screenStack.pop();
+  if (prev) showScreen(prev);
+  else navTo('home');
+}
+
+// ════════════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════════════
+async function loadDashboard() {
+  const el = document.getElementById('home-content');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  const today      = new Date().toISOString().slice(0, 10);
+  const monthStart = today.slice(0, 8) + '01';
+
+  try {
+    const [r1, r2, r3, r4, r5] = await Promise.all([
+      sb.from('sales').select('id,total,payment_status')
+        .eq('shop_id', SHOP_ID).gte('created_at', today + 'T00:00:00').lt('created_at', today + 'T23:59:59')
+        .not('payment_status', 'in', '(quote,voided)'),
+      sb.from('sales').select('id,total')
+        .eq('shop_id', SHOP_ID).gte('created_at', monthStart + 'T00:00:00')
+        .not('payment_status', 'in', '(quote,voided)'),
+      sb.from('products').select('id,name,stock,low_stock_threshold,price')
+        .eq('shop_id', SHOP_ID).eq('active', true),
+      sb.from('expenses').select('amount')
+        .eq('shop_id', SHOP_ID).gte('date', monthStart),
+      sb.from('sales').select('id,receipt_number,total,payment_status,payment_method,created_at,customers(name)')
+        .eq('shop_id', SHOP_ID).not('payment_status', 'in', '(quote,voided)')
+        .order('created_at', { ascending: false }).limit(6),
+    ]);
+
+    const todaySales  = r1.data || [];
+    const monthSales  = r2.data || [];
+    const products    = r3.data || [];
+    const expenses    = r4.data || [];
+    const recent      = r5.data || [];
+
+    const todayRev  = todaySales.reduce((s, r) => s + (r.total || 0), 0);
+    const monthRev  = monthSales.reduce((s, r) => s + (r.total || 0), 0);
+    const monthExp  = expenses.reduce((s, r) => s + (r.amount || 0), 0);
+    const lowStock  = products.filter(p => (p.stock || 0) <= (p.low_stock_threshold || 5));
+
+    el.innerHTML = `
+      <div class="kpi-grid">
+        <div class="kpi-card c-accent">
+          <div class="kpi-label">Today Revenue</div>
+          <div class="kpi-value">${fmt(todayRev)}</div>
+          <div class="kpi-sub">${todaySales.length} sales today</div>
+        </div>
+        <div class="kpi-card c-green">
+          <div class="kpi-label">Month Revenue</div>
+          <div class="kpi-value">${fmt(monthRev)}</div>
+          <div class="kpi-sub">Expenses: ${fmt(monthExp)}</div>
+        </div>
+        <div class="kpi-card c-blue">
+          <div class="kpi-label">Products</div>
+          <div class="kpi-value">${products.length}</div>
+          <div class="kpi-sub">Active items</div>
+        </div>
+        <div class="kpi-card ${lowStock.length > 0 ? 'c-red' : 'c-yellow'}">
+          <div class="kpi-label">Low Stock</div>
+          <div class="kpi-value">${lowStock.length}</div>
+          <div class="kpi-sub">${lowStock.length > 0 ? 'Needs reorder' : 'All good ✓'}</div>
+        </div>
+      </div>
+      ${lowStock.length > 0 ? `
+        <div class="section-hdr">
+          <div class="section-title" style="color:var(--red); display:flex; align-items:center; gap:6px;">
+            ${icons.warning} Low Stock Alerts
+          </div>
+          <div class="section-link" onclick="navTo('products')">View all →</div>
+        </div>
+        <div class="section-card">
+          ${lowStock.slice(0, 5).map(p => `
+            <div class="list-item" style="cursor:default">
+              <div class="li-avatar" style="background:rgba(244,63,94,.15);color:var(--red);font-size:13px">${initials(p.name)}</div>
+              <div class="li-body">
+                <div class="li-title">${esc(p.name)}</div>
+                <div class="li-sub">${fmt(p.price)}</div>
+              </div>
+              <div class="li-right">
+                <div class="li-amount" style="color:var(--red)">${p.stock || 0}</div>
+                <div style="font-size:11px;color:var(--text3)">in stock</div>
+              </div>
+            </div>`).join('')}
+        </div>` : ''}
+      <div class="section-hdr">
+        <div class="section-title">Recent Sales</div>
+        <div class="section-link" onclick="navTo('sales')">View all →</div>
+      </div>
+      <div class="section-card">
+        ${recent.length === 0
+          ? '<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><div class="empty-msg">No sales yet</div></div>'
+          : recent.map(s => `
+            <div class="list-item" onclick="openSaleDetail('${s.id}')">
+              <div class="li-avatar" style="background:${statusBg(s.payment_status)};color:${statusColor(s.payment_status)}">${statusIco(s.payment_status)}</div>
+              <div class="li-body">
+                <div class="li-title">${esc(s.receipt_number || 'Receipt')}</div>
+                <div class="li-sub">${esc(s.customers?.name || 'Walk-in')} · ${fmtDateTime(s.created_at)}</div>
+              </div>
+              <div class="li-right">
+                <div class="li-amount">${fmt(s.total)}</div>
+                <div class="li-badge ${badge(s.payment_status)}">${s.payment_status}</div>
+              </div>
+            </div>`).join('')}
+      </div>
+      <div class="section-gap"></div>
+    `;
+  } catch (e) { el.innerHTML = errHtml(e.message); }
+}
+
+// ════════════════════════════════════════════════════
+// SALES
+// ════════════════════════════════════════════════════
+async function loadSales() {
+  const el = document.getElementById('sales-list');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  const { data, error } = await sb.from('sales')
+    .select('id,receipt_number,total,payment_status,payment_method,created_at,customers(name)')
+    .eq('shop_id', SHOP_ID).order('created_at', { ascending: false }).limit(300);
+  if (error) { el.innerHTML = errHtml(error.message); return; }
+  allSales = data || [];
+  filterSalesList();
+}
+
+function setSalesFilter(status, el) {
+  salesFilter = status;
+  document.querySelectorAll('#sales-chips .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  filterSalesList();
+}
+
+function filterSalesList() {
+  const q = (document.getElementById('sales-search')?.value || '').toLowerCase();
+  filteredSales = allSales.filter(s => {
+    const ok = salesFilter === 'all' || s.payment_status === salesFilter;
+    const mq = !q || (s.receipt_number || '').toLowerCase().includes(q) || (s.customers?.name || '').toLowerCase().includes(q);
+    return ok && mq;
+  });
+  renderSalesList();
+}
+
+function renderSalesList() {
+  const el = document.getElementById('sales-list');
+  if (!filteredSales.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><div class="empty-msg">No sales found</div></div>';
+    return;
+  }
+  el.innerHTML = filteredSales.map(s => `
+    <div class="list-item" onclick="openSaleDetail('${s.id}')">
+      <div class="li-avatar" style="background:${statusBg(s.payment_status)};color:${statusColor(s.payment_status)}">${statusIco(s.payment_status)}</div>
+      <div class="li-body">
+        <div class="li-title">${esc(s.receipt_number || '—')}</div>
+        <div class="li-sub">${esc(s.customers?.name || 'Walk-in')} · ${fmtDateTime(s.created_at)}</div>
+      </div>
+      <div class="li-right">
+        <div class="li-amount">${fmt(s.total)}</div>
+        <div class="li-badge ${badge(s.payment_status)}">${s.payment_status}</div>
+      </div>
+    </div>`).join('');
+}
+
+async function openSaleDetail(saleId) {
+  pushScreen('sale-detail-screen');
+  const el = document.getElementById('sale-detail-content');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+
+  const [sr, ir] = await Promise.all([
+    sb.from('sales').select('*,customers(name,phone)').eq('id', saleId).single(),
+    sb.from('sale_items').select('*').eq('sale_id', saleId).order('id'),
+  ]);
+
+  const s = sr.data;
+  const items = ir.data || [];
+  if (!s) { el.innerHTML = errHtml('Sale not found'); return; }
+
+  document.getElementById('sale-detail-title').textContent = s.receipt_number || 'Sale';
+
+  const subtotal = items.reduce((sum, i) => sum + (i.total || (i.price * i.qty) || 0), 0);
+
+  el.innerHTML = `
+    <div class="detail-section">
+      <div class="detail-stitle">Receipt</div>
+      <div class="detail-row"><span class="detail-key">Receipt #</span><span class="detail-val">${esc(s.receipt_number || '—')}</span></div>
+      <div class="detail-row"><span class="detail-key">Date</span><span class="detail-val">${fmtDateTime(s.created_at)}</span></div>
+      <div class="detail-row"><span class="detail-key">Status</span><span class="detail-val"><span class="li-badge ${badge(s.payment_status)}">${s.payment_status}</span></span></div>
+      <div class="detail-row"><span class="detail-key">Payment</span><span class="detail-val">${esc(s.payment_method || '—')}</span></div>
+      <div class="detail-row"><span class="detail-key">Customer</span><span class="detail-val">${esc(s.customers?.name || 'Walk-in')}</span></div>
+      ${s.customers?.phone ? `<div class="detail-row"><span class="detail-key">Phone</span><span class="detail-val">${esc(s.customers.phone)}</span></div>` : ''}
+      ${s.notes ? `<div class="detail-row"><span class="detail-key">Notes</span><span class="detail-val">${esc(s.notes)}</span></div>` : ''}
+    </div>
+    <div class="detail-section">
+      <div class="detail-stitle">Items (${items.length})</div>
+      <table class="items-table">
+        <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
+        <tbody>${items.map(i => `
+          <tr>
+            <td>${esc(i.name || '—')}</td>
+            <td>${i.qty || 1}</td>
+            <td>${fmt(i.price)}</td>
+            <td>${fmt(i.total || (i.price * i.qty))}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="total-box">
+      <div class="detail-row"><span class="detail-key">Subtotal</span><span class="detail-val">${fmt(subtotal)}</span></div>
+      ${s.discount ? `<div class="detail-row"><span class="detail-key">Discount</span><span class="detail-val" style="color:var(--green)">− ${fmt(s.discount)}</span></div>` : ''}
+      ${s.tax ? `<div class="detail-row"><span class="detail-key">Tax</span><span class="detail-val">${fmt(s.tax)}</span></div>` : ''}
+      <div class="divider"></div>
+      <div class="detail-row"><span class="detail-key">Total</span><span class="detail-val">${fmt(s.total)}</span></div>
+    </div>
+    <div class="section-gap"></div>`;
+}
+
+// ════════════════════════════════════════════════════
+// PRODUCTS
+// ════════════════════════════════════════════════════
+async function loadProducts() {
+  const el = document.getElementById('products-list');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  const [pr, cr] = await Promise.all([
+    sb.from('products').select('id,name,price,cost,stock,low_stock_threshold,barcode,categories(id,name)')
+      .eq('shop_id', SHOP_ID).eq('active', true).order('name').limit(1000),
+    sb.from('categories').select('id,name').eq('shop_id', SHOP_ID).order('name'),
+  ]);
+
+  allProducts = pr.data || [];
+  productMap = {};
+  allProducts.forEach(p => productMap[p.id] = p);
+  filteredProducts = allProducts;
+
+  const cats = cr.data || [];
+  const chipsEl = document.getElementById('prod-cats');
+  chipsEl.innerHTML = `<span class="chip active" onclick="setProdCat('all',this)">All</span>`
+    + cats.map(c => `<span class="chip" onclick="setProdCat('${c.id}',this)">${esc(c.name)}</span>`).join('');
+  renderProducts();
+}
+
+function setProdCat(cat, el) {
+  prodCat = cat;
+  document.querySelectorAll('#prod-cats .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  filterProducts();
+}
+
+function filterProducts() {
+  const q = (document.getElementById('prod-search')?.value || '').toLowerCase();
+  filteredProducts = allProducts.filter(p => {
+    const mc = prodCat === 'all' || p.categories?.id === prodCat;
+    const mq = !q || p.name.toLowerCase().includes(q) || (p.barcode || '').toLowerCase().includes(q);
+    return mc && mq;
+  });
+  renderProducts();
+}
+
+function renderProducts() {
+  const el = document.getElementById('products-list');
+  if (!filteredProducts.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="empty-msg">No products found</div></div>';
+    return;
+  }
+  el.innerHTML = `<div class="prod-grid">${filteredProducts.map(p => {
+    const ok = (p.stock || 0) > (p.low_stock_threshold || 5);
+    return `<div class="prod-card" onclick="openProductDetail('${p.id}')">
+      <div class="prod-cat">${esc(p.categories?.name || 'General')}</div>
+      <div class="prod-name">${esc(p.name)}</div>
+      <div class="prod-price">${fmt(p.price)}</div>
+      <div class="prod-stock ${ok ? 'ok' : 'low'}">${ok ? '✓' : '⚠'} ${p.stock || 0} in stock</div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function openProductDetail(id) {
+  const p = productMap[id];
+  if (!p) return;
+  pushScreen('product-detail-screen');
+  const el = document.getElementById('product-detail-content');
+  const stockOk = (p.stock || 0) > (p.low_stock_threshold || 5);
+  const margin = (p.price && p.cost && p.price > 0) ? (((p.price - p.cost) / p.price) * 100).toFixed(1) : null;
+
+  el.innerHTML = `
+    <div class="detail-section">
+      <div class="detail-stitle">Product Details</div>
+      <div class="detail-row"><span class="detail-key">Name</span><span class="detail-val">${esc(p.name)}</span></div>
+      ${p.categories?.name ? `<div class="detail-row"><span class="detail-key">Category</span><span class="detail-val">${esc(p.categories.name)}</span></div>` : ''}
+      ${p.barcode ? `<div class="detail-row"><span class="detail-key">Barcode</span><span class="detail-val" style="font-family:monospace">${esc(p.barcode)}</span></div>` : ''}
+    </div>
+    <div class="detail-section">
+      <div class="detail-stitle">Pricing & Stock</div>
+      <div class="detail-row"><span class="detail-key">Selling Price</span><span class="detail-val" style="color:var(--accent2);font-size:20px;font-weight:800">${fmt(p.price)}</span></div>
+      ${p.cost ? `<div class="detail-row"><span class="detail-key">Cost Price</span><span class="detail-val">${fmt(p.cost)}</span></div>` : ''}
+      ${margin !== null ? `<div class="detail-row"><span class="detail-key">Margin</span><span class="detail-val" style="color:var(--green)">${margin}%</span></div>` : ''}
+      <div class="detail-row"><span class="detail-key">Stock</span><span class="detail-val" style="color:${stockOk ? 'var(--green)' : 'var(--red)'};font-size:20px;font-weight:800">${p.stock || 0} units</span></div>
+      ${p.low_stock_threshold ? `<div class="detail-row"><span class="detail-key">Reorder At</span><span class="detail-val">${p.low_stock_threshold} units</span></div>` : ''}
+    </div>
+    <div class="section-gap"></div>`;
+}
+
+// ════════════════════════════════════════════════════
+// PEOPLE
+// ════════════════════════════════════════════════════
+async function loadCustomers() {
+  const el = document.getElementById('customers-list');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  const { data, error } = await sb.from('customers').select('id,name,phone,email,loyalty_points').eq('shop_id', SHOP_ID).order('name').limit(500);
+  if (error) { el.innerHTML = errHtml(error.message); return; }
+  allCustomers = data || []; filteredCustomers = allCustomers;
+  renderCustomers();
+}
+
+function filterCustomers() {
+  const q = (document.getElementById('cust-search')?.value || '').toLowerCase();
+  filteredCustomers = q ? allCustomers.filter(c => c.name.toLowerCase().includes(q) || (c.phone || '').includes(q) || (c.email || '').toLowerCase().includes(q)) : allCustomers;
+  renderCustomers();
+}
+
+function renderCustomers() {
+  const el = document.getElementById('customers-list');
+  if (!filteredCustomers.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="empty-msg">No customers yet.<br>Tap + to add one.</div></div>';
+    return;
+  }
+  el.innerHTML = filteredCustomers.map(c => `
+    <div class="list-item" style="cursor:default">
+      <div class="li-avatar" style="background:${avatarBg(c.name)}">${initials(c.name)}</div>
+      <div class="li-body"><div class="li-title">${esc(c.name)}</div><div class="li-sub">${esc(c.phone || c.email || 'No contact info')}</div></div>
+      ${c.loyalty_points ? `<div class="li-right"><div class="li-amount" style="color:var(--purple);font-size:13px">${c.loyalty_points}</div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;font-weight:700">Pts</div></div>` : ''}
+    </div>`).join('');
+}
+
+async function loadSuppliers() {
+  const el = document.getElementById('suppliers-list');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  const { data, error } = await sb.from('suppliers').select('id,name,phone,email,address').eq('shop_id', SHOP_ID).order('name').limit(500);
+  if (error) { el.innerHTML = errHtml(error.message); return; }
+  allSuppliers = data || []; filteredSuppliers = allSuppliers;
+  renderSuppliers();
+}
+
+function filterSuppliers() {
+  const q = (document.getElementById('sup-search')?.value || '').toLowerCase();
+  filteredSuppliers = q ? allSuppliers.filter(s => s.name.toLowerCase().includes(q) || (s.phone || '').includes(q)) : allSuppliers;
+  renderSuppliers();
+}
+
+function renderSuppliers() {
+  const el = document.getElementById('suppliers-list');
+  if (!filteredSuppliers.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg></div><div class="empty-msg">No suppliers yet.<br>Tap + to add one.</div></div>';
+    return;
+  }
+  el.innerHTML = filteredSuppliers.map(s => `
+    <div class="list-item" style="cursor:default">
+      <div class="li-avatar" style="background:${avatarBg(s.name)}">${initials(s.name)}</div>
+      <div class="li-body"><div class="li-title">${esc(s.name)}</div><div class="li-sub">${esc(s.phone || s.email || 'No contact info')}</div></div>
+    </div>`).join('');
+}
+
+function switchPeopleTab(tab, btn) {
+  currentPeopleTab = tab;
+  document.querySelectorAll('#people-screen .tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+  document.querySelectorAll('#people-screen .tab-panel').forEach(p => p.classList.remove('active')); document.getElementById('tab-' + tab).classList.add('active');
+}
+
+function openAddPerson() {
+  if (currentPeopleTab === 'customers') {
+    ['nc-name','nc-phone','nc-email','nc-address'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
+    pushScreen('add-customer-screen');
+  } else {
+    ['ns-name','ns-phone','ns-email','ns-address'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
+    pushScreen('add-supplier-screen');
+  }
+}
+
+async function saveCustomer() {
+  const name = document.getElementById('nc-name').value.trim();
+  if (!name) { showToast('Name is required.'); return; }
+  const btn = document.getElementById('nc-save'); btn.textContent = 'Saving…'; btn.disabled = true;
+  const { error } = await sb.from('customers').insert({
+    shop_id: SHOP_ID, name,
+    phone:   document.getElementById('nc-phone').value.trim() || null,
+    email:   document.getElementById('nc-email').value.trim() || null,
+    address: document.getElementById('nc-address').value.trim() || null
+  });
+  btn.textContent = 'Save Customer'; btn.disabled = false;
+  if (error) { showToast('Error: ' + error.message); return; }
+  showToast('Customer saved!'); allCustomers = []; loadCustomers(); goBack();
+}
+
+async function saveSupplier() {
+  const name = document.getElementById('ns-name').value.trim();
+  if (!name) { showToast('Name is required.'); return; }
+  const btn = document.getElementById('ns-save'); btn.textContent = 'Saving…'; btn.disabled = true;
+  const { error } = await sb.from('suppliers').insert({
+    shop_id: SHOP_ID, name,
+    phone:   document.getElementById('ns-phone').value.trim() || null,
+    email:   document.getElementById('ns-email').value.trim() || null,
+    address: document.getElementById('ns-address').value.trim() || null
+  });
+  btn.textContent = 'Save Supplier'; btn.disabled = false;
+  if (error) { showToast('Error: ' + error.message); return; }
+  showToast('Supplier saved!'); allSuppliers = []; loadSuppliers(); goBack();
+}
+
+// ════════════════════════════════════════════════════
+// REPORTS
+// ════════════════════════════════════════════════════
+function initRptDates() {
+  const today = new Date().toISOString().slice(0, 10);
+  document.getElementById('rpt-from').value = today.slice(0, 8) + '01';
+  document.getElementById('rpt-to').value   = today;
+}
+
+async function loadReports() {
+  const el = document.getElementById('reports-content');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  const from = document.getElementById('rpt-from').value;
+  const to   = document.getElementById('rpt-to').value;
+  if (!from || !to) return;
+
+  try {
+    const idRes = await sb.from('sales').select('id').eq('shop_id', SHOP_ID).gte('created_at', from + 'T00:00:00').lte('created_at', to + 'T23:59:59').not('payment_status', 'in', '(quote,voided)').limit(300);
+    const saleIds = (idRes.data || []).map(s => s.id).slice(0, 200);
+
+    const [salesRes, expRes, prodRes, itemsRes] = await Promise.all([
+      sb.from('sales').select('id,total,payment_status,payment_method').eq('shop_id', SHOP_ID).gte('created_at', from + 'T00:00:00').lte('created_at', to + 'T23:59:59').not('payment_status', 'in', '(quote,voided)'),
+      sb.from('expenses').select('amount,category').eq('shop_id', SHOP_ID).gte('date', from).lte('date', to),
+      sb.from('products').select('id,price,cost,stock,low_stock_threshold').eq('shop_id', SHOP_ID).eq('active', true),
+      saleIds.length > 0 ? sb.from('sale_items').select('name,qty,total').in('sale_id', saleIds).limit(2000) : Promise.resolve({ data: [] }),
+    ]);
+
+    rptData = { sales: salesRes.data || [], expenses: expRes.data || [], products: prodRes.data || [], items: itemsRes.data || [] };
+    renderRptTab();
+  } catch (e) { el.innerHTML = errHtml(e.message || String(e)); }
+}
+
+function switchRptTab(tab, btn) {
+  rptTab = tab;
+  document.querySelectorAll('#rpt-tabs .tab-btn').forEach(b => b.classList.remove('active')); btn?.classList.add('active');
+  if (rptData) renderRptTab();
+}
+
+function renderRptTab() {
+  const el = document.getElementById('reports-content'); const d = rptData; if (!d) return;
+  const revenue  = d.sales.reduce((s, r) => s + (r.total || 0), 0);
+  const expenses = d.expenses.reduce((s, r) => s + (r.amount || 0), 0);
+  const profit   = revenue - expenses;
+  const txCount  = d.sales.length;
+  const avgOrder = txCount ? revenue / txCount : 0;
+
+  if (rptTab === 'overview') {
+    el.innerHTML = `
+      <div class="kpi-grid">
+        <div class="kpi-card c-accent"><div class="kpi-label">Revenue</div><div class="kpi-value">${fmt(revenue)}</div><div class="kpi-sub">${txCount} transactions</div></div>
+        <div class="kpi-card c-red"><div class="kpi-label">Expenses</div><div class="kpi-value">${fmt(expenses)}</div></div>
+        <div class="kpi-card ${profit >= 0 ? 'c-green' : 'c-red'} c-full"><div class="kpi-label">Net Profit</div><div class="kpi-value" style="font-size:26px">${fmt(profit)}</div><div class="kpi-sub">${revenue > 0 ? Math.abs((profit / revenue * 100)).toFixed(1) : 0}% margin</div></div>
+        <div class="kpi-card"><div class="kpi-label">Transactions</div><div class="kpi-value">${txCount}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Avg Order</div><div class="kpi-value" style="font-size:18px">${fmt(avgOrder)}</div></div>
+      </div><div class="section-gap"></div>`;
+  } else if (rptTab === 'breakdown') {
+    const pm = {}, ec = {};
+    d.sales.forEach(s => { const k = s.payment_method || 'Unknown'; pm[k] = (pm[k] || 0) + (s.total || 0); });
+    d.expenses.forEach(e => { const k = e.category || 'Other'; ec[k] = (ec[k] || 0) + (e.amount || 0); });
+    const pmMax = Math.max(...Object.values(pm), 1), ecMax = Math.max(...Object.values(ec), 1);
+    el.innerHTML = `
+      <div class="section-hdr"><div class="section-title">Revenue by Payment Method</div></div>
+      <div class="bar-chart">
+        ${Object.entries(pm).sort((a,b) => b[1]-a[1]).map(([k,v]) => `<div class="bar-row"><div class="bar-label">${esc(k)}</div><div class="bar-track"><div class="bar-fill" style="width:${(v/pmMax*100).toFixed(1)}%"></div></div><div class="bar-val">${fmt(v)}</div></div>`).join('') || '<div class="empty-msg" style="padding:16px">No data</div>'}
+      </div><div class="section-gap"></div>
+      <div class="section-hdr"><div class="section-title">Expenses by Category</div></div>
+      <div class="bar-chart">
+        ${Object.entries(ec).sort((a,b) => b[1]-a[1]).map(([k,v]) => `<div class="bar-row"><div class="bar-label">${esc(k)}</div><div class="bar-track"><div class="bar-fill" style="width:${(v/ecMax*100).toFixed(1)}%;background:var(--red)"></div></div><div class="bar-val">${fmt(v)}</div></div>`).join('') || '<div class="empty-msg" style="padding:16px;color:var(--text2)">No expenses</div>'}
+      </div><div class="section-gap"></div>`;
+  } else if (rptTab === 'inventory') {
+    const pq = {};
+    d.items.forEach(i => { const k = i.name || '—'; pq[k] = (pq[k] || 0) + (i.qty || 0); });
+    const top = Object.entries(pq).sort((a,b) => b[1]-a[1]).slice(0, 10);
+    const topMax = top.length ? top[0][1] : 1;
+    const costVal   = d.products.reduce((s,p) => s + ((p.cost   || 0) * (p.stock || 0)), 0);
+    const retailVal = d.products.reduce((s,p) => s + ((p.price || 0) * (p.stock || 0)), 0);
+    const lowP = d.products.filter(p => (p.stock || 0) <= (p.low_stock_threshold || 5)).length;
+
+    el.innerHTML = `
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-label">Stock at Cost</div><div class="kpi-value" style="font-size:17px">${fmt(costVal)}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Stock at Retail</div><div class="kpi-value" style="font-size:17px">${fmt(retailVal)}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total Items</div><div class="kpi-value">${d.products.length}</div></div>
+        <div class="kpi-card ${lowP > 0 ? 'c-red' : 'c-green'}"><div class="kpi-label">Low Stock</div><div class="kpi-value">${lowP}</div></div>
+      </div>
+      <div class="section-hdr"><div class="section-title">Top Products Sold</div></div>
+      <div class="bar-chart">
+        ${top.map(([k,v]) => `<div class="bar-row"><div class="bar-label">${esc(k)}</div><div class="bar-track"><div class="bar-fill" style="width:${(v/topMax*100).toFixed(1)}%;background:var(--teal)"></div></div><div class="bar-val">${v} sold</div></div>`).join('') || '<div class="empty-msg" style="padding:16px;color:var(--text2)">No data</div>'}
+      </div><div class="section-gap"></div>`;
+  }
+}
+
+// ════════════════════════════════════════════════════
+// GENERIC MORE SCREENS
+// ════════════════════════════════════════════════════
+async function openMore(type, title) {
+  gType = type;
+  document.getElementById('generic-title').textContent = title;
+  document.getElementById('generic-search').value = '';
+  pushScreen('generic-screen');
+  await loadGeneric();
+}
+
+async function loadGeneric() {
+  const el = document.getElementById('generic-content');
+  el.innerHTML = '<div class="loading-box"><div class="spinner"></div></div>';
+  let data = [], error = null;
+  try {
+    switch (gType) {
+      case 'expenses': {
+        const r = await sb.from('expenses').select('id,date,category,description,amount').eq('shop_id',SHOP_ID).order('date',{ascending:false}).limit(200);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'staff': {
+        const r = await sb.from('staff').select('id,name,role,phone,status').eq('shop_id',SHOP_ID).order('name');
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'repairs': {
+        const r = await sb.from('repair_jobs').select('id,job_number,device_model,device_type,status,created_at,repair_cost,customers(name)').eq('shop_id',SHOP_ID).order('created_at',{ascending:false}).limit(100);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'po': {
+        const r = await sb.from('purchase_orders').select('id,grn_number,invoice_number,status,total,created_at,suppliers(name)').eq('shop_id',SHOP_ID).order('created_at',{ascending:false}).limit(100);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'grn': {
+        const r = await sb.from('purchase_orders').select('id,grn_number,invoice_number,status,total,received_at,suppliers(name)').eq('shop_id',SHOP_ID).eq('status','received').order('received_at',{ascending:false}).limit(100);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'cashbook': {
+        const r = await sb.from('cash_entries').select('id,created_at,type,description,amount,category').eq('shop_id',SHOP_ID).order('created_at',{ascending:false}).limit(200);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'imei': {
+        const r = await sb.from('imei_records').select('id,imei,received_at,status,products(name)').eq('shop_id',SHOP_ID).order('received_at',{ascending:false}).limit(200);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'warranties': {
+        const r = await sb.from('warranties').select('id,serial_number,imei,expiry_date,status,products(name),customers(name)').eq('shop_id',SHOP_ID).order('expiry_date').limit(200);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'deliveries': {
+        const r = await sb.from('deliveries').select('id,status,address,created_at,delivery_number,customer_name,sales(receipt_number)').eq('shop_id',SHOP_ID).order('created_at',{ascending:false}).limit(100);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'cheques': {
+        const r = await sb.from('cheques').select('id,cheque_number,bank,amount,type,due_date,status,party_name').eq('shop_id',SHOP_ID).order('due_date',{ascending:false}).limit(100);
+        data = r.data||[]; error = r.error; break;
+      }
+      case 'vouchers': {
+        const r = await sb.from('gift_vouchers').select('id,code,initial_amount,remaining_amount,status,created_at,issued_to').eq('shop_id',SHOP_ID).order('created_at',{ascending:false}).limit(100);
+        data = r.data||[]; error = r.error; break;
+      }
+    }
+  } catch(e) { error = e; }
+
+  if (error) { el.innerHTML = errHtml(error.message || String(error)); return; }
+  gAllData = data; gFiltered = data;
+  renderGeneric();
+}
+
+function filterGeneric() {
+  const q = (document.getElementById('generic-search')?.value || '').toLowerCase();
+  gFiltered = q ? gAllData.filter(item => JSON.stringify(item).toLowerCase().includes(q)) : gAllData;
+  renderGeneric();
+}
+
+function refreshGeneric() { loadGeneric(); }
+
+function renderGeneric() {
+  const el = document.getElementById('generic-content');
+  if (!gFiltered.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div><div class="empty-msg">No records found</div></div>';
+    return;
+  }
+  const rows = gFiltered.map(item => gItem(gType, item)).join('');
+
+  if (gType === 'cashbook') {
+    const ci = gFiltered.filter(i => i.type === 'in').reduce((s,i)=>s+(i.amount||0),0);
+    const co = gFiltered.filter(i => i.type === 'out').reduce((s,i)=>s+(i.amount||0),0);
+    el.innerHTML = `
+      <div class="kpi-grid">
+        <div class="kpi-card c-green"><div class="kpi-label">Cash In</div><div class="kpi-value">${fmt(ci)}</div></div>
+        <div class="kpi-card c-red"><div class="kpi-label">Cash Out</div><div class="kpi-value">${fmt(co)}</div></div>
+        <div class="kpi-card ${ci-co>=0?'c-accent':'c-red'} c-full"><div class="kpi-label">Net Balance</div><div class="kpi-value">${fmt(ci-co)}</div></div>
+      </div>${rows}`;
+    return;
+  }
+  el.innerHTML = rows;
+}
+
+function gItem(type, item) {
+  switch (type) {
+    case 'expenses':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(244,63,94,.12);color:var(--red)">${icons.expenses}</div>
+        <div class="li-body"><div class="li-title">${esc(item.description||item.category||'—')}</div><div class="li-sub">${esc(item.category||'—')} · ${fmtDate(item.date)}</div></div>
+        <div class="li-right"><div class="li-amount" style="color:var(--red)">${fmt(item.amount)}</div></div>
+      </div>`;
+    case 'staff':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:${avatarBg(item.name)}">${initials(item.name)}</div>
+        <div class="li-body"><div class="li-title">${esc(item.name)}</div><div class="li-sub">${esc(item.role||'—')} · ${esc(item.phone||'')}</div></div>
+        <div class="li-right"><div class="li-badge ${item.status==='active'?'b-active':'b-default'}">${item.status==='active'?'Active':(item.status||'Inactive')}</div></div>
+      </div>`;
+    case 'repairs':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(251,146,60,.12);color:var(--orange)">${icons.repairs}</div>
+        <div class="li-body"><div class="li-title">${esc(item.job_number||'—')} · ${esc(item.device_model||item.device_type||'—')}</div><div class="li-sub">${esc(item.customers?.name||'—')} · ${fmtDate(item.created_at)}</div></div>
+        <div class="li-right">${item.repair_cost?`<div class="li-amount">${fmt(item.repair_cost)}</div>`:''}
+          <div class="li-badge ${sBadge(item.status)}">${item.status||'—'}</div></div>
+      </div>`;
+    case 'po':
+    case 'grn':
+      const title = item.grn_number || item.invoice_number || '—';
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(59,130,246,.12);color:var(--blue)">${type==='grn'?icons.grn:icons.po}</div>
+        <div class="li-body"><div class="li-title">${esc(title)}</div><div class="li-sub">${esc(item.suppliers?.name||'—')} · ${fmtDate(item.created_at||item.received_at)}</div></div>
+        <div class="li-right">${item.total?`<div class="li-amount">${fmt(item.total)}</div>`:''}
+          <div class="li-badge ${sBadge(item.status)}">${item.status||'—'}</div></div>
+      </div>`;
+    case 'cashbook':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:${item.type==='in'?'rgba(34,197,94,.12)':'rgba(244,63,94,.12)'};color:${item.type==='in'?'var(--green)':'var(--red)'}">
+          ${item.type==='in'?icons.cashbookIn:icons.cashbookOut}
+        </div>
+        <div class="li-body"><div class="li-title">${esc(item.description||'—')}</div><div class="li-sub">${esc(item.category||'')} · ${fmtDate(item.created_at)}</div></div>
+        <div class="li-right"><div class="li-amount" style="color:${item.type==='in'?'var(--green)':'var(--red)'}">${fmt(item.amount)}</div>
+          <div class="li-badge ${item.type==='in'?'b-in':'b-out'}">${item.type||'—'}</div></div>
+      </div>`;
+    case 'imei':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(45,212,191,.1);color:var(--teal)">${icons.imei}</div>
+        <div class="li-body"><div class="li-title" style="font-family:monospace">${esc(item.imei||'—')}</div><div class="li-sub">${esc(item.products?.name||'—')} · ${fmtDate(item.received_at)}</div></div>
+        <div class="li-right"><div class="li-badge ${sBadge(item.status)}">${item.status||'—'}</div></div>
+      </div>`;
+    case 'warranties': {
+      const exp = item.expiry_date && new Date(item.expiry_date) < new Date();
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:${exp?'rgba(244,63,94,.1)':'rgba(34,197,94,.1)'};color:${exp?'var(--red)':'var(--green)'}">${icons.warranties}</div>
+        <div class="li-body"><div class="li-title">${esc(item.serial_number||item.imei||'—')} · ${esc(item.products?.name||'—')}</div><div class="li-sub">${esc(item.customers?.name||'—')} · Exp: ${fmtDate(item.expiry_date)}</div></div>
+        <div class="li-right"><div class="li-badge ${exp?'b-expired':'b-active'}">${exp?'Expired':'Active'}</div></div>
+      </div>`;
+    }
+    case 'deliveries':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(251,146,60,.12);color:var(--orange)">${icons.deliveries}</div>
+        <div class="li-body"><div class="li-title">${esc(item.delivery_number||'—')}</div><div class="li-sub">${esc(item.customer_name||'')} · ${esc((item.address||'').slice(0,30)||'No addr')}</div></div>
+        <div class="li-right"><div class="li-badge ${sBadge(item.status)}">${item.status||'—'}</div></div>
+      </div>`;
+    case 'cheques':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(168,85,247,.12);color:var(--purple)">${icons.cheques}</div>
+        <div class="li-body"><div class="li-title">${esc(item.cheque_number||'—')} · ${esc(item.bank||'—')}</div><div class="li-sub">${esc(item.party_name||'—')} · Due: ${fmtDate(item.due_date)}</div></div>
+        <div class="li-right"><div class="li-amount">${fmt(item.amount)}</div><div class="li-badge ${sBadge(item.status)}">${item.status||'—'}</div></div>
+      </div>`;
+    case 'vouchers':
+      return `<div class="list-item" style="cursor:default">
+        <div class="li-avatar" style="background:rgba(236,72,153,.12);color:var(--pink)">${icons.vouchers}</div>
+        <div class="li-body"><div class="li-title">${esc(item.code||'—')}</div><div class="li-sub">Bal: ${fmt(item.remaining_amount ?? item.initial_amount)} · ${esc(item.issued_to||'General')}</div></div>
+        <div class="li-right"><div class="li-badge ${item.status==='active'?'b-active':'b-default'}">${item.status||'—'}</div></div>
+      </div>`;
+    default:
+      return `<div class="list-item" style="cursor:default"><div class="li-body"><div class="li-title">${esc(JSON.stringify(item).slice(0,80))}</div></div></div>`;
+  }
+}
+
+// ════════════════════════════════════════════════════
+// UTILITIES
+// ════════════════════════════════════════════════════
+function fmt(n) { if (n == null || isNaN(n)) return '—'; return 'Rs. ' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
+function fmtDateTime(d) { if (!d) return '—'; const dt = new Date(d); return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + ' ' + dt.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }); }
+function esc(str) { if (str == null) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function initials(name) { if (!name) return '?'; const parts = name.trim().split(/\s+/); return parts.length >= 2 ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase() : name.slice(0,2).toUpperCase(); }
+
+const AVATAR_PALETTE = ['rgba(99,102,241,.65)','rgba(168,85,247,.6)','rgba(236,72,153,.6)','rgba(34,197,94,.5)','rgba(59,130,246,.6)','rgba(245,158,11,.55)','rgba(20,184,166,.6)','rgba(251,146,60,.55)'];
+function avatarBg(name) { if (!name) return AVATAR_PALETTE[0]; let h = 0; for (let i = 0; i < name.length; i++) h = ((h << 5) - h + name.charCodeAt(i)) | 0; return AVATAR_PALETTE[Math.abs(h) % AVATAR_PALETTE.length]; }
+function statusBg(status) { const m = { paid:'rgba(34,197,94,.12)',partial:'rgba(59,130,246,.12)',credit:'rgba(168,85,247,.12)',refund:'rgba(244,63,94,.12)',quote:'rgba(116,116,168,.1)',voided:'rgba(244,63,94,.08)' }; return m[status] || 'rgba(99,102,241,.18)'; }
+function statusColor(status) { const m = { paid:'var(--green)', partial:'var(--blue)', credit:'var(--purple)', refund:'var(--red)', quote:'var(--text2)', voided:'var(--red)' }; return m[status] || 'var(--accent2)'; }
+function statusIco(status) {
+  const m = {
+    paid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>',
+    partial: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10z"/></svg>',
+    credit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    refund: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/></svg>',
+    voided: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+  };
+  return m[status] || '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="2"/></svg>';
+}
+function badge(status) { const m = { paid:'b-paid',partial:'b-partial',credit:'b-credit',refund:'b-refund',quote:'b-quote',voided:'b-voided',pending:'b-pending' }; return m[status] || 'b-default'; }
+function sBadge(status) {
+  if (!status) return 'b-default'; const s = status.toLowerCase();
+  if (['active','paid','completed','received','delivered','cleared'].includes(s)) return 'b-active';
+  if (['expired','cancelled','bounced','voided','rejected'].includes(s)) return 'b-expired';
+  if (['pending','in_progress','processing','open'].includes(s)) return 'b-pending';
+  if (['partial'].includes(s)) return 'b-partial'; return 'b-default';
+}
+let toastTimer;
+function showToast(msg) { const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 3200); }
+function errHtml(msg) { return `<div class="empty-state"><div class="empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="empty-msg">${esc(msg)}</div></div>`; }
+
+window.addEventListener('DOMContentLoaded', () => { initRptDates(); init(); });
+</script>
 </body>
-
 </html>
