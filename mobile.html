@@ -3,18 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- PWA Core -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BizSensePOS">
+<meta name="application-name" content="BizSensePOS">
 <meta name="theme-color" content="#090910">
-<title>BizSensePOS</title>
+<meta name="background-color" content="#08080f">
+<meta name="msapplication-TileColor" content="#090910">
+<meta name="msapplication-TileImage" content="https://i.ibb.co/Y7qXPn0L/app.png">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="100x100" href="https://i.ibb.co/Y7qXPn0L/app.png">
+<link rel="apple-touch-icon" sizes="100x100" href="https://i.ibb.co/Y7qXPn0L/app.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/Y7qXPn0L/app.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/Y7qXPn0L/app.png">
+<link rel="apple-touch-icon" sizes="192x192" href="https://i.ibb.co/Y7qXPn0L/app.png">
+
+<!-- Manifest -->
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="https://i.ibb.co/Y7qXPn0L/app.png">
+
+<!-- SEO / Open Graph / Social -->
+<title>BizSensePOS</title>
+<meta name="description" content="BizSensePOS — Mobile Point of Sale for your business">
+<meta property="og:type" content="website">
 <meta property="og:title" content="BizSensePOS">
+<meta property="og:description" content="BizSensePOS — Mobile Point of Sale for your business">
 <meta property="og:image" content="https://i.ibb.co/n8jGVxnR/imagethumb.jpg">
-<meta property="og:description" content="BizSensePOS - Mobile Point of Sale">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="https://i.ibb.co/Y7qXPn0L/app.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BizSensePOS">
+<meta name="twitter:description" content="BizSensePOS — Mobile Point of Sale for your business">
+<meta name="twitter:image" content="https://i.ibb.co/n8jGVxnR/imagethumb.jpg">
 </head>
 <body>
 
@@ -369,10 +392,8 @@ button { font-family: inherit; }
   <!-- LOGIN -->
   <div class="screen" id="login-screen">
     <div class="login-wrap">
-      <div class="app-logo">
-        <svg viewBox="0 0 56 56" fill="none" width="56" height="56">
-          <text x="28" y="38" font-size="28" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-weight="800">B</text>
-        </svg>
+      <div class="app-logo" style="background:none;box-shadow:none;width:80px;height:80px;">
+        <img src="https://i.ibb.co/Y7qXPn0L/app.png" alt="BizSensePOS" width="80" height="80" style="border-radius:20px;box-shadow:0 8px 32px rgba(99,102,241,.45);">
       </div>
       <h2 class="login-title">BizSense POS</h2>
       <p class="login-sub">Sign in to manage your shop</p>
@@ -743,12 +764,113 @@ function isMobile() {
   return false;
 }
 
+function isPWA() {
+  return window.matchMedia('(display-mode: standalone)').matches ||
+         window.navigator.standalone === true ||
+         document.referrer.includes('android-app://');
+}
+
+// Capture the install prompt as early as possible
+let _deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _deferredInstallPrompt = e;
+});
+
+function showInstallGate() {
+  // Build install gate UI inline
+  const gate = document.createElement('div');
+  gate.id = 'pwa-install-gate';
+  gate.style.cssText = `
+    position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:32px 24px;text-align:center;
+    background:radial-gradient(ellipse at 50% -10%,rgba(99,102,241,.18) 0%,transparent 60%),
+               radial-gradient(ellipse at 20% 110%,rgba(168,85,247,.10) 0%,transparent 50%),#08080f;
+  `;
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPhone|iPad|iPod/.test(ua);
+  const isAndroid = /Android/.test(ua);
+
+  let instructionsHTML = '';
+  if (isIOS) {
+    instructionsHTML = `
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:20px;max-width:300px;margin-top:8px">
+        <p style="color:#7474a8;font-size:14px;margin-bottom:14px;line-height:1.6">To install on iPhone / iPad:</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <span style="font-size:22px">1.</span>
+          <span style="color:#eeeef8;font-size:14px">Tap the <strong>Share</strong> button
+            <svg style="vertical-align:middle;margin:0 2px" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" width="16" height="16"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            in Safari</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px">2.</span>
+          <span style="color:#eeeef8;font-size:14px">Tap <strong>"Add to Home Screen"</strong></span>
+        </div>
+      </div>`;
+  } else if (isAndroid) {
+    instructionsHTML = `
+      <button id="_pwa-install-btn" style="
+        margin-top:16px;width:100%;max-width:260px;padding:15px;
+        background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;
+        border:none;border-radius:14px;font-weight:700;font-size:16px;
+        box-shadow:0 4px 24px rgba(99,102,241,.45);cursor:pointer;font-family:inherit;
+      ">
+        ⬇ Install BizSensePOS
+      </button>
+      <p style="color:#3a3a58;font-size:12px;margin-top:12px;max-width:260px;line-height:1.5">
+        If the button doesn't appear, tap the browser menu (⋮) and choose <strong>"Add to Home screen"</strong>
+      </p>`;
+  } else {
+    instructionsHTML = `
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:20px;max-width:300px;margin-top:8px">
+        <p style="color:#7474a8;font-size:14px;line-height:1.6">Open this page in your mobile browser and add it to your home screen to use BizSensePOS.</p>
+      </div>`;
+  }
+
+  gate.innerHTML = `
+    <img src="https://i.ibb.co/Y7qXPn0L/app.png" alt="BizSensePOS"
+      style="width:100px;height:100px;border-radius:24px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.4)">
+    <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px;color:#eeeef8">BizSensePOS</h2>
+    <p style="color:#7474a8;font-size:15px;line-height:1.6;max-width:280px;margin-bottom:8px">
+      Please install this app on your home screen to continue.
+    </p>
+    ${instructionsHTML}
+  `;
+  document.body.appendChild(gate);
+
+  // Wire up Android install button
+  const btn = document.getElementById('_pwa-install-btn');
+  if (btn) {
+    if (_deferredInstallPrompt) {
+      btn.addEventListener('click', async () => {
+        _deferredInstallPrompt.prompt();
+        const { outcome } = await _deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          btn.textContent = '✓ Installed! Please open from your home screen.';
+          btn.disabled = true;
+        }
+        _deferredInstallPrompt = null;
+      });
+    } else {
+      // Prompt not available yet — hide the button, show menu instruction instead
+      btn.style.display = 'none';
+    }
+  }
+}
+
 async function init() {
   if (!isMobile()) {
     document.getElementById('gate').removeAttribute('hidden');
     document.getElementById('gate-url').textContent = window.location.href;
     return;
   }
+
+  // Block access unless running as an installed PWA
+  if (!isPWA()) {
+    showInstallGate();
+    return;
+  }
+
   document.getElementById('app').removeAttribute('hidden');
   try {
     const { data: { session } } = await sb.auth.getSession();
