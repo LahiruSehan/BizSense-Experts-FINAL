@@ -7,8 +7,37 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#090910">
-<title>BizSense POS</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='system-ui,sans-serif' font-weight='bold'>B</text></svg>">
+<title>BizSensePOS</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="https://i.ibb.co/Y7qXPn0L/app.png">
+<meta property="og:title" content="BizSensePOS">
+<meta property="og:image" content="https://i.ibb.co/n8jGVxnR/imagethumb.jpg">
+<meta property="og:description" content="BizSensePOS - Mobile Point of Sale">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="https://i.ibb.co/Y7qXPn0L/app.png">
+</head>
+<body>
+
+<!-- ════ INSTALL GATE (MOBILE PWA ENFORCEMENT) ════ -->
+<div id="install-gate" hidden>
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 24px; text-align: center;">
+    <img src="https://i.ibb.co/Y7qXPn0L/app.png" alt="BizSensePOS" style="width:100px; height:100px; border-radius:24px; margin-bottom:24px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+    <h2 style="font-size: 24px; margin-bottom: 12px; color: var(--text);">Install BizSensePOS</h2>
+    <p style="color: var(--text2); margin-bottom: 32px; line-height: 1.5; font-size: 15px;">To use this application securely, you must add it to your home screen.</p>
+    <div id="install-instructions"></div>
+    <button id="pwa-install-btn" style="margin-top: 24px; width: 100%; max-width: 220px; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 16px;" hidden>Install App</button>
+  </div>
+</div>
+
+<!-- ════ DESKTOP GATE ════ -->
+<div id="gate" hidden>
+  <div class="gate-logo">
+    <img src="https://i.ibb.co/Y7qXPn0L/app.png" alt="BizSensePOS" width="56" height="56" style="border-radius: 16px;">
+  </div>
+  <div class="gate-content">
+    <!-- Desktop Gate Content -->
+  </div>
+</div>
 <style>
 /* ════════════════════════════════════════════════════
    BIZSENSE — MOBILE WEB APP
