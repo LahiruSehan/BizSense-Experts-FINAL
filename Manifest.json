@@ -1,20 +1,14 @@
 {
   "name": "BizSensePOS",
   "short_name": "BizSensePOS",
-  "description": "BizSensePOS — Mobile Point of Sale for your business",
+  "description": "BizSensePOS \u2014 Mobile Point of Sale for your business",
   "start_url": "./mobile.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#08080f",
-  "theme_color": "#090910",
+  "theme_color": "#6366f1",
   "icons": [
-    {
-      "src": "./app.png",
-      "sizes": "100x100",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
     {
       "src": "./app.png",
       "sizes": "192x192",
