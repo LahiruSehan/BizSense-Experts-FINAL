@@ -605,24 +605,28 @@
             .hero-content-grid {
                 grid-template-columns: 1fr !important;
                 padding: 20px 20px 48px !important;
-                gap: 24px !important;
+                gap: 0 !important;
                 align-items: start !important;
                 min-height: auto !important;
             }
+            /* Video column goes above text on mobile */
+            .hero-video-col { order: -1; margin-bottom: 24px; }
+            .hero-video-col .hero-video-frame { border-radius: 16px !important; }
+            .hero-video-col .hero-video-frame video { aspect-ratio: 16/9 !important; max-height: 240px !important; }
+            /* Text col centered on mobile */
             .hero-text-col { text-align: center; }
             .hero-text-col .section-label { justify-content: center; }
             .hero-text-col p { max-width: 100% !important; }
+            /* "with" row centered */
+            .hero-text-col > div:nth-child(3) { justify-content: center !important; }
+            /* Stats pill centered */
+            .hero-text-col > div:nth-child(4) { margin: 0 auto 28px !important; }
+            /* CTA centered */
             .hero-cta-row { justify-content: center !important; }
             .hero-cta-row .btn-primary,
             .hero-cta-row .btn-outline { flex: 1; justify-content: center; min-width: 0; }
-            .hero-icons-grid { max-width: 100% !important; margin: 0 auto !important; }
-            .hero-video-col {
-                display: block !important;
-                order: -1;
-            }
-            .hero-video-col .hero-video-frame { border-radius: 16px !important; }
-            .hero-video-col .hero-video-frame video { max-height: 220px !important; }
-            .hero-video-col > div:last-child { display: none !important; } /* hide trust badge */
+            /* Icons grid full width */
+            .hero-icons-grid { max-width: 100% !important; }
 
             /* ── Stats strip ── */
             .stats-section { padding: 28px 20px !important; }
@@ -782,34 +786,55 @@
         <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1588672489918-0791d6d46bc8?q=80&w=687&auto=format&fit=crop');"></div>
     </div>
 
-    <!-- Overlay: white gradient on top of slideshow -->
-    <div style="position:absolute; inset:0; background:linear-gradient(105deg, rgba(248,250,252,0.97) 0%, rgba(248,250,252,0.94) 45%, rgba(241,245,249,0.7) 70%, rgba(224,242,254,0.4) 100%); z-index:1;"></div>
-    <!-- Subtle blue mesh top-right -->
-    <div style="position:absolute; top:-80px; right:-80px; width:560px; height:560px; background:radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%); border-radius:50%; z-index:1; pointer-events:none;"></div>
-    <div style="position:absolute; bottom:-120px; left:-80px; width:480px; height:480px; background:radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%); border-radius:50%; z-index:1; pointer-events:none;"></div>
+    <!-- Overlay -->
+    <div style="position:absolute; inset:0; background:linear-gradient(110deg, rgba(248,250,252,0.98) 0%, rgba(248,250,252,0.95) 50%, rgba(224,242,254,0.55) 100%); z-index:1;"></div>
+    <!-- Decorative orbs -->
+    <div style="position:absolute; top:-100px; right:-100px; width:700px; height:700px; background:radial-gradient(circle, rgba(14,165,233,0.10) 0%, transparent 65%); border-radius:50%; z-index:1; pointer-events:none;"></div>
+    <div style="position:absolute; bottom:-160px; left:-60px; width:500px; height:500px; background:radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 65%); border-radius:50%; z-index:1; pointer-events:none;"></div>
 
-    <!-- Content -->
-    <div class="hero-content-grid" style="position:relative; z-index:2; width:100%; max-width:1280px; margin:0 auto; padding:60px 40px 80px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+    <!-- Content grid: 55% text / 45% visual -->
+    <div class="hero-content-grid" style="position:relative; z-index:2; width:100%; max-width:1320px; margin:0 auto; padding:56px 48px 72px; display:grid; grid-template-columns:55fr 45fr; gap:56px; align-items:center;">
 
-        <!-- LEFT: Text -->
-        <div class="hero-text-col">
+        <!-- ── LEFT: Text Column ── -->
+        <div class="hero-text-col" style="display:flex; flex-direction:column; justify-content:center; gap:0;">
+
             <!-- Label -->
-            <div class="section-label reveal" style="margin-bottom:20px;">Strategic Business Systems · Sri Lanka</div>
+            <div class="section-label reveal" style="margin-bottom:24px;">Strategic Business Systems · Sri Lanka</div>
 
-            <!-- Headline -->
-            <h1 class="reveal" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(44px,5.5vw,82px); font-weight:900; color:#0f172a; line-height:0.96; letter-spacing:-0.03em; margin:0 0 20px; animation-delay:0.05s;">
-                Empowering<br>Businesses<br>
-                <span style="color:#94a3b8; font-weight:400; font-style:italic; font-size:0.7em;">with</span><br>
-                <span id="rotating-text" class="text-rotate">Digital Marketing</span>
+            <!-- Headline — 2 clean visual blocks -->
+            <h1 class="reveal" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(48px,5.8vw,88px); font-weight:900; color:#0f172a; line-height:0.94; letter-spacing:-0.035em; margin:0 0 16px; animation-delay:0.05s;">
+                Empowering<br>Businesses
             </h1>
 
+            <!-- "with [rotating]" — separate row, visually distinct -->
+            <div class="reveal" style="display:flex; align-items:baseline; gap:14px; margin-bottom:28px; animation-delay:0.08s;">
+                <span style="font-family:'Space Grotesk',sans-serif; font-size:clamp(22px,2.6vw,38px); font-weight:400; font-style:italic; color:#94a3b8; letter-spacing:-0.01em; flex-shrink:0;">with</span>
+                <span id="rotating-text" class="text-rotate" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(24px,2.8vw,42px); font-weight:800; letter-spacing:-0.02em; line-height:1.1;">Digital Marketing</span>
+            </div>
+
             <!-- Bio -->
-            <p class="reveal" style="font-size:clamp(15px,1.4vw,18px); color:#64748b; line-height:1.7; max-width:480px; margin:0 0 36px; animation-delay:0.1s;">
-                <strong style="color:#0f172a;">BizSense Experts</strong> is a multi-disciplinary business solutions firm helping Sri Lankan SMEs and growing enterprises bridge the gap between <strong style="color:#0f172a;">technology</strong> and <strong style="color:#0f172a;">real business needs</strong>.
+            <p class="reveal" style="font-size:clamp(15px,1.3vw,17px); color:#64748b; line-height:1.75; margin:0 0 32px; animation-delay:0.12s; max-width:520px;">
+                <strong style="color:#0f172a;">BizSense Experts</strong> helps Sri Lankan SMEs bridge the gap between <strong style="color:#0f172a;">technology</strong> and <strong style="color:#0f172a;">real business needs</strong> — through ERP, trade, marketing, and finance.
             </p>
 
+            <!-- Inline mini-stats -->
+            <div class="reveal" style="display:flex; gap:0; margin-bottom:36px; animation-delay:0.14s; border:1px solid #e2e8f0; border-radius:16px; background:white; overflow:hidden; width:fit-content;">
+                <div style="padding:14px 24px; border-right:1px solid #e2e8f0; text-align:center;">
+                    <div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:900; color:#0ea5e9; line-height:1;">6+</div>
+                    <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; margin-top:2px;">Industries</div>
+                </div>
+                <div style="padding:14px 24px; border-right:1px solid #e2e8f0; text-align:center;">
+                    <div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:900; color:#0f172a; line-height:1;">4</div>
+                    <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; margin-top:2px;">Core Services</div>
+                </div>
+                <div style="padding:14px 24px; text-align:center;">
+                    <div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:900; color:#2563eb; line-height:1;">360°</div>
+                    <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; margin-top:2px;">Solutions</div>
+                </div>
+            </div>
+
             <!-- CTA Buttons -->
-            <div class="reveal hero-cta-row" style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:48px; animation-delay:0.15s;">
+            <div class="reveal hero-cta-row" style="display:flex; flex-wrap:wrap; gap:14px; animation-delay:0.17s;">
                 <a href="https://wa.me/94701757576" class="btn-primary">
                     Book a Strategy Session
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -818,67 +843,71 @@
                     Our Services
                 </button>
             </div>
+        </div>
 
-            <!-- Service Quick Links -->
-            <div class="reveal hero-icons-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:400px; animation-delay:0.2s;">
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('erp')" class="service-icon-btn" style="width:100%;">
-                        <video class="absolute inset-0 w-full h-full object-cover" style="position:relative;" autoplay loop muted playsinline>
+        <!-- ── RIGHT: Visual Column (Video + Service Icons) ── -->
+        <div class="reveal hero-video-col" style="animation-delay:0.22s; display:flex; flex-direction:column; gap:16px;">
+
+            <!-- Video card -->
+            <div style="position:relative;">
+                <div class="hero-video-frame" style="border-radius:24px; overflow:hidden;">
+                    <video id="heroVideo" autoplay loop muted playsinline style="width:100%; display:block; aspect-ratio:16/10; object-fit:cover;">
+                        <source src="CleanVideo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- Trust badge — overlaps bottom-left of video -->
+                <div style="position:absolute; bottom:-16px; left:20px; background:white; border:1px solid #e2e8f0; border-radius:14px; padding:12px 18px; box-shadow:0 8px 32px rgba(0,0,0,0.10); display:flex; align-items:center; gap:10px; z-index:5;">
+                    <div style="width:9px; height:9px; background:#22c55e; border-radius:50%; flex-shrink:0; box-shadow:0 0 0 3px rgba(34,197,94,0.22);"></div>
+                    <div>
+                        <p style="font-size:11px; font-weight:800; color:#0f172a; margin:0; letter-spacing:0.05em; text-transform:uppercase;">Trusted by SMEs</p>
+                        <p style="font-size:10px; color:#94a3b8; margin:0; font-weight:500;">Across Sri Lanka</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service icon buttons — 4-across strip below video -->
+            <div class="hero-icons-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <button onclick="openServiceModal('erp')" class="service-icon-btn" style="width:100%; position:relative;">
+                        <video style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" autoplay loop muted playsinline>
                             <source src="https://cdn-icons-mp4.flaticon.com/512/19028/19028570.mp4" type="video/mp4">
                         </video>
                     </button>
-                    <span style="font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#475569;">ERP</span>
+                    <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#475569;">ERP</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('b2b')" class="service-icon-btn" style="width:100%;">
-                        <video class="absolute inset-0 w-full h-full object-cover" style="position:relative;" autoplay loop muted playsinline>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <button onclick="openServiceModal('b2b')" class="service-icon-btn" style="width:100%; position:relative;">
+                        <video style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" autoplay loop muted playsinline>
                             <source src="https://cdn-icons-mp4.flaticon.com/512/17907/17907839.mp4" type="video/mp4">
                         </video>
                     </button>
-                    <span style="font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#475569;">B2B</span>
+                    <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#475569;">B2B</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('marketing')" class="service-icon-btn" style="width:100%;">
-                        <video class="absolute inset-0 w-full h-full object-cover" style="position:relative;" autoplay loop muted playsinline>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <button onclick="openServiceModal('marketing')" class="service-icon-btn" style="width:100%; position:relative;">
+                        <video style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" autoplay loop muted playsinline>
                             <source src="https://cdn-icons-mp4.flaticon.com/512/17556/17556486.mp4" type="video/mp4">
                         </video>
                     </button>
-                    <span style="font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#475569;">Digital</span>
+                    <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#475569;">Digital</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 group">
-                    <button onclick="openServiceModal('finance')" class="service-icon-btn" style="width:100%;">
-                        <video class="absolute inset-0 w-full h-full object-cover" style="position:relative;" autoplay loop muted playsinline>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <button onclick="openServiceModal('finance')" class="service-icon-btn" style="width:100%; position:relative;">
+                        <video style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" autoplay loop muted playsinline>
                             <source src="https://cdn-icons-mp4.flaticon.com/512/17556/17556489.mp4" type="video/mp4">
                         </video>
                     </button>
-                    <span style="font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#475569;">Finance</span>
+                    <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#475569;">Finance</span>
                 </div>
             </div>
-        </div>
 
-        <!-- RIGHT: Video -->
-        <div class="reveal hero-video-col" style="animation-delay:0.25s;">
-            <div class="hero-video-frame">
-                <video id="heroVideo" autoplay loop muted playsinline style="width:100%; display:block; max-height:520px; object-fit:cover;">
-                    <source src="CleanVideo.mp4" type="video/mp4">
-                </video>
-            </div>
-            <!-- Floating trust badge -->
-            <div style="position:absolute; margin-top:-60px; right:0; background:white; border:1px solid #e2e8f0; border-radius:16px; padding:16px 22px; box-shadow:0 12px 40px rgba(0,0,0,0.1); display:flex; align-items:center; gap:12px;">
-                <div style="width:10px; height:10px; background:#22c55e; border-radius:50%; flex-shrink:0; box-shadow:0 0 0 3px rgba(34,197,94,0.2);"></div>
-                <div>
-                    <p style="font-size:12px; font-weight:800; color:#0f172a; margin:0; letter-spacing:0.04em; text-transform:uppercase;">Trusted by SMEs</p>
-                    <p style="font-size:11px; color:#94a3b8; margin:0; font-weight:500;">Across Sri Lanka</p>
-                </div>
-            </div>
-        </div>
-
+        </div><!-- end right col -->
     </div>
 
     <!-- Scroll cue -->
-    <div style="position:absolute; bottom:32px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0.45;">
+    <div class="scroll-cue" style="position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0.4;">
         <span style="font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#64748b;">Scroll</span>
-        <div style="width:1px; height:40px; background:linear-gradient(to bottom, #0ea5e9, transparent);"></div>
+        <div style="width:1px; height:36px; background:linear-gradient(to bottom, #0ea5e9, transparent);"></div>
     </div>
 </section>
 
