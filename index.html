@@ -587,6 +587,118 @@
         @media (min-width: 769px) {
             .hide-desktop { display: none !important; }
         }
+
+        /* ═══════════════════════════════════════
+           MOBILE RESPONSIVE — max-width: 768px
+        ═══════════════════════════════════════ */
+        @media (max-width: 768px) {
+
+            /* ── Nav ── */
+            #main-nav { padding: 10px 16px; }
+            .nav-inner { gap: 8px; }
+            .nav-cta { font-size: 11px; padding: 9px 14px; letter-spacing: 0.04em; }
+
+            /* ── Section padding ── */
+            .sp { padding-top: 56px !important; padding-bottom: 56px !important; padding-left: 20px !important; padding-right: 20px !important; }
+
+            /* ── Hero ── */
+            .hero-content-grid {
+                grid-template-columns: 1fr !important;
+                padding: 20px 20px 48px !important;
+                gap: 24px !important;
+                align-items: start !important;
+                min-height: auto !important;
+            }
+            .hero-text-col { text-align: center; }
+            .hero-text-col .section-label { justify-content: center; }
+            .hero-text-col p { max-width: 100% !important; }
+            .hero-cta-row { justify-content: center !important; }
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline { flex: 1; justify-content: center; min-width: 0; }
+            .hero-icons-grid { max-width: 100% !important; margin: 0 auto !important; }
+            .hero-video-col {
+                display: block !important;
+                order: -1;
+            }
+            .hero-video-col .hero-video-frame { border-radius: 16px !important; }
+            .hero-video-col .hero-video-frame video { max-height: 220px !important; }
+            .hero-video-col > div:last-child { display: none !important; } /* hide trust badge */
+
+            /* ── Stats strip ── */
+            .stats-section { padding: 28px 20px !important; }
+            .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+            .stat-card { padding: 18px 16px !important; }
+
+            /* ── Services bento ── */
+            .services-bento { grid-template-columns: 1fr !important; gap: 16px !important; }
+            .services-bento .card { padding: 28px 24px !important; }
+
+            /* ── ERP section ── */
+            .erp-section-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+            /* ── Industries ── */
+            .industries-section-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+            .industry-card { height: 180px !important; }
+
+            /* ── Why ERP ── */
+            .why-erp-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+            /* ── Deliverables ── */
+            .deliverables-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+            .deliverables-grid .card { padding: 18px 16px !important; }
+
+            /* ── Gallery ── */
+            .gallery-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+
+            /* ── Contact panel ── */
+            .contact-panel { grid-template-columns: 1fr !important; }
+            .contact-info-col { padding: 40px 28px !important; }
+            .contact-form-col { padding: 36px 28px !important; }
+
+            /* ── CTA banner ── */
+            .cta-banner { padding: 72px 24px !important; }
+
+            /* ── Footer ── */
+            .footer-row { flex-direction: column !important; align-items: center !important; gap: 16px !important; text-align: center; }
+
+            /* ── Modal ── */
+            .modal-fullscreen { padding: 16px 12px 32px !important; }
+            #service-modal > div { border-radius: 16px !important; }
+            #modal-content { padding: 24px 20px !important; }
+
+            /* ── Buttons ── */
+            .btn-primary { font-size: 13px; padding: 14px 24px; }
+            .btn-outline { font-size: 13px; padding: 13px 22px; }
+
+            /* ── Section labels centered on mobile ── */
+            .mob-center { text-align: center !important; }
+            .mob-center .section-label { justify-content: center !important; }
+
+            /* ── Framework steps ── */
+            .framework-step { padding: 22px 20px !important; }
+
+            /* ── Tool pills row ── */
+            .tools-row { gap: 8px !important; }
+            .tool-pill { padding: 10px 20px !important; font-size: 13px !important; }
+
+            /* ── Philosophy card ── */
+            .philosophy-card { padding: 36px 24px !important; }
+
+            /* ── Hero section height ── */
+            section:first-of-type { min-height: auto !important; padding-top: 72px !important; }
+
+            /* ── Scroll cue hidden on mobile ── */
+            .scroll-cue { display: none !important; }
+        }
+
+        /* ── Tablet (769–1024px) ── */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-content-grid { padding: 40px 28px 60px !important; gap: 40px !important; }
+            .sp { padding-top: 72px !important; padding-bottom: 72px !important; padding-left: 28px !important; padding-right: 28px !important; }
+            .industries-section-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .deliverables-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
     </style>
 </head>
 
@@ -677,10 +789,10 @@
     <div style="position:absolute; bottom:-120px; left:-80px; width:480px; height:480px; background:radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%); border-radius:50%; z-index:1; pointer-events:none;"></div>
 
     <!-- Content -->
-    <div style="position:relative; z-index:2; width:100%; max-width:1280px; margin:0 auto; padding:60px 40px 80px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+    <div class="hero-content-grid" style="position:relative; z-index:2; width:100%; max-width:1280px; margin:0 auto; padding:60px 40px 80px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
 
         <!-- LEFT: Text -->
-        <div>
+        <div class="hero-text-col">
             <!-- Label -->
             <div class="section-label reveal" style="margin-bottom:20px;">Strategic Business Systems · Sri Lanka</div>
 
@@ -697,7 +809,7 @@
             </p>
 
             <!-- CTA Buttons -->
-            <div class="reveal" style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:48px; animation-delay:0.15s;">
+            <div class="reveal hero-cta-row" style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:48px; animation-delay:0.15s;">
                 <a href="https://wa.me/94701757576" class="btn-primary">
                     Book a Strategy Session
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -708,7 +820,7 @@
             </div>
 
             <!-- Service Quick Links -->
-            <div class="reveal" style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:400px; animation-delay:0.2s;">
+            <div class="reveal hero-icons-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:400px; animation-delay:0.2s;">
                 <div class="flex flex-col items-center gap-2 group">
                     <button onclick="openServiceModal('erp')" class="service-icon-btn" style="width:100%;">
                         <video class="absolute inset-0 w-full h-full object-cover" style="position:relative;" autoplay loop muted playsinline>
@@ -745,7 +857,7 @@
         </div>
 
         <!-- RIGHT: Video -->
-        <div class="reveal hide-mobile" style="animation-delay:0.25s;">
+        <div class="reveal hero-video-col" style="animation-delay:0.25s;">
             <div class="hero-video-frame">
                 <video id="heroVideo" autoplay loop muted playsinline style="width:100%; display:block; max-height:520px; object-fit:cover;">
                     <source src="CleanVideo.mp4" type="video/mp4">
@@ -773,8 +885,8 @@
 <!-- ══════════════════════════════════════════════
      STATS STRIP
 ══════════════════════════════════════════════ -->
-<section style="background:white; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0; padding:40px 40px;">
-    <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+<section style="background:white; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0; padding:40px 40px;" class="stats-section">
+    <div class="stats-grid" style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
         <div class="stat-card reveal">
             <div style="font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,3vw,48px); font-weight:900; color:#0f172a; line-height:1;">6+</div>
             <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; margin-top:6px;">Industries Served</div>
@@ -797,7 +909,7 @@
 <!-- ══════════════════════════════════════════════
      WHAT WE DO
 ══════════════════════════════════════════════ -->
-<section id="services" style="padding:100px 40px; background:#f8fafc;">
+<section id="services" class="sp" style="padding:100px 40px; background:#f8fafc;">
     <div style="max-width:1280px; margin:0 auto;">
 
         <!-- Header -->
@@ -812,7 +924,7 @@
         </div>
 
         <!-- Bento Grid -->
-        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px;">
+        <div class="services-bento" style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px;">
 
             <!-- ERP -->
             <div class="card reveal" style="padding:40px; cursor:pointer; animation-delay:0.05s;" onclick="openServiceModal('erp')">
@@ -873,8 +985,8 @@
 <!-- ══════════════════════════════════════════════
      ERP DEEP DIVE
 ══════════════════════════════════════════════ -->
-<section style="padding:100px 40px; background:white; border-top:1px solid #e2e8f0;">
-    <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+<section class="sp" style="padding:100px 40px; background:white; border-top:1px solid #e2e8f0;">
+    <div class="erp-section-grid" style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
 
         <!-- Left text -->
         <div>
@@ -936,7 +1048,7 @@
 <!-- ══════════════════════════════════════════════
      INDUSTRIES
 ══════════════════════════════════════════════ -->
-<section style="padding:100px 40px; background:#f8fafc; border-top:1px solid #e2e8f0;">
+<section class="sp" style="padding:100px 40px; background:#f8fafc; border-top:1px solid #e2e8f0;">
     <div style="max-width:1280px; margin:0 auto;">
 
         <div class="reveal" style="text-align:center; margin-bottom:60px;">
@@ -946,7 +1058,7 @@
             </h2>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <div class="industries-section-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
 
             <div class="industry-card reveal" style="height:260px; animation-delay:0.05s;">
                 <img src="https://plus.unsplash.com/premium_photo-1682144509812-4734c830b486?q=80&w=1470&auto=format&fit=crop" alt="Manufacturing">
@@ -997,10 +1109,10 @@
 <!-- ══════════════════════════════════════════════
      WHY ERP
 ══════════════════════════════════════════════ -->
-<section style="padding:100px 40px; background:white; border-top:1px solid #e2e8f0;">
+<section class="sp" style="padding:100px 40px; background:white; border-top:1px solid #e2e8f0;">
     <div style="max-width:1280px; margin:0 auto;">
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:flex-start;">
+        <div class="why-erp-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:flex-start;">
 
             <!-- Left: Problems -->
             <div>
@@ -1093,7 +1205,7 @@
 <!-- ══════════════════════════════════════════════
      DELIVERABLES + PHILOSOPHY
 ══════════════════════════════════════════════ -->
-<section style="padding:100px 40px; background:#f8fafc; border-top:1px solid #e2e8f0;">
+<section class="sp" style="padding:100px 40px; background:#f8fafc; border-top:1px solid #e2e8f0;">
     <div style="max-width:1280px; margin:0 auto;">
 
         <!-- Header -->
@@ -1105,7 +1217,7 @@
         </div>
 
         <!-- Deliverables grid -->
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:64px;">
+        <div class="deliverables-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:64px;">
             <div class="card reveal" style="padding:28px 32px; display:flex; align-items:flex-start; gap:16px; animation-delay:0.05s;">
                 <div style="width:40px; height:40px; background:#f0f9ff; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     <svg width="20" height="20" fill="none" stroke="#0ea5e9" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12h2m16 0h2M12 2v2m0 16v2"/></svg>
@@ -1145,11 +1257,11 @@
         </div>
 
         <!-- Philosophy + Tools -->
-        <div class="reveal" style="background:white; border:1px solid #e2e8f0; border-radius:28px; padding:60px; text-align:center;">
+        <div class="reveal philosophy-card" style="background:white; border:1px solid #e2e8f0; border-radius:28px; padding:60px; text-align:center;">
             <div class="section-label" style="justify-content:center;">Philosophy</div>
             <h3 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,3vw,44px); font-weight:900; color:#0f172a; letter-spacing:-0.02em; margin:0 0 16px;">Tools Are Enablers — Not Products</h3>
             <p style="font-size:17px; color:#64748b; max-width:560px; margin:0 auto 40px; line-height:1.7;">We use technology as a solution — not a sale. We recommend platforms based on your business reality, not trends or licensing fees.</p>
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px;">
+            <div class="tools-row" style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px;">
                 <span class="tool-pill">Odoo</span>
                 <span class="tool-pill">Zoho Books</span>
                 <span class="tool-pill">QuickBooks</span>
@@ -1163,7 +1275,7 @@
 <!-- ══════════════════════════════════════════════
      GALLERY
 ══════════════════════════════════════════════ -->
-<section style="padding:100px 40px; background:white; border-top:1px solid #e2e8f0;">
+<section class="sp" style="padding:100px 40px; background:white; border-top:1px solid #e2e8f0;">
     <div style="max-width:1280px; margin:0 auto;">
 
         <div class="reveal" style="text-align:center; margin-bottom:56px;">
@@ -1171,7 +1283,7 @@
             <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,3.5vw,52px); font-weight:900; color:#0f172a; letter-spacing:-0.03em; margin:0;">Transformation in Action</h2>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+        <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
             <div class="gallery-item reveal" style="aspect-ratio:4/5; animation-delay:0.05s;">
                 <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000" alt="Strategy">
                 <div style="position:absolute; bottom:0; left:0; right:0; padding:32px 16px 16px; background:linear-gradient(to top, rgba(0,0,0,0.65), transparent);">
@@ -1204,14 +1316,14 @@
 <!-- ══════════════════════════════════════════════
      CONTACT
 ══════════════════════════════════════════════ -->
-<section id="contact" style="padding:100px 40px; background:#f8fafc; border-top:1px solid #e2e8f0;">
+<section id="contact" class="sp" style="padding:100px 40px; background:#f8fafc; border-top:1px solid #e2e8f0;">
     <div style="max-width:1280px; margin:0 auto;">
 
         <div class="reveal" style="background:white; border:1px solid #e2e8f0; border-radius:32px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.05);">
-            <div style="display:grid; grid-template-columns:1fr 1fr;">
+            <div class="contact-panel" style="display:grid; grid-template-columns:1fr 1fr;">
 
                 <!-- Left info panel -->
-                <div style="padding:64px; background:linear-gradient(140deg, #0f172a 0%, #1e3a5f 100%); position:relative; overflow:hidden;">
+                <div class="contact-info-col" style="padding:64px; background:linear-gradient(140deg, #0f172a 0%, #1e3a5f 100%); position:relative; overflow:hidden;">
                     <div style="position:absolute; top:-80px; right:-80px; width:360px; height:360px; background:radial-gradient(circle, rgba(14,165,233,0.25) 0%, transparent 70%); border-radius:50%; pointer-events:none;"></div>
                     <div style="position:absolute; bottom:-60px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); border-radius:50%; pointer-events:none;"></div>
 
@@ -1254,7 +1366,7 @@
                 </div>
 
                 <!-- Right form -->
-                <div style="padding:64px;">
+                <div class="contact-form-col" style="padding:64px;">
                     <h4 style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#0f172a; margin:0 0 8px; letter-spacing:-0.01em;">Send a Request</h4>
                     <p style="font-size:15px; color:#94a3b8; margin:0 0 36px; line-height:1.6;">We'll get back to you within 24 hours.</p>
 
@@ -1300,7 +1412,7 @@
 <!-- ══════════════════════════════════════════════
      FINAL CTA BANNER
 ══════════════════════════════════════════════ -->
-<section style="padding:100px 40px; background:linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f172a 100%); position:relative; overflow:hidden;">
+<section class="cta-banner" style="padding:100px 40px; background:linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f172a 100%); position:relative; overflow:hidden;">
     <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:800px; background:radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 65%); border-radius:50%; pointer-events:none;"></div>
     <div style="max-width:1280px; margin:0 auto; text-align:center; position:relative; z-index:1;">
         <div class="reveal" style="display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:#38bdf8; margin-bottom:24px;">
@@ -1327,7 +1439,7 @@
      FOOTER
 ══════════════════════════════════════════════ -->
 <footer style="padding:40px; background:#0f172a; border-top:1px solid rgba(255,255,255,0.06);">
-    <div style="max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+    <div class="footer-row" style="max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
         <img src="https://i.ibb.co/7mmBhMJ/LOGO.png" alt="BizSense" onerror="this.style.display='none'" style="height:24px; object-fit:contain; opacity:0.5; filter:invert(1) brightness(2); transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.5'">
         <p style="font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#475569; margin:0;">&copy; 2026 BizSense Experts. All Rights Reserved.</p>
         <div style="display:flex; gap:20px;">
